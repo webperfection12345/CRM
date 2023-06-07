@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 /* Posting Webservice Here */
 export const postAPI = async (
@@ -6,14 +6,14 @@ export const postAPI = async (
   data,
   header = {},
   params = {},
-  Authorization = {},
+  Authorization = {}
 ) => {
   /* Checking for Internet connection */
   const connection = true;
   /* If successfully connected */
   if (connection) {
     return axios({
-      method: 'post',
+      method: "post",
       url: url,
       timeout: 1000 * 60, //Time out of 60 Sec
       data: data,
@@ -23,7 +23,7 @@ export const postAPI = async (
     });
   } else {
     /* throw error for No internet connection */
-    throw new Error('No Internet Connection');
+    throw new Error("No Internet Connection");
   }
 };
 
@@ -34,7 +34,7 @@ export const uploadImageAPI = async (url, data, header = {}) => {
   /* If successfully connected */
   if (connection) {
     return axios({
-      method: 'post',
+      method: "post",
       url: url,
       timeout: 1000 * 60, //Time out of 60 Sec
       data: data,
@@ -42,7 +42,7 @@ export const uploadImageAPI = async (url, data, header = {}) => {
     });
   } else {
     /* throw error for No internet connection */
-    throw new Error('No Internet Connection');
+    throw new Error("No Internet Connection");
   }
 };
 
@@ -51,15 +51,15 @@ export const getAPI = async (
   url,
   header = {},
   params = {},
-  Authorization = {},
+  Authorization = {}
 ) => {
   /* Checking for Internet connection */
-  console.log('print value', url, header, Authorization);
+  console.log("print value", url, header, Authorization);
   const connection = true;
   /* If successfully connected */
   if (connection) {
     return axios({
-      method: 'get',
+      method: "get",
       url: url,
       timeout: 10000 * 60, //Time out of 60 Sec
       headers: header,
@@ -68,7 +68,7 @@ export const getAPI = async (
     });
   } else {
     /* throw error for No internet connection */
-    throw new Error('No Internet Connection');
+    throw new Error("No Internet Connection");
   }
 };
 
@@ -78,7 +78,7 @@ export const putAPI = async (url, data, header = {}) => {
   /* If successfully connected */
   if (connection) {
     return axios({
-      method: 'put',
+      method: "put",
       url: url,
       timeout: 1000 * 60, //Time out of 60 Sec
       data: data,
@@ -86,7 +86,7 @@ export const putAPI = async (url, data, header = {}) => {
     });
   } else {
     /* throw error for No internet connection */
-    throw new Error('No Internet Connection');
+    throw new Error("No Internet Connection");
   }
 };
 
@@ -96,7 +96,7 @@ export const deleteAPI = async (url, data, header = {}) => {
   /* If successfully connected */
   if (connection) {
     return axios({
-      method: 'delete',
+      method: "delete",
       url: url,
       timeout: 1000 * 60, //Time out of 60 Sec
       data: data,
@@ -104,6 +104,6 @@ export const deleteAPI = async (url, data, header = {}) => {
     });
   } else {
     /* throw error for No internet connection */
-    throw new Error('No Internet Connection');
+    throw new Error("No Internet Connection");
   }
 };

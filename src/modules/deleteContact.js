@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { deleteAPI } from "../config/apiMethod";
+import { postAPI } from "../config/apiMethod";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Async thunk action creator for deleting a contact
@@ -12,7 +12,7 @@ export const deleteContact = createAsyncThunk(
     )}`;
 
     try {
-      const response = await deleteAPI(urlDynamic);
+      const response = await postAPI(urlDynamic);
       console.log(response, "res");
       const { data } = response;
       return data;

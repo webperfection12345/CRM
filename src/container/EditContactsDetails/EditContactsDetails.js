@@ -28,7 +28,7 @@ const EditContactsDetails = (props) => {
     setPassword(item.password);
   }, [item]);
   const handleDelete = () => {
-    dispatch(deleteContact(item.contact_lead_id))
+    dispatch(deleteContact(item.id))
       .then(() => {
         console.log("Contact deleted successfully");
         navigation.navigate("Contact");
