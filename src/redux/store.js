@@ -1,12 +1,13 @@
-import {configureStore} from '@reduxjs/toolkit';
-import loginUserReducer from '../modules/loginUser';
-import getPropertiesReducer from '../modules/getProperties';
-import getSearchPropertiesReducer from '../modules/getSearchProperties';
-import getPropertiesDetailsReducer from '../modules/getPropertiesDetails';
-import getContactsReducer from '../modules/getContacts';
-import getSearchHistoryReducer from '../modules/getSearchHistory';
-import getDashbaordDataReducer from '../modules/getDashboardData';
-import getMyClientListReducer from '../modules/getMyClientList';
+import { configureStore } from "@reduxjs/toolkit";
+import loginUserReducer from "../modules/loginUser";
+import getPropertiesReducer from "../modules/getProperties";
+import getSearchPropertiesReducer from "../modules/getSearchProperties";
+import getPropertiesDetailsReducer from "../modules/getPropertiesDetails";
+import getContactsReducer from "../modules/getContacts";
+import getSearchHistoryReducer from "../modules/getSearchHistory";
+import getDashbaordDataReducer from "../modules/getDashboardData";
+import getMyClientListReducer from "../modules/getMyClientList";
+import deleteContactReducer from "../modules/deleteContact";
 
 export const store = configureStore({
   reducer: {
@@ -18,12 +19,13 @@ export const store = configureStore({
     getSearchHistory: getSearchHistoryReducer,
     getDashbaordData: getDashbaordDataReducer,
     getMyClientList: getMyClientListReducer,
+    deleteContact: deleteContactReducer,
   },
-  middleware: getDefaultMiddleware =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
       hasError: true,
-      errorName: 'ValidationError',
-      errorMessage: 'Foo must be greater than Bar',
+      errorName: "ValidationError",
+      errorMessage: "Foo must be greater than Bar",
     }),
 });

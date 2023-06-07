@@ -99,25 +99,7 @@ const PropertiesDetails = (props) => {
             <Text style={{ fontSize: 15, color: Colors.white }}>
               {data.property_address}
             </Text>
-            <TouchableOpacity
-              onPress={() => navigation.navigate("DeletePropertiy")}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-              }}
-            >
-              <Image
-                style={{
-                  height: 15,
-                  width: 15,
-                  resizeMode: "contain",
-                  tintColor: Colors.white,
-                }}
-                source={require("../../../assets/edit.png")}
-              ></Image>
-            </TouchableOpacity>
+            <TouchableOpacity></TouchableOpacity>
           </View>
           <ScrollView>
             <View

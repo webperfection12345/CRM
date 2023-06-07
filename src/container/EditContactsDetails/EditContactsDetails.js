@@ -28,9 +28,8 @@ const EditContactsDetails = (props) => {
     setPassword(item.password);
   }, [item]);
   const handleDelete = () => {
-    dispatch(deleteContact(item.id))
-      .then((resonse) => {
-        console.log(resonse);
+    dispatch(deleteContact(item.contact_lead_id))
+      .then(() => {
         console.log("Contact deleted successfully");
         navigation.navigate("Contact");
       })
@@ -77,7 +76,7 @@ const EditContactsDetails = (props) => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.navigate("")}
+            onPress={() => navigation.goBack()}
             style={{
               flexDirection: "row",
               justifyContent: "center",

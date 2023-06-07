@@ -62,7 +62,7 @@ const Properties = () => {
     if (!loading) {
       setLoading(true);
       getAllHistory();
-      // getSearchPropertiesApiCall();
+      getSearchPropertiesApiCall();
     }
   };
   const getSearchPropertiesApiCall = () => {
@@ -121,15 +121,15 @@ const Properties = () => {
               Properties
             </Text>
             <TouchableOpacity
-              onPress={() => navigation.navigate("AddProperties")}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-              }}
+            // onPress={() => navigation.navigate("AddProperties")}
+            // style={{
+            //   flexDirection: "row",
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            //   marginRight: 10,
+            // }}
             >
-              <Image
+              {/* <Image
                 style={{
                   height: 15,
                   width: 15,
@@ -137,7 +137,7 @@ const Properties = () => {
                   tintColor: Colors.white,
                 }}
                 source={require("../../../assets/plus.png")}
-              ></Image>
+              ></Image> */}
             </TouchableOpacity>
           </View>
 
@@ -181,12 +181,8 @@ const Properties = () => {
                 value={search}
                 placeholderTextColor={Colors.white}
                 onTouchStart={() => setSearchView(false)}
-                onChangeText={(search) =>
-                  getSearchPropertiesApiCall(
-                    setSearch(search),
-                    setSearchView(false)
-                  )
-                }
+                onChangeText={(text) => setSearch(text)}
+                onSubmitEditing={getSearchPropertiesApiCall}
                 style={{
                   color: Colors.white,
                   fontSize: 18,

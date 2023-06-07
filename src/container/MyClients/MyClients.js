@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import {
   Image,
   Text,
-  TouchableOpacity,
   View,
-  KeyboardAvoidingView,
-  SafeAreaView,
+  TouchableOpacity,
   FlatList,
+  SafeAreaView,
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -14,100 +13,147 @@ import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
-import { getMyClientList } from "../../modules/getMyClientList";
+import { getContacts } from "../../modules/getContacts";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
 
-const MyClients = () => {
-  const [email, setEmail] = useState("");
-  const [data, setData] = useState([]);
+const Myclient = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  const [activity, setActivity] = useState(false);
-
   useEffect(() => {
-    // setLoading(false);
-    getMyClientListApiCall();
+    getAllContacts();
   }, []);
 
-  const getMyClientListApiCall = () => {
-    dispatch(getMyClientList()).then((response) => {
-      console.log(response.payload);
-      //const newData = [...data, ...response.payload];
-      setData(response.payload);
-      setActivity(true);
+  const getAllContacts = () => {
+    dispatch(getContacts()).then((response) => {
+      const contactsData = response.payload.data;
+      setData(Object.values(contactsData));
+      setLoading(false);
     });
   };
 
-  const getUserInitials = (fullName) => {
-    const sentence = fullName;
-    const words = sentence.split(" ");
-    const firstLetters = [];
-
-    words.forEach((word) => {
-      firstLetters.push(word.charAt(0));
-    });
-
-    console.log(firstLetters); // Output: ["h", "w", "i"]
-    return firstLetters;
+  const handleRefresh = () => {
+    if (!loading) {
+      setLoading(true);
+      getAllContacts();
+    }
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
-      <Header label={"My Clients"} plusButton={true} />
-      <View
-        style={{
-          height: 80,
-          width: "100%",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          backgroundColor: Colors.PrimaryColor,
-        }}
-      >
+      <View style={{ flex: 1, backgroundColor: Colors.white }}>
         <View
           style={{
-            backgroundColor: Colors.buttonColor,
-            borderRadius: 10,
-            width: "92%",
-            height: 50,
+            height: 40,
+            width: "100%",
             flexDirection: "row",
+            justifyContent: "space-between",
             alignItems: "center",
+            backgroundColor: Colors.PrimaryColor,
           }}
         >
-          <Image
-            source={require("../../../assets/search.png")}
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
             style={{
-              height: 20,
-              width: 20,
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
               marginLeft: 10,
-              tintColor: Colors.white,
             }}
-          ></Image>
-          <TextInput
-            allowFontScaling={false}
-            placeholder="Search"
-            placeholderTextColor={Colors.white}
-            onChangeText={(email) => setEmail(email)}
+          >
+            <Image
+              style={{
+                height: 15,
+                width: 15,
+                resizeMode: "contain",
+                tintColor: Colors.white,
+              }}
+              source={require("../../../assets/back.png")}
+            ></Image>
+            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+          </TouchableOpacity>
+          <Text style={{ fontSize: 15, color: Colors.white }}>My Clients</Text>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AddContacts")}
             style={{
-              color: Colors.white,
-              fontSize: 18,
-              marginLeft: 10,
-              fontWeight: "bold",
+              flexDirection: "row",
+              justifyContent: "center",
+              alignItems: "center",
+              marginRight: 10,
             }}
-          ></TextInput>
+          >
+            <Image
+              style={{
+                height: 15,
+                width: 15,
+                resizeMode: "contain",
+                tintColor: Colors.white,
+              }}
+              source={require("../../../assets/plus.png")}
+            ></Image>
+          </TouchableOpacity>
         </View>
-      </View>
-
-      {activity ? (
-        <View style={{ flex: 1, backgroundColor: Colors.white }}>
-          <FlatList
-            data={data}
-            renderItem={({ item }) => (
-              <View>
+        <View
+          style={{
+            height: 80,
+            width: "100%",
+            justifyContent: "center",
+            alignContent: "center",
+            alignItems: "center",
+            backgroundColor: Colors.PrimaryColor,
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              width: "92%",
+              height: 50,
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Image
+              source={require("../../../assets/search.png")}
+              style={{
+                height: 20,
+                width: 20,
+                marginLeft: 10,
+                tintColor: Colors.white,
+              }}
+            ></Image>
+            <TextInput
+              allowFontScaling={false}
+              placeholder="Search"
+              placeholderTextColor={Colors.white}
+              onChangeText={(email) => setEmail(email)}
+              style={{
+                color: Colors.white,
+                fontSize: 18,
+                marginLeft: 10,
+                fontWeight: "bold",
+              }}
+            ></TextInput>
+          </View>
+        </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}></View>
+        <View style={{ flex: 1 }}>
+          {loading ? (
+            <Activity />
+          ) : (
+            <FlatList
+              data={data}
+              ListFooterComponent={<View style={{ height: 50 }}></View>}
+              renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("MyClientsDetails")}
+                  onPress={() =>
+                    navigation.navigate("ContactsDetails", { item: item })
+                  }
                   style={{
                     height: 80,
                     width: "96%",
@@ -136,7 +182,7 @@ const MyClients = () => {
                           fontSize: 12,
                         }}
                       >
-                        {getUserInitials(item.firstname)}
+                        {item.contact_full_name}
                       </Text>
                     </View>
                   </View>
@@ -160,7 +206,7 @@ const MyClients = () => {
                           fontWeight: "bold",
                         }}
                       >
-                        {item.firstname}
+                        {item.contact_name}
                       </Text>
                       <Text
                         style={{
@@ -168,7 +214,7 @@ const MyClients = () => {
                           fontSize: 12,
                         }}
                       >
-                        {item.email}
+                        {item.post_title}
                       </Text>
                     </View>
                     <View
@@ -188,18 +234,16 @@ const MyClients = () => {
                     </View>
                   </View>
                 </TouchableOpacity>
-              </View>
-            )}
-            //   keyExtractor={(item) => item.id}
-            //  ItemSeparatorComponent={this.renderSeparator}
-            //   key={(item) => item.id}
-          />
+              )}
+              onRefresh={handleRefresh}
+              refreshing={loading}
+              keyExtractor={(item) => item.id}
+            />
+          )}
         </View>
-      ) : (
-        <Activity />
-      )}
+      </View>
     </SafeAreaView>
   );
 };
 
-export default MyClients;
+export default Myclient;

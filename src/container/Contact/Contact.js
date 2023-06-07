@@ -141,18 +141,7 @@ const Contacts = () => {
             ></TextInput>
           </View>
         </View>
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Text
-            style={{
-              fontSize: 26,
-              fontWeight: "bold",
-              marginTop: 10,
-              marginBottom: 10,
-            }}
-          >
-            Most Recent
-          </Text>
-        </View>
+        <View style={{ justifyContent: "center", alignItems: "center" }}></View>
         <View style={{ flex: 1 }}>
           {loading ? (
             <Activity />

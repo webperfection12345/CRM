@@ -26,8 +26,8 @@ import * as AuthSession from "expo-auth-session";
 //   statusCodes,
 // } from "@react-native-google-signin/google-signin";
 export default function Login({ navigation }) {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("john123");
+  const [password, setPassword] = useState("test123456");
   const [activity, setActivity] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
