@@ -35,10 +35,12 @@ const AddActivity = (props) => {
   const [phone, setPhone] = useState("");
   const [date, setDate] = useState("");
   const [password, setPassword] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShowPicker(Platform.OS === "ios");
-    setDate(currentDate);
+    setSelectedDate(currentDate);
   };
   const showDatePicker = () => {
     setShowPicker(true);
@@ -230,7 +232,7 @@ const AddActivity = (props) => {
                 <Button onPress={showDatePicker} title="Select a date" />
                 {showPicker && (
                   <DateTimePicker
-                    value={date}
+                    value={selectedDate}
                     mode="date"
                     display="default"
                     onChange={onChange}
