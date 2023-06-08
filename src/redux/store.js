@@ -9,6 +9,9 @@ import getDashbaordDataReducer from "../modules/getDashboardData";
 import getMyClientListReducer from "../modules/getMyClientList";
 import deleteContactReducer from "../modules/deleteContact";
 import getClientDetailsReducer from "../modules/getMyClientDetails";
+import activityHistoryReducers from "../modules/activityHistory";
+import addActivityTaskReducers from "../modules/addActivityTask";
+import activityAddnoteReducers from "../modules/activityAddnote";
 
 export const store = configureStore({
   reducer: {
@@ -22,6 +25,9 @@ export const store = configureStore({
     getMyClientList: getMyClientListReducer,
     deleteContact: deleteContactReducer,
     getClientDetails: getClientDetailsReducer,
+    activityHistory: activityHistoryReducers,
+    addActivityTask: addActivityTaskReducers,
+    activityAddnote: activityAddnoteReducers,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

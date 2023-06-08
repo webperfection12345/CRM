@@ -18,10 +18,12 @@ import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { getClientDetails } from "../../modules/getMyClientDetails";
+import { activityHistory } from "../../modules/activityHistory";
 
 const MyClientsDetails = (props) => {
   useEffect(() => {
     MyClientsDetails();
+    allActivityHistory();
   }, []);
   const dispatch = useDispatch();
 
@@ -30,6 +32,7 @@ const MyClientsDetails = (props) => {
   const [password, setPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState();
+  const [history, setHistory] = useState();
 
   const items = props.route.params;
 
@@ -42,6 +45,15 @@ const MyClientsDetails = (props) => {
       console.log(clientData, "clientData");
       console.log(Object.values(clientData));
       setData(clientData);
+    });
+  };
+
+  const allActivityHistory = () => {
+    dispatch(activityHistory()).then((response) => {
+      console.log(response, "historyresponse");
+      const history = response.payload.data;
+      console.log(history, "fffffffffffffffff");
+      setHistory(history);
     });
   };
 
@@ -514,7 +526,7 @@ const MyClientsDetails = (props) => {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("AddActivity")}
+                    onPress={() => navigation.navigate("AddActivity", { item })}
                     style={{
                       height: 35,
                       width: "45%",
@@ -531,7 +543,7 @@ const MyClientsDetails = (props) => {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("NewNote")}
+                    onPress={() => navigation.navigate("NewNote", { item })}
                     style={{
                       height: 35,
                       width: "45%",
@@ -1043,7 +1055,7 @@ const MyClientsDetails = (props) => {
             </View>
             <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
               <FlatList
-                data={data}
+                data={history}
                 scrollEnabled={false}
                 renderItem={({ item }) => (
                   <TouchableOpacity
@@ -1079,7 +1091,7 @@ const MyClientsDetails = (props) => {
                             fontWeight: "bold",
                           }}
                         >
-                          Called
+                          {item.activity_type}
                         </Text>
 
                         <Text
@@ -1088,7 +1100,7 @@ const MyClientsDetails = (props) => {
                             fontSize: 12,
                           }}
                         >
-                          2023-03-27T13:13:43.145Z
+                          {item.activity_date}
                         </Text>
                       </View>
                     </View>
@@ -1394,25 +1406,15 @@ const MyClientsDetails = (props) => {
                       justifyContent: "center",
                     }}
                   >
-                    <TextInput
-                      allowFontScaling={false}
+                    <Text
                       style={{
-                        width: "100%",
-                        borderRadius: 8,
-                        height: "100%",
-                        paddingHorizontal: 15,
                         color: Colors.black,
-                        borderWidth: 1,
-                        borderColor: Colors.gray,
-                        fontSize: 14,
-                        padding: 2,
+                        fontSize: 16,
+                        fontWeight: "bold",
                       }}
-                      autoCorrect={false}
-                      returnKeyType="done"
-                      placeholder=""
-                      placeholderTextColor={Colors.black}
-                      //onChangeText={text => setLastName(text)}
-                    />
+                    >
+                      {items.item.contact_email}
+                    </Text>
                   </View>
                 </View>
                 <View style={{ width: "95%", alignSelf: "center" }}>
