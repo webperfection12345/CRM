@@ -22,7 +22,7 @@ const ContactsDetails = (props) => {
   const [value, setValue] = useState([]);
   const [password, setPassword] = useState("");
   const items = props.route.params.item;
-  console.log("value", items);
+  console.log(" ContactsDetailsvalue", items);
   //setValue(items);
 
   const fogotPassword = () => {

@@ -8,6 +8,7 @@ import getSearchHistoryReducer from "../modules/getSearchHistory";
 import getDashbaordDataReducer from "../modules/getDashboardData";
 import getMyClientListReducer from "../modules/getMyClientList";
 import deleteContactReducer from "../modules/deleteContact";
+import getClientDetailsReducer from "../modules/getMyClientDetails";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     getDashbaordData: getDashbaordDataReducer,
     getMyClientList: getMyClientListReducer,
     deleteContact: deleteContactReducer,
+    getClientDetails: getClientDetailsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
