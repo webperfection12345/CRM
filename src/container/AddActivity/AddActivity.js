@@ -365,6 +365,7 @@ const AddActivity = (props) => {
                 />
               </View>
             </View>
+
             <View style={{ height: 50 }}></View>
           </View>
         </ScrollView>
