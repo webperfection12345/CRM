@@ -13,11 +13,20 @@ import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { activityAddnote } from "../../modules/activityAddnote";
+import moment from "moment";
+
 // import ImagePicker from "react-native-image-crop-picker";
 
-const NewNote = () => {
+const NewNote = (props) => {
+  const dispatch = useDispatch();
+
+  const items = props.route.params;
+  console.log(items, "itemsitemsitemsitems");
+
   const navigation = useNavigation();
-  const [id, setID] = useState("");
+  const [note, setNote] = useState("");
   const [login, setLogin] = useState("");
   const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
@@ -26,6 +35,24 @@ const NewNote = () => {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [date, setDate] = useState("");
+  const addActivity = () => {
+    dispatch(activityAddnote(payload)).then((response) => {
+      console.log(response, "response");
+    });
+  };
+  const onhandleClick = () => {
+    addActivity(payload);
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    setDate(currentDateTime);
+  };
+  console.log(date, "date");
+  const payload = {
+    note_client_id: items.item.id,
+    note_contact_lead_id: items.item.contact_lead_id,
+    activity_note_content: note,
+    note_created_date: date,
+  };
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");
   };
@@ -139,7 +166,7 @@ const NewNote = () => {
                       marginLeft: 20,
                     }}
                   >
-                    Deek Diggles
+                    {items.item.contact_name}
                   </Text>
                   <Text
                     style={{
@@ -149,7 +176,7 @@ const NewNote = () => {
                       marginLeft: 20,
                     }}
                   >
-                    Deek Diggles
+                    {items.item.contact_name}
                   </Text>
                 </View>
               </View>
@@ -198,7 +225,7 @@ const NewNote = () => {
                 returnKeyType="done"
                 multiline={true}
                 placeholder="Enter your note here...."
-                onChangeText={(text) => setID(text)}
+                onChangeText={(text) => setNote(text)}
               />
             </View>
           </View>
@@ -221,6 +248,7 @@ const NewNote = () => {
                 justifyContent: "center",
                 alignItems: "center",
               }}
+              onPress={onhandleClick}
             >
               <Text
                 style={{
