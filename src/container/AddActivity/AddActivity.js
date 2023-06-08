@@ -283,6 +283,11 @@ const AddActivity = (props) => {
               }}
             ></View>
             <View style={{ width: "95%", alignSelf: "center" }}>
+              <Text
+                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
+              >
+                Contact Email
+              </Text>
               <View
                 style={{
                   width: "100%",
@@ -314,9 +319,6 @@ const AddActivity = (props) => {
               </View>
             </View>
 
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Contact Email
-            </Text>
             <View style={{ width: "95%", alignSelf: "center" }}>
               <Text
                 style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
@@ -361,42 +363,7 @@ const AddActivity = (props) => {
                 />
               </View>
             </View>
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
-              >
-                Owner
-              </Text>
-              <View
-                style={{
-                  width: "100%",
-                  height: 50,
-                  marginTop: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  allowFontScaling={false}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    height: "100%",
-                    paddingHorizontal: 15,
-                    color: Colors.black,
-                    borderWidth: 1,
-                    borderColor: Colors.gray,
-                    fontSize: 14,
-                    padding: 2,
-                  }}
-                  keyboardType="number-pad"
-                  autoCorrect={false}
-                  returnKeyType="done"
-                  placeholder="devaccessme@gmail.com"
-                  placeholderTextColor={Colors.black}
-                  onChangeText={(text) => setMobile(text)}
-                />
-              </View>
-            </View>
+
             <View style={{ height: 50 }}></View>
           </View>
         </ScrollView>
