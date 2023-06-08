@@ -17,7 +17,7 @@ import { getContacts } from "../../modules/getContacts";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
 
-const Contacts = () => {
+const Contact = () => {
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -246,4 +246,4 @@ const Contacts = () => {
   );
 };
 
-export default Contacts;
+export default Contact;

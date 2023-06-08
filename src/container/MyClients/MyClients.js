@@ -151,7 +151,9 @@ const Myclient = () => {
               ListFooterComponent={<View style={{ height: 50 }}></View>}
               renderItem={({ item }) => (
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("MyClientsDetails")}
+                  onPress={() =>
+                    navigation.navigate("MyClientsDetails", { item })
+                  }
                   style={{
                     height: 80,
                     width: "96%",

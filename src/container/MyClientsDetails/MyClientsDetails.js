@@ -13,50 +13,37 @@ import {
   Share,
 } from "react-native";
 
-import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
-import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
-// import ImagePicker from "react-native-image-crop-picker";
-const data = [
-  {
-    name: "Daniel Kinney",
-    details: "Daniel Kinney",
-    index: 0,
-    img: Images.people,
-  },
-  {
-    name: "Daniel Kinney",
-    details: "",
-    index: 1,
-    img: Images.home,
-  },
-  {
-    name: "Daniel Test",
-    details: "Daniel Kinney",
-    index: 2,
-    img: Images.signOut,
-  },
-  {
-    name: "Daniel Kinney",
-    details: "",
-    index: 1,
-    img: Images.home,
-  },
-  {
-    name: "Daniel Test",
-    details: "Daniel Kinney",
-    index: 2,
-    img: Images.signOut,
-  },
-];
+import { useDispatch } from "react-redux";
+import { getClientDetails } from "../../modules/getMyClientDetails";
 
-const MyClientsDetails = () => {
+const MyClientsDetails = (props) => {
+  useEffect(() => {
+    MyClientsDetails();
+  }, []);
+  const dispatch = useDispatch();
+
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [data, setData] = useState();
+
+  const items = props.route.params;
+
+  const id = items.item.id;
+
+  const MyClientsDetails = () => {
+    dispatch(getClientDetails(id)).then((response) => {
+      console.log(response, "response");
+      const clientData = response.payload.data;
+      console.log(clientData, "clientData");
+      console.log(Object.values(clientData));
+      setData(clientData);
+    });
+  };
 
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");
@@ -74,10 +61,10 @@ const MyClientsDetails = () => {
       },
     })
   ).current;
-  const getUserInitials = (fullName) => {
-    const [firstName, lastName] = fullName.split(" ");
-    return `${firstName.charAt(0)} ${lastName.charAt(0)}`;
-  };
+  // const getUserInitials = (fullName) => {
+  //   const [firstName, lastName] = fullName.split(" ");
+  //   return `${firstName.charAt(0)} ${lastName.charAt(0)}`;
+  // };
   const makePhoneCall = () => {
     let phoneNumber = "512458790";
     Linking.openURL(`tel:${phoneNumber}`);
@@ -180,6 +167,7 @@ const MyClientsDetails = () => {
             ></Image>
           </TouchableOpacity>
         </View>
+
         {/* <View
           style={{
             height: 60,
@@ -206,226 +194,230 @@ const MyClientsDetails = () => {
           </TouchableOpacity>
         </View> */}
         <ScrollView showsVerticalScrollIndicator={false}>
-          <View
-            style={{
-              borderWidth: 1,
-              width: "95%",
-              alignSelf: "center",
-              borderRadius: 5,
-              marginTop: 20,
-              borderColor: Colors.gray,
-            }}
-          >
-            <View
-              style={{
-                width: "100%",
-                flexDirection: "row",
-                padding: 10,
-                marginTop: 20,
-              }}
-            >
-              <Image
-                source={require("../../../assets/profilePic.png")}
+          <FlatList
+            data={data}
+            scrollEnabled={false}
+            renderItem={({ item, index }) => (
+              <View
                 style={{
-                  height: 120,
-                  width: 120,
-                  borderRadius: 60,
+                  borderWidth: 1,
+                  width: "95%",
+                  alignSelf: "center",
+                  borderRadius: 5,
+                  marginTop: 20,
+                  borderColor: Colors.gray,
                 }}
-              ></Image>
-              <View style={{ width: "60%", justifyContent: "center" }}>
-                <Text
+              >
+                <View
                   style={{
-                    color: Colors.black,
-                    fontSize: 30,
-
-                    fontWeight: "bold",
-                    marginLeft: 20,
+                    width: "100%",
+                    flexDirection: "row",
+                    padding: 10,
+                    marginTop: 20,
                   }}
                 >
-                  Deek Diggles
-                </Text>
-                <Text
+                  <Image
+                    source={require("../../../assets/profilePic.png")}
+                    style={{
+                      height: 120,
+                      width: 120,
+                      borderRadius: 60,
+                    }}
+                  ></Image>
+                  <View style={{ width: "60%", justifyContent: "center" }}>
+                    <Text
+                      style={{
+                        color: Colors.black,
+                        fontSize: 30,
+
+                        fontWeight: "bold",
+                        marginLeft: 20,
+                      }}
+                    >
+                      {item.contact_name}{" "}
+                    </Text>
+                    <Text
+                      style={{
+                        color: Colors.black,
+                        fontSize: 16,
+                        marginTop: 5,
+                        marginLeft: 20,
+                      }}
+                    >
+                      {item.contact_name}{" "}
+                    </Text>
+                  </View>
+                </View>
+                <View
                   style={{
-                    color: Colors.black,
-                    fontSize: 16,
-                    marginTop: 5,
-                    marginLeft: 20,
+                    height: 60,
+                    width: "60%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
                 >
-                  Deek Diggles
-                </Text>
-              </View>
-            </View>
-            <View
-              style={{
-                height: 60,
-                width: "60%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                justifyContent: "space-between",
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => makePhoneCall()}
-                style={{
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={require("../../../assets/phone.png")}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    resizeMode: "contain",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => sendEmail()}
-                style={{
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={require("../../../assets/mail.png")}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    resizeMode: "contain",
-                  }}
-                ></Image>
-              </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => makePhoneCall()}
+                    style={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/phone.png")}
+                      style={{
+                        height: 40,
+                        width: 40,
+                        resizeMode: "contain",
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => sendEmail()}
+                    style={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/mail.png")}
+                      style={{
+                        height: 40,
+                        width: 40,
+                        resizeMode: "contain",
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
 
-              <TouchableOpacity
-                onPress={() => sendSMS()}
-                style={{
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={require("../../../assets/chat.png")}
+                  <TouchableOpacity
+                    onPress={() => sendSMS()}
+                    style={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/chat.png")}
+                      style={{
+                        height: 40,
+                        width: 40,
+                        resizeMode: "contain",
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => handleShare()}
+                    style={{
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/share.png")}
+                      style={{
+                        height: 40,
+                        width: 40,
+
+                        resizeMode: "contain",
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
+                </View>
+                <View
                   style={{
                     height: 40,
-                    width: 40,
-                    resizeMode: "contain",
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    borderBottomWidth: 1,
+                    borderColor: Colors.gray,
+                    marginTop: 20,
+                    justifyContent: "space-between",
                   }}
-                ></Image>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => handleShare()}
-                style={{
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={require("../../../assets/share.png")}
+                >
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 14,
+                    }}
+                  >
+                    Phone
+                  </Text>
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 16,
+                    }}
+                  >
+                    {item.contact_number}
+                  </Text>
+                </View>
+                <View
                   style={{
-                    height: 40,
-                    width: 40,
-
-                    resizeMode: "contain",
+                    height: 30,
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    borderBottomWidth: 1,
+                    borderColor: Colors.gray,
+                    marginTop: 10,
+                    justifyContent: "space-between",
                   }}
-                ></Image>
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                height: 40,
-                width: "90%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                borderBottomWidth: 1,
-                borderColor: Colors.gray,
-                marginTop: 20,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 14,
-                }}
-              >
-                Phone
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                512458790
-              </Text>
-            </View>
-            <View
-              style={{
-                height: 30,
-                width: "90%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                borderBottomWidth: 1,
-                borderColor: Colors.gray,
-                marginTop: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 14,
-                }}
-              >
-                Email
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                  color: Colors.PrimaryColor,
-                }}
-              >
-                biff@bowser.com
-              </Text>
-            </View>
-            <View
-              style={{
-                height: 30,
-                width: "90%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                borderBottomWidth: 1,
-                borderColor: Colors.gray,
-                marginTop: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 14,
-                }}
-              >
-                Propertity Address
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                4401 Clint Moore Road
-              </Text>
-            </View>
+                >
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 14,
+                    }}
+                  >
+                    Email
+                  </Text>
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 16,
+                      color: Colors.PrimaryColor,
+                    }}
+                  >
+                    {item.contact_email}{" "}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    height: 30,
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    borderBottomWidth: 1,
+                    borderColor: Colors.gray,
+                    marginTop: 10,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 14,
+                    }}
+                  >
+                    Propertity Address
+                  </Text>
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 16,
+                    }}
+                  >
+                    {item.property_address}{" "}
+                  </Text>
+                </View>
 
-            {/* <View
+                {/* <View
               style={{
                 height: 30,
                 width: '90%',
@@ -453,7 +445,7 @@ const MyClientsDetails = () => {
                 @biffthevs
               </Text>
             </View> */}
-            {/* <View
+                {/* <View
               style={{
                 height: 30,
                 width: '90%',
@@ -481,83 +473,84 @@ const MyClientsDetails = () => {
                 @biffy
               </Text>
             </View> */}
-            <View
-              style={{
-                height: 30,
-                width: "90%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                marginTop: 10,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 14,
-                }}
-              >
-                Linked Contact
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                  color: Colors.PrimaryColor,
-                }}
-              >
-                jim@lokulrealty.com
-              </Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                width: "90%",
-                height: 60,
-                marginTop: 20,
-                alignSelf: "center",
-                justifyContent: "space-between",
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => navigation.navigate("AddActivity")}
-                style={{
-                  height: 35,
-                  width: "45%",
-                  borderRadius: 5,
-                  borderColor: Colors.gray,
-                  borderWidth: 0.5,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 14, color: Colors.black }}>
-                  🗓️ TASK
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigation.navigate("NewNote")}
-                style={{
-                  height: 35,
-                  width: "45%",
-                  borderRadius: 5,
-                  borderColor: Colors.gray,
-                  borderWidth: 0.5,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text style={{ fontSize: 14, color: Colors.black }}>
-                  📝 NOTE
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-
+                <View
+                  style={{
+                    height: 30,
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    marginTop: 10,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 14,
+                    }}
+                  >
+                    Linked Contact
+                  </Text>
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 16,
+                      color: Colors.PrimaryColor,
+                    }}
+                  >
+                    {item.linked_lead}{" "}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    width: "90%",
+                    height: 60,
+                    marginTop: 20,
+                    alignSelf: "center",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("AddActivity")}
+                    style={{
+                      height: 35,
+                      width: "45%",
+                      borderRadius: 5,
+                      borderColor: Colors.gray,
+                      borderWidth: 0.5,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ fontSize: 14, color: Colors.black }}>
+                      🗓️ TASK
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => navigation.navigate("NewNote")}
+                    style={{
+                      height: 35,
+                      width: "45%",
+                      borderRadius: 5,
+                      borderColor: Colors.gray,
+                      borderWidth: 0.5,
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Text style={{ fontSize: 14, color: Colors.black }}>
+                      📝 NOTE
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            )}
+          />
           <View
             style={{
               borderWidth: 1,
@@ -604,7 +597,9 @@ const MyClientsDetails = () => {
                 scrollEnabled={false}
                 renderItem={({ item, index }) => (
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("PropertiesViewed")}
+                    onPress={() =>
+                      navigation.navigate("PropertiesViewed", { items })
+                    }
                     style={{
                       height: 60,
                       width: "90%",
@@ -627,14 +622,14 @@ const MyClientsDetails = () => {
                           alignItems: "center",
                         }}
                       >
-                        <Text
+                        <Image
+                          source={{ uri: item.property_viewed[0].prop_image }} // Replace `item.imageURL` with the actual property from your API response that contains the image URL
                           style={{
-                            color: Colors.PrimaryColor,
-                            fontSize: 12,
+                            height: 100,
+                            width: 100,
+                            resizeMode: "contain",
                           }}
-                        >
-                          {/* {getUserInitials(item.name)} */}
-                        </Text>
+                        />
                       </View>
                     </View>
                     <View
@@ -644,27 +639,29 @@ const MyClientsDetails = () => {
                         justifyContent: "space-between",
                       }}
                     >
-                      <View
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {item.name}
-                        </Text>
+                      <View style={{ justifyContent: "center" }}>
+                        <View style={{ justifyContent: "center" }}>
+                          {item.property_viewed.map((property, index) => (
+                            <View key={index}>
+                              <Text
+                                style={{
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {property.prop_title}
+                              </Text>
+                            </View>
+                          ))}
+                        </View>
                         <Text
                           style={{
                             color: Colors.black,
                             fontSize: 12,
                           }}
                         >
-                          {item.details}
+                          {/* {item.details} */}
                         </Text>
                       </View>
                       <View
@@ -684,9 +681,6 @@ const MyClientsDetails = () => {
                     </View>
                   </TouchableOpacity>
                 )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
               />
             </View>
 
@@ -766,7 +760,7 @@ const MyClientsDetails = () => {
               }}
             >
               <FlatList
-                data={data}
+                data={[]}
                 scrollEnabled={false}
                 renderItem={({ item, index }) => (
                   <TouchableOpacity
@@ -799,7 +793,7 @@ const MyClientsDetails = () => {
                             fontSize: 12,
                           }}
                         >
-                          {/* {getUserInitials(item.name)} */}
+                          {item.contact_name}
                         </Text>
                       </View>
                     </View>
@@ -822,7 +816,7 @@ const MyClientsDetails = () => {
                             fontWeight: "bold",
                           }}
                         >
-                          {item.name}
+                          {item.contact_name}
                         </Text>
                         <Text
                           style={{
@@ -830,7 +824,7 @@ const MyClientsDetails = () => {
                             fontSize: 12,
                           }}
                         >
-                          {item.details}
+                          {/* {item.details} */}
                         </Text>
                       </View>
                       <View

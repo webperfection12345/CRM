@@ -26,7 +26,7 @@ export const getClientDetails = createAsyncThunk(
   }
 );
 
-const getClientDetails = createSlice({
+const getClientDetailsSlice = createSlice({
   name: "getClientDetails",
   initialState: {
     getClientDetails: [],
@@ -46,4 +46,4 @@ const getClientDetails = createSlice({
   },
 });
 
-export default getClientDetails.reducer;
+export default getClientDetailsSlice.reducer;
