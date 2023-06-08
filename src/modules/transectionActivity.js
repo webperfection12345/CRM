@@ -1,11 +1,15 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { getAPI } from "../config/apiMethod";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export const transectioActivity = createAsyncThunk(
   "transectioActivity",
   async () => {
+    const id = await AsyncStorage.getItem("userId");
+
     const urlDynamic =
-      "https://surf.topsearchrealty.com/wp-json/activity/transectionactivity";
+      "https://surf.topsearchrealty.com/wp-json/activity/transectionactivity?Agentid=" +
+      id;
     return await getAPI(urlDynamic)
       .then(async (response) => {
         const { data } = response;
