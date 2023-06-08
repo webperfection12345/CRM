@@ -78,18 +78,18 @@ const MyClientsDetails = (props) => {
   //   return `${firstName.charAt(0)} ${lastName.charAt(0)}`;
   // };
   const makePhoneCall = () => {
-    let phoneNumber = "512458790";
+    let phoneNumber = items.item.contact_number;
     Linking.openURL(`tel:${phoneNumber}`);
   };
   const sendEmail = () => {
-    let recipient = "example@example.com";
+    let recipient = items.item.contact_email;
     let subject = "Subject of email";
     let body = "Body of email";
     Linking.openURL(`mailto:${recipient}?subject=${subject}&body=${body}`);
   };
 
   const sendSMS = () => {
-    let phoneNumber = "512458790";
+    let phoneNumber = items.item.contact_number;
     let message = "Hello from my app!";
     Linking.openURL(`sms:${phoneNumber}`);
   };
@@ -634,14 +634,14 @@ const MyClientsDetails = (props) => {
                           alignItems: "center",
                         }}
                       >
-                        <Image
+                        {/* <Image
                           source={{ uri: item.property_viewed[0].prop_image }} // Replace `item.imageURL` with the actual property from your API response that contains the image URL
                           style={{
                             height: 100,
                             width: 100,
                             resizeMode: "contain",
                           }}
-                        />
+                        /> */}
                       </View>
                     </View>
                     <View
