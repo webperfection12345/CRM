@@ -15,6 +15,8 @@ import activityAddnoteReducers from "../modules/activityAddnote";
 import transectionActivityReducer from "../modules/transectionActivity";
 import transectionAddActivityReducer from "../modules/transectionAddActivity";
 import getMeterDataReducer from "../modules/getMeterValue";
+import getDocumentReducer from "../modules/getDocument";
+
 export const store = configureStore({
   reducer: {
     loginUser: loginUserReducer,
@@ -33,7 +35,7 @@ export const store = configureStore({
     transectioActivity: transectionActivityReducer,
     transectioActivity: transectionAddActivityReducer,
     getMeterData: getMeterDataReducer,
-
+    getDocument: getDocumentReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

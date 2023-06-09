@@ -38,6 +38,7 @@ const EditContactsDetails = (props) => {
       contactid: item.id,
       contact_name: name,
       contact_number: phone,
+      contactimg: uriResponse,
     };
     dispatch(updateContact(payload))
       .then((res) => {
@@ -240,8 +241,58 @@ const EditContactsDetails = (props) => {
               />
             </View>
           </View>
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+              Picture
+            </Text>
+            <TouchableOpacity
+              onPress={() => _pickImage()}
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <View
+                allowFontScaling={false}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  alignSelf: "center",
+                  alignItems: "center",
+                  flexDirection: "row",
+                }}
+              >
+                <Image
+                  style={{
+                    height: 30,
+                    width: 30,
+                    resizeMode: "contain",
+                    marginLeft: 10,
+                  }}
+                  source={require("../../../assets/uploadImage.png")}
+                ></Image>
 
-          {/* Delete Item */}
+                <Text
+                  allowFontScaling={false}
+                  style={{
+                    color: Colors.black,
+                    fontSize: 14,
+                    marginLeft: 10,
+                    alignSelf: "center",
+                  }}
+                >
+                  Choose an image...
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
           <TouchableOpacity
             style={{ alignSelf: "center", marginTop: 30 }}
             onPress={handleDelete}

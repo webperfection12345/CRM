@@ -19,11 +19,13 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { getClientDetails } from "../../modules/getMyClientDetails";
 import { activityHistory } from "../../modules/activityHistory";
+import { getDocument } from "../../modules/getDocument";
 
 const MyClientsDetails = (props) => {
   useEffect(() => {
     MyClientsDetails();
     allActivityHistory();
+    AllDocumets();
   }, []);
   const dispatch = useDispatch();
 
@@ -33,6 +35,7 @@ const MyClientsDetails = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState();
   const [history, setHistory] = useState();
+  const [docutemts, setDocutemts] = useState();
 
   const items = props.route.params;
 
@@ -53,6 +56,16 @@ const MyClientsDetails = (props) => {
       console.log(response, "historyresponse");
       const history = response.payload.data;
       setHistory(history);
+    });
+  };
+
+  const AllDocumets = () => {
+    dispatch(getDocument()).then((response) => {
+      console.log(response, "getDocument");
+      const getDoc = response.payload.data;
+      console.log(getDoc, "docutemtsdocutemtsdocutemts");
+      setDocutemts(getDoc);
+      console.log(docutemts, "docutemts");
     });
   };
 
