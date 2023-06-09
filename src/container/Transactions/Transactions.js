@@ -122,6 +122,67 @@ const Transactions = ({ navigation }) => {
             <TouchableOpacity>
               <Image
                 style={{
+                  height: 15,
+                  width: 15,
+                  resizeMode: "contain",
+                  tintColor: Colors.white,
+                }}
+                source={require("../../../assets/back.png")}
+              ></Image>
+              <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+            </TouchableOpacity>
+            <Text style={{ color: "white" }}>Transactions</Text>
+
+            <TouchableOpacity
+              onPress={() => navigation.navigate("NewActivies")}
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+              }}
+            >
+              <Image
+                style={{
+                  height: 15,
+                  width: 15,
+                  resizeMode: "contain",
+                  tintColor: Colors.white,
+                }}
+                source={require("../../../assets/plus.png")}
+              ></Image>
+            </TouchableOpacity>
+          </View>
+          <Text
+            style={{
+              fontSize: 40,
+              color: "white",
+              margin: 10,
+              marginVertical: 25,
+              // fontStyle: "italic",
+            }}
+          >
+            Transactions
+          </Text>
+
+          <View
+            style={{
+              backgroundColor: Colors.buttonColor,
+              flexDirection: "row",
+              justifyContent: "flex-start",
+              alignItems: "center",
+              margin: 10,
+              // marginTop: 5,
+
+              borderRadius: 10,
+
+              width: "92%",
+              height: 50,
+            }}
+          >
+            <TouchableOpacity>
+              <Image
+                style={{
                   marginLeft: 10,
                   height: 20,
                   width: 20,

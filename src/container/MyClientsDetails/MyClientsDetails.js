@@ -392,7 +392,7 @@ const MyClientsDetails = (props) => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 12,
                       color: Colors.PrimaryColor,
                     }}
                   >
@@ -510,7 +510,7 @@ const MyClientsDetails = (props) => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 16,
+                      fontSize: 12,
                       color: Colors.PrimaryColor,
                     }}
                   >
