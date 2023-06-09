@@ -2,26 +2,28 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { url } from "../config/url";
 import { postAPI } from "../config/apiMethod";
 
-export const activityAddnote = createAsyncThunk("activityAddnote", async () => {
-  const urlDynamic =
-    "https://surf.topsearchrealty.com/wp-json/activity/addnote";
-  try {
-    const response = await postAPI(urlDynamic);
-    console.log(response, "res");
-    const { data } = response;
-    return data;
-  } catch (error) {
-    console.log(error);
-    if (error.response) {
-      console.log("API issue", error.response);
-    } else if (error.request) {
-      console.log("API issue", error.request);
-    } else {
-      console.log("API issue", error.message);
+export const activityAddnote = createAsyncThunk(
+  "activityAddnote",
+  async (payload) => {
+    const urlDynamic =
+      "https://surf.topsearchrealty.com/wp-json/activity/addnote";
+    try {
+      const response = await postAPI(urlDynamic, payload); // Pass the payload to the postAPI function
+      const { data } = response;
+      return data;
+    } catch (error) {
+      console.log(error);
+      if (error.response) {
+        console.log("API issue", error.response);
+      } else if (error.request) {
+        console.log("API issue", error.request);
+      } else {
+        console.log("API issue", error.message);
+      }
+      throw error;
     }
-    throw error;
   }
-});
+);
 
 const activityAddnoteSlice = createSlice({
   name: "activityAddnote",

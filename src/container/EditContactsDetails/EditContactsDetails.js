@@ -11,7 +11,7 @@ import {
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "../../modules/deleteContact";
+import { updateContact } from "../../modules/deleteContact";
 import Colors from "../../utils/Colors";
 
 const EditContactsDetails = (props) => {
@@ -19,31 +19,36 @@ const EditContactsDetails = (props) => {
   const dispatch = useDispatch();
   const item = props.route.params.item;
 
+  const [name, setName] = useState("");
+  const [linkedId, setLinkedId] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [data, setData] = useState([]);
   useEffect(() => {
-    const [firstName, lastName] = item.contact_name.split(" ");
-    setName(firstName);
-    setLastName(lastName);
+    setName(item.contact_name);
     setPhone(item.contact_number);
-    setEmail(item.email);
+    setEmail(item.contact_email);
+    setLinkedId(item.linked_lead);
     setPassword(item.password);
   }, [item]);
+
   const handleDelete = () => {
-    dispatch(deleteContact(item.id))
-      .then(() => {
-        console.log("Contact deleted successfully");
+    const payload = {
+      contactid: item.id,
+      contact_name: name,
+      contact_number: phone,
+    };
+    dispatch(updateContact(payload))
+      .then((res) => {
+        console.log(res, "Reseseses");
+        console.log("Contact update successfully");
         navigation.navigate("Contact");
       })
       .catch((error) => {
         console.log("Error deleting contact:", error);
       });
   };
-
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [data, setData] = useState([]);
 
   const _pickImage = () => {
     ImagePicker.openPicker({
@@ -94,6 +99,7 @@ const EditContactsDetails = (props) => {
               alignItems: "center",
               marginRight: 10,
             }}
+            onPress={handleDelete}
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Done</Text>
           </TouchableOpacity>
@@ -102,6 +108,40 @@ const EditContactsDetails = (props) => {
         {/* Scrollable content */}
         <ScrollView>
           {/* Phone */}
+
+          {/* First Name */}
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+              Name
+            </Text>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                allowFontScaling={false}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+                value={name}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setName(text)}
+              />
+            </View>
+          </View>
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Phone
@@ -135,45 +175,10 @@ const EditContactsDetails = (props) => {
               />
             </View>
           </View>
-
-          {/* First Name */}
-          <View style={{ width: "95%", alignSelf: "center" }}>
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              First Name
-            </Text>
-            <View
-              style={{
-                width: "100%",
-                height: 50,
-                marginTop: 10,
-                justifyContent: "center",
-              }}
-            >
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: "100%",
-                  borderRadius: 8,
-                  height: "100%",
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                value={name}
-                autoCorrect={false}
-                returnKeyType="done"
-                onChangeText={(text) => setName(text)}
-              />
-            </View>
-          </View>
-
           {/* Last Name */}
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Last Name
+              Email
             </Text>
             <View
               style={{
@@ -195,10 +200,10 @@ const EditContactsDetails = (props) => {
                   fontSize: 14,
                   padding: 2,
                 }}
-                value={lastName}
+                value={email}
                 autoCorrect={false}
                 returnKeyType="done"
-                onChangeText={(text) => setLastName(text)}
+                onChangeText={(text) => setEmail(text)}
               />
             </View>
           </View>
@@ -206,7 +211,7 @@ const EditContactsDetails = (props) => {
           {/* Linked Lead */}
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Linked Lead
+              Email
             </Text>
             <View
               style={{
@@ -216,15 +221,23 @@ const EditContactsDetails = (props) => {
                 justifyContent: "center",
               }}
             >
-              <Text
+              <TextInput
+                allowFontScaling={false}
                 style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
                   color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: "bold",
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
                 }}
-              >
-                {item.linked_lead}
-              </Text>
+                value={item.linked_lead}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setLinkedId(text)}
+              />
             </View>
           </View>
 
@@ -234,7 +247,7 @@ const EditContactsDetails = (props) => {
             onPress={handleDelete}
           >
             <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
-              Delete Item
+              Update Contact
             </Text>
           </TouchableOpacity>
 

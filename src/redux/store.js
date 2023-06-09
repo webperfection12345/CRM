@@ -7,7 +7,7 @@ import getContactsReducer from "../modules/getContacts";
 import getSearchHistoryReducer from "../modules/getSearchHistory";
 import getDashbaordDataReducer from "../modules/getDashboardData";
 import getMyClientListReducer from "../modules/getMyClientList";
-import deleteContactReducer from "../modules/deleteContact";
+import updateContactReducer from "../modules/deleteContact";
 import getClientDetailsReducer from "../modules/getMyClientDetails";
 import activityHistoryReducers from "../modules/activityHistory";
 import addActivityTaskReducers from "../modules/addActivityTask";
@@ -24,7 +24,7 @@ export const store = configureStore({
     getSearchHistory: getSearchHistoryReducer,
     getDashbaordData: getDashbaordDataReducer,
     getMyClientList: getMyClientListReducer,
-    deleteContact: deleteContactReducer,
+    updateContact: updateContactReducer,
     getClientDetails: getClientDetailsReducer,
     activityHistory: activityHistoryReducers,
     addActivityTask: addActivityTaskReducers,

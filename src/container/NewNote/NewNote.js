@@ -36,22 +36,24 @@ const NewNote = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [date, setDate] = useState("");
-  const addActivity = () => {
-    dispatch(activityAddnote(payload)).then((response) => {
-      console.log(response, "response");
-    });
-  };
+
   const onhandleClick = () => {
-    addActivity(payload);
-    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    setDate(currentDateTime);
+    addActivity();
   };
   console.log(date, "date");
-  const payload = {
-    note_client_id: items.item.id,
-    note_contact_lead_id: items.item.contact_lead_id,
-    activity_note_content: note,
-    note_created_date: date,
+  const addActivity = () => {
+    const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    setDate(currentDateTime);
+    const payload = {
+      note_client_id: items.item.id,
+      note_contact_lead_id: items.item.contact_lead_id,
+      activity_note_content: note,
+      note_created_date: date,
+    };
+    dispatch(activityAddnote(payload)).then((response) => {
+      console.log(response, "response");
+      navigation.goBack();
+    });
   };
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");

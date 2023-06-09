@@ -17,6 +17,7 @@ import { useNavigation } from "@react-navigation/native";
 import { addActivityTask } from "../../modules/addActivityTask";
 import { useDispatch } from "react-redux";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // import ImagePicker from "react-native-image-crop-picker";
 
@@ -29,7 +30,7 @@ const AddActivity = (props) => {
   const [activity, setActivity] = useState("");
   const [login, setLogin] = useState("");
   const [notes, setNotes] = useState("");
-  const [name, setName] = useState("");
+  const [agentEmail, setAgentEmail] = useState("");
   const [lastName, setLastName] = useState("");
   const [mobile, setMobile] = useState("");
   const [phone, setPhone] = useState("");
@@ -45,25 +46,38 @@ const AddActivity = (props) => {
   const showDatePicker = () => {
     setShowPicker(true);
   };
+  useEffect(() => {
+    getData();
+  }, []);
+  const getData = async () => {
+    const userDetails = await AsyncStorage.getItem("userDetails");
+    // const userImage = await AsyncStorage.getItem('imageUri');
+    const parsedUserDetails = JSON.parse(userDetails);
+    const email = parsedUserDetails.user_email;
+    setAgentEmail(email);
+  };
+  console.log("value hai ", agentEmail);
 
   console.log(items.item.id, "fsdfsd");
-  const payload = {
-    client_id: items.item.id,
-    contact_lead_id: items.item.contact_lead_id,
-    activity_type: activity,
-    activity_content: login,
-    activity_date: date,
-    activity_notes: notes,
-    contact_email: items.item.contact_email,
-    agent_email: "agentEmail",
-  };
+
   const addActivity = () => {
+    const payload = {
+      client_id: items.item.id,
+      contact_lead_id: items.item.contact_lead_id,
+      activity_type: activity,
+      activity_content: login,
+      activity_date: date,
+      activity_notes: notes,
+      contact_email: items.item.contact_email,
+      agent_email: agentEmail,
+    };
     dispatch(addActivityTask(payload)).then((response) => {
+      navigation.goBack();
       console.log(response, "response");
     });
   };
   const onhandleClick = () => {
-    addActivity(payload);
+    addActivity();
   };
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");
@@ -233,7 +247,7 @@ const AddActivity = (props) => {
                 {showPicker && (
                   <DateTimePicker
                     value={selectedDate}
-                    mode="date"
+                    mode="datetime"
                     display="default"
                     onChange={onChange}
                   />
@@ -359,7 +373,7 @@ const AddActivity = (props) => {
                   keyboardType="number-pad"
                   autoCorrect={false}
                   returnKeyType="done"
-                  placeholder="devaccessme@gmail.com"
+                  value={agentEmail}
                   placeholderTextColor={Colors.black}
                   onChangeText={(text) => setMobile(text)}
                 />

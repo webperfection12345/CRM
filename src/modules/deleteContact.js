@@ -2,18 +2,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postAPI } from "../config/apiMethod";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-// Async thunk action creator for deleting a contact
-export const deleteContact = createAsyncThunk(
-  "deleteContact",
-  async (itemId) => {
-    const userId = await AsyncStorage.getItem("userId");
-    const urlDynamic = `https://surf.topsearchrealty.com//wp-json/remove/contact?post_id=${encodeURIComponent(
-      itemId
-    )}`;
-
+// Async thunk action creator for updating a contact
+export const updateContact = createAsyncThunk(
+  "contacts/updateContact",
+  async (payload) => {
+    const url = "https://surf.topsearchrealty.com/wp-json/leads/updatecontacts";
     try {
-      const response = await postAPI(urlDynamic);
-      console.log(response, "res");
+      const response = await postAPI(url, payload); // Pass the payload to the postAPI function
       const { data } = response;
       return data;
     } catch (error) {
@@ -30,27 +25,27 @@ export const deleteContact = createAsyncThunk(
   }
 );
 
-// Redux slice for managing delete contact state
-const deleteContactSlice = createSlice({
-  name: "deleteContact",
+// Redux slice for managing update contact state
+const updateContactSlice = createSlice({
+  name: "contacts",
   initialState: {
-    deleteContactData: [],
+    updateContactData: [],
     status: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(deleteContact.pending, (state, action) => {
+      .addCase(updateContact.pending, (state, action) => {
         state.status = "loading";
       })
-      .addCase(deleteContact.fulfilled, (state, action) => {
+      .addCase(updateContact.fulfilled, (state, action) => {
         state.status = "success";
-        state.deleteContactData = action.payload;
+        state.updateContactData = action.payload;
       })
-      .addCase(deleteContact.rejected, (state, action) => {
+      .addCase(updateContact.rejected, (state, action) => {
         state.status = "failed";
       });
   },
 });
 
-export default deleteContactSlice.reducer;
+export default updateContactSlice.reducer;

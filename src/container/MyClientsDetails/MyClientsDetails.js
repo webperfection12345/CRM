@@ -52,7 +52,6 @@ const MyClientsDetails = (props) => {
     dispatch(activityHistory()).then((response) => {
       console.log(response, "historyresponse");
       const history = response.payload.data;
-      console.log(history, "fffffffffffffffff");
       setHistory(history);
     });
   };
