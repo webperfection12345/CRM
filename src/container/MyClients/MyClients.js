@@ -190,9 +190,7 @@ const Myclient = () => {
                           color: Colors.PrimaryColor,
                           fontSize: 12,
                         }}
-                      >
-                        {item.contact_full_name}
-                      </Text>
+                      ></Text>
                     </View>
                   </View>
                   <View

@@ -291,14 +291,14 @@ export default function Dashboard() {
                 Fast Gun
               </Text>
             </View>
-            <View
+            {/* <View
               style={{
                 height: 1,
                 width: "100%",
                 backgroundColor: Colors.gray,
                 marginTop: 10,
               }}
-            ></View>
+            ></View> */}
             {/* <AnimatedCircularProgress
             size={250}
             width={25}
@@ -456,7 +456,7 @@ export default function Dashboard() {
                 ></Image>
               </TouchableOpacity>
             </View> */}
-            <Text
+            {/* <Text
               style={{
                 fontSize: 20,
                 marginTop: 20,
@@ -495,7 +495,7 @@ export default function Dashboard() {
               }}
             >
               $ 829,000
-            </Text>
+            </Text> */}
             <View
               style={{
                 height: 1,

@@ -7,19 +7,25 @@ import {
   Alert,
   Picker,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
+import { getContacts } from "../../modules/getContacts";
 import { transectioAddActivity } from "../../modules/transectionAddActivity";
-
 import Colors from "../../utils/Colors";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
-// import { Button } from "react-native-web";
 
-const NewActivies = ({ navigation }) => {
+const NewActivities = ({ navigation }) => {
   const dispatch = useDispatch();
-
+  const [contact, setContact] = useState([]);
   const [selectedValue, setSelectedValue] = useState("");
+  const [selectedValu, setSelectedValu] = useState("");
+  const getAllContacts = () => {
+    dispatch(getContacts()).then((response) => {
+      const contactsData = response.payload.data;
+      setContact(contactsData);
+      console.log(contactsData, "data");
+    });
+  };
 
   const addNewActivity = () => {
     const payload = {
@@ -37,9 +43,14 @@ const NewActivies = ({ navigation }) => {
       console.log(response, "response");
     });
   };
+
   const onhandleClick = () => {
     addNewActivity();
   };
+
+  useEffect(() => {
+    getAllContacts();
+  }, []);
 
   return (
     <View style={{ flex: 1 }}>
@@ -69,7 +80,7 @@ const NewActivies = ({ navigation }) => {
               tintColor: Colors.white,
             }}
             source={require("../../../assets/back.png")}
-          ></Image>
+          />
           <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
         </TouchableOpacity>
         <Text
@@ -78,7 +89,7 @@ const NewActivies = ({ navigation }) => {
           New Activities
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("NewActivies")}
+          onPress={() => navigation.navigate("NewActivities")}
           style={{
             flexDirection: "row",
             justifyContent: "center",
@@ -104,7 +115,6 @@ const NewActivies = ({ navigation }) => {
           <View
             style={{
               flexDirection: "row",
-
               margin: 10,
               borderWidth: 1,
               padding: 15,
@@ -115,10 +125,10 @@ const NewActivies = ({ navigation }) => {
           >
             <Picker
               selectedValue={selectedValue}
-              onChangeText={setSelectedValue}
+              onValueChange={(value) => setSelectedValue(value)}
             >
               <Picker.Item label="Note" value="Note" />
-              <Picker.Item label="call" value="call" />
+              <Picker.Item label="Call" value="Call" />
               <Picker.Item label="In Person" value="In Person" />
               <Picker.Item label="Task" value="Task" />
               <Picker.Item label="Video" value="Video" />
@@ -132,7 +142,7 @@ const NewActivies = ({ navigation }) => {
                   tintColor: "grey",
                 }}
                 source={require("../../../assets/arrowDown.png")}
-              ></Image>
+              />
             </TouchableOpacity>
           </View>
           <View
@@ -143,14 +153,7 @@ const NewActivies = ({ navigation }) => {
               margin: 10,
             }}
           >
-            <Text
-              style={{
-                fontSize: 14,
-                margin: 5,
-              }}
-            >
-              Activity
-            </Text>
+            <Text style={{ fontSize: 14, margin: 5 }}>Activity</Text>
             <Text style={{ fontSize: 14, alignSelf: "center" }}>Required</Text>
           </View>
           <TextInput
@@ -163,36 +166,59 @@ const NewActivies = ({ navigation }) => {
               borderRadius: 15,
             }}
             placeholder=""
-            onChangeText={(te) => te}
+            onChangeText={(text) => text}
           />
-          <Text
-            style={{
-              fontSize: 14,
-
-              margin: 12,
-            }}
-          >
-            Contact
-          </Text>
+          <Text style={{ fontSize: 14, margin: 10 }}>Contact</Text>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
               margin: 10,
-
               borderWidth: 1,
               padding: 15,
               borderColor: "grey",
               borderRadius: 15,
             }}
           >
-            <TouchableOpacity>
-              <Picker selectedValue={selectedValue} onChangeText={(te) => te}>
-                <Picker.Item label="Note" value="Note" />
-                <Picker.Item label="call" value="call" />
+            <View
+              style={{
+                flexDirection: "row",
+                margin: 10,
+                borderWidth: 1,
+                padding: 15,
+                borderColor: "grey",
+                borderRadius: 15,
+              }}
+            >
+              <Picker
+                selectedValue={selectedValu}
+                onValueChange={(value) => setSelectedValu(value)}
+              >
+                {contact.map((contacts) => (
+                  <Picker.Item
+                    key={contacts.id}
+                    label={contacts.contact_name}
+                    value={contacts.id}
+                  />
+                ))}
               </Picker>
-            </TouchableOpacity>
-            <TextInput style={{}} placeholder="" onChangeText={(te) => te} />
+              <TouchableOpacity>
+                <Image
+                  style={{
+                    height: 15,
+                    width: 15,
+                    resizeMode: "contain",
+                    tintColor: "grey",
+                  }}
+                  source={require("../../../assets/arrowDown.png")}
+                />
+              </TouchableOpacity>
+            </View>
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder=""
+              onChangeText={(text) => text}
+            />
 
             <TouchableOpacity>
               <Image
@@ -203,18 +229,15 @@ const NewActivies = ({ navigation }) => {
                   tintColor: "grey",
                 }}
                 source={require("../../../assets/arrowDown.png")}
-              ></Image>
+              />
             </TouchableOpacity>
           </View>
-          <Text style={{ margin: 10, fontSize: 14, marginRight: 10 }}>
-            Due Date
-          </Text>
+          <Text style={{ margin: 10, fontSize: 14 }}>Due Date</Text>
           <View
             style={{
               flexDirection: "row",
               justifyContent: "flex-start",
               margin: 10,
-
               borderWidth: 1,
               padding: 15,
               borderColor: "grey",
@@ -230,82 +253,46 @@ const NewActivies = ({ navigation }) => {
                   tintColor: "grey",
                 }}
                 source={require("./../../assets/images/calendar.png")}
-              ></Image>
+              />
             </TouchableOpacity>
-            <TextInput style={{}} placeholder="" onChangeText={(te) => te} />
+            <TextInput
+              style={{ flex: 1 }}
+              placeholder=""
+              onChangeText={(text) => text}
+            />
           </View>
           <Text style={{ fontSize: 14, margin: 10 }}>Notes</Text>
           <TextInput
             style={{
               margin: 10,
-
-              borderWidth: 1,
-              padding: 30,
-              borderColor: "grey",
-              borderRadius: 15,
-            }}
-            placeholder=""
-            onChangeText={(te) => te}
-          />
-          <View
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              margin: 10,
-            }}
-          >
-            <Text style={{ fontSize: 14 }}>Owner</Text>
-            <Text>Required</Text>
-          </View>
-          <TextInput
-            style={{
-              margin: 10,
-
+              marginTop: 1,
               borderWidth: 1,
               padding: 15,
               borderColor: "grey",
               borderRadius: 15,
             }}
+            multiline={true}
+            numberOfLines={4}
             placeholder=""
-            onChangeText={(te) => te}
+            onChangeText={(text) => text}
           />
-          <View
+          <TouchableOpacity
             style={{
-              marginTop: 10,
-              flexDirection: "row",
-              marginHorizontal: 10,
-              marginBottom: 20,
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor: Colors.themeColor,
+              margin: 10,
+              height: 40,
+              borderRadius: 15,
             }}
+            onPress={onhandleClick}
           >
-            <View
-              style={{ backgroundColor: Colors.PrimaryColor, borderRadius: 10 }}
-            >
-              <Button
-                title="Submit"
-                onPress={onhandleClick}
-                color={Colors.buttonColor}
-              />
-            </View>
-            <View
-              style={{
-                backgroundColor: Colors.gray,
-                borderRadius: 10,
-                marginHorizontal: 20,
-              }}
-            >
-              <Button
-                title="Cancel"
-                onPress={() => {
-                  navigation.goBack();
-                }}
-                color={Colors.PrimaryColor}
-              />
-            </View>
-          </View>
+            <Text style={{ color: "black" }}>Submit</Text>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     </View>
   );
 };
 
-export default NewActivies;
+export default NewActivities;
