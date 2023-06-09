@@ -18,10 +18,10 @@ import RNSpeedometer from "react-native-speedometer";
 import { getDashboardData } from "../../modules/getDashboardData";
 import Activity from "../../components/Activity";
 import { getContacts } from "../../modules/getContacts";
-
+import { getMeterData } from "../../modules/getMeterValue";
 export default function Dashboard() {
   const navigation = useNavigation();
-  const [meterValue, setMeterValue] = useState(69);
+  const [meterValue, setMeterValue] = useState("");
   const [meter2Value, setMeter2Value] = useState(60);
   const [totalLeadValue, setTotalLeadValue] = useState("");
   const [underContarct, setUnderContarct] = useState("");
@@ -35,13 +35,18 @@ export default function Dashboard() {
   useEffect(() => {
     getDashboardDataApiCall();
     getAllContacts();
+    getMeter();
   }, []);
   const getDashboardDataApiCall = () => {
     dispatch(getDashboardData()).then((response) => {
-      console.log(response.payload);
       setActivity(true);
       // setMeterValue(response.payload.data[0].under_contract_percent);
       // setMeter2Value(response.payload.data[0].sold_percent);
+    });
+  };
+  const getMeter = () => {
+    dispatch(getMeterData()).then((response) => {
+      setMeterValue(response.payload.data);
     });
   };
   const getAllContacts = () => {

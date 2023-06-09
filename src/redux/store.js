@@ -14,7 +14,7 @@ import addActivityTaskReducers from "../modules/addActivityTask";
 import activityAddnoteReducers from "../modules/activityAddnote";
 import transectionActivityReducer from "../modules/transectionActivity";
 import transectionAddActivityReducer from "../modules/transectionAddActivity";
-
+import getMeterDataReducer from "../modules/getMeterValue";
 export const store = configureStore({
   reducer: {
     loginUser: loginUserReducer,
@@ -32,6 +32,8 @@ export const store = configureStore({
     activityAddnote: activityAddnoteReducers,
     transectioActivity: transectionActivityReducer,
     transectioActivity: transectionAddActivityReducer,
+    getMeterData: getMeterDataReducer,
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
