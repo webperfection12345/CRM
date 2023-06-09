@@ -22,6 +22,8 @@ import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
 
 const Properties = () => {
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -32,6 +34,15 @@ const Properties = () => {
   const dispatch = useDispatch();
   const [activity, setActivity] = useState(false);
   const [searchView, setSearchView] = useState(true);
+
+  const searchFilter = (text) => {
+    setSearchText(text);
+    const filteredItems = data.filter((item) =>
+      item.title.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
+
   useEffect(() => {
     getAllProperties();
     // getAllHistory();
@@ -53,8 +64,9 @@ const Properties = () => {
 
   const getAllHistory = () => {
     dispatch(getSearchhistory()).then((response) => {
-      console.log("value undefiend", response.payload);
       setHistoryData(response.payload);
+      console.log("historyData", historyData);
+      lo;
     });
   };
 
@@ -70,6 +82,7 @@ const Properties = () => {
       dispatch(getSearchProperties(search)).then((response) => {
         console.log("data hai ki nhi", response);
         setData(response.payload);
+        console.log(data, "ddddddddddddddd");
         setActivity(true);
       });
     } else {
@@ -178,11 +191,8 @@ const Properties = () => {
               <TextInput
                 allowFontScaling={false}
                 placeholder="Search"
-                value={search}
                 placeholderTextColor={Colors.white}
-                onTouchStart={() => setSearchView(false)}
-                onChangeText={(text) => setSearch(text)}
-                onSubmitEditing={getSearchPropertiesApiCall}
+                onChangeText={searchFilter}
                 style={{
                   color: Colors.white,
                   fontSize: 18,
@@ -203,7 +213,7 @@ const Properties = () => {
                 }}
               >
                 <FlatList
-                  data={historyData}
+                  data={[]}
                   renderItem={({ item }) => (
                     <TouchableOpacity
                       onPress={() => (
@@ -231,7 +241,6 @@ const Properties = () => {
                     </TouchableOpacity>
                   )}
                   keyExtractor={(item) => item.id}
-                  ItemSeparatorComponent={this.renderSeparator}
                   key={(item) => item.id}
                 />
               </View>
@@ -247,7 +256,7 @@ const Properties = () => {
             }}
           >
             <FlatList
-              data={data}
+              data={filteredData.length > 0 ? filteredData : data}
               extraData={data}
               numColumns={2}
               ListFooterComponent={() => <View style={{ height: 200 }}></View>}

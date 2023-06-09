@@ -144,6 +144,8 @@ const Transactions = ({ navigation }) => {
                 marginLeft: 10,
                 fontWeight: "bold",
                 marginHorizontal: 10,
+                height: "100%",
+                width: "100%",
               }}
             ></TextInput>
           </View>

@@ -5,13 +5,17 @@ import {
   Image,
   Button,
   Alert,
+  Picker,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Colors from "../../utils/Colors";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 // import { Button } from "react-native-web";
 
 const NewActivies = ({ navigation }) => {
+  const [selectedValue, setSelectedValue] = useState("");
+
   return (
     <View style={{ flex: 1 }}>
       <View
@@ -84,10 +88,16 @@ const NewActivies = ({ navigation }) => {
               justifyContent: "space-between",
             }}
           >
-            <TextInput
-              placeholder="Choose something"
-              onChangeText={(te) => te}
-            />
+            <Picker
+              selectedValue={selectedValue}
+              onChangeText={setSelectedValue}
+            >
+              <Picker.Item label="Note" value="Note" />
+              <Picker.Item label="call" value="call" />
+              <Picker.Item label="In Person" value="In Person" />
+              <Picker.Item label="Task" value="Task" />
+              <Picker.Item label="Video" value="Video" />
+            </Picker>
             <TouchableOpacity>
               <Image
                 style={{
@@ -152,7 +162,10 @@ const NewActivies = ({ navigation }) => {
             }}
           >
             <TouchableOpacity>
-              <Text style={{ fontSize: 20 }}>-</Text>
+              <Picker selectedValue={selectedValue} onChangeText={(te) => te}>
+                <Picker.Item label="Note" value="Note" />
+                <Picker.Item label="call" value="call" />
+              </Picker>
             </TouchableOpacity>
             <TextInput style={{}} placeholder="" onChangeText={(te) => te} />
 
