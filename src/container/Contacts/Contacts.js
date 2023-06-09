@@ -181,7 +181,7 @@ const Contacts = () => {
                           fontSize: 12,
                         }}
                       >
-                        {item.contact_full_name}
+                        {/* {item.contact_full_name} */}
                       </Text>
                     </View>
                   </View>

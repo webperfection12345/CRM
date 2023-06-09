@@ -19,13 +19,11 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { getClientDetails } from "../../modules/getMyClientDetails";
 import { activityHistory } from "../../modules/activityHistory";
-import { getDocument } from "../../modules/getDocument";
 
 const MyClientsDetails = (props) => {
   useEffect(() => {
     MyClientsDetails();
     allActivityHistory();
-    AllDocumets();
   }, []);
   const dispatch = useDispatch();
 
@@ -35,7 +33,6 @@ const MyClientsDetails = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState();
   const [history, setHistory] = useState();
-  const [docutemts, setDocutemts] = useState();
 
   const items = props.route.params;
 
@@ -56,16 +53,6 @@ const MyClientsDetails = (props) => {
       console.log(response, "historyresponse");
       const history = response.payload.data;
       setHistory(history);
-    });
-  };
-
-  const AllDocumets = () => {
-    dispatch(getDocument()).then((response) => {
-      console.log(response, "getDocument");
-      const getDoc = response.payload.data;
-      console.log(getDoc, "docutemtsdocutemtsdocutemts");
-      setDocutemts(getDoc);
-      console.log(docutemts, "docutemts");
     });
   };
 
@@ -138,60 +125,6 @@ const MyClientsDetails = (props) => {
           backgroundColor: Colors.white,
         }}
       >
-        <View
-          style={{
-            height: 60,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: 10,
-            }}
-          >
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-                tintColor: Colors.white,
-              }}
-              source={require("../../../assets/back.png")}
-            ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
-          </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>
-            MyClientsDetails
-          </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("EditClientsDetails")}
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight: 10,
-            }}
-          >
-            <Image
-              source={require("../../../assets/edit.png")}
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-                tintColor: Colors.white,
-              }}
-            ></Image>
-          </TouchableOpacity>
-        </View>
-
         {/* <View
           style={{
             height: 60,
@@ -232,6 +165,63 @@ const MyClientsDetails = (props) => {
                   borderColor: Colors.gray,
                 }}
               >
+                <View
+                  style={{
+                    height: 60,
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    backgroundColor: Colors.PrimaryColor,
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => navigation.goBack()}
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginLeft: 10,
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 15,
+                        width: 15,
+                        resizeMode: "contain",
+                        tintColor: Colors.white,
+                      }}
+                      source={require("../../../assets/back.png")}
+                    ></Image>
+                    <Text style={{ fontSize: 15, color: Colors.white }}>
+                      Back
+                    </Text>
+                  </TouchableOpacity>
+                  <Text style={{ fontSize: 15, color: Colors.white }}>
+                    MyClientsDetails
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("EditClientsDetails", { item })
+                    }
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: 10,
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/edit.png")}
+                      style={{
+                        height: 15,
+                        width: 15,
+                        resizeMode: "contain",
+                        tintColor: Colors.white,
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
+                </View>
                 <View
                   style={{
                     width: "100%",
@@ -575,6 +565,7 @@ const MyClientsDetails = (props) => {
               </View>
             )}
           />
+
           <View
             style={{
               borderWidth: 1,

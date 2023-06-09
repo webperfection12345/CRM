@@ -202,6 +202,7 @@ const EditContactsDetails = (props) => {
                   padding: 2,
                 }}
                 value={email}
+                editable={false}
                 autoCorrect={false}
                 returnKeyType="done"
                 onChangeText={(text) => setEmail(text)}
@@ -212,7 +213,7 @@ const EditContactsDetails = (props) => {
           {/* Linked Lead */}
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Email
+              Linked Lead
             </Text>
             <View
               style={{
@@ -236,6 +237,7 @@ const EditContactsDetails = (props) => {
                 }}
                 value={item.linked_lead}
                 autoCorrect={false}
+                editable={false}
                 returnKeyType="done"
                 onChangeText={(text) => setLinkedId(text)}
               />
