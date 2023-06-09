@@ -18,12 +18,23 @@ import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
 
 const Contact = () => {
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
+
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
+  const searchFilter = (text) => {
+    setSearchText(text);
+    const filteredItems = data.filter((item) =>
+      item.contact_name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+  };
 
   useEffect(() => {
     getAllContacts();
@@ -131,7 +142,7 @@ const Contact = () => {
               allowFontScaling={false}
               placeholder="Search"
               placeholderTextColor={Colors.white}
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={searchFilter}
               style={{
                 color: Colors.white,
                 fontSize: 18,
@@ -147,7 +158,7 @@ const Contact = () => {
             <Activity />
           ) : (
             <FlatList
-              data={data}
+              data={filteredData.length > 0 ? filteredData : data}
               ListFooterComponent={<View style={{ height: 50 }}></View>}
               renderItem={({ item }) => (
                 <TouchableOpacity
