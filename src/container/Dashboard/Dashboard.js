@@ -21,7 +21,7 @@ import { getContacts } from "../../modules/getContacts";
 import { getMeterData } from "../../modules/getMeterValue";
 export default function Dashboard() {
   const navigation = useNavigation();
-  const [meterValue, setMeterValue] = useState("");
+  const [meterValue, setMeterValue] = useState();
   const [meter2Value, setMeter2Value] = useState(60);
   const [totalLeadValue, setTotalLeadValue] = useState("");
   const [underContarct, setUnderContarct] = useState("");
