@@ -7,14 +7,39 @@ import {
   Alert,
   Picker,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
+import { transectioAddActivity } from "../../modules/transectionAddActivity";
 
 import Colors from "../../utils/Colors";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 // import { Button } from "react-native-web";
 
 const NewActivies = ({ navigation }) => {
+  const dispatch = useDispatch();
+
   const [selectedValue, setSelectedValue] = useState("");
+
+  const addNewActivity = () => {
+    const payload = {
+      // client_id: items.item.id,
+      // contact_lead_id: items.item.contact_lead_id,
+      // activity_type: activity,
+      // activity_content: login,
+      // activity_date: date,
+      // activity_notes: notes,
+      // contact_email: items.item.contact_email,
+      // agent_email: agentEmail,
+    };
+    dispatch(transectioAddActivity(payload)).then((response) => {
+      navigation.goBack();
+      console.log(response, "response");
+    });
+  };
+  const onhandleClick = () => {
+    addNewActivity();
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -257,10 +282,8 @@ const NewActivies = ({ navigation }) => {
             >
               <Button
                 title="Submit"
-                onPress={() => {
-                  Alert.alert("hello");
-                }}
-                color={"white"}
+                onPress={onhandleClick}
+                color={Colors.buttonColor}
               />
             </View>
             <View
