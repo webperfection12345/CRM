@@ -49,8 +49,6 @@ const Properties = () => {
   }, []);
   const getAllProperties = () => {
     dispatch(getProperties()).then((response) => {
-      console.log(response.payload, "proprop");
-
       setActivity(true);
       setLoading(false);
       const newData = [...data, ...response.payload];
@@ -80,9 +78,7 @@ const Properties = () => {
   const getSearchPropertiesApiCall = () => {
     if (search != "") {
       dispatch(getSearchProperties(search)).then((response) => {
-        console.log("data hai ki nhi", response);
         setData(response.payload);
-        console.log(data, "ddddddddddddddd");
         setActivity(true);
       });
     } else {

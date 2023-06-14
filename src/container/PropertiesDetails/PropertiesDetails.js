@@ -17,6 +17,7 @@ import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
 import { getPropertiesDetails } from "../../modules/getPropertiesDetails";
 import { useSelector, useDispatch } from "react-redux";
+
 import Activity from "../../components/Activity";
 const PropertiesDetails = (props) => {
   const navigation = useNavigation();
@@ -26,28 +27,26 @@ const PropertiesDetails = (props) => {
   useEffect(() => {
     getPropertiesDetailsApiCall();
   }, []);
-  console.log("details", id);
   const [data, setdata] = useState([]);
   const getPropertiesDetailsApiCall = () => {
     dispatch(getPropertiesDetails(id)).then((response) => {
-      console.log("data hai ki nhi", response);
       setdata(response.payload);
       setActivity(true);
     });
   };
   const makePhoneCall = () => {
-    let phoneNumber = "512458790";
+    let phoneNumber = data.listagentpreferredphone;
     Linking.openURL(`tel:${phoneNumber}`);
   };
   const sendEmail = () => {
-    let recipient = "example@example.com";
+    let recipient = data.listagentemail;
     let subject = "Subject of email";
     let body = "Body of email";
     Linking.openURL(`mailto:${recipient}?subject=${subject}&body=${body}`);
   };
 
   const sendSMS = () => {
-    let phoneNumber = "512458790";
+    let phoneNumber = data.listagentpreferredphone;
     let message = "Hello from my app!";
     Linking.openURL(`sms:${phoneNumber}`);
   };
@@ -110,12 +109,12 @@ const PropertiesDetails = (props) => {
                 alignContent: "center",
               }}
             >
-              <View style={{ marginTop: 20 }}>
+              {/* <View style={{ marginTop: 20 }}>
                 <Image
                   source={{ uri: data.featured_image_src }}
                   style={{ height: 120, width: 120, borderRadius: 60 }}
                 ></Image>
-              </View>
+              </View> */}
               <View
                 style={{
                   justifyContent: "center",

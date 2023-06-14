@@ -9,7 +9,6 @@ export const transectioAddActivity = createAsyncThunk(
       "https://surf.topsearchrealty.com/wp-json/activity/addactivity";
     try {
       const response = await postAPI(urlDynamic);
-      console.log(response, "res");
       const { data } = response;
       return data;
     } catch (error) {

@@ -37,7 +37,6 @@ const PropertiesViewedByLeads = () => {
   }, []);
   const getAllProperties = () => {
     dispatch(getFavoriteProperties()).then((response) => {
-      console.log(response.payload);
       //const newData = [...data, ...response.payload];
       setData(response.payload);
       setActivity(true);
@@ -49,7 +48,6 @@ const PropertiesViewedByLeads = () => {
 
   const getAllHistory = () => {
     dispatch(getSearchhistory()).then((response) => {
-      console.log("value undefiend", response.payload);
       setHistoryData(response.payload);
     });
   };
@@ -63,7 +61,6 @@ const PropertiesViewedByLeads = () => {
   const getSearchPropertiesApiCall = () => {
     if (search != "") {
       dispatch(getSearchProperties(search)).then((response) => {
-        console.log("data hai ki nhi", response);
         setData(response.payload);
         setActivity(true);
       });

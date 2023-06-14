@@ -185,13 +185,22 @@ const Myclient = () => {
                         alignItems: "center",
                       }}
                     >
+                      <Image
+                        source={{ uri: item.contact_image }}
+                        style={{
+                          height: 60,
+                          width: 60,
+                          borderRadius: 30,
+                          resizeMode: "contain",
+                        }}
+                      ></Image>
                       <Text
                         style={{
                           color: Colors.PrimaryColor,
                           fontSize: 12,
                         }}
                       >
-                        {item.contact_full_name}
+                        {/* {item.contact_full_name} */}
                       </Text>
                     </View>
                   </View>

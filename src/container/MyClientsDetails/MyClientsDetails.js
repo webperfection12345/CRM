@@ -19,11 +19,17 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { getClientDetails } from "../../modules/getMyClientDetails";
 import { activityHistory } from "../../modules/activityHistory";
+import { getActivityData } from "../../modules/getActivityTask";
+import { getNoteData } from "../../modules/getNoteData";
+import { getDocument } from "../../modules/getDocument";
 
 const MyClientsDetails = (props) => {
   useEffect(() => {
     MyClientsDetails();
     allActivityHistory();
+    MyTaskData();
+    MyNoteData();
+    MyDocsData();
   }, []);
   const dispatch = useDispatch();
 
@@ -33,26 +39,65 @@ const MyClientsDetails = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState();
   const [history, setHistory] = useState();
-
+  const [note, setNote] = useState([]);
+  const [task, setTask] = useState([]);
+  const [leadType, setLeadType] = useState("");
+  const [property, setProperty] = useState([]);
   const items = props.route.params;
 
   const id = items.item.id;
 
-  const MyClientsDetails = () => {
-    dispatch(getClientDetails(id)).then((response) => {
-      console.log(response, "response");
-      const clientData = response.payload.data;
-      console.log(clientData, "clientData");
-      console.log(Object.values(clientData));
-      setData(clientData);
+  const MyTaskData = () => {
+    dispatch(getActivityData(id)).then((response) => {
+      const taskData = response.payload.data;
+      setTask(taskData);
     });
+  };
+  const MyClientsDetails = () => {
+    dispatch(getClientDetails(id))
+      .then((response) => {
+        const clientData = response.payload.data;
+        setData(clientData);
+        const prop = clientData.map((item) => item.property_viewed);
+        setProperty(prop);
+        const url = clientData.map((item) => item.linked_id);
+        const updatedLeadTypes = clientData.map((item) => {
+          const url = item.linked_lead;
+          const paramName = getParamNameFromUrl(url, "wpestate_crm_lead");
+          return "Lead";
+        });
+
+        setLeadType(updatedLeadTypes);
+        console.log(updatedLeadTypes);
+      })
+      .catch((error) => {
+        console.log("Error fetching client details:", error);
+      });
+    const getParamNameFromUrl = (url, paramKey) => {
+      const regex = new RegExp(`[?&](${paramKey}=([^&#]*)|&|#|$)`);
+      const match = url.match(regex);
+      if (match) {
+        return match[1].split("=")[0];
+      }
+      return "";
+    };
   };
 
   const allActivityHistory = () => {
     dispatch(activityHistory()).then((response) => {
-      console.log(response, "historyresponse");
       const history = response.payload.data;
       setHistory(history);
+    });
+  };
+  const MyNoteData = () => {
+    dispatch(getNoteData(id)).then((response) => {
+      const noteData = response.payload.data;
+      setNote(noteData);
+    });
+  };
+  const MyDocsData = () => {
+    dispatch(getDocument()).then((response) => {
+      console.log(response, "note");
     });
   };
 
@@ -99,6 +144,7 @@ const MyClientsDetails = (props) => {
       title: "Cool Article",
     });
   };
+
   const _pickImage = () => {
     ImagePicker.openPicker({
       width: 300,
@@ -117,6 +163,25 @@ const MyClientsDetails = (props) => {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+  const newLocal = (
+    <TouchableOpacity
+      onPress={toggleModal}
+      style={{
+        justifyContent: "center",
+        backgroundColor: Colors.PrimaryColor,
+        height: 40,
+        width: 40,
+        borderRadius: 20,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Image
+        style={{ height: 20, width: 20, resizeMode: "contain" }}
+        source={require("../../../assets/plus.png")}
+      ></Image>
+    </TouchableOpacity>
+  );
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       <View
@@ -231,7 +296,7 @@ const MyClientsDetails = (props) => {
                   }}
                 >
                   <Image
-                    source={require("../../../assets/profilePic.png")}
+                    source={{ uri: item.contact_image }}
                     style={{
                       height: 120,
                       width: 120,
@@ -505,7 +570,7 @@ const MyClientsDetails = (props) => {
                       fontSize: 14,
                     }}
                   >
-                    Linked Contact
+                    Client Type
                   </Text>
                   <Text
                     style={{
@@ -514,7 +579,7 @@ const MyClientsDetails = (props) => {
                       color: Colors.PrimaryColor,
                     }}
                   >
-                    {item.linked_lead}{" "}
+                    {leadType}{" "}
                   </Text>
                 </View>
                 <View
@@ -601,25 +666,21 @@ const MyClientsDetails = (props) => {
                 </Text>
               </TouchableOpacity> */}
             </View>
-            <View
-              style={{
-                height: 300,
-                marginTop: 20,
-              }}
-            >
+            <View>
               <FlatList
-                data={data}
+                data={property}
                 scrollEnabled={false}
+                numColumns={5}
                 renderItem={({ item, index }) => (
                   <TouchableOpacity
                     onPress={() =>
                       navigation.navigate("PropertiesViewed", { items })
                     }
                     style={{
-                      height: 60,
+                      height: 200,
                       width: "90%",
                       alignSelf: "center",
-                      borderBottomWidth: index == 4 ? null : 1,
+                      borderBottomWidth: index === 4 ? null : 1,
                       borderBottomColor: Colors.gray,
                       alignItems: "center",
                       alignContent: "center",
@@ -638,64 +699,52 @@ const MyClientsDetails = (props) => {
                         }}
                       >
                         {/* <Image
-                          source={{ uri: item.property_viewed[0].prop_image }} // Replace `item.imageURL` with the actual property from your API response that contains the image URL
-                          style={{
-                            height: 100,
-                            width: 100,
-                            resizeMode: "contain",
-                          }}
-                        /> */}
+            source={{ uri: item.prop_image }} // Replace `item.prop_image` with the actual property image URL from your API response
+            style={{
+              height: 100,
+              width: 100,
+              resizeMode: 'contain',
+            }}
+          /> */}
                       </View>
                     </View>
                     <View
                       style={{
                         width: "80%",
-                        flexDirection: "row",
+                        flexDirection: "column",
                         justifyContent: "space-between",
                       }}
                     >
-                      <View style={{ justifyContent: "center" }}>
-                        <View style={{ justifyContent: "center" }}>
-                          {item.property_viewed.map((property, index) => (
-                            <View key={index}>
-                              <Text
-                                style={{
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: "bold",
-                                }}
-                              >
-                                {property.prop_title}
-                              </Text>
-                            </View>
-                          ))}
-                        </View>
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 12,
-                          }}
-                        >
-                          {/* {item.details} */}
-                        </Text>
+                      <View>
+                        <Text>{item.prop_title}</Text>
                       </View>
-                      <View
+                      <Text
                         style={{
-                          justifyContent: "center",
+                          color: Colors.black,
+                          fontSize: 12,
                         }}
                       >
-                        <Image
-                          source={require("../../../assets/leftArrow.png")}
-                          style={{
-                            height: 15,
-                            width: 15,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </View>
+                        {/* {item.details} */}
+                      </Text>
+
+                      {/* <View
+          style={{
+            justifyContent: "center",
+          }}
+        >
+          <Image
+            source={require("../../../assets/leftArrow.png")}
+            style={{
+              height: 15,
+              width: 15,
+              resizeMode: "contain",
+            }}
+          ></Image>
+        </View> */}
                     </View>
                   </TouchableOpacity>
                 )}
+                keyExtractor={(item, index) => index.toString()}
               />
             </View>
 
@@ -710,7 +759,7 @@ const MyClientsDetails = (props) => {
               }}
             >
               <TouchableOpacity
-                onPress={() => navigation.navigate("PropertiesViewedByLeads")}
+                onPress={() => navigation.navigate("Properties")}
                 style={{
                   height: 35,
                   width: "45%",
@@ -908,7 +957,7 @@ const MyClientsDetails = (props) => {
               borderColor: Colors.gray,
             }}
           >
-            <View
+            {/* <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
               <Text
@@ -922,8 +971,8 @@ const MyClientsDetails = (props) => {
               >
                 Activities
               </Text>
-            </View>
-            <View
+            </View> */}
+            {/* <View
               style={{
                 marginTop: 20,
               }}
@@ -995,8 +1044,8 @@ const MyClientsDetails = (props) => {
                         >
                           {item.details}
                         </Text>
-                      </View>
-                      <View
+                      </View> */}
+            {/* <View
                         style={{
                           justifyContent: "center",
                         }}
@@ -1009,6 +1058,198 @@ const MyClientsDetails = (props) => {
                             resizeMode: "contain",
                           }}
                         ></Image>
+                      </View> */}
+            {/* </View> */}
+            {/* </TouchableOpacity>
+                )}
+                //   keyExtractor={(item) => item.id}
+                //  ItemSeparatorComponent={this.renderSeparator}
+                //   key={(item) => item.id}
+              />
+            </View> */}
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignContent: "center",
+                alignItems: "center",
+                width: "90%",
+                alignSelf: "center",
+                marginTop: 20,
+              }}
+            >
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: "bold",
+                }}
+              >
+                Activities
+              </Text>
+              {/* <TouchableOpacity
+                onPress={toggleModal}
+                style={{
+                  justifyContent: "center",
+                  backgroundColor: Colors.PrimaryColor,
+                  height: 40,
+                  width: 40,
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  style={{ height: 20, width: 20, resizeMode: "contain" }}
+                  source={require("../../../assets/plus.png")}
+                ></Image>
+              </TouchableOpacity> */}
+            </View>
+            <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
+              <FlatList
+                data={task}
+                scrollEnabled={false}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    //onPress={() => navigation.navigate('MyClientsDetails')}
+                    style={{
+                      height: 60,
+                      width: "90%",
+                      borderBottomWidth: 1,
+                      borderBottomColor: Colors.gray,
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      alignSelf: "center",
+                    }}
+                  >
+                    <View
+                      style={{
+                        width: "100%",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <View
+                        style={{
+                          height: 80,
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {item.activity_content}
+                        </Text>
+
+                        <Text
+                          style={{
+                            color: Colors.black,
+                            fontSize: 12,
+                          }}
+                        >
+                          {item.activity_notes}
+                        </Text>
+                      </View>
+                    </View>
+                  </TouchableOpacity>
+                )}
+                //   keyExtractor={(item) => item.id}
+                //  ItemSeparatorComponent={this.renderSeparator}
+                //   key={(item) => item.id}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignContent: "center",
+                alignItems: "center",
+                width: "90%",
+                alignSelf: "center",
+                marginTop: 20,
+              }}
+            >
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: "bold",
+                }}
+              >
+                Notes
+              </Text>
+              {/* <TouchableOpacity
+                onPress={toggleModal}
+                style={{
+                  justifyContent: "center",
+                  backgroundColor: Colors.PrimaryColor,
+                  height: 40,
+                  width: 40,
+                  borderRadius: 20,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  style={{ height: 20, width: 20, resizeMode: "contain" }}
+                  source={require("../../../assets/plus.png")}
+                ></Image>
+              </TouchableOpacity> */}
+            </View>
+            <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
+              <FlatList
+                data={note}
+                scrollEnabled={false}
+                renderItem={({ item }) => (
+                  <TouchableOpacity
+                    //onPress={() => navigation.navigate('MyClientsDetails')}
+                    style={{
+                      height: 60,
+                      width: "90%",
+                      borderBottomWidth: 1,
+                      borderBottomColor: Colors.gray,
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      alignSelf: "center",
+                    }}
+                  >
+                    <View
+                      style={{
+                        width: "100%",
+                        flexDirection: "row",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <View
+                        style={{
+                          height: 80,
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Text
+                          style={{
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: "bold",
+                          }}
+                        >
+                          {item.note_content}
+                        </Text>
+
+                        <Text
+                          style={{
+                            color: Colors.black,
+                            fontSize: 12,
+                          }}
+                        >
+                          {item.created_date}
+                        </Text>
                       </View>
                     </View>
                   </TouchableOpacity>
@@ -1038,23 +1279,6 @@ const MyClientsDetails = (props) => {
               >
                 History
               </Text>
-              <TouchableOpacity
-                onPress={toggleModal}
-                style={{
-                  justifyContent: "center",
-                  backgroundColor: Colors.PrimaryColor,
-                  height: 40,
-                  width: 40,
-                  borderRadius: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  style={{ height: 20, width: 20, resizeMode: "contain" }}
-                  source={require("../../../assets/plus.png")}
-                ></Image>
-              </TouchableOpacity>
             </View>
             <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
               <FlatList

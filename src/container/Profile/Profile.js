@@ -29,7 +29,6 @@ const Contacts = () => {
     const userDetails = await AsyncStorage.getItem("userDetails");
     // const userImage = await AsyncStorage.getItem('imageUri');
     setUserDetails(JSON.parse(userDetails));
-    console.log("value hai ", userDetails);
   };
 
   const _pickImage = () => {
@@ -43,8 +42,6 @@ const Contacts = () => {
       let source = { uri: response.path };
       setAvatarSource(source);
       seturiResponse(response.path);
-      console.log("mkm", avatarSource);
-      console.log("uri", uriResponse);
     });
   };
 

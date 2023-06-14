@@ -39,7 +39,7 @@ const Transactions = ({ navigation }) => {
           style={{
             backgroundColor: "#576ebd",
             width: "100%",
-            height: "30%",
+            height: "20%",
           }}
         >
           <View
@@ -67,42 +67,11 @@ const Transactions = ({ navigation }) => {
                   tintColor: Colors.white,
                 }}
                 source={require("../../../assets/back.png")}
-              ></Image>
+              />
               <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
             </TouchableOpacity>
             <Text style={{ color: "white" }}>Transactions</Text>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("NewActivies")}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-              }}
-            >
-              <Image
-                style={{
-                  height: 15,
-                  width: 15,
-                  resizeMode: "contain",
-                  tintColor: Colors.white,
-                }}
-                source={require("../../../assets/plus.png")}
-              ></Image>
-            </TouchableOpacity>
           </View>
-          <Text
-            style={{
-              fontSize: 40,
-              color: "white",
-              margin: 10,
-              marginVertical: 25,
-              // fontStyle: "italic",
-            }}
-          >
-            Transactions
-          </Text>
 
           <View
             style={{
@@ -111,71 +80,7 @@ const Transactions = ({ navigation }) => {
               justifyContent: "flex-start",
               alignItems: "center",
               margin: 10,
-              // marginTop: 5,
-
               borderRadius: 10,
-
-              width: "92%",
-              height: 50,
-            }}
-          >
-            <TouchableOpacity>
-              <Image
-                style={{
-                  height: 15,
-                  width: 15,
-                  resizeMode: "contain",
-                  tintColor: Colors.white,
-                }}
-                source={require("../../../assets/back.png")}
-              ></Image>
-              <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
-            </TouchableOpacity>
-            <Text style={{ color: "white" }}>Transactions</Text>
-
-            <TouchableOpacity
-              onPress={() => navigation.navigate("NewActivies")}
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                marginRight: 10,
-              }}
-            >
-              <Image
-                style={{
-                  height: 15,
-                  width: 15,
-                  resizeMode: "contain",
-                  tintColor: Colors.white,
-                }}
-                source={require("../../../assets/plus.png")}
-              ></Image>
-            </TouchableOpacity>
-          </View>
-          <Text
-            style={{
-              fontSize: 40,
-              color: "white",
-              margin: 10,
-              marginVertical: 25,
-              // fontStyle: "italic",
-            }}
-          >
-            Transactions
-          </Text>
-
-          <View
-            style={{
-              backgroundColor: Colors.buttonColor,
-              flexDirection: "row",
-              justifyContent: "flex-start",
-              alignItems: "center",
-              margin: 10,
-              // marginTop: 5,
-
-              borderRadius: 10,
-
               width: "92%",
               height: 50,
             }}
@@ -190,7 +95,7 @@ const Transactions = ({ navigation }) => {
                   tintColor: Colors.white,
                 }}
                 source={require("../../../assets/search.png")}
-              ></Image>
+              />
             </TouchableOpacity>
 
             <TextInput
@@ -199,7 +104,6 @@ const Transactions = ({ navigation }) => {
               placeholderTextColor={Colors.white}
               onChangeText={(email) => email}
               style={{
-                // backgroundColor: "#dbdbdb",
                 color: Colors.white,
                 fontSize: 18,
                 marginLeft: 10,
@@ -208,9 +112,10 @@ const Transactions = ({ navigation }) => {
                 height: "100%",
                 width: "100%",
               }}
-            ></TextInput>
+            />
           </View>
         </View>
+
         <View style={{ backgroundColor: Colors.white }}>
           <Text
             style={{
@@ -228,7 +133,6 @@ const Transactions = ({ navigation }) => {
             style={{
               marginTop: 10,
               fontSize: 16,
-              // fontWeight: "800",
               marginLeft: 10,
               alignSelf: "center",
             }}
@@ -261,7 +165,6 @@ const Transactions = ({ navigation }) => {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
-
                     margin: 8,
                     borderRadius: 10,
                     borderBottomWidth: 3,
@@ -277,16 +180,13 @@ const Transactions = ({ navigation }) => {
                       height: 50,
                       width: 50,
                       resizeMode: "contain",
-                      // tintColor: Colors.white,
                       borderRadius: 30,
                       marginBottom: 5,
                     }}
-                    source={require("../../../assets/profilePic.png")}
+                    source={{ uri: item.contact_image }}
                   />
 
-                  <Text style={{}}>{item.contact_name}</Text>
-
-                  {/* <TextInput style={{}} placeholder="" onChangeText={(tr) => tr} /> */}
+                  <Text>{item.contact_name}</Text>
                   <Text>{item.activity_date}</Text>
                 </TouchableOpacity>
               </View>
@@ -296,12 +196,11 @@ const Transactions = ({ navigation }) => {
             style={{
               marginTop: 10,
               fontSize: 16,
-              // fontWeight: "800",
               marginLeft: 10,
               alignSelf: "center",
             }}
           >
-            Upcomming
+            Upcoming
           </Text>
           <View
             style={{
@@ -329,7 +228,6 @@ const Transactions = ({ navigation }) => {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
-
                     margin: 8,
                     borderRadius: 10,
                     borderBottomWidth: 3,
@@ -345,16 +243,13 @@ const Transactions = ({ navigation }) => {
                       height: 50,
                       width: 50,
                       resizeMode: "contain",
-                      // tintColor: Colors.white,
                       borderRadius: 30,
                       marginBottom: 5,
                     }}
-                    source={require("../../../assets/profilePic.png")}
+                    source={{ uri: item.contact_image }}
                   />
 
-                  <Text style={{}}>{item.contact_name}</Text>
-
-                  {/* <TextInput style={{}} placeholder="" onChangeText={(tr) => tr} /> */}
+                  <Text>{item.contact_name}</Text>
                   <Text>{item.activity_date}</Text>
                 </TouchableOpacity>
               </View>
@@ -364,7 +259,6 @@ const Transactions = ({ navigation }) => {
             style={{
               marginTop: 10,
               fontSize: 16,
-              // fontWeight: "800",
               marginLeft: 10,
               alignSelf: "center",
             }}
@@ -397,7 +291,6 @@ const Transactions = ({ navigation }) => {
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
-
                     margin: 8,
                     borderRadius: 10,
                     borderBottomWidth: 3,
@@ -413,16 +306,13 @@ const Transactions = ({ navigation }) => {
                       height: 50,
                       width: 50,
                       resizeMode: "contain",
-                      // tintColor: Colors.white,
                       borderRadius: 30,
                       marginBottom: 5,
                     }}
-                    source={require("../../../assets/profilePic.png")}
+                    source={{ uri: item.contact_image }}
                   />
 
-                  <Text style={{}}>{item.contact_name}</Text>
-
-                  {/* <TextInput style={{}} placeholder="" onChangeText={(tr) => tr} /> */}
+                  <Text>{item.contact_name}</Text>
                   <Text>{item.activity_date}</Text>
                 </TouchableOpacity>
               </View>

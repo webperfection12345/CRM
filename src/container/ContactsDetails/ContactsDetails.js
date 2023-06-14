@@ -21,10 +21,30 @@ const ContactsDetails = (props) => {
   const navigation = useNavigation();
   const [value, setValue] = useState([]);
   const [password, setPassword] = useState("");
+  const [leadType, setLeadType] = useState("");
   const items = props.route.params.item;
-  console.log(" ContactsDetailsvalue", items);
-  //setValue(items);
+  useEffect(() => {
+    leadData();
+  }, []);
+  const leadData = () => {
+    const url = items.linked_lead;
 
+    try {
+      const regex = /(\w+)=\d+/;
+      const matches = url.match(regex);
+
+      if (matches && matches.length >= 2) {
+        const paramName = "Lead";
+        setLeadType(paramName);
+      } else {
+        console.log("Parameter not found in the URL");
+      }
+    } catch (error) {
+      console.error("Error parsing URL:", error);
+    }
+  };
+
+  //setValue(items);
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");
   };
@@ -55,10 +75,9 @@ const ContactsDetails = (props) => {
       let source = { uri: response.path };
       setAvatarSource(source);
       seturiResponse(response.path);
-      console.log("mkm", avatarSource);
-      console.log("uri", uriResponse);
     });
   };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       <View
@@ -134,11 +153,11 @@ const ContactsDetails = (props) => {
           >
             <View>
               <Image
-                source={require("../../../assets/user.png")}
+                source={{ uri: items.contact_image }}
                 style={{
-                  height: 100,
-                  width: 100,
-                  tintColor: Colors.gray,
+                  height: 120,
+                  width: 120,
+                  borderRadius: 60,
                 }}
               ></Image>
             </View>
@@ -295,7 +314,7 @@ const ContactsDetails = (props) => {
           </View>
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Linked Lead
+              Client Type{" "}
             </Text>
             <View
               style={{
@@ -312,7 +331,7 @@ const ContactsDetails = (props) => {
                   fontWeight: "bold",
                 }}
               >
-                {items.linked_lead}
+                {leadType}
               </Text>
             </View>
           </View>

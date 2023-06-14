@@ -30,7 +30,6 @@ const PropertiesFavorites = () => {
   }, []);
   const getAllProperties = () => {
     dispatch(getFavoriteProperties()).then((response) => {
-      console.log("response hai ki nhi ", response.payload);
       setdata(response.payload);
     });
   };
@@ -45,7 +44,6 @@ const PropertiesFavorites = () => {
   const getSearchPropertiesApiCall = (search) => {
     if (search != "") {
       dispatch(getSearchProperties(search)).then((response) => {
-        console.log("data hai ki nhi", response);
         setdata(response.payload);
       });
     } else {

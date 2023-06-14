@@ -1,391 +1,231 @@
 import React, { useState, useEffect } from "react";
 import {
-  Image,
   Text,
   View,
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
-  Button,
+  TextInput,
+  StyleSheet,
 } from "react-native";
-
-import Header from "../../components/Header";
-import Colors from "../../utils/Colors";
-import { FlatList, TextInput } from "react-native-gesture-handler";
-import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
-import { addActivityTask } from "../../modules/addActivityTask";
 import { useDispatch } from "react-redux";
-import DateTimePicker from "@react-native-community/datetimepicker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-// import ImagePicker from "react-native-image-crop-picker";
+import { addActivityTask } from "../../modules/addActivityTask";
+import Colors from "../../utils/Colors";
+import { Picker } from "@react-native-picker/picker";
 
 const AddActivity = (props) => {
   const dispatch = useDispatch();
-  const [showPicker, setShowPicker] = useState(false);
-
-  const items = props.route.params;
   const navigation = useNavigation();
-  const [activity, setActivity] = useState("");
+  const [selectedOption, setSelectedOption] = useState("note");
   const [login, setLogin] = useState("");
   const [notes, setNotes] = useState("");
   const [agentEmail, setAgentEmail] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [phone, setPhone] = useState("");
-  const [date, setDate] = useState("");
-  const [password, setPassword] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShowPicker(Platform.OS === "ios");
-    setSelectedDate(currentDate);
-  };
   const showDatePicker = () => {
-    setShowPicker(true);
+    setDatePickerVisibility(true);
   };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+  };
+
+  const handleConfirm = (date) => {
+    setSelectedDate(date);
+    hideDatePicker();
+  };
+
   useEffect(() => {
     getData();
   }, []);
+
   const getData = async () => {
     const userDetails = await AsyncStorage.getItem("userDetails");
-    // const userImage = await AsyncStorage.getItem('imageUri');
     const parsedUserDetails = JSON.parse(userDetails);
     const email = parsedUserDetails.user_email;
     setAgentEmail(email);
   };
-  console.log("value hai ", agentEmail);
-
-  console.log(items.item.id, "fsdfsd");
 
   const addActivity = () => {
     const payload = {
-      client_id: items.item.id,
-      contact_lead_id: items.item.contact_lead_id,
-      activity_type: activity,
+      client_id: props.route.params.item.id,
+      contact_lead_id: props.route.params.item.contact_lead_id,
+      activity_type: selectedOption,
       activity_content: login,
-      activity_date: date,
+      activity_date: selectedDate,
       activity_notes: notes,
-      contact_email: items.item.contact_email,
+      contact_email: props.route.params.item.contact_email,
       agent_email: agentEmail,
     };
     dispatch(addActivityTask(payload)).then((response) => {
       navigation.goBack();
-      console.log(response, "response");
     });
   };
-  const onhandleClick = () => {
+
+  const onHandleClick = () => {
     addActivity();
   };
-  const fogotPassword = () => {
-    navigation.navigate("ForgotPassword");
-  };
-  const _pickImage = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-      includeBase64: true,
-      freeStyleCropEnabled: true,
-    }).then((response) => {
-      let source = { uri: response.path };
-      setAvatarSource(source);
-      seturiResponse(response.path);
-      console.log("mkm", avatarSource);
-      console.log("uri", uriResponse);
-    });
-  };
+
   return (
-    <SafeAreaView style={{ backgroundColor: Colors.PrimaryColor, flex: 1 }}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: Colors.white,
-        }}
-      >
-        <View
-          style={{
-            height: 60,
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: 10,
-            }}
-          >
-            <Text style={{ fontSize: 15, color: Colors.white }}>Cancel</Text>
-          </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>
-            New Activity
-          </Text>
-          <TouchableOpacity
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight: 10,
-            }}
-            onPress={onhandleClick}
-          >
-            <Text style={{ fontSize: 15, color: Colors.white }}>Submit</Text>
-          </TouchableOpacity>
-        </View>
-        <ScrollView>
-          <View>
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 15,
-                }}
-              >
-                <Text style={{ fontSize: 15, color: Colors.black }}>
-                  Activity Type
-                </Text>
-                <Text style={{ fontSize: 12, color: Colors.black }}>
-                  Required
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                  height: 50,
-                  marginTop: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  allowFontScaling={false}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    height: "100%",
-                    paddingHorizontal: 15,
-                    color: Colors.black,
-                    borderColor: Colors.gray,
-                    borderWidth: 1,
-                    fontSize: 14,
-                    padding: 2,
-                  }}
-                  autoCorrect={false}
-                  returnKeyType="done"
-                  onChangeText={(text) => setActivity(text)}
-                />
-              </View>
-            </View>
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 15,
-                }}
-              >
-                <Text style={{ fontSize: 15, color: Colors.black }}>
-                  Activity
-                </Text>
-                <Text style={{ fontSize: 12, color: Colors.black }}>
-                  Required
-                </Text>
-              </View>
-              <View
-                style={{
-                  width: "100%",
-                  height: 50,
-                  marginTop: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  allowFontScaling={false}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    height: "100%",
-                    paddingHorizontal: 15,
-                    color: Colors.black,
-                    borderColor: Colors.gray,
-                    borderWidth: 1,
-                    fontSize: 14,
-                    padding: 2,
-                  }}
-                  autoCorrect={false}
-                  returnKeyType="done"
-                  onChangeText={(text) => setLogin(text)}
-                />
-              </View>
-            </View>
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginTop: 15,
-                }}
-              >
-                <Text style={{ fontSize: 15, color: Colors.black }}>
-                  Due Date
-                </Text>
-                <Text style={{ fontSize: 12, color: Colors.black }}>
-                  Required
-                </Text>
-              </View>
-              <View>
-                <Button onPress={showDatePicker} title="Select a date" />
-                {showPicker && (
-                  <DateTimePicker
-                    value={selectedDate}
-                    mode="datetime"
-                    display="default"
-                    onChange={onChange}
-                  />
-                )}
-              </View>
-            </View>
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
-              >
-                Notes
-              </Text>
-              <View
-                style={{
-                  width: "100%",
-                  height: 100,
-                  marginTop: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  allowFontScaling={false}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    height: "100%",
-                    paddingHorizontal: 15,
-                    color: Colors.black,
-                    borderColor: Colors.gray,
-                    borderWidth: 1,
-                    fontSize: 14,
-                    padding: 2,
-                  }}
-                  autoCorrect={false}
-                  returnKeyType="done"
-                  onChangeText={(text) => setNotes(text)}
-                />
-              </View>
-            </View>
-
-            <View
-              style={{
-                width: "95%",
-                alignSelf: "center",
-                borderWidth: 1,
-                borderColor: Colors.gray,
-                marginTop: 30,
-                marginBottom: 20,
-              }}
-            ></View>
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
-              >
-                Contact Email
-              </Text>
-              <View
-                style={{
-                  width: "100%",
-                  height: 50,
-                  marginTop: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  allowFontScaling={false}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    height: "100%",
-                    paddingHorizontal: 15,
-                    color: Colors.black,
-                    borderColor: Colors.PrimaryColor,
-                    backgroundColor: Colors.gray,
-                    fontSize: 14,
-                    padding: 2,
-                  }}
-                  autoCorrect={false}
-                  returnKeyType="done"
-                  placeholder="Aitomatically generated"
-                  placeholderTextColor={Colors.black}
-                  // onChangeText={(text) => setName(text)}
-                  value={items.item.contact_email}
-                />
-              </View>
-            </View>
-
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
-              >
-                {items.contact_email}
-              </Text>
-            </View>
-
-            <View style={{ width: "95%", alignSelf: "center" }}>
-              <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
-              >
-                Owner
-              </Text>
-              <View
-                style={{
-                  width: "100%",
-                  height: 50,
-                  marginTop: 10,
-                  justifyContent: "center",
-                }}
-              >
-                <TextInput
-                  allowFontScaling={false}
-                  style={{
-                    width: "100%",
-                    borderRadius: 8,
-                    height: "100%",
-                    paddingHorizontal: 15,
-                    color: Colors.black,
-                    borderWidth: 1,
-                    borderColor: Colors.gray,
-                    fontSize: 14,
-                    padding: 2,
-                  }}
-                  keyboardType="number-pad"
-                  autoCorrect={false}
-                  returnKeyType="done"
-                  value={agentEmail}
-                  placeholderTextColor={Colors.black}
-                  onChangeText={(text) => setMobile(text)}
-                />
-              </View>
-            </View>
-
-            <View style={{ height: 50 }}></View>
-          </View>
-        </ScrollView>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.headerText}>Cancel</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerText}>New Activity</Text>
+        <TouchableOpacity onPress={onHandleClick}>
+          <Text style={styles.headerText}>Submit</Text>
+        </TouchableOpacity>
       </View>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.content}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Activity Type</Text>
+            <View style={styles.pickerContainer}>
+              <Picker
+                selectedValue={selectedOption}
+                onValueChange={handleOptionChange}
+                style={styles.picker}
+              >
+                <Picker.Item label="Note" value="note" />
+                <Picker.Item label="Call" value="call" />
+                <Picker.Item label="In-person" value="inperson" />
+                <Picker.Item label="Task" value="task" />
+                <Picker.Item label="Video call" value="videocall" />
+              </Picker>
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Activity</Text>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                onChangeText={setLogin}
+                value={login}
+                style={styles.textInput}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Due Date</Text>
+            <View style={styles.textInputContainer}>
+              <TouchableOpacity
+                onPress={showDatePicker}
+                style={styles.datePickerButton}
+              >
+                <Text style={styles.datePickerText}>
+                  Selected Date:{" "}
+                  {selectedDate ? selectedDate.toString() : "None"}
+                </Text>
+              </TouchableOpacity>
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="datetime"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Notes</Text>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                onChangeText={setNotes}
+                value={notes}
+                multiline={true}
+                numberOfLines={4}
+                style={styles.textInput}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Contact Email</Text>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                value={props.route.params.item.contact_email}
+                editable={false}
+                style={styles.textInput}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Owner</Text>
+            <View style={styles.textInputContainer}>
+              <TextInput
+                onChangeText={setAgentEmail}
+                value={agentEmail}
+                style={styles.textInput}
+              />
+            </View>
+          </View>
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  header: {
+    height: 60,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: Colors.PrimaryColor,
+    paddingHorizontal: 10,
+  },
+  headerText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    margin: 10,
+  },
+  content: {
+    flex: 1,
+  },
+  inputContainer: {
+    marginBottom: 10,
+  },
+  label: {
+    marginTop: 5,
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  picker: {
+    height: 40,
+  },
+  textInputContainer: {
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  textInput: {
+    height: 40,
+    paddingHorizontal: 10,
+  },
+  datePickerButton: {
+    paddingVertical: 10,
+  },
+  datePickerText: {
+    fontSize: 14,
+  },
+});
 
 export default AddActivity;

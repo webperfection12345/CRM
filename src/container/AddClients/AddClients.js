@@ -40,8 +40,6 @@ const AddClients = () => {
       let source = { uri: response.path };
       setAvatarSource(source);
       seturiResponse(response.path);
-      console.log("mkm", avatarSource);
-      console.log("uri", uriResponse);
     });
   };
   return (

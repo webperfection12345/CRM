@@ -16,13 +16,20 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.CRM"
+      "bundleIdentifier": "com.CRM",
+      "infoPlist": {
+    "NSLocationWhenInUseUsageDescription": "This app needs access to your location to display the map."
+  }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
+       "permissions": [
+    "ACCESS_COARSE_LOCATION",
+    "ACCESS_FINE_LOCATION"
+  ],
       "package": "com.CRM"
     },
     "web": {

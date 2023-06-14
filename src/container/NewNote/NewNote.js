@@ -23,7 +23,6 @@ const NewNote = (props) => {
   const dispatch = useDispatch();
 
   const items = props.route.params;
-  console.log(items, "itemsitemsitemsitems");
 
   const navigation = useNavigation();
   const [note, setNote] = useState("");
@@ -40,7 +39,6 @@ const NewNote = (props) => {
   const onhandleClick = () => {
     addActivity();
   };
-  console.log(date, "date");
   const addActivity = () => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
     setDate(currentDateTime);
@@ -69,8 +67,6 @@ const NewNote = (props) => {
       let source = { uri: response.path };
       setAvatarSource(source);
       seturiResponse(response.path);
-      console.log("mkm", avatarSource);
-      console.log("uri", uriResponse);
     });
   };
   return (
@@ -151,7 +147,7 @@ const NewNote = (props) => {
                 }}
               >
                 <Image
-                  source={require("../../../assets/profilePic.png")}
+                  source={{ uri: items.item.contact_image }}
                   style={{
                     height: 80,
                     width: 80,

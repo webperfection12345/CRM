@@ -26,11 +26,9 @@ const PropertiesViewed = (props) => {
   useEffect(() => {
     //getPropertiesViewedApiCall();
   }, []);
-  //console.log('details', id);
   const [data, setdata] = useState([]);
   const getPropertiesViewedApiCall = () => {
     dispatch(getProperties(id)).then((response) => {
-      console.log("data hai ki nhi", response);
       setdata(response.payload);
       setActivity(true);
     });

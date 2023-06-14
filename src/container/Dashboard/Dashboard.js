@@ -25,6 +25,8 @@ export default function Dashboard() {
   const [meter2Value, setMeter2Value] = useState(60);
   const [totalLeadValue, setTotalLeadValue] = useState("");
   const [underContarct, setUnderContarct] = useState("");
+  const [loading, setLoading] = useState(true);
+
   const [soldValue, setSoldValue] = useState("");
   const [underContractValue, setUnderContarctValue] = useState("");
   const [activity, setActivity] = useState(false);
@@ -53,7 +55,6 @@ export default function Dashboard() {
     dispatch(getContacts()).then((response) => {
       const contactsData = response.payload.data;
       setData(Object.values(contactsData));
-      console.log(contactsData, "asdas");
       setLoading(false);
     });
   };
@@ -571,6 +572,14 @@ export default function Dashboard() {
                         alignItems: "center",
                       }}
                     >
+                      <Image
+                        source={{ uri: item.contact_image }}
+                        style={{
+                          height: 40,
+                          width: 40,
+                          borderRadius: 20,
+                        }}
+                      ></Image>
                       <Text
                         style={{
                           color: Colors.PrimaryColor,

@@ -175,6 +175,14 @@ const Contacts = () => {
                         alignItems: "center",
                       }}
                     >
+                      <Image
+                        source={{ uri: item.contact_image }}
+                        style={{
+                          height: 60,
+                          width: 60,
+                          borderRadius: 30,
+                        }}
+                      ></Image>
                       <Text
                         style={{
                           color: Colors.PrimaryColor,

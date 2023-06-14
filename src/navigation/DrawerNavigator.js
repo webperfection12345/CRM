@@ -122,7 +122,6 @@ const CustomDrawerContent = () => {
     // const userImage = await AsyncStorage.getItem('imageUri');
     setUserDetails(JSON.parse(userDetails));
     // setUserImage(JSON.parse(userImage));
-    console.log("value hai ", userDetails);
   };
   const navigation = useNavigation();
   const signOut = (index) => {

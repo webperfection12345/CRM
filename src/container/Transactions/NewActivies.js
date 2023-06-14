@@ -23,7 +23,6 @@ const NewActivities = ({ navigation }) => {
     dispatch(getContacts()).then((response) => {
       const contactsData = response.payload.data;
       setContact(contactsData);
-      console.log(contactsData, "data");
     });
   };
 
@@ -89,7 +88,7 @@ const NewActivities = ({ navigation }) => {
           New Activities
         </Text>
         <TouchableOpacity
-          onPress={() => navigation.navigate("NewActivities")}
+          // onPress={() => navigation.navigate("NewActivities")}
           style={{
             flexDirection: "row",
             justifyContent: "center",
@@ -123,7 +122,7 @@ const NewActivities = ({ navigation }) => {
               justifyContent: "space-between",
             }}
           >
-            <Picker
+            {/* <Picker
               selectedValue={selectedValue}
               onValueChange={(value) => setSelectedValue(value)}
             >
@@ -132,7 +131,7 @@ const NewActivities = ({ navigation }) => {
               <Picker.Item label="In Person" value="In Person" />
               <Picker.Item label="Task" value="Task" />
               <Picker.Item label="Video" value="Video" />
-            </Picker>
+            </Picker> */}
             <TouchableOpacity>
               <Image
                 style={{
@@ -190,7 +189,7 @@ const NewActivities = ({ navigation }) => {
                 borderRadius: 15,
               }}
             >
-              <Picker
+              {/* <Picker
                 selectedValue={selectedValu}
                 onValueChange={(value) => setSelectedValu(value)}
               >
@@ -201,7 +200,7 @@ const NewActivities = ({ navigation }) => {
                     value={contacts.id}
                   />
                 ))}
-              </Picker>
+              </Picker> */}
               <TouchableOpacity>
                 <Image
                   style={{

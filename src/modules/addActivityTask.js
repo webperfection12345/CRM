@@ -9,7 +9,6 @@ export const addActivityTask = createAsyncThunk(
       " https://surf.topsearchrealty.com/wp-json/activity/addtask";
     try {
       const response = await postAPI(urlDynamic, payload);
-      console.log(response, "res");
       const { data } = response;
       return data;
     } catch (error) {

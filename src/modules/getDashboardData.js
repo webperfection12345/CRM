@@ -10,11 +10,9 @@ export const getDashboardData = createAsyncThunk(
     let data = {
       user_id: id,
     };
-    console.log(" api params", dispatch);
     return await postAPI(url.BASE_URL + "wp-json/Dashboard/dashboard", data)
       .then(async (response) => {
         const { data } = response;
-        console.log("question res", response.data);
         return data;
       })
       .catch((e) => {

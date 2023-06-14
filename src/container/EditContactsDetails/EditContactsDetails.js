@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { updateContact } from "../../modules/deleteContact";
 import Colors from "../../utils/Colors";
-
+import * as ImagePicker from "expo-image-picker";
 const EditContactsDetails = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
@@ -25,6 +25,8 @@ const EditContactsDetails = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
+  const [avatarSource, setAvatarSource] = useState(null);
+  const [uriResponse, setUriResponse] = useState(null);
   useEffect(() => {
     setName(item.contact_name);
     setPhone(item.contact_number);
@@ -42,8 +44,7 @@ const EditContactsDetails = (props) => {
     };
     dispatch(updateContact(payload))
       .then((res) => {
-        console.log(res, "Reseseses");
-        console.log("Contact update successfully");
+        w("Contact update successfully");
         navigation.navigate("Contact");
       })
       .catch((error) => {
@@ -51,20 +52,27 @@ const EditContactsDetails = (props) => {
       });
   };
 
-  const _pickImage = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-      includeBase64: true,
-      freeStyleCropEnabled: true,
-    }).then((response) => {
-      let source = { uri: response.path };
-      setAvatarSource(source);
-      seturiResponse(response.path);
-      console.log("mkm", avatarSource);
-      console.log("uri", uriResponse);
+  const _pickImage = async () => {
+    let permissionResult =
+      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert("Permission to access the camera roll is required!");
+      return;
+    }
+
+    let pickerResult = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+      base64: true, // Request base64 encoding
     });
+
+    if (!pickerResult.cancelled) {
+      let base64Image = `data:image/png;base64,${pickerResult.base64}`;
+
+      setUriResponse(base64Image);
+    }
   };
 
   return (
