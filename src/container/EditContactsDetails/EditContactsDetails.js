@@ -44,7 +44,7 @@ const EditContactsDetails = (props) => {
     };
     dispatch(updateContact(payload))
       .then((res) => {
-        w("Contact update successfully");
+        ("Contact update successfully");
         navigation.navigate("Contact");
       })
       .catch((error) => {
