@@ -178,34 +178,23 @@ const Myclient = () => {
                   }}
                 >
                   <View style={{ width: "20%" }}>
-                    <View
+                    <Image
+                      source={{ uri: item.contact_image }}
                       style={{
                         height: 60,
                         width: 60,
                         borderRadius: 30,
-                        backgroundColor: Colors.gray,
-                        justifyContent: "center",
-                        alignItems: "center",
+                        resizeMode: "contain",
+                      }}
+                    ></Image>
+                    <Text
+                      style={{
+                        color: Colors.PrimaryColor,
+                        fontSize: 12,
                       }}
                     >
-                      <Image
-                        source={{ uri: item.contact_image }}
-                        style={{
-                          height: 60,
-                          width: 60,
-                          borderRadius: 30,
-                          resizeMode: "contain",
-                        }}
-                      ></Image>
-                      <Text
-                        style={{
-                          color: Colors.PrimaryColor,
-                          fontSize: 12,
-                        }}
-                      >
-                        {/* {item.contact_full_name} */}
-                      </Text>
-                    </View>
+                      {/* {item.contact_full_name} */}
+                    </Text>
                   </View>
                   <View
                     style={{

@@ -37,7 +37,17 @@ const AddActivity = (props) => {
   const handleOptionChange = (option) => {
     setSelectedOption(option);
   };
-
+  const formatDate = (date) => {
+    return date.toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata", // Set the desired timezone
+      hour12: true,
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
+  };
   const handleConfirm = (date) => {
     setSelectedDate(date);
     hideDatePicker();
@@ -121,8 +131,7 @@ const AddActivity = (props) => {
                 style={styles.datePickerButton}
               >
                 <Text style={styles.datePickerText}>
-                  Selected Date:{" "}
-                  {selectedDate ? selectedDate.toString() : "None"}
+                  {selectedDate ? formatDate(selectedDate) : "None"}{" "}
                 </Text>
               </TouchableOpacity>
               <DateTimePickerModal

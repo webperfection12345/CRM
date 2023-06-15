@@ -2,6 +2,7 @@
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTLinkingManager.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 @implementation AppDelegate
 
@@ -63,5 +64,7 @@
 {
   return [super application:application didReceiveRemoteNotification:userInfo fetchCompletionHandler:completionHandler];
 }
+[GMSPlacesClient provideAPIKey:@"AIzaSyBenZdKitxhCII3y6i0XS7ZevgRJi9I6RM"];
+[GMSServices provideAPIKey:@"AIzaSyBenZdKitxhCII3y6i0XS7ZevgRJi9I6RM"];
 
 @end

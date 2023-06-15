@@ -562,33 +562,22 @@ export default function Dashboard() {
                   }}
                 >
                   <View style={{ width: "15%" }}>
-                    <View
+                    <Image
+                      source={{ uri: item.contact_image }}
                       style={{
                         height: 40,
                         width: 40,
                         borderRadius: 20,
-                        backgroundColor: Colors.gray,
-                        justifyContent: "center",
-                        alignItems: "center",
+                      }}
+                    ></Image>
+                    <Text
+                      style={{
+                        color: Colors.PrimaryColor,
+                        fontSize: 12,
                       }}
                     >
-                      <Image
-                        source={{ uri: item.contact_image }}
-                        style={{
-                          height: 40,
-                          width: 40,
-                          borderRadius: 20,
-                        }}
-                      ></Image>
-                      <Text
-                        style={{
-                          color: Colors.PrimaryColor,
-                          fontSize: 12,
-                        }}
-                      >
-                        {item.name}
-                      </Text>
-                    </View>
+                      {item.name}
+                    </Text>
                   </View>
                   <View
                     style={{

@@ -7,6 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
   Switch,
+  StyleSheet,
 } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import Header from "../../components/Header";
@@ -101,7 +102,7 @@ const AddContacts = () => {
           // Adjust the type according to your requirements
         },
       ];
-      setUriResponse(fileArray);
+      setUriResponse(base64Image);
     }
   };
   const getData = async () => {
@@ -109,6 +110,17 @@ const AddContacts = () => {
     const parsedUserDetails = JSON.parse(userDetails);
     const id = parsedUserDetails.ID;
     setAgentId(id);
+  };
+  const formatDate = (date) => {
+    return date.toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata", // Set the desired timezone
+      hour12: true,
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+    });
   };
 
   const handleAddContact = () => {
@@ -300,9 +312,10 @@ const AddContacts = () => {
               />
             </View>
           </View>
+
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Linked Lead
+              Properties
             </Text>
             <View
               style={{
@@ -312,66 +325,28 @@ const AddContacts = () => {
                 justifyContent: "center",
               }}
             >
-              <TextInput
-                allowFontScaling={false}
+              <Picker
+                selectedValue={selectedValue}
+                onValueChange={(itemValue) => setSelectedValue(itemValue)}
                 style={{
-                  width: "100%",
+                  width: "98%",
+                  marginLeft: 13,
                   borderRadius: 8,
-                  height: "100%",
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.PrimaryColor,
                   backgroundColor: Colors.gray,
-                  fontSize: 14,
-                  padding: 2,
                 }}
-                autoCorrect={false}
-                returnKeyType="done"
-                onChangeText={(text) => setName(text)}
-              />
+              >
+                <Picker.Item label="Select an option" value="" />
+                {dropdownData.map((item) => (
+                  <Picker.Item
+                    key={item.id}
+                    label={item.property_address}
+                    value={item.id}
+                  />
+                ))}
+              </Picker>
             </View>
           </View>
-          <Text
-            style={{
-              fontSize: 15,
-              color: Colors.black,
-              marginTop: 15,
-              marginLeft: 30,
-            }}
-          >
-            Properties
-          </Text>
-          <View
-            style={{
-              width: "95%",
-              height: 50,
-              marginTop: 10,
-              marginLeft: 31,
-              justifyContent: "center",
-              borderRadius: 8,
-              backgroundColor: Colors.gray,
-            }}
-          >
-            <Picker
-              selectedValue={selectedValue}
-              onValueChange={(itemValue) => setSelectedValue(itemValue)}
-              style={{
-                width: "98%",
-                marginLeft: 13,
-                borderRadius: 8,
-                backgroundColor: Colors.gray,
-              }}
-            >
-              <Picker.Item label="Select an option" value="" />
-              {dropdownData.map((item) => (
-                <Picker.Item
-                  key={item.id}
-                  label={item.property_address}
-                  value={item.id}
-                />
-              ))}
-            </Picker>
-          </View>
+
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Comments
@@ -403,27 +378,29 @@ const AddContacts = () => {
               />
             </View>
           </View>
-          <View
-            style={{
-              width: "95%",
-              height: 50,
-              marginTop: 10,
-              marginLeft: 30,
-              justifyContent: "center",
-              borderRadius: 8,
-              backgroundColor: Colors.gray,
-            }}
-          >
-            <TouchableOpacity onPress={showDatePicker}>
-              <Text>Select a date</Text>
-            </TouchableOpacity>
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="datetime"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            />
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TouchableOpacity onPress={showDatePicker}>
+                <Text style={styles.datePickerText}>
+                  {selectedDate ? formatDate(selectedDate) : "None"}
+                </Text>
+              </TouchableOpacity>
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="datetime"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+              />
+            </View>
           </View>
+
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Schedule Mode
@@ -559,5 +536,61 @@ const AddContacts = () => {
     </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "white",
+  },
+  header: {
+    height: 60,
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: Colors.PrimaryColor,
+    paddingHorizontal: 10,
+  },
+  headerText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  scrollViewContent: {
+    flexGrow: 1,
+    margin: 10,
+  },
+  content: {
+    flex: 1,
+  },
+  inputContainer: {
+    marginBottom: 10,
+  },
+  label: {
+    marginTop: 5,
+    fontSize: 14,
+    fontWeight: "bold",
+  },
+  pickerContainer: {
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  picker: {
+    height: 40,
+  },
+  textInputContainer: {
+    borderWidth: 1,
+    borderRadius: 3,
+  },
+  textInput: {
+    height: 40,
+    paddingHorizontal: 10,
+  },
+  datePickerButton: {
+    paddingVertical: 10,
+  },
+  datePickerText: {
+    fontSize: 14,
+  },
+});
 
 export default AddContacts;
