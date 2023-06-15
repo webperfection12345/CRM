@@ -26,7 +26,7 @@ export const addContact = createAsyncThunk("addContact", async (payload) => {
 const addContactSlice = createSlice({
   name: "addContact",
   initialState: {
-    addActivityTaskData: [],
+    contactData: [],
     status: null,
   },
   extraReducers: {
@@ -35,7 +35,7 @@ const addContactSlice = createSlice({
     },
     [addContact.fulfilled]: (state, action) => {
       state.status = "success";
-      state.addActivityTaskData = action.payload;
+      state.contactData = action.payload;
     },
     [addContact.rejected]: (state, action) => {
       state.status = "failed";

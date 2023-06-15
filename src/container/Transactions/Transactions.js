@@ -71,6 +71,25 @@ const Transactions = ({ navigation }) => {
               <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
             </TouchableOpacity>
             <Text style={{ color: "white" }}>Transactions</Text>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("NewActivies")}
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: 10,
+              }}
+            >
+              <Image
+                style={{
+                  height: 15,
+                  width: 15,
+                  resizeMode: "contain",
+                  tintColor: Colors.white,
+                }}
+                source={require("../../../assets/plus.png")}
+              ></Image>
+            </TouchableOpacity>
           </View>
 
           <View

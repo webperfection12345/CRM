@@ -41,12 +41,14 @@ const NewNote = (props) => {
   };
   const addActivity = () => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
+    console.log(currentDateTime, "date1");
     setDate(currentDateTime);
+
     const payload = {
       note_client_id: items.item.id,
       note_contact_lead_id: items.item.contact_lead_id,
       activity_note_content: note,
-      note_created_date: date,
+      note_created_date: currentDateTime,
     };
     dispatch(activityAddnote(payload)).then((response) => {
       console.log(response, "response");
