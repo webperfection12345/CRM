@@ -23,11 +23,24 @@ const Contacts = () => {
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState();
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     getAllContacts();
   }, []);
+
+  const searchFilter = (text) => {
+    setSearchText(text);
+    const filteredItems = data.filter((item) =>
+      item.contact_name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredData(filteredItems);
+    setIsSearching(true);
+  };
 
   const getAllContacts = () => {
     dispatch(getContacts()).then((response) => {
@@ -131,7 +144,7 @@ const Contacts = () => {
               allowFontScaling={false}
               placeholder="Search"
               placeholderTextColor={Colors.white}
-              onChangeText={(email) => setEmail(email)}
+              onChangeText={searchFilter}
               style={{
                 color: Colors.white,
                 fontSize: 18,
@@ -146,7 +159,7 @@ const Contacts = () => {
             <Activity />
           ) : (
             <FlatList
-              data={data}
+              data={isSearching ? filteredData : data}
               ListFooterComponent={<View style={{ height: 50 }}></View>}
               renderItem={({ item }) => (
                 <TouchableOpacity
@@ -242,6 +255,11 @@ const Contacts = () => {
                   </View>
                 </TouchableOpacity>
               )}
+              ListEmptyComponent={
+                <View style={{ alignItems: "center", marginTop: 20 }}>
+                  <Text>No data found</Text>
+                </View>
+              }
               onRefresh={handleRefresh}
               refreshing={loading}
               keyExtractor={(item) => item.id}

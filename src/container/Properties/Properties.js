@@ -22,8 +22,6 @@ import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
 
 const Properties = () => {
-  const [searchText, setSearchText] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
   const navigation = useNavigation();
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -35,12 +33,17 @@ const Properties = () => {
   const [activity, setActivity] = useState(false);
   const [searchView, setSearchView] = useState(true);
 
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState();
+
   const searchFilter = (text) => {
     setSearchText(text);
     const filteredItems = data.filter((item) =>
       item.title.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredData(filteredItems);
+    setIsSearching(true);
   };
 
   useEffect(() => {
@@ -252,7 +255,7 @@ const Properties = () => {
             }}
           >
             <FlatList
-              data={filteredData.length > 0 ? filteredData : data}
+              data={isSearching ? filteredData : data}
               extraData={data}
               numColumns={2}
               ListFooterComponent={() => <View style={{ height: 200 }}></View>}
@@ -315,6 +318,11 @@ const Properties = () => {
                   </View>
                 </TouchableOpacity>
               )}
+              ListEmptyComponent={
+                <View style={{ alignItems: "center", marginTop: 20 }}>
+                  <Text>No data found</Text>
+                </View>
+              }
               keyExtractor={(item) => item.id}
               // onTouchStart={handleLoad}
               onRefresh={handleRefresh}

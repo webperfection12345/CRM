@@ -19,10 +19,36 @@ const Transactions = ({ navigation }) => {
   const [upcomingData, setUpcomingData] = useState([]);
   const [completedData, setCompletedData] = useState([]);
 
+  const [filteredPastData, setFilteredPastData] = useState([]);
+  const [filteredUpcomingData, setFilteredUpcomingData] = useState([]);
+  const [filteredCompletedData, setFilteredCompletedData] = useState([]);
+
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchText, setSearchText] = useState("");
+
   useEffect(() => {
     getAllContacts();
   }, []);
 
+  const searchFilter = (text) => {
+    setSearchText(text);
+    const filteredPastItems = pastData.filter((item) =>
+      item.contact_name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredPastData(filteredPastItems);
+
+    const filteredUpcomingItems = upcomingData.filter((item) =>
+      item.contact_name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredUpcomingData(filteredUpcomingItems);
+
+    const filteredCompletedItems = completedData.filter((item) =>
+      item.contact_name.toLowerCase().includes(text.toLowerCase())
+    );
+    setFilteredCompletedData(filteredCompletedItems);
+
+    setIsSearching(true);
+  };
   const getAllContacts = () => {
     dispatch(transectioActivity()).then((response) => {
       const transictionData = response.payload.data[0];
@@ -121,7 +147,7 @@ const Transactions = ({ navigation }) => {
               allowFontScaling={false}
               placeholder="Search"
               placeholderTextColor={Colors.white}
-              onChangeText={(email) => email}
+              onChangeText={searchFilter}
               style={{
                 color: Colors.white,
                 fontSize: 18,
@@ -174,7 +200,7 @@ const Transactions = ({ navigation }) => {
             <Text style={{ fontWeight: "600" }}>Due Date & Time</Text>
           </View>
           <FlatList
-            data={pastData}
+            data={isSearching ? filteredPastData : pastData}
             ListFooterComponent={<View style={{ height: 50 }}></View>}
             renderItem={({ item }) => (
               <View style={{}}>
@@ -210,6 +236,11 @@ const Transactions = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             )}
+            ListEmptyComponent={
+              <View style={{ alignItems: "center", marginTop: 20 }}>
+                <Text>No data found</Text>
+              </View>
+            }
           />
           <Text
             style={{
@@ -237,7 +268,8 @@ const Transactions = ({ navigation }) => {
             <Text style={{ fontWeight: "600" }}>Due Date & Time</Text>
           </View>
           <FlatList
-            data={upcomingData}
+            data={isSearching ? filteredUpcomingData : upcomingData}
+            // data={upcomingData}
             ListFooterComponent={<View style={{ height: 50 }}></View>}
             renderItem={({ item }) => (
               <View style={{}}>
@@ -273,6 +305,11 @@ const Transactions = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             )}
+            ListEmptyComponent={
+              <View style={{ alignItems: "center", marginTop: 20 }}>
+                <Text>No data found</Text>
+              </View>
+            }
           />
           <Text
             style={{
@@ -300,7 +337,7 @@ const Transactions = ({ navigation }) => {
             <Text style={{ fontWeight: "600" }}>Due Date & Time</Text>
           </View>
           <FlatList
-            data={completedData}
+            data={isSearching ? filteredCompletedData : completedData}
             ListFooterComponent={<View style={{ height: 50 }}></View>}
             renderItem={({ item }) => (
               <View style={{}}>
@@ -336,6 +373,11 @@ const Transactions = ({ navigation }) => {
                 </TouchableOpacity>
               </View>
             )}
+            ListEmptyComponent={
+              <View style={{ alignItems: "center", marginTop: 20 }}>
+                <Text>No data found</Text>
+              </View>
+            }
           />
         </View>
       </View>
