@@ -18,13 +18,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
 
 const Myclient = () => {
-  const [searchText, setSearchText] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState();
   const dispatch = useDispatch();
 
   const searchFilter = (text) => {
@@ -33,7 +34,9 @@ const Myclient = () => {
       item.contact_name.toLowerCase().includes(text.toLowerCase())
     );
     setFilteredData(filteredItems);
+    setIsSearching(true);
   };
+
   useEffect(() => {
     getAllContacts();
   }, []);
@@ -156,7 +159,7 @@ const Myclient = () => {
             <Activity />
           ) : (
             <FlatList
-              data={filteredData.length > 0 ? filteredData : data}
+              data={isSearching ? filteredData : data}
               ListFooterComponent={<View style={{ height: 50 }}></View>}
               renderItem={({ item }) => (
                 <TouchableOpacity
@@ -253,6 +256,11 @@ const Myclient = () => {
                   </View>
                 </TouchableOpacity>
               )}
+              ListEmptyComponent={
+                <View style={{ alignItems: "center", marginTop: 20 }}>
+                  <Text>No data found</Text>
+                </View>
+              }
               onRefresh={handleRefresh}
               refreshing={loading}
               keyExtractor={(item) => item.id}
