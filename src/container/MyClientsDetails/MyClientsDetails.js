@@ -15,7 +15,7 @@ import {
 
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { getClientDetails } from "../../modules/getMyClientDetails";
 import { activityHistory } from "../../modules/activityHistory";
@@ -24,13 +24,6 @@ import { getNoteData } from "../../modules/getNoteData";
 import { getDocument } from "../../modules/getDocument";
 
 const MyClientsDetails = (props) => {
-  useEffect(() => {
-    MyClientsDetails();
-    allActivityHistory();
-    MyTaskData();
-    MyNoteData();
-    MyDocsData();
-  }, []);
   const dispatch = useDispatch();
 
   const navigation = useNavigation();
@@ -44,8 +37,22 @@ const MyClientsDetails = (props) => {
   const [leadType, setLeadType] = useState("");
   const [property, setProperty] = useState([]);
   const items = props.route.params;
+  const isFocused = useIsFocused();
 
   const id = items.item.id;
+  useEffect(() => {
+    if (isFocused) {
+      // Perform the refresh logic here
+      console.log("Page refreshed");
+    }
+  }, [isFocused]);
+  useEffect(() => {
+    MyClientsDetails();
+    allActivityHistory();
+    MyTaskData();
+    MyNoteData();
+    MyDocsData();
+  }, []);
 
   const MyTaskData = () => {
     dispatch(getActivityData(id)).then((response) => {

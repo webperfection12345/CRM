@@ -22,6 +22,7 @@ import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { addContact } from "../../modules/addContact";
 import { Picker } from "@react-native-picker/picker";
+import { getContacts } from "../../modules/getContacts";
 const AddContacts = () => {
   const navigation = useNavigation();
   const [name, setName] = useState("");
@@ -50,7 +51,27 @@ const AddContacts = () => {
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
+  const contactTypes = [
+    "Buyer",
+    "Seller",
+    "Associated",
+    "Lender",
+    "Insurance",
+    "Inspector",
+    "Real Estate Agent",
+    "Title Co",
+    "Attorney",
+    "Escrow Agent",
+    "Appraiser",
+    "Contractor",
+    "Other",
+  ];
+  const [selectedContactType, setSelectedContactType] = useState("");
 
+  const handleContactTypeChange = (itemValue) => {
+    console.log(itemValue, "item");
+    setSelectedContactType(itemValue);
+  };
   const handleConfirm = (date) => {
     const dateObj = new Date(date);
     const formattedDate = dateObj.toLocaleString("en-US", {
@@ -136,6 +157,7 @@ const AddContacts = () => {
       contactimg: uriResponse,
     };
     dispatch(addContact(payload)).then((response) => {
+      getContacts();
       navigation.goBack();
     });
   };
@@ -400,7 +422,20 @@ const AddContacts = () => {
               />
             </View>
           </View>
-
+          <View>
+            <Picker
+              selectedValue={selectedContactType}
+              onValueChange={handleContactTypeChange}
+            >
+              {contactTypes.map((contactType) => (
+                <Picker.Item
+                  key={contactType}
+                  label={contactType}
+                  value={contactType}
+                />
+              ))}
+            </Picker>
+          </View>
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Schedule Mode

@@ -14,15 +14,6 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "plugins": [
-      [
-        "@rnmapbox/maps",
-        {
-           "RNMapboxMapsImpl": "mapbox",
-          "RNMapboxMapsDownloadToken": "pk.eyJ1IjoiZGprdXNhIiwiYSI6ImNsZGV2dTNtbDBhd28zbm96MGtyNnF3eDcifQ.MbjuFh2i0QhdwEuPV8u6dA"
-        }
-      ]
-    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.CRM",

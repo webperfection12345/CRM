@@ -12,7 +12,7 @@ import {
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import Images from "../../utils/Images";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import RNSpeedometer from "react-native-speedometer";
 import { getDashboardData } from "../../modules/getDashboardData";
@@ -26,7 +26,7 @@ export default function Dashboard() {
   const [totalLeadValue, setTotalLeadValue] = useState("");
   const [underContarct, setUnderContarct] = useState("");
   const [loading, setLoading] = useState(true);
-
+  const isFocused = useIsFocused();
   const [soldValue, setSoldValue] = useState("");
   const [underContractValue, setUnderContarctValue] = useState("");
   const [activity, setActivity] = useState(false);
@@ -38,7 +38,11 @@ export default function Dashboard() {
     getDashboardDataApiCall();
     getAllContacts();
     getMeter();
-  }, []);
+    if (isFocused) {
+      // Perform the refresh logic here
+      console.log("Page refreshed");
+    }
+  }, [isFocused]);
   const getDashboardDataApiCall = () => {
     dispatch(getDashboardData()).then((response) => {
       setActivity(true);

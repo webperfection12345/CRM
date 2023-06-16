@@ -12,7 +12,7 @@ import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import Images from "../../utils/Images";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { getContacts } from "../../modules/getContacts";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
@@ -27,6 +27,7 @@ const Myclient = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState();
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
 
   const searchFilter = (text) => {
     setSearchText(text);
@@ -39,7 +40,11 @@ const Myclient = () => {
 
   useEffect(() => {
     getAllContacts();
-  }, []);
+    if (isFocused) {
+      // Perform the refresh logic here
+      console.log("Page refreshed");
+    }
+  }, [isFocused]);
 
   const getAllContacts = () => {
     dispatch(getContacts()).then((response) => {

@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { updateContact } from "../../modules/deleteContact";
 import Colors from "../../utils/Colors";
@@ -27,6 +27,8 @@ const EditContactsDetails = (props) => {
   const [data, setData] = useState([]);
   const [avatarSource, setAvatarSource] = useState(null);
   const [uriResponse, setUriResponse] = useState(null);
+  const isFocused = useIsFocused();
+
   useEffect(() => {
     setName(item.contact_name);
     setPhone(item.contact_number);
@@ -34,7 +36,12 @@ const EditContactsDetails = (props) => {
     setLinkedId(item.linked_lead);
     setPassword(item.password);
   }, [item]);
-
+  useEffect(() => {
+    if (isFocused) {
+      // Perform the refresh logic here
+      console.log("Page refreshed");
+    }
+  }, [isFocused]);
   const handleDelete = () => {
     const payload = {
       contactid: item.id,
@@ -45,6 +52,7 @@ const EditContactsDetails = (props) => {
     dispatch(updateContact(payload))
       .then((res) => {
         ("Contact update successfully");
+
         navigation.navigate("Contact");
       })
       .catch((error) => {
