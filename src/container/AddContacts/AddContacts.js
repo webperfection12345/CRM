@@ -52,19 +52,19 @@ const AddContacts = () => {
     setDatePickerVisibility(false);
   };
   const contactTypes = [
-    "Buyer",
-    "Seller",
-    "Associated",
-    "Lender",
-    "Insurance",
-    "Inspector",
-    "Real Estate Agent",
-    "Title Co",
-    "Attorney",
-    "Escrow Agent",
-    "Appraiser",
-    "Contractor",
-    "Other",
+    "contributor",
+    "lander",
+    "buyer",
+    "seller",
+    "associated",
+    "insurance",
+    "inspector",
+    "real-estate-agent",
+    "title-co",
+    "attorney",
+    "escrow-agent",
+    "appraiser",
+    "contractor",
   ];
   const [selectedContactType, setSelectedContactType] = useState("");
 
@@ -155,6 +155,7 @@ const AddContacts = () => {
       comment: comment,
       propid: selectedValue,
       contactimg: uriResponse,
+      userrole: selectedContactType,
     };
     dispatch(addContact(payload)).then((response) => {
       getContacts();

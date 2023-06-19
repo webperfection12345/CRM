@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  Linking,
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -59,6 +60,22 @@ const Contact = () => {
       setLoading(true);
       getAllContacts();
     }
+  };
+  const makePhoneCall = (item) => {
+    let phoneNumber = item;
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+  const sendEmail = (item) => {
+    let recipient = item;
+    let subject = "Subject of email";
+    let body = "Body of email";
+    Linking.openURL(`mailto:${recipient}?subject=${subject}&body=${body}`);
+  };
+
+  const sendSMS = (item) => {
+    let phoneNumber = item;
+    let message = "Hello from my app!";
+    Linking.openURL(`sms:${phoneNumber}`);
   };
 
   return (
@@ -231,6 +248,64 @@ const Contact = () => {
                         {item.post_title}
                       </Text>
                     </View>
+                    <View
+                      style={{
+                        height: 80,
+                        width: "96%",
+                        alignSelf: "flex-end",
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <TouchableOpacity
+                        onPress={() => sendEmail(item.contact_email)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/mail.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => sendSMS(item.contact_number)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/chat.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => makePhoneCall(item.contact_number)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/phone.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            marginLeft: "5%",
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                    </View>
+
                     <View
                       style={{
                         height: 80,

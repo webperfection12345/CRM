@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { addActivityTask } from "../../modules/addActivityTask";
 import Colors from "../../utils/Colors";
 import { Picker } from "@react-native-picker/picker";
+import getMyClientDetails from "../../modules/getMyClientDetails";
 
 const AddActivity = (props) => {
   const dispatch = useDispatch();

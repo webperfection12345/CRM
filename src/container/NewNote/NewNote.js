@@ -16,6 +16,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { activityAddnote } from "../../modules/activityAddnote";
 import moment from "moment";
+import getMyClientDetails from "../../modules/getMyClientDetails";
 
 // import ImagePicker from "react-native-image-crop-picker";
 

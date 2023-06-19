@@ -8,8 +8,9 @@ import {
   ScrollView,
   Linking,
   SafeAreaView,
+  StyleSheet,
 } from "react-native";
-
+// import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
@@ -17,7 +18,6 @@ import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
 import { getPropertiesDetails } from "../../modules/getPropertiesDetails";
 import { useSelector, useDispatch } from "react-redux";
-
 import Activity from "../../components/Activity";
 const PropertiesDetails = (props) => {
   const navigation = useNavigation();
@@ -50,11 +50,24 @@ const PropertiesDetails = (props) => {
     let message = "Hello from my app!";
     Linking.openURL(`sms:${phoneNumber}`);
   };
+  console.log(data);
   const goToMap = () => {
-    let latitude = data.property_latitude;
-    let longitude = data.property_longitude;
-    let label = "San Francisco";
-    Linking.openURL(`geo:${latitude},${longitude}?q=${label}`);
+    const latitude = data.property_latitude;
+    const longitude = data.property_longitude;
+
+    const mapUrl = `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
+
+    Linking.canOpenURL(mapUrl)
+      .then((supported) => {
+        if (supported) {
+          Linking.openURL(mapUrl);
+        } else {
+          console.log("Map URL scheme is not supported");
+        }
+      })
+      .catch((error) => {
+        console.log("Error opening map URL:", error);
+      });
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
@@ -152,13 +165,27 @@ const PropertiesDetails = (props) => {
                 marginTop: 20,
               }}
             >
-              <Image
-                source={require("../../../assets/map.png")}
+              {/* <MapView
+                provider={PROVIDER_GOOGLE}
                 style={{
                   height: 250,
                   width: "100%",
                 }}
-              ></Image>
+                region={{
+                  latitude: parseFloat(data.property_latitude),
+                  longitude: parseFloat(data.property_longitude),
+                  latitudeDelta: 0.015,
+                  longitudeDelta: 0.0121,
+                }}
+              >
+                <Marker
+                  coordinate={{
+                    latitude: parseFloat(data.property_latitude),
+                    longitude: parseFloat(data.property_longitude),
+                  }}
+                />
+              </MapView> */}
+                   
             </TouchableOpacity>
             <View
               style={{
@@ -472,3 +499,13 @@ const PropertiesDetails = (props) => {
 };
 
 export default PropertiesDetails;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  map: {
+    width: "100%",
+    height: "100%",
+  },
+});

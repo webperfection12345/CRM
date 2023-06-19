@@ -40,19 +40,17 @@ const MyClientsDetails = (props) => {
   const isFocused = useIsFocused();
 
   const id = items.item.id;
+
   useEffect(() => {
     if (isFocused) {
-      // Perform the refresh logic here
       console.log("Page refreshed");
     }
-  }, [isFocused]);
-  useEffect(() => {
     MyClientsDetails();
     allActivityHistory();
     MyTaskData();
     MyNoteData();
     MyDocsData();
-  }, []);
+  }, [isFocused]);
 
   const MyTaskData = () => {
     dispatch(getActivityData(id)).then((response) => {

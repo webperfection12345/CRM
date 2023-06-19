@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
   Image,
   Text,
@@ -6,16 +6,21 @@ import {
   TouchableOpacity,
   FlatList,
   SafeAreaView,
+  Alert,
+  Linking,
 } from "react-native";
-
+import { TextInput } from "react-native-gesture-handler";
+import * as DocumentPicker from "expo-document-picker";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
-import { TextInput } from "react-native-gesture-handler";
 import Images from "../../utils/Images";
 import { useNavigation } from "@react-navigation/native";
 import { getContacts } from "../../modules/getContacts";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
+import * as Print from "expo-print";
+import * as Sharing from "expo-sharing";
+import * as FileSystem from "expo-file-system";
 
 const Contacts = () => {
   const navigation = useNavigation();
@@ -26,6 +31,8 @@ const Contacts = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState();
+  const menuRef = useRef(null);
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -57,6 +64,137 @@ const Contacts = () => {
     }
   };
 
+  const handleMenuItemSelect = (item) => {
+    // Handle menu item selection
+    switch (item) {
+      case "Import Contacts":
+        handleImportPDF();
+        break;
+      case "Export Contacts":
+        handleExportPDF();
+        break;
+      case "User Agreements":
+        // Handle User Agreements
+        break;
+      case "Pay History":
+        // Handle Pay History
+        break;
+      case "Reports":
+        // Handle Reports
+        break;
+      case "Disclosures":
+        // Handle Disclosures
+        break;
+      default:
+        break;
+    }
+
+    setMenuVisible(false);
+  };
+
+  // ...
+
+  const handleExportPDF = async () => {
+    try {
+      // Fetch the API data
+
+      // Create an HTML template with the API data
+      const htmlTemplate = `
+      <html>
+        <head>
+          <style>
+            body {
+              font-family: Arial, sans-serif;
+            }
+          </style>
+        </head>
+        <body>
+          <h1>Contact Data</h1>
+          ${data
+            .map(
+              (contact) => `
+                <div>
+                  <p><strong>Contact Name:</strong> ${contact.contact_full_name}</p>
+                  <p><strong>Contact Email:</strong> ${contact.contact_email}</p>
+                  <p><strong>Contact Number:</strong> ${contact.contact_number}</p>
+                  <p><strong>Linked Lead:</strong> ${contact.linked_lead}</p>
+                </div>
+              `
+            )
+            .join("")}
+        </body>
+      </html>
+    `;
+
+      // Create a temporary HTML file
+      const htmlFileUri = `${FileSystem.cacheDirectory}contact_data.html`;
+      await FileSystem.writeAsStringAsync(htmlFileUri, htmlTemplate, {
+        encoding: FileSystem.EncodingType.UTF8,
+      });
+
+      // Generate a PDF file
+      const pdfFileUri = `${FileSystem.cacheDirectory}contact_data.pdf`;
+      await Print.printToFileAsync({
+        html: htmlFileUri,
+        width: 612,
+        height: 792,
+        base64: false,
+        filePath: pdfFileUri,
+      });
+
+      // Share the PDF file
+      await Sharing.shareAsync(pdfFileUri, {
+        mimeType: "application/pdf",
+        dialogTitle: "Export PDF",
+      });
+
+      // Delete the temporary files
+      await FileSystem.deleteAsync(htmlFileUri, { idempotent: true });
+      await FileSystem.deleteAsync(pdfFileUri, { idempotent: true });
+    } catch (error) {
+      console.log("Export PDF error:", error);
+      Alert.alert(
+        "Export PDF Error",
+        "An error occurred while exporting contact data as PDF."
+      );
+    }
+  };
+
+  const handleImportPDF = async () => {
+    try {
+      const res = await DocumentPicker.getDocumentAsync({
+        type: "application/pdf",
+      });
+
+      if (res.type === "success") {
+        // Handle the selected PDF file
+        const { uri, name, size } = res;
+        // Implement your logic to process the PDF file here
+        console.log("Import PDF", `Selected PDF: ${name}`);
+        Alert.alert("Import PDF", `Selected PDF: ${name}`);
+      } else {
+        console.log("Document picker cancelled");
+      }
+    } catch (error) {
+      console.log("Document picker error:", error);
+    }
+  };
+  const makePhoneCall = (item) => {
+    let phoneNumber = item;
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+  const sendEmail = (item) => {
+    let recipient = item;
+    let subject = "Subject of email";
+    let body = "Body of email";
+    Linking.openURL(`mailto:${recipient}?subject=${subject}&body=${body}`);
+  };
+
+  const sendSMS = (item) => {
+    let phoneNumber = item;
+    let message = "Hello from my app!";
+    Linking.openURL(`sms:${phoneNumber}`);
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
@@ -87,7 +225,7 @@ const Contacts = () => {
                 tintColor: Colors.white,
               }}
               source={require("../../../assets/back.png")}
-            ></Image>
+            />
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
           <Text style={{ fontSize: 15, color: Colors.white }}>Contacts</Text>
@@ -108,7 +246,7 @@ const Contacts = () => {
                 tintColor: Colors.white,
               }}
               source={require("../../../assets/plus.png")}
-            ></Image>
+            />
           </TouchableOpacity>
         </View>
         <View
@@ -139,7 +277,7 @@ const Contacts = () => {
                 marginLeft: 10,
                 tintColor: Colors.white,
               }}
-            ></Image>
+            />
             <TextInput
               allowFontScaling={false}
               placeholder="Search"
@@ -151,16 +289,94 @@ const Contacts = () => {
                 marginLeft: 10,
                 fontWeight: "bold",
               }}
-            ></TextInput>
+            />
           </View>
         </View>
+
+        {/* <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingHorizontal: 10,
+            marginBottom: 10,
+          }}
+        >
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+            }}
+            onPress={() => handleMenuItemSelect("Import Contacts")}
+          >
+            <Text style={{ color: Colors.white }}>Import Contacts</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+            }}
+            onPress={() => handleMenuItemSelect("Export Contacts")}
+          >
+            <Text style={{ color: Colors.white }}>Export Contacts</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+            }}
+            onPress={() => handleMenuItemSelect("Reports")}
+          >
+            <Text style={{ color: Colors.white }}>Reports</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+            }}
+            onPress={() => handleMenuItemSelect("")}
+          >
+            <Text style={{ color: Colors.white }}>User Agreements</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+            }}
+            onPress={() => handleMenuItemSelect("Export Contacts")}
+          >
+            <Text style={{ color: Colors.white }}>Pay History'</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              backgroundColor: Colors.buttonColor,
+              borderRadius: 5,
+              paddingVertical: 10,
+              paddingHorizontal: 20,
+            }}
+            onPress={() => handleMenuItemSelect("Export Contacts")}
+          >
+            <Text style={{ color: Colors.white }}>Disclosures</Text>
+          </TouchableOpacity>
+        </View> */}
+
         <View style={{ flex: 1 }}>
           {loading ? (
             <Activity />
           ) : (
             <FlatList
               data={isSearching ? filteredData : data}
-              ListFooterComponent={<View style={{ height: 50 }}></View>}
+              ListFooterComponent={<View style={{ height: 50 }} />}
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() =>
@@ -185,7 +401,7 @@ const Contacts = () => {
                         width: 60,
                         borderRadius: 30,
                       }}
-                    ></Image>
+                    />
                     <Text
                       style={{
                         color: Colors.PrimaryColor,
@@ -229,6 +445,63 @@ const Contacts = () => {
                     <View
                       style={{
                         height: 80,
+                        width: "96%",
+                        alignSelf: "flex-end",
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+                      }}
+                    >
+                      <TouchableOpacity
+                        onPress={() => sendEmail(item.contact_email)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/mail.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => sendSMS(item.contact_number)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/chat.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => makePhoneCall(item.contact_number)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/phone.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            marginLeft: "5%",
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                    </View>
+                    <View
+                      style={{
+                        height: 80,
                         justifyContent: "center",
                       }}
                     >
@@ -239,7 +512,7 @@ const Contacts = () => {
                           width: 15,
                           resizeMode: "contain",
                         }}
-                      ></Image>
+                      />
                     </View>
                   </View>
                 </TouchableOpacity>

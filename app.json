@@ -28,8 +28,15 @@
       },
        "permissions": [
     "ACCESS_COARSE_LOCATION",
-    "ACCESS_FINE_LOCATION"
+    "ACCESS_FINE_LOCATION",
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.READ_EXTERNAL_STORAGE"
   ],
+   "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyBenZdKitxhCII3y6i0XS7ZevgRJi9I6RM"
+        }
+      },
       "package": "com.CRM"
     },
     "web": {

@@ -65,7 +65,7 @@ const Transactions = ({ navigation }) => {
           style={{
             backgroundColor: "#576ebd",
             width: "100%",
-            height: "20%",
+            height: "10%",
           }}
         >
           <View
@@ -180,6 +180,7 @@ const Transactions = ({ navigation }) => {
               fontSize: 16,
               marginLeft: 10,
               alignSelf: "center",
+              fontWeight: "700",
             }}
           >
             Past Due & Today's Activities
@@ -193,11 +194,11 @@ const Transactions = ({ navigation }) => {
               marginTop: 30,
             }}
           >
-            <Text style={{ fontWeight: "600", marginHorizontal: 10 }}>
+            <Text style={{ fontWeight: "700", marginHorizontal: 10 }}>
               Activity
             </Text>
-            <Text style={{ fontWeight: "600" }}>Contact</Text>
-            <Text style={{ fontWeight: "600" }}>Due Date & Time</Text>
+            <Text style={{ fontWeight: "700" }}>Contact</Text>
+            <Text style={{ fontWeight: "700" }}>Due Date & Time</Text>
           </View>
           <FlatList
             data={isSearching ? filteredPastData : pastData}
@@ -248,6 +249,7 @@ const Transactions = ({ navigation }) => {
               fontSize: 16,
               marginLeft: 10,
               alignSelf: "center",
+              fontWeight: "900",
             }}
           >
             Upcoming
@@ -261,11 +263,11 @@ const Transactions = ({ navigation }) => {
               marginTop: 30,
             }}
           >
-            <Text style={{ fontWeight: "600", marginHorizontal: 10 }}>
+            <Text style={{ fontWeight: "700", marginHorizontal: 10 }}>
               Activity
             </Text>
-            <Text style={{ fontWeight: "600" }}>Contact</Text>
-            <Text style={{ fontWeight: "600" }}>Due Date & Time</Text>
+            <Text style={{ fontWeight: "700" }}>Contact</Text>
+            <Text style={{ fontWeight: "700" }}>Due Date & Time</Text>
           </View>
           <FlatList
             data={isSearching ? filteredUpcomingData : upcomingData}
@@ -317,6 +319,7 @@ const Transactions = ({ navigation }) => {
               fontSize: 16,
               marginLeft: 10,
               alignSelf: "center",
+              fontWeight: "900",
             }}
           >
             Completed
@@ -330,11 +333,11 @@ const Transactions = ({ navigation }) => {
               marginTop: 30,
             }}
           >
-            <Text style={{ fontWeight: "600", marginHorizontal: 10 }}>
+            <Text style={{ fontWeight: "700", marginHorizontal: 10 }}>
               Activity
             </Text>
-            <Text style={{ fontWeight: "600" }}>Contact</Text>
-            <Text style={{ fontWeight: "600" }}>Due Date & Time</Text>
+            <Text style={{ fontWeight: "700" }}>Contact</Text>
+            <Text style={{ fontWeight: "700" }}>Due Date & Time</Text>
           </View>
           <FlatList
             data={isSearching ? filteredCompletedData : completedData}
