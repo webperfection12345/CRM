@@ -24,6 +24,7 @@ import PropertiesViewed from "../container/PropertiesViewed/PropertiesViewed";
 import EditActivity from "../container/EditActivity/EditActivity";
 import NewActivies from "../container/Transactions/NewActivies";
 import TransactionDetails from "../container/Transactions/TransactionDetails";
+import Leads from "../container/Leads/Leads";
 const Stack = createStackNavigator();
 
 function StackNavigator() {
@@ -60,6 +61,8 @@ function StackNavigator() {
       <Stack.Screen name="NewNote" component={NewNote} />
       <Stack.Screen name="EditClientsDetails" component={EditClientsDetails} />
       <Stack.Screen name="Documents" component={Documents} />
+      <Stack.Screen name="Leads" component={Leads} />
+
       <Stack.Screen
         name="PropertiesViewedByLeads"
         component={PropertiesViewedByLeads}
