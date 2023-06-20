@@ -109,7 +109,7 @@ const NewNote = (props) => {
               source={require("../../../assets/back.png")}
             ></Image>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>New Note</Text>
+          <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>New Note</Text>
           <TouchableOpacity
             style={{
               flexDirection: "row",
@@ -196,7 +196,7 @@ const NewNote = (props) => {
               >
                 Note
               </Text>
-              <Text style={{ fontSize: 12, color: Colors.black }}>
+              <Text style={{ fontSize: 12, color: "#950000" }}>
                 Required
               </Text>
             </View>
@@ -216,9 +216,10 @@ const NewNote = (props) => {
                   borderRadius: 8,
                   height: "100%",
                   paddingHorizontal: 15,
+                  paddingVertical:15,
                   color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
                   fontSize: 14,
                   padding: 2,
                 }}
@@ -237,6 +238,7 @@ const NewNote = (props) => {
               height: 60,
               marginTop: 20,
               alignSelf: "center",
+              justifyContent: "flex-end"
             }}
           >
             <TouchableOpacity
@@ -254,7 +256,7 @@ const NewNote = (props) => {
               <Text
                 style={{
                   fontSize: 14,
-                  fontWeight: "bold",
+                  //fontWeight: "bold",
                   color: Colors.white,
                 }}
               >

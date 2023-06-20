@@ -96,7 +96,7 @@ const Myclient = () => {
             ></Image>
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>My Clients</Text>
+          <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>My Clients</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AddContacts")}
             style={{
@@ -153,9 +153,8 @@ const Myclient = () => {
               onChangeText={searchFilter}
               style={{
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 15,
                 marginLeft: 10,
-                fontWeight: "bold",
               }}
             ></TextInput>
           </View>

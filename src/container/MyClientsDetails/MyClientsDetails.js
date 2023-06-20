@@ -781,7 +781,7 @@ const MyClientsDetails = (props) => {
                 <Text
                   style={{
                     fontSize: 14,
-                    fontWeight: "bold",
+                  
                     color: Colors.white,
                   }}
                 >
@@ -946,7 +946,7 @@ const MyClientsDetails = (props) => {
                 <Text
                   style={{
                     fontSize: 14,
-                    fontWeight: "bold",
+                   
                     color: Colors.white,
                   }}
                 >

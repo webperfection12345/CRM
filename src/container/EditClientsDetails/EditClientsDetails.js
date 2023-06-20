@@ -120,8 +120,7 @@ const EditClientsDetails = (props) => {
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Cancel</Text>
           </TouchableOpacity>
-          <Text style={{  fontSize: 19,
-          fontWeight: "bold", color: Colors.white }}>Edit Client</Text>
+          <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>Edit Client</Text>
           <TouchableOpacity
             onPress={onHandleClick}
             style={{

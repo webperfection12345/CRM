@@ -53,7 +53,7 @@ const TransactionDetails = ({ navigation }) => {
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
           <Text
-            style={{ textAlign: "center", alignSelf: "center", color: "white" }}
+            style={{ textAlign: "center", alignSelf: "center",  fontSize: 19, fontWeight: "bold", color: Colors.white }}
           >
             TransactionDetails
           </Text>

@@ -12,7 +12,8 @@ import Images from "../utils/Images";
 import Fonts from "../utils/Fonts";
 import Colors from "../utils/Colors";
 import Dashboard from "../container/Dashboard/Dashboard";
-import MyClients from "../container/MyClients/MyClients";
+//import MyClients from "../container/MyClients/MyClients";
+import Leads from "../container/Leads/Leads";
 import Contact from "../container/Contact/Contact";
 import Transactions from "../container/Transactions/Transactions";
 import Marketing from "../container/Marketing/Marketing";
@@ -57,8 +58,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="MyClients"
-        component={MyClients}
+        name="Leads"
+        component={Leads}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
