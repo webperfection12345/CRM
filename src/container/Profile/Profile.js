@@ -74,7 +74,7 @@ const Contacts = () => {
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Close</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>Profile</Text>
+          <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>Profile</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("EditProfile")}
             style={{

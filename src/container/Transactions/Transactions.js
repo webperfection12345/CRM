@@ -96,7 +96,7 @@ const Transactions = ({ navigation }) => {
               />
               <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
             </TouchableOpacity>
-            <Text style={{ color: "white" }}>Transactions</Text>
+            <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>Transactions</Text>
             <TouchableOpacity
               onPress={() => navigation.navigate("NewActivies")}
               style={{
@@ -150,9 +150,8 @@ const Transactions = ({ navigation }) => {
               onChangeText={searchFilter}
               style={{
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 15,
                 marginLeft: 10,
-                fontWeight: "bold",
                 marginHorizontal: 10,
                 height: "100%",
                 width: "100%",

@@ -91,7 +91,7 @@ const AddActivity = (props) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.headerText}>Cancel</Text>
         </TouchableOpacity>
-        <Text style={styles.headerText}>New Activity</Text>
+        <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>New Activity</Text>
         <TouchableOpacity onPress={onHandleClick}>
           <Text style={styles.headerText}>Submit</Text>
         </TouchableOpacity>
@@ -100,11 +100,29 @@ const AddActivity = (props) => {
         <View style={styles.content}>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Activity Type</Text>
-            <View style={styles.pickerContainer}>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
               <Picker
                 selectedValue={selectedOption}
                 onValueChange={handleOptionChange}
-                style={styles.picker}
+                style={{
+                  borderRadius: 8,
+                  backgroundColor: Colors.gray,
+                  width: "100%",
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                  borderColor:  Colors.gray,
+                }}
               >
                 <Picker.Item label="Note" value="note" />
                 <Picker.Item label="Call" value="call" />
@@ -116,17 +134,49 @@ const AddActivity = (props) => {
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Activity</Text>
-            <View style={styles.textInputContainer}>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
               <TextInput
                 onChangeText={setLogin}
                 value={login}
-                style={styles.textInput}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
               />
             </View>
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Due Date</Text>
-            <View style={styles.textInputContainer}>
+            <View
+              style={{
+               width: "100%",
+                borderRadius: 8,
+                height: "100%",
+                paddingVertical:9,
+                color: Colors.black,
+                borderColor: Colors.PrimaryColor,
+                backgroundColor: Colors.gray,
+                fontSize: 14,
+                padding: 2,
+                marginTop:12,
+                paddingHorizontal:15,
+                height:55,
+              }}
+            >
               <TouchableOpacity
                 onPress={showDatePicker}
                 style={styles.datePickerButton}
@@ -135,43 +185,108 @@ const AddActivity = (props) => {
                   {selectedDate ? formatDate(selectedDate) : "None"}{" "}
                 </Text>
               </TouchableOpacity>
+              
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="datetime"
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
               />
             </View>
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Notes</Text>
-            <View style={styles.textInputContainer}>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
               <TextInput
                 onChangeText={setNotes}
                 value={notes}
                 multiline={true}
                 numberOfLines={4}
-                style={styles.textInput}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+
               />
             </View>
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Contact Email</Text>
-            <View style={styles.textInputContainer}>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
               <TextInput
                 value={props.route.params.item.contact_email}
                 editable={false}
-                style={styles.textInput}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
               />
             </View>
           </View>
           <View style={styles.inputContainer}>
             <Text style={styles.label}>Owner</Text>
-            <View style={styles.textInputContainer}>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
               <TextInput
                 onChangeText={setAgentEmail}
                 value={agentEmail}
-                style={styles.textInput}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+                
               />
             </View>
           </View>
@@ -198,7 +313,7 @@ const styles = StyleSheet.create({
   headerText: {
     color: "white",
     fontSize: 16,
-    fontWeight: "bold",
+
   },
   scrollViewContent: {
     flexGrow: 1,
