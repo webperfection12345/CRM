@@ -8,8 +8,8 @@ import {
   ScrollView,
   Linking,
   SafeAreaView,
-  StyleSheet,
 } from "react-native";
+import "react-native-gesture-handler";
 // import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
@@ -27,9 +27,11 @@ const PropertiesDetails = (props) => {
   useEffect(() => {
     getPropertiesDetailsApiCall();
   }, []);
+  console.log("details", id);
   const [data, setdata] = useState([]);
   const getPropertiesDetailsApiCall = () => {
     dispatch(getPropertiesDetails(id)).then((response) => {
+      console.log("data hai ki nhi", response);
       setdata(response.payload);
       setActivity(true);
     });
@@ -185,7 +187,6 @@ const PropertiesDetails = (props) => {
                   }}
                 />
               </MapView> */}
-                   
             </TouchableOpacity>
             <View
               style={{
@@ -434,6 +435,7 @@ const PropertiesDetails = (props) => {
                 height: 80,
                 width: "96%",
                 alignSelf: "flex-end",
+
                 alignItems: "center",
                 alignContent: "center",
                 flexDirection: "row",
@@ -499,13 +501,3 @@ const PropertiesDetails = (props) => {
 };
 
 export default PropertiesDetails;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  map: {
-    width: "100%",
-    height: "100%",
-  },
-});

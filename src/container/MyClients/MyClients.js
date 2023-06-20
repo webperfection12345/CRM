@@ -16,6 +16,7 @@ import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { getContacts } from "../../modules/getContacts";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
+import getLeads from "../../modules/getLeads";
 
 const Myclient = () => {
   const navigation = useNavigation();
@@ -47,8 +48,9 @@ const Myclient = () => {
   }, [isFocused]);
 
   const getAllContacts = () => {
-    dispatch(getContacts()).then((response) => {
+    dispatch(getLeads()).then((response) => {
       const contactsData = response.payload.data;
+      console.log(contactsData, "data");
       setData(Object.values(contactsData));
       setLoading(false);
     });
