@@ -228,10 +228,10 @@ const MyClientsDetails = (props) => {
               <View
                 style={{
                   borderWidth: 1,
-                  width: "95%",
+                  width: "100%",
                   alignSelf: "center",
                   borderRadius: 5,
-                  marginTop: 20,
+                  marginTop:0,
                   borderColor: Colors.gray,
                 }}
               >
@@ -267,7 +267,7 @@ const MyClientsDetails = (props) => {
                       Back
                     </Text>
                   </TouchableOpacity>
-                  <Text style={{ fontSize: 15, color: Colors.white }}>
+                  <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>
                     MyClientsDetails
                   </Text>
                   <TouchableOpacity
@@ -306,6 +306,8 @@ const MyClientsDetails = (props) => {
                       height: 120,
                       width: 120,
                       borderRadius: 60,
+                      borderWidth:2,
+                      borderColor: '#ddd',
                     }}
                   ></Image>
                   <View style={{ width: "60%", justifyContent: "center" }}>
@@ -352,8 +354,8 @@ const MyClientsDetails = (props) => {
                     <Image
                       source={require("../../../assets/phone.png")}
                       style={{
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         resizeMode: "contain",
                       }}
                     ></Image>
@@ -367,8 +369,8 @@ const MyClientsDetails = (props) => {
                     <Image
                       source={require("../../../assets/mail.png")}
                       style={{
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         resizeMode: "contain",
                       }}
                     ></Image>
@@ -383,8 +385,8 @@ const MyClientsDetails = (props) => {
                     <Image
                       source={require("../../../assets/chat.png")}
                       style={{
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
                         resizeMode: "contain",
                       }}
                     ></Image>
@@ -398,8 +400,8 @@ const MyClientsDetails = (props) => {
                     <Image
                       source={require("../../../assets/share.png")}
                       style={{
-                        height: 40,
-                        width: 40,
+                        height: 50,
+                        width: 50,
 
                         resizeMode: "contain",
                       }}
@@ -422,7 +424,7 @@ const MyClientsDetails = (props) => {
                 >
                   <Text
                     style={{
-                      color: Colors.black,
+                      color: "#8d8a8a",
                       fontSize: 14,
                     }}
                   >
@@ -453,7 +455,7 @@ const MyClientsDetails = (props) => {
                 >
                   <Text
                     style={{
-                      color: Colors.black,
+                      color: "#8d8a8a",
                       fontSize: 14,
                     }}
                   >
@@ -462,7 +464,7 @@ const MyClientsDetails = (props) => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 12,
+                      fontSize: 16,
                       color: Colors.PrimaryColor,
                     }}
                   >
@@ -485,7 +487,7 @@ const MyClientsDetails = (props) => {
                 >
                   <Text
                     style={{
-                      color: Colors.black,
+                      color: "#8d8a8a",
                       fontSize: 14,
                     }}
                   >
@@ -571,7 +573,7 @@ const MyClientsDetails = (props) => {
                 >
                   <Text
                     style={{
-                      color: Colors.black,
+                      color: "#8d8a8a",
                       fontSize: 14,
                     }}
                   >
@@ -580,7 +582,7 @@ const MyClientsDetails = (props) => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 12,
+                      fontSize: 16,
                       color: Colors.PrimaryColor,
                     }}
                   >
@@ -594,20 +596,21 @@ const MyClientsDetails = (props) => {
                     height: 60,
                     marginTop: 20,
                     alignSelf: "center",
-                    justifyContent: "space-between",
+                    justifyContent: "center",
                   }}
                 >
                   <TouchableOpacity
                     onPress={() => navigation.navigate("AddActivity", { item })}
                     style={{
-                      height: 35,
-                      width: "45%",
+                      height: 52,
+                      width: "25%",
                       borderRadius: 5,
                       borderColor: Colors.gray,
                       borderWidth: 0.5,
                       flexDirection: "row",
                       justifyContent: "center",
                       alignItems: "center",
+                      marginRight:6
                     }}
                   >
                     <Text style={{ fontSize: 14, color: Colors.black }}>
@@ -617,8 +620,8 @@ const MyClientsDetails = (props) => {
                   <TouchableOpacity
                     onPress={() => navigation.navigate("NewNote", { item })}
                     style={{
-                      height: 35,
-                      width: "45%",
+                      height: 52,
+                      width: "25%",
                       borderRadius: 5,
                       borderColor: Colors.gray,
                       borderWidth: 0.5,

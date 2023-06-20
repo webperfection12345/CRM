@@ -10,9 +10,10 @@ const Header = (props) => {
   return (
     <View
       style={{
-        height: 140,
+        height: 120,
         width: "100%",
         justifyContent: "space-between",
+     
         backgroundColor: Colors.PrimaryColor,
       }}
     >
@@ -50,10 +51,10 @@ const Header = (props) => {
         allowFontScaling={false}
         style={{
           color: Colors.white,
-          fontSize: 35,
+          fontSize: 19,
           fontWeight: "bold",
-          marginLeft: 15,
-          marginBottom: 20,
+          marginBottom: 30,
+         textAlign:"center"
         }}
       >
         {label}

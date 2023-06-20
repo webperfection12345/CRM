@@ -206,7 +206,7 @@ const AddContacts = () => {
             }}
             onPress={handleAddContact}
           >
-            <Text style={{ fontSize: 15, color: Colors.white }}>Add</Text>
+            <Text style={{  fontSize: 15, fontWeight: "bold", color: Colors.white }}>Add</Text>
           </TouchableOpacity>
         </View>
         <ScrollView>
@@ -335,7 +335,7 @@ const AddContacts = () => {
               />
             </View>
           </View>
-
+          
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Properties
@@ -352,10 +352,16 @@ const AddContacts = () => {
                 selectedValue={selectedValue}
                 onValueChange={(itemValue) => setSelectedValue(itemValue)}
                 style={{
-                  width: "98%",
-                  marginLeft: 13,
                   borderRadius: 8,
                   backgroundColor: Colors.gray,
+                  width: "100%",
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                  borderColor:  Colors.gray,
                 }}
               >
                 <Picker.Item label="Select an option" value="" />
@@ -423,20 +429,41 @@ const AddContacts = () => {
               />
             </View>
           </View>
-          <View>
+          <View style={{ width: "95%", alignSelf: "center" }}>
+          <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
             <Picker
               selectedValue={selectedContactType}
               onValueChange={handleContactTypeChange}
+              style={{
+                borderRadius: 8,
+                backgroundColor: Colors.gray,
+                width: "100%",
+                height: "100%",
+                paddingHorizontal: 15,
+                color: Colors.black,
+                backgroundColor: Colors.gray,
+                fontSize: 14,
+                padding: 2,
+                borderColor:  Colors.gray,
+              }}
             >
               {contactTypes.map((contactType) => (
                 <Picker.Item
                   key={contactType}
                   label={contactType}
                   value={contactType}
+                
                 />
               ))}
             </Picker>
-          </View>
+          </View> </View>
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Schedule Mode

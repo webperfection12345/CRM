@@ -111,7 +111,7 @@ const Contact = () => {
             ></Image>
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>Contacts</Text>
+          <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>Contacts</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AddContacts")}
             style={{
@@ -168,15 +168,14 @@ const Contact = () => {
               onChangeText={searchFilter}
               style={{
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 15,
                 marginLeft: 10,
-                fontWeight: "bold",
               }}
             ></TextInput>
           </View>
         </View>
         <View style={{ justifyContent: "center", alignItems: "center" }}></View>
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop:12, }}>
           {loading ? (
             <Activity />
           ) : (
@@ -186,27 +185,32 @@ const Contact = () => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate("ContactsDetails", { item: item })
+                    navigation.navigate("MyClientsDetails", { item: item })
                   }
                   style={{
                     height: 80,
-                    width: "96%",
-                    alignSelf: "flex-end",
-                    borderBottomWidth: 1,
-                    borderBottomColor: Colors.gray,
+                    width: "97%",
+                    alignSelf: "center",
+                    borderWidth: 1,
+                    borderColor:"#bbbbbb52",
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
+                    backgroundColor:"#00000017",
+                    marginBottom:5,
+                    padding:12,
+                    justifyContent:"space-between",
+                    borderRadius: 6
                   }}
                 >
-                  <View style={{ width: "20%" }}>
+                  <View style={{justifyContent:"space-between",flexDirection: "row", alignItems: "center", }}>
                     <Image
                       source={{ uri: item.contact_image }}
                       style={{
-                        height: 60,
-                        width: 60,
+                        height: 50,
+                        width: 50,
                         borderRadius: 30,
-                        resizeMode: "contain",
+                        resizeMode: "cover",
                       }}
                     ></Image>
 
@@ -216,10 +220,20 @@ const Contact = () => {
                         fontSize: 12,
                       }}
                     ></Text>
+                      <Text
+                        style={{
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: "bold",
+                          paddingLeft:12,
+                        }}
+                      >
+                        {item.contact_name}
+                      </Text>
                   </View>
                   <View
                     style={{
-                      width: "75%",
+                     
                       flexDirection: "row",
                       justifyContent: "space-between",
                     }}
@@ -230,15 +244,7 @@ const Contact = () => {
                         justifyContent: "center",
                       }}
                     >
-                      <Text
-                        style={{
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {item.contact_name}
-                      </Text>
+                    
                       <Text
                         style={{
                           color: Colors.black,
@@ -251,11 +257,12 @@ const Contact = () => {
                     <View
                       style={{
                         height: 80,
-                        width: "96%",
                         alignSelf: "flex-end",
                         alignItems: "center",
                         alignContent: "center",
                         flexDirection: "row",
+                        width: 140,
+                        justifyContent:"space-between",
                       }}
                     >
                       <TouchableOpacity
@@ -310,14 +317,16 @@ const Contact = () => {
                       style={{
                         height: 80,
                         justifyContent: "center",
+                        marginLeft:10,
                       }}
                     >
                       <Image
                         source={require("../../../assets/leftArrow.png")}
                         style={{
-                          height: 15,
-                          width: 15,
+                          height: 10,
+                          width: 10,
                           resizeMode: "contain",
+                          marginLeft:12
                         }}
                       ></Image>
                     </View>

@@ -62,7 +62,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
-              My Clients
+             Leads
             </Text>
           ),
 

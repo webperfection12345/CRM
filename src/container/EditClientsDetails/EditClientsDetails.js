@@ -120,7 +120,8 @@ const EditClientsDetails = (props) => {
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Cancel</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>Edit Client</Text>
+          <Text style={{  fontSize: 19,
+          fontWeight: "bold", color: Colors.white }}>Edit Client</Text>
           <TouchableOpacity
             onPress={onHandleClick}
             style={{
@@ -145,7 +146,7 @@ const EditClientsDetails = (props) => {
               <Text style={{ fontSize: 15, color: Colors.black }}>
                 Full_Name
               </Text>
-              <Text style={{ fontSize: 12, color: Colors.black }}>
+              <Text style={{ fontSize: 12, color: "#950000" }}>
                 Required
               </Text>
             </View>
@@ -549,15 +550,15 @@ const EditClientsDetails = (props) => {
                     flexDirection: "row",
                   }}
                 >
-                  <Image
-                    style={{
-                      height: 30,
-                      width: 30,
-                      resizeMode: "contain",
-                      marginLeft: 10,
-                    }}
-                    source={Images.uploadImage}
-                  ></Image>
+                   <Image
+                  style={{
+                    height: 30,
+                    width: 30,
+                    resizeMode: "contain",
+                    marginLeft: 10,
+                  }}
+                  source={require("../../../assets/uploadImage.png")}
+                ></Image>
 
                   <Text
                     style={{

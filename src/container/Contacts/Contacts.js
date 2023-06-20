@@ -228,7 +228,7 @@ const Contacts = () => {
             />
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>Contacts</Text>
+          <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>Contacts</Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AddContacts")}
             style={{
