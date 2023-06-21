@@ -233,9 +233,10 @@ const Contact = () => {
                     <Text
                       style={{
                         color: Colors.black,
-                        fontSize: 16,
+                        fontSize: 14,
                         fontWeight: "bold",
-                        paddingLeft: 12,
+                        Width: 200,
+                        paddingHorizontal: 4,
                       }}
                     >
                       {item.contact_name}
@@ -269,7 +270,7 @@ const Contact = () => {
                         alignItems: "center",
                         alignContent: "center",
                         flexDirection: "row",
-                        width: 140,
+
                         justifyContent: "space-between",
                       }}
                     >
@@ -334,7 +335,6 @@ const Contact = () => {
                           height: 10,
                           width: 10,
                           resizeMode: "contain",
-                          marginLeft: 12,
                         }}
                       ></Image>
                     </View>

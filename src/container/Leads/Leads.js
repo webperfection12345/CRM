@@ -125,7 +125,7 @@ const Leads = () => {
               style={{
                 backgroundColor: Colors.cream,
                 width: "100%",
-                height: "100%",
+
                 paddingVertical: 20,
                 borderBottomWidth: 1,
                 borderBottomColor: "#ddd",
@@ -154,7 +154,7 @@ const Leads = () => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    marginTop: 25,
+                    marginTop: 30,
                   }}
                 >
                   Type
@@ -172,6 +172,7 @@ const Leads = () => {
                         alignContent: "center",
                         flexDirection: "row",
                         resizeMode: "contain",
+                        marginTop: 12,
                       }}
                     />
                   ) : item.type === "message" ? (
@@ -240,7 +241,9 @@ const Leads = () => {
                 <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
                   Date Created
                 </Text>
-                <Text style={{ color: Colors.black, fontSize: 14 }}></Text>
+                <Text style={{ color: Colors.black, fontSize: 14 }}>
+                  {item.created_date}
+                </Text>
               </View>
             </View>
           )}

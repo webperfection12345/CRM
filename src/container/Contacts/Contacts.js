@@ -228,7 +228,11 @@ const Contacts = () => {
             />
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
-          <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>Contacts</Text>
+          <Text
+            style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
+          >
+            Contacts
+          </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AddContacts")}
             style={{
@@ -257,6 +261,7 @@ const Contacts = () => {
             alignContent: "center",
             alignItems: "center",
             backgroundColor: Colors.PrimaryColor,
+            marginBottom: 20,
           }}
         >
           <View
@@ -285,9 +290,8 @@ const Contacts = () => {
               onChangeText={searchFilter}
               style={{
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 15,
                 marginLeft: 10,
-                fontWeight: "bold",
               }}
             />
           </View>
@@ -384,36 +388,57 @@ const Contacts = () => {
                   }
                   style={{
                     height: 80,
-                    width: "96%",
-                    alignSelf: "flex-end",
-                    borderBottomWidth: 1,
-                    borderBottomColor: Colors.gray,
+                    width: "97%",
+                    alignSelf: "center",
+                    borderWidth: 1,
+                    borderColor: "#bbbbbb52",
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
+                    backgroundColor: "#987e7e17",
+                    marginBottom: 5,
+                    padding: 12,
+                    justifyContent: "space-between",
+                    borderRadius: 6,
                   }}
                 >
-                  <View style={{ width: "20%" }}>
+                  <View
+                    style={{
+                      justifyContent: "space-between",
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                  >
                     <Image
                       source={{ uri: item.contact_image }}
                       style={{
-                        height: 60,
-                        width: 60,
+                        height: 50,
+                        width: 50,
                         borderRadius: 30,
+                        resizeMode: "cover",
                       }}
-                    />
+                    ></Image>
+
                     <Text
                       style={{
                         color: Colors.PrimaryColor,
                         fontSize: 12,
                       }}
+                    ></Text>
+                    <Text
+                      style={{
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: "bold",
+                        Width: 200,
+                        paddingHorizontal: 4,
+                      }}
                     >
-                      {/* {item.contact_full_name} */}
+                      {item.contact_name}
                     </Text>
                   </View>
                   <View
                     style={{
-                      width: "75%",
                       flexDirection: "row",
                       justifyContent: "space-between",
                     }}
@@ -427,15 +452,6 @@ const Contacts = () => {
                       <Text
                         style={{
                           color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {item.contact_name}
-                      </Text>
-                      <Text
-                        style={{
-                          color: Colors.black,
                           fontSize: 12,
                         }}
                       >
@@ -445,11 +461,12 @@ const Contacts = () => {
                     <View
                       style={{
                         height: 80,
-                        width: "96%",
                         alignSelf: "flex-end",
                         alignItems: "center",
                         alignContent: "center",
                         flexDirection: "row",
+
+                        justifyContent: "space-between",
                       }}
                     >
                       <TouchableOpacity
@@ -499,20 +516,22 @@ const Contacts = () => {
                         ></Image>
                       </TouchableOpacity>
                     </View>
+
                     <View
                       style={{
                         height: 80,
                         justifyContent: "center",
+                        marginLeft: 10,
                       }}
                     >
                       <Image
                         source={require("../../../assets/leftArrow.png")}
                         style={{
-                          height: 15,
-                          width: 15,
+                          height: 10,
+                          width: 10,
                           resizeMode: "contain",
                         }}
-                      />
+                      ></Image>
                     </View>
                   </View>
                 </TouchableOpacity>
