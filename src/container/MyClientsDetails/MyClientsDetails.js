@@ -54,7 +54,7 @@ const MyClientsDetails = (props) => {
     allActivityHistory();
     MyTaskData();
     MyNoteData();
-    MyDocsData();
+ 
     TodayDisPosition();
   }, [isFocused]);
 
@@ -162,6 +162,7 @@ const MyClientsDetails = (props) => {
   const TodayDisPosition = () => {
     dispatch(getTodayDipos(id)).then((response) => {
       const data = response.payload.data;
+      console.log(data,"dsata");
       setTodayDipo(data);
     });
   };
@@ -742,7 +743,9 @@ const MyClientsDetails = (props) => {
               >
                 Today's Activities
               </Text>
+              
             </View>
+           
             <Text
               style={{
                 color: Colors.black,
@@ -751,19 +754,11 @@ const MyClientsDetails = (props) => {
                 marginLeft: 10,
               }}
             >
-              testtesttesttesttesttesttest
+             {todayDipo}
             </Text>
-            <Text
-              style={{
-                color: Colors.black,
-                fontSize: 15,
-                marginTop: 10,
-                marginLeft: 10,
-              }}
-            >
-              testtesttesttesttesttesttest
-            </Text>
+               
           </View>
+              
           <View
             style={{
               width: "95%",
@@ -799,6 +794,7 @@ const MyClientsDetails = (props) => {
                 justifyContent: "space-between",
               }}
             >
+              
               <Text
                 style={{
                   color: "#8d8a8a",
