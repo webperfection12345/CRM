@@ -154,7 +154,7 @@ const Leads = () => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    marginTop: 30,
+                    marginTop: 25,
                   }}
                 >
                   Type
@@ -172,7 +172,6 @@ const Leads = () => {
                         alignContent: "center",
                         flexDirection: "row",
                         resizeMode: "contain",
-                        marginTop: 12,
                       }}
                     />
                   ) : item.type === "Message" ? (
@@ -250,9 +249,11 @@ const Leads = () => {
                 <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
                   Date Created
                 </Text>
+
                 <Text style={{ color: Colors.black, fontSize: 14 }}>
                 {new Date(item.created_date).toLocaleDateString("en-US")}
                 </Text>
+
               </View>
             </View>
           )}

@@ -16,6 +16,7 @@ import Dashboard from "../container/Dashboard/Dashboard";
 import Leads from "../container/Leads/Leads";
 import Contact from "../container/Contact/Contact";
 import Transactions from "../container/Transactions/Transactions";
+import DisPosition from "../container/DisPosition/DisPosition";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 
@@ -73,8 +74,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Transactions"
-        component={Transactions}
+        name="DisPosition"
+        component={DisPosition}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>

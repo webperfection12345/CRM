@@ -91,7 +91,9 @@ const AddActivity = (props) => {
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.headerText}>Cancel</Text>
         </TouchableOpacity>
-        <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>New Activity</Text>
+        <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
+          New Activity
+        </Text>
         <TouchableOpacity onPress={onHandleClick}>
           <Text style={styles.headerText}>Submit</Text>
         </TouchableOpacity>
@@ -121,7 +123,7 @@ const AddActivity = (props) => {
                   backgroundColor: Colors.gray,
                   fontSize: 14,
                   padding: 2,
-                  borderColor:  Colors.gray,
+                  borderColor: Colors.gray,
                 }}
               >
                 <Picker.Item label="Note" value="note" />
@@ -163,18 +165,18 @@ const AddActivity = (props) => {
             <Text style={styles.label}>Due Date</Text>
             <View
               style={{
-               width: "100%",
+                width: "100%",
                 borderRadius: 8,
                 height: "100%",
-                paddingVertical:9,
+                paddingVertical: 9,
                 color: Colors.black,
                 borderColor: Colors.PrimaryColor,
                 backgroundColor: Colors.gray,
                 fontSize: 14,
                 padding: 2,
-                marginTop:12,
-                paddingHorizontal:15,
-                height:55,
+                marginTop: 12,
+                paddingHorizontal: 15,
+                height: 55,
               }}
             >
               <TouchableOpacity
@@ -185,7 +187,7 @@ const AddActivity = (props) => {
                   {selectedDate ? formatDate(selectedDate) : "None"}{" "}
                 </Text>
               </TouchableOpacity>
-              
+
               <DateTimePickerModal
                 isVisible={isDatePickerVisible}
                 mode="datetime"
@@ -231,7 +233,6 @@ const AddActivity = (props) => {
                   fontSize: 14,
                   padding: 2,
                 }}
-
               />
             </View>
           </View>
@@ -287,7 +288,6 @@ const AddActivity = (props) => {
                   fontSize: 14,
                   padding: 2,
                 }}
-                
               />
             </View>
           </View>
@@ -314,7 +314,6 @@ const styles = StyleSheet.create({
   headerText: {
     color: "white",
     fontSize: 16,
-
   },
   scrollViewContent: {
     flexGrow: 1,
