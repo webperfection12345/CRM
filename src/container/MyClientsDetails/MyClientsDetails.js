@@ -22,6 +22,8 @@ import { activityHistory } from "../../modules/activityHistory";
 import { getActivityData } from "../../modules/getActivityTask";
 import { getNoteData } from "../../modules/getNoteData";
 import { getDocument } from "../../modules/getDocument";
+import { getDisposition } from "../../modules/getDisposition";
+import { getTodayDipos } from "../../modules/getTodayDipos";
 
 const MyClientsDetails = (props) => {
   const dispatch = useDispatch();
@@ -39,17 +41,21 @@ const MyClientsDetails = (props) => {
   const items = props.route.params;
   const isFocused = useIsFocused();
   const [showAll, setShowAll] = useState(false);
+  const [todayDipo, setTodayDipo] = useState([]);
+  const [futureDipo, setFutureDipo] = useState([]);
   const id = items.item.id;
 
   useEffect(() => {
     if (isFocused) {
       console.log("Page refreshed");
     }
+    disPosition();
     MyClientsDetails();
     allActivityHistory();
     MyTaskData();
     MyNoteData();
     MyDocsData();
+    TodayDisPosition();
   }, [isFocused]);
 
   const MyTaskData = () => {
@@ -69,52 +75,52 @@ const MyClientsDetails = (props) => {
   const renderItem = ({ item }) => {
     return (
       <TouchableOpacity
-      //onPress={() => navigation.navigate('MyClientsDetails')}
-      style={{
-        height: 60,
-        width: "90%",
-        borderBottomWidth: 1,
-        borderBottomColor: Colors.gray,
-        alignItems: "center",
-        alignContent: "center",
-        flexDirection: "row",
-        alignSelf: "center",
-      }}
-    >
-      <View
+        //onPress={() => navigation.navigate('MyClientsDetails')}
         style={{
-          width: "100%",
+          height: 60,
+          width: "90%",
+          borderBottomWidth: 1,
+          borderBottomColor: Colors.gray,
+          alignItems: "center",
+          alignContent: "center",
           flexDirection: "row",
-          justifyContent: "space-between",
+          alignSelf: "center",
         }}
       >
         <View
           style={{
-            height: 80,
-            justifyContent: "center",
+            width: "100%",
+            flexDirection: "row",
+            justifyContent: "space-between",
           }}
         >
-          <Text
+          <View
             style={{
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: "bold",
+              height: 80,
+              justifyContent: "center",
             }}
           >
-            {item.activity_content}
-          </Text>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              {item.activity_content}
+            </Text>
 
-          <Text
-            style={{
-              color: Colors.black,
-              fontSize: 12,
-            }}
-          >
-            {item.activity_notes}
-          </Text>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: 12,
+              }}
+            >
+              {item.activity_notes}
+            </Text>
+          </View>
         </View>
-      </View>
-    </TouchableOpacity> 
+      </TouchableOpacity>
     );
   };
   const MyClientsDetails = () => {
@@ -146,7 +152,19 @@ const MyClientsDetails = (props) => {
       return "";
     };
   };
+  const disPosition = () => {
+    dispatch(getDisposition(id)).then((response) => {
+      const data = response.payload.data;
+      setFutureDipo(data);
+    });
+  };
 
+  const TodayDisPosition = () => {
+    dispatch(getTodayDipos(id)).then((response) => {
+      const data = response.payload.data;
+      setTodayDipo(data);
+    });
+  };
   const allActivityHistory = () => {
     dispatch(activityHistory()).then((response) => {
       const history = response.payload.data;
@@ -286,11 +304,10 @@ const MyClientsDetails = (props) => {
             renderItem={({ item, index }) => (
               <View
                 style={{
-                
                   width: "100%",
                   alignSelf: "center",
                   borderRadius: 5,
-                  marginTop:0,
+                  marginTop: 0,
                   borderColor: Colors.gray,
                 }}
               >
@@ -326,7 +343,13 @@ const MyClientsDetails = (props) => {
                       Back
                     </Text>
                   </TouchableOpacity>
-                  <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>
+                  <Text
+                    style={{
+                      fontSize: 19,
+                      fontWeight: "bold",
+                      color: Colors.white,
+                    }}
+                  >
                     MyClientsDetails
                   </Text>
                   <TouchableOpacity
@@ -365,8 +388,8 @@ const MyClientsDetails = (props) => {
                       height: 120,
                       width: 120,
                       borderRadius: 60,
-                      borderWidth:2,
-                      borderColor: '#ddd',
+                      borderWidth: 2,
+                      borderColor: "#ddd",
                     }}
                   ></Image>
                   <View style={{ width: "60%", justifyContent: "center" }}>
@@ -669,7 +692,7 @@ const MyClientsDetails = (props) => {
                       flexDirection: "row",
                       justifyContent: "center",
                       alignItems: "center",
-                      marginRight:6
+                      marginRight: 6,
                     }}
                   >
                     <Text style={{ fontSize: 14, color: Colors.black }}>
@@ -677,7 +700,7 @@ const MyClientsDetails = (props) => {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("DisPosition",  {  item } )}
+                    onPress={() => navigation.navigate("DisPosition", { item })}
                     style={{
                       height: 52,
                       width: "25%",
@@ -840,7 +863,7 @@ const MyClientsDetails = (props) => {
                 <Text
                   style={{
                     fontSize: 14,
-                  
+
                     color: Colors.white,
                   }}
                 >
@@ -858,162 +881,7 @@ const MyClientsDetails = (props) => {
               marginTop: 20,
               borderColor: Colors.gray,
             }}
-          >
-            <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: "bold",
-                  marginTop: 20,
-                  marginLeft: 10,
-                }}
-              >
-                Document Portal
-              </Text>
-              {/* <TouchableOpacity style={{justifyContent: 'center'}}>
-                <Text
-                  style={{
-                    color: Colors.PrimaryColor,
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                  }}>
-                  See All
-                </Text>
-              </TouchableOpacity> */}
-            </View>
-            <View
-              style={{
-                height: 300,
-                marginTop: 20,
-              }}
-            >
-              <FlatList
-                data={[]}
-                scrollEnabled={false}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    //onPress={() => navigation.navigate('MyClientsDetails')}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      alignSelf: "center",
-                      borderBottomWidth: index == 4 ? null : 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <View style={{ width: "15%" }}>
-                      <View
-                        style={{
-                          height: 40,
-                          width: 40,
-                          borderRadius: 20,
-                          backgroundColor: Colors.gray,
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.PrimaryColor,
-                            fontSize: 12,
-                          }}
-                        >
-                          {item.contact_name}
-                        </Text>
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        width: "80%",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <View
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {item.contact_name}
-                        </Text>
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 12,
-                          }}
-                        >
-                          {/* {item.details} */}
-                        </Text>
-                      </View>
-                      <View
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/leftArrow.png")}
-                          style={{
-                            height: 15,
-                            width: 15,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
-              />
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                width: "90%",
-                height: 60,
-                marginTop: 20,
-                alignSelf: "center",
-                justifyContent: "flex-end",
-              }}
-            >
-              <TouchableOpacity
-                onPress={() => navigation.navigate("Documents")}
-                style={{
-                  height: 35,
-                  width: "45%",
-                  borderRadius: 5,
-                  backgroundColor: Colors.PrimaryColor,
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Text
-                  style={{
-                    fontSize: 14,
-                   
-                    color: Colors.white,
-                  }}
-                >
-                  See all Documents
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+          ></View>
           <View
             style={{
               borderWidth: 1,
@@ -1173,28 +1041,31 @@ const MyClientsDetails = (props) => {
               </TouchableOpacity> */}
             </View>
             <View>
-      {/* Other components */}
-      <ScrollView>
-        <FlatList
-          data={showAll ? task : task.slice(0, 5)}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        />
-        
-      </ScrollView>
-      <View style={{ alignItems: "center", marginTop: 10 }}>
-      {!showAll && task.length > 5 && (
-        <TouchableOpacity onPress={loadMoreItems}>
-          <Text style={{ color: Colors.PrimaryColor }}>Show More</Text>
-        </TouchableOpacity>
-      )}
-      {showAll && (
-        <TouchableOpacity onPress={loadLessItems}>
-          <Text style={{ color: Colors.PrimaryColor }}>Show Less</Text>
-        </TouchableOpacity>
-      )}
-      </View>
-    </View>
+              {/* Other components */}
+              <ScrollView>
+                <FlatList
+                  data={showAll ? task : task.slice(0, 5)}
+                  renderItem={renderItem}
+                  keyExtractor={(item) => item.id}
+                />
+              </ScrollView>
+              <View style={{ alignItems: "center", marginTop: 10 }}>
+                {!showAll && task.length > 5 && (
+                  <TouchableOpacity onPress={loadMoreItems}>
+                    <Text style={{ color: Colors.PrimaryColor }}>
+                      Show More
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                {showAll && (
+                  <TouchableOpacity onPress={loadLessItems}>
+                    <Text style={{ color: Colors.PrimaryColor }}>
+                      Show Less
+                    </Text>
+                  </TouchableOpacity>
+                )}
+              </View>
+            </View>
             <View
               style={{
                 flexDirection: "row",

@@ -20,6 +20,8 @@ import getActivityTaskReducer from "../modules/getActivityTask";
 import getNoteDataReducer from "../modules/getNoteData";
 import addContactReducer from "../modules/addContact";
 import addDispositionReducer from "../modules/addDisposition";
+import getDispositionReducer from "../modules/getDisposition";
+import getTodayDiposReducer from "../modules/getTodayDipos";
 export const store = configureStore({
   reducer: {
     loginUser: loginUserReducer,
@@ -43,6 +45,8 @@ export const store = configureStore({
     getNoteData: getNoteDataReducer,
     addContact: addContactReducer,
     addDispositon:addDispositionReducer,
+    getDisposition:getDispositionReducer,
+    getTodayDipos:getTodayDiposReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
