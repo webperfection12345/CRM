@@ -723,6 +723,220 @@ const MyClientsDetails = (props) => {
 
           <View
             style={{
+              width: "95%",
+              alignSelf: "center",
+              borderRadius: 5,
+              marginTop: 20,
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  marginTop: 20,
+
+                  marginLeft: 10,
+                }}
+              >
+                Today's Activities
+              </Text>
+            </View>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: 15,
+                marginTop: 10,
+                marginLeft: 10,
+              }}
+            >
+              testtesttesttesttesttesttest
+            </Text>
+            <Text
+              style={{
+                color: Colors.black,
+                fontSize: 15,
+                marginTop: 10,
+                marginLeft: 10,
+              }}
+            >
+              testtesttesttesttesttesttest
+            </Text>
+          </View>
+          <View
+            style={{
+              width: "95%",
+              alignSelf: "center",
+              borderRadius: 5,
+              marginTop: 20,
+            }}
+          >
+            <View>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  marginTop: 20,
+
+                  marginLeft: 10,
+                }}
+              >
+                Activity Log
+              </Text>
+            </View>
+
+            <View
+              style={{
+                height: 40,
+                width: "90%",
+                alignSelf: "center",
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                marginTop: 20,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8d8a8a",
+                  fontSize: 14,
+                }}
+              >
+                Type
+              </Text>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 16,
+                }}
+              >
+                testtttttt
+              </Text>
+            </View>
+            <View
+              style={{
+                height: 40,
+                width: "95%",
+                alignSelf: "center",
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                marginTop: 20,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8d8a8a",
+                  fontSize: 14,
+                }}
+              >
+                DisPosition
+              </Text>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 16,
+                }}
+              >
+                testtttttt
+              </Text>
+            </View>
+            <View
+              style={{
+                height: 40,
+                width: "95%",
+                alignSelf: "center",
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                marginTop: 20,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8d8a8a",
+                  fontSize: 14,
+                }}
+              >
+                Date
+              </Text>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 16,
+                }}
+              >
+                5/05/23
+              </Text>
+            </View>
+
+            <View
+              style={{
+                height: 40,
+                width: "95%",
+                alignSelf: "center",
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                marginTop: 20,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8d8a8a",
+                  fontSize: 14,
+                }}
+              >
+                Date
+              </Text>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 16,
+                }}
+              >
+                5/05/23
+              </Text>
+            </View>
+            <View
+              style={{
+                height: 40,
+                width: "95%",
+                alignSelf: "center",
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                marginTop: 20,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8d8a8a",
+                  fontSize: 14,
+                }}
+              >
+                Date
+              </Text>
+              <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 16,
+                }}
+              >
+                5/05/23
+              </Text>
+            </View>
+          </View>
+
+          <View
+            style={{
               borderWidth: 1,
               width: "95%",
               alignSelf: "center",
