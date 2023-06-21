@@ -38,7 +38,7 @@ const MyClientsDetails = (props) => {
   const [property, setProperty] = useState([]);
   const items = props.route.params;
   const isFocused = useIsFocused();
-
+  const [showAll, setShowAll] = useState(false);
   const id = items.item.id;
 
   useEffect(() => {
@@ -55,8 +55,67 @@ const MyClientsDetails = (props) => {
   const MyTaskData = () => {
     dispatch(getActivityData(id)).then((response) => {
       const taskData = response.payload.data;
-      setTask(taskData);
+      const initialTasks = taskData; // Get the first 5 tasks
+      setTask(initialTasks);
     });
+  };
+  const loadLessItems = () => {
+    setShowAll(false);
+  };
+  const loadMoreItems = () => {
+    setShowAll(true);
+  };
+
+  const renderItem = ({ item }) => {
+    return (
+      <TouchableOpacity
+      //onPress={() => navigation.navigate('MyClientsDetails')}
+      style={{
+        height: 60,
+        width: "90%",
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.gray,
+        alignItems: "center",
+        alignContent: "center",
+        flexDirection: "row",
+        alignSelf: "center",
+      }}
+    >
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <View
+          style={{
+            height: 80,
+            justifyContent: "center",
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: "bold",
+            }}
+          >
+            {item.activity_content}
+          </Text>
+
+          <Text
+            style={{
+              color: Colors.black,
+              fontSize: 12,
+            }}
+          >
+            {item.activity_notes}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity> 
+    );
   };
   const MyClientsDetails = () => {
     dispatch(getClientDetails(id))
@@ -227,7 +286,7 @@ const MyClientsDetails = (props) => {
             renderItem={({ item, index }) => (
               <View
                 style={{
-                  borderWidth: 1,
+                
                   width: "100%",
                   alignSelf: "center",
                   borderRadius: 5,
@@ -1113,64 +1172,29 @@ const MyClientsDetails = (props) => {
                 ></Image>
               </TouchableOpacity> */}
             </View>
-            <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
-              <FlatList
-                data={task}
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    //onPress={() => navigation.navigate('MyClientsDetails')}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      borderBottomWidth: 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      alignSelf: "center",
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: "100%",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: 80,
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {item.activity_content}
-                        </Text>
-
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 12,
-                          }}
-                        >
-                          {item.activity_notes}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
-              />
-            </View>
+            <View>
+      {/* Other components */}
+      <ScrollView>
+        <FlatList
+          data={showAll ? task : task.slice(0, 5)}
+          renderItem={renderItem}
+          keyExtractor={(item) => item.id}
+        />
+        
+      </ScrollView>
+      <View style={{ alignItems: "center", marginTop: 10 }}>
+      {!showAll && task.length > 5 && (
+        <TouchableOpacity onPress={loadMoreItems}>
+          <Text style={{ color: Colors.PrimaryColor }}>Show More</Text>
+        </TouchableOpacity>
+      )}
+      {showAll && (
+        <TouchableOpacity onPress={loadLessItems}>
+          <Text style={{ color: Colors.PrimaryColor }}>Show Less</Text>
+        </TouchableOpacity>
+      )}
+      </View>
+    </View>
             <View
               style={{
                 flexDirection: "row",

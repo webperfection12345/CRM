@@ -10,7 +10,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import "react-native-gesture-handler";
-import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
+// import MapView, { PROVIDER_GOOGLE, Marker } from "react-native-maps";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
@@ -167,7 +167,7 @@ const PropertiesDetails = (props) => {
                 marginTop: 20,
               }}
             >
-              <MapView
+              {/* <MapView
                 provider={PROVIDER_GOOGLE}
                 style={{
                   height: 250,
@@ -186,7 +186,7 @@ const PropertiesDetails = (props) => {
                     longitude: parseFloat(data.property_longitude),
                   }}
                 />
-              </MapView>
+              </MapView> */}
             </TouchableOpacity>
             <View
               style={{

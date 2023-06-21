@@ -275,6 +275,7 @@ const AddActivity = (props) => {
               <TextInput
                 onChangeText={setAgentEmail}
                 value={agentEmail}
+                editable={false}
                 style={{
                   width: "100%",
                   borderRadius: 8,

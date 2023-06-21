@@ -467,6 +467,7 @@ const EditClientsDetails = (props) => {
             >
               <TextInput
                 allowFontScaling={false}
+                editable={false}
                 style={{
                   width: "100%",
                   borderRadius: 8,

@@ -64,7 +64,7 @@ const Contact = () => {
   const makePhoneCall = (item) => {
     let phoneNumber = item;
     Linking.openURL(`tel:${phoneNumber}`);
-  };
+  };  
   const sendEmail = (item) => {
     let recipient = item;
     let subject = "Subject of email";
