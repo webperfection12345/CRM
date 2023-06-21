@@ -82,9 +82,7 @@ const NewActivities = ({ navigation }) => {
           />
           <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
         </TouchableOpacity>
-        <Text
-          style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
-        >
+        <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
           New Activities
         </Text>
         <TouchableOpacity
