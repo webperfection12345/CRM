@@ -65,7 +65,7 @@ const Transactions = ({ navigation }) => {
           style={{
             backgroundColor: "#576ebd",
             width: "100%",
-            height: "10%",
+            height: "6%",
           }}
         >
           <View

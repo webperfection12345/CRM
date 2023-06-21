@@ -160,7 +160,7 @@ const Leads = () => {
                   Type
                 </Text>
                 {/* Render the icon based on the item type */}
-                <Text style={{ color: Colors.black, height: 50 }}>
+               
                   {item.type === "Email" ? (
                     <Image
                       source={require("../../../assets/mail.png")}
@@ -174,13 +174,22 @@ const Leads = () => {
                         resizeMode: "contain",
                       }}
                     />
-                  ) : item.type === "message" ? (
+                  ) : item.type === "Message" ? (
                     <Image
-                      // source={require("../../assets/images/smsblue.plng")}
-                      style={{ height: 50, width: 50, resizeMode: "contain" }}
+                    source={require("../../../assets/chat.png")}
+                    style={{
+                      height: 35,
+                      width: 35,
+                      alignSelf: "center",
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      resizeMode: "contain",
+                      marginTop: 12,
+                    }}
                     />
                   ) : null}
-                </Text>
+               
               </View>
               {/* Render the Message */}
               <View
@@ -203,7 +212,7 @@ const Leads = () => {
                     width: "60%",
                   }}
                 >
-                  {item.content}
+                    {item.content.replace(/<br>/g, "")}
                 </Text>
               </View>
               {/* Render the Property Key */}
@@ -240,7 +249,11 @@ const Leads = () => {
                 <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
                   Date Created
                 </Text>
-                <Text style={{ color: Colors.black, fontSize: 14 }}></Text>
+
+                <Text style={{ color: Colors.black, fontSize: 14 }}>
+                {new Date(item.created_date).toLocaleDateString("en-US")}
+                </Text>
+
               </View>
             </View>
           )}
