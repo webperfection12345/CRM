@@ -677,7 +677,7 @@ const MyClientsDetails = (props) => {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("NewNote", { item })}
+                    onPress={() => navigation.navigate("DisPosition",  {  item } )}
                     style={{
                       height: 52,
                       width: "25%",
