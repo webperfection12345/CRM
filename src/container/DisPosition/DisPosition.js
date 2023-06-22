@@ -36,6 +36,8 @@ const DisPosition = (props) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSecondModalVisible, setSecondModalVisible] = useState(false);
   const [selectedSecondOption, setSelectedSecondOption] = useState(null);
+  const [isThirdModalVisible, setThirdModalVisible] = useState(false);
+  const [selectedThirdOption, setSelectedThirdOption] = useState(null);
   useEffect(() => {
     getData();
   });
@@ -63,6 +65,17 @@ const DisPosition = (props) => {
 
   const closeSecondModal = () => {
     setSecondModalVisible(false);
+  };
+  const openThirdModal = () => {
+    setThirdModalVisible(true);
+  };
+
+  const closeThirdModal = () => {
+    setThirdModalVisible(false);
+  };
+  const handleThirdOptionSelect = (option) => {
+    setSelectedThirdOption(option);
+    closeThirdModal();
   };
 
   const handleSecondOptionSelect = (option) => {
@@ -109,6 +122,7 @@ const DisPosition = (props) => {
       contact_email: data.contact_email,
       agent_email: agentEmail,
       activity_publish_date: date,
+      activity_disposition:selectedThirdOption
     };
     dispatch(addDisposition(payload)).then((response) => {
       console.log(response);
@@ -329,7 +343,71 @@ const DisPosition = (props) => {
             Current Deposition : <Text>4</Text>
           </Text>
         </View>
-
+        <View style={styles.activitytype}>
+          <Text style={styles.label}>Activity DisPosition
+          <Text style={styles.selectedValue}>{selectedThirdOption}</Text>  </Text>
+          <View
+            style={{
+              backgroundColor: Colors.PrimaryColor,
+              alignItems: "center",
+              justifyContent: "center",
+              height: 40,
+              width: 40,
+              borderRadius: 100,
+              alignSelf: "center",
+              flexDirection: "row",
+            }}
+          >
+            <TouchableOpacity onPress={openThirdModal}>
+              <Image
+                source={require("../../../assets/plus.png")}
+                style={{
+                  height: 15,
+                  width: 15,
+                  alignSelf: "center",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              />
+            </TouchableOpacity>
+            <Modal
+            animationType="fade"
+            transparent={true}
+            visible={isThirdModalVisible}
+            onRequestClose={closeThirdModal}
+          >
+            <View style={styles.modalContainer}>
+              <View style={styles.modalContent}>
+                <TouchableOpacity
+                  style={styles.optionButton}
+                  onPress={() => handleThirdOptionSelect("ContactSigned")}
+                >
+                  <Text style={styles.optionText}>Contact Signed</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.optionButton}
+                  onPress={() => handleThirdOptionSelect("Pending")}
+                >
+                  <Text style={styles.optionText}>Pending</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.optionButton}
+                  onPress={() => handleThirdOptionSelect("prepare")}
+                >
+                  <Text style={styles.optionText}>Prepare</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.optionButton}
+                  onPress={() => handleThirdOptionSelect("Hold")}
+                >
+                  <Text style={styles.optionText}>Hold</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Modal>
+          </View>
+          </View>
+     
         <View style={styles.activitytype}>
           <Text style={styles.label}>Activity Type
           <Text style={styles.selectedValue}>{selectedOption}</Text>  </Text>
