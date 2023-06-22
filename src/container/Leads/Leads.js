@@ -41,7 +41,7 @@ const Leads = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
-            height: 10,
+            height: 40,
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -111,7 +111,7 @@ const Leads = () => {
               placeholderTextColor={Colors.white}
               style={{
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: 15,
                 marginLeft: 10,
               }}
             />
@@ -160,22 +160,22 @@ const Leads = () => {
                   Type
                 </Text>
                 {/* Render the icon based on the item type */}
-               
-                  {item.type === "Email" ? (
-                    <Image
-                      source={require("../../../assets/mail.png")}
-                      style={{
-                        height: 35,
-                        width: 35,
-                        alignSelf: "center",
-                        alignItems: "center",
-                        alignContent: "center",
-                        flexDirection: "row",
-                        resizeMode: "contain",
-                      }}
-                    />
-                  ) : item.type === "Message" ? (
-                    <Image
+
+                {item.type === "Email" ? (
+                  <Image
+                    source={require("../../../assets/mail.png")}
+                    style={{
+                      height: 35,
+                      width: 35,
+                      alignSelf: "center",
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      resizeMode: "contain",
+                    }}
+                  />
+                ) : item.type === "Message" ? (
+                  <Image
                     source={require("../../../assets/chat.png")}
                     style={{
                       height: 35,
@@ -187,9 +187,8 @@ const Leads = () => {
                       resizeMode: "contain",
                       marginTop: 12,
                     }}
-                    />
-                  ) : null}
-               
+                  />
+                ) : null}
               </View>
               {/* Render the Message */}
               <View
@@ -212,7 +211,7 @@ const Leads = () => {
                     width: "60%",
                   }}
                 >
-                    {item.content.replace(/<br>/g, "")}
+                  {item.content.replace(/<br>/g, "")}
                 </Text>
               </View>
               {/* Render the Property Key */}
@@ -251,9 +250,8 @@ const Leads = () => {
                 </Text>
 
                 <Text style={{ color: Colors.black, fontSize: 14 }}>
-                {new Date(item.created_date).toLocaleDateString("en-US")}
+                  {new Date(item.created_date).toLocaleDateString("en-US")}
                 </Text>
-
               </View>
             </View>
           )}
