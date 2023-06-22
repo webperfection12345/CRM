@@ -9,6 +9,7 @@ import {
   Linking,
   SafeAreaView,
   Modal,
+  StyleSheet,
   PanResponder,
   Share,
 } from "react-native";
@@ -804,83 +805,96 @@ const MyClientsDetails = (props) => {
             </View>
             <View
               style={{
-                height: 40,
-                width: "90%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
+                width: "95%",
+                alignSelf: "flex-start",
+                alignItems: "flex-start",
+                alignContent: "flex-start",
+                flexDirection: "column",
                 marginTop: 20,
+                paddingHorizontal: 12,
                 justifyContent: "space-between",
               }}
             >
-              <Text
+              {/* <Text
                 style={{
-                  color: "#8d8a8a",
-                  fontSize: 14,
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: "bold",
                 }}
               >
                 Type
-              </Text>
-              <FlatList
-                data={futureDipo}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item, index }) => (
+              </Text> */}
+              <ScrollView horizontal={true}>
+                <View
+                  style={{
+                    width: "95%",
+                    alignSelf: "flex-start",
+                    alignItems: "flex-start",
+                    alignContent: "flex-start",
+                    flexDirection: "column",
+                    marginTop: 20,
+                    paddingHorizontal: 12,
+                    justifyContent: "space-between",
+                  }}
+                >
                   <View
                     style={{
-                      height: 40,
-                      width: "95%",
-                      alignSelf: "center",
-                      alignItems: "center",
-                      alignContent: "center",
+                      paddingRight: 20,
+                      alignSelf: "flex-start",
+                      alignItems: "flex-start",
+                      alignContent: "flex-start",
                       flexDirection: "row",
-                      marginTop: 20,
-                      justifyContent: "space-between",
                     }}
                   >
-                    <Text
-                      style={{
-                        color: "black",
-                        fontSize: 16,
-                      }}
-                    >
-                      {item.activity_type}
+                    <Text style={styles.headingmaintype}>Activity Type</Text>
+                    <Text style={styles.headingmaintype}>Activity Notes</Text>
+                    <Text style={styles.headingmaintype}>
+                      Next Disposition Date
                     </Text>
-                    <Text
-                      style={{
-                        color: "black",
-                        fontSize: 16,
-                      }}
-                    >
-                      {item.activity_notes}
+                    <Text style={styles.headingmaintype}>
+                      Activity Next Disposition
                     </Text>
-                    <Text
-                      style={{
-                        color: "black",
-                        fontSize: 16,
-                      }}
-                    >
-                      {item.next_disposition_date}
-                    </Text>
-                    <Text
-                      style={{
-                        color: "black",
-                        fontSize: 16,
-                      }}
-                    >
-                      {item.activity_next_disposition}
-                    </Text>
-                    <Text
-                      style={{
-                        color: "black",
-                        fontSize: 16,
-                      }}
-                    >
-                      {item.next_disposition_notes}
+                    <Text style={styles.headingmaintype}>
+                      Next Disposition Notes
                     </Text>
                   </View>
-                )}
-              />
+                  <FlatList
+                    data={futureDipo}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) => (
+                      <View
+                        style={{
+                          paddingRight: 20,
+                          alignSelf: "flex-start",
+                          alignItems: "flex-start",
+                          alignContent: "flex-start",
+                          flexDirection: "row",
+                        }}
+                      >
+                        <Text style={styles.subheadingmaintype}>
+                          {item.activity_type}
+                        </Text>
+
+                        <Text style={styles.subheadingmaintype}>
+                          {item.activity_notes}
+                        </Text>
+
+                        <Text style={styles.subheadingmaintype}>
+                          {item.next_disposition_date}
+                        </Text>
+
+                        <Text style={styles.subheadingmaintype}>
+                          {item.activity_next_disposition}
+                        </Text>
+
+                        <Text style={styles.subheadingmaintype}>
+                          {item.next_disposition_notes}
+                        </Text>
+                      </View>
+                    )}
+                  />
+                </View>
+              </ScrollView>
             </View>
 
             {/* <View
@@ -2036,5 +2050,20 @@ const MyClientsDetails = (props) => {
     </SafeAreaView>
   );
 };
-
+const styles = StyleSheet.create({
+  headingmaintype: {
+    color: "black",
+    fontSize: 14,
+    paddingRight: 12,
+    marginBottom: 3,
+    width: 150,
+  },
+  subheadingmaintype: {
+    color: Colors.lightblack,
+    fontSize: 13,
+    width: 150,
+    paddingRight: 12,
+    marginBottom: 20,
+  },
+});
 export default MyClientsDetails;
