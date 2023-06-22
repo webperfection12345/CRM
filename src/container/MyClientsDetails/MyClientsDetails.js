@@ -25,7 +25,7 @@ import { getNoteData } from "../../modules/getNoteData";
 import { getDocument } from "../../modules/getDocument";
 import { getDisposition } from "../../modules/getDisposition";
 import { getTodayDipos } from "../../modules/getTodayDipos";
-import {getCurrentDisposition} from "../../modules/currentDisposition";
+import { getCurrentDisposition } from "../../modules/currentDisposition";
 
 const MyClientsDetails = (props) => {
   const dispatch = useDispatch();
@@ -44,7 +44,7 @@ const MyClientsDetails = (props) => {
   const items = props.route.params;
   const isFocused = useIsFocused();
   const [showAll, setShowAll] = useState(false);
-  const [todayDipo, setTodayDipo] = useState([]);
+  const [todayDipo, setTodayDipo] = useState("");
   const [futureDipo, setFutureDipo] = useState([]);
   const [currentDipo, setCurrentDisposition] = useState([]);
 
@@ -61,7 +61,6 @@ const MyClientsDetails = (props) => {
     currentDisposition();
     TodayDisPosition();
   }, [isFocused]);
-
 
   const renderdfItem = ({ item }) => {
     return (
@@ -153,6 +152,7 @@ const MyClientsDetails = (props) => {
   const TodayDisPosition = () => {
     dispatch(getTodayDipos(id)).then((response) => {
       const data = response.payload.data;
+
       setTodayDipo(data);
     });
   };
@@ -757,16 +757,111 @@ const MyClientsDetails = (props) => {
               </Text>
             </View>
 
-            <Text
+            <View
               style={{
-                color: Colors.black,
-                fontSize: 15,
-                marginTop: 10,
-                marginLeft: 10,
+                width: "95%",
+                alignSelf: "flex-start",
+                alignItems: "flex-start",
+                alignContent: "flex-start",
+                flexDirection: "column",
+                marginTop: 20,
+                paddingHorizontal: 12,
+                justifyContent: "space-between",
               }}
             >
-              {todayDipo}
-            </Text>
+              {/* <Text
+                style={{
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Type
+              </Text> */}
+              <ScrollView horizontal={true}>
+                <View
+                  style={{
+                    width: "95%",
+                    alignSelf: "flex-start",
+                    alignItems: "flex-start",
+                    alignContent: "flex-start",
+                    flexDirection: "column",
+                    marginTop: 20,
+                    paddingHorizontal: 12,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <View
+                    style={{
+                      paddingRight: 20,
+                      alignSelf: "flex-start",
+                      alignItems: "flex-start",
+                      alignContent: "flex-start",
+                      flexDirection: "row",
+                    }}
+                  >
+                    <Text style={styles.headingmaintype}>Activity Type</Text>
+
+                    <Text style={styles.headingmaintype}>
+                      Next Disposition Date
+                    </Text>
+                    <Text style={styles.headingmaintype}>
+                      Activity Next Disposition
+                    </Text>
+                    <Text style={styles.headingmaintype}>
+                      Next Disposition Notes
+                    </Text>
+                  </View>
+                  {typeof todayDipo === "string" ? (
+                    <Text
+                      style={{
+                       
+                        alignSelf: "center",
+                        alignItems: "flex-start",
+                        alignContent: "flex-start",
+                        flexDirection: "column",
+                        marginTop: 20,
+                     
+                      }}
+                    >
+                      {todayDipo}
+                    </Text>
+                  ) : (
+                    <FlatList
+                      data={todayDipo}
+                      keyExtractor={(item, index) => index.toString()}
+                      renderItem={({ item, index }) => (
+                        <View
+                          style={{
+                            paddingRight: 20,
+                            alignSelf: "flex-start",
+                            alignItems: "flex-start",
+                            alignContent: "flex-start",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Text style={styles.subheadingmaintype}>
+                            {item.activity_type}
+                          </Text>
+
+                          <Text style={styles.subheadingmaintype}>
+                            {item.next_disposition_date}
+                          </Text>
+
+                          <Text style={styles.subheadingmaintype}>
+                            {item.activity_next_disposition}
+                          </Text>
+
+                          <Text style={styles.subheadingmaintype}>
+                            {item.next_disposition_notes}
+                          </Text>
+                        </View>
+                      )}
+                    />
+                  )}
+                </View>
+              </ScrollView>
+            </View>
           </View>
 
           <View
@@ -1058,7 +1153,6 @@ const MyClientsDetails = (props) => {
               >
                 Properties Viewed
               </Text>
-              
             </View>
             <View>
               <FlatList
@@ -1196,7 +1290,6 @@ const MyClientsDetails = (props) => {
               borderColor: Colors.gray,
             }}
           >
-        
             <View
               style={{
                 flexDirection: "row",

@@ -31,7 +31,6 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="homeTab"
         component={Dashboard}
-        key="child1"
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
@@ -48,7 +47,6 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="Contact"
         component={Contact}
-        key="child2"
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
@@ -63,7 +61,6 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="Leads"
         component={Leads}
-        key="child4"
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
@@ -79,7 +76,6 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="Transaction"
         component={Transactions}
-        key="child3"
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
