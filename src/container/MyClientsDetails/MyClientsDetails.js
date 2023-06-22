@@ -737,10 +737,10 @@ const MyClientsDetails = (props) => {
                       <React.Fragment>
                         <TouchableOpacity
                           onPress={() => {
-                            if (selectedActivityType === item.activity_type) {
+                            if (selectedActivityType === item.activity_disposition) {
                               setSelectedActivityType(null);
                             } else {
-                              setSelectedActivityType(item.activity_type);
+                              setSelectedActivityType(item.activity_disposition);
                             }
                           }}
                           style={{
@@ -752,11 +752,11 @@ const MyClientsDetails = (props) => {
                           }}
                         >
                           <Text style={styles.subheadingmaintype}>
-                            {item.activity_type}
+                            {item.activity_disposition}
                           </Text>
                           {/* Other activity type data */}
                         </TouchableOpacity>
-                        {selectedActivityType === item.activity_type && (
+                        {selectedActivityType === item.activity_disposition && (
                           <View>
                            <View
                     style={{
@@ -767,7 +767,14 @@ const MyClientsDetails = (props) => {
                       flexDirection: "row",
                     }}
                   >
-                 
+                 <Text style={styles.headingmaintype}>Activity Disposition</Text>
+                    <Text style={styles.subheadingmaintype}>
+                          {item.activity_disposition}
+                        </Text>
+                        <Text style={styles.headingmaintype}>Activity Type</Text>
+                    <Text style={styles.subheadingmaintype}>
+                          {item.activity_type}
+                        </Text>
                     <Text style={styles.headingmaintype}>Activity Notes</Text>
                     <Text style={styles.subheadingmaintype}>
                           {item.activity_notes}
@@ -1584,5 +1591,6 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     marginBottom: 20,
   },
+  
 });
 export default MyClientsDetails;
