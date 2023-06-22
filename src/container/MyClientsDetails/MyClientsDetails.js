@@ -597,7 +597,7 @@ const MyClientsDetails = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              {/* <ScrollView horizontal={true}>
+              <ScrollView horizontal={true}>
                 <View
                   style={{
                     width: "95%",
@@ -677,7 +677,7 @@ const MyClientsDetails = (props) => {
                     />
                   )}
                 </View>
-              </ScrollView> */}
+              </ScrollView>
             </View>
           </View>
 
