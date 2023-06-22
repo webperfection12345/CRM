@@ -62,66 +62,16 @@ const MyClientsDetails = (props) => {
     TodayDisPosition();
   }, [isFocused]);
 
-  const renderdfItem = ({ item }) => {
-    return (
-      <TouchableOpacity
-        //onPress={() => navigation.navigate('MyClientsDetails')}
-        style={{
-          height: 60,
-          width: "90%",
-          borderBottomWidth: 1,
-          borderBottomColor: Colors.gray,
-          alignItems: "center",
-          alignContent: "center",
-          flexDirection: "row",
-          alignSelf: "center",
-        }}
-      >
-        <View
-          style={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-          }}
-        >
-          <View
-            style={{
-              height: 80,
-              justifyContent: "center",
-            }}
-          >
-            <Text
-              style={{
-                color: Colors.black,
-                fontSize: 16,
-                fontWeight: "bold",
-              }}
-            >
-              {item.activity_content}
-            </Text>
-
-            <Text
-              style={{
-                color: Colors.black,
-                fontSize: 12,
-              }}
-            >
-              {item.activity_notes}
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  };
   const MyClientsDetails = () => {
     dispatch(getClientDetails(id))
       .then((response) => {
         const clientData = response.payload.data;
         setData(clientData);
         const propTitles = clientData.flatMap((item) =>
-          item.property_viewed.map((property) => property.prop_title).filter(title => title)
+          item.property_viewed
+            .map((property) => property.prop_title)
+            .filter((title) => title)
         );
-        console.log(propTitles);
         setProperty(propTitles);
         const url = clientData.map((item) => item.linked_id);
         const updatedLeadTypes = clientData.map((item) => {
@@ -155,14 +105,12 @@ const MyClientsDetails = (props) => {
   const TodayDisPosition = () => {
     dispatch(getTodayDipos(id)).then((response) => {
       const data = response.payload.data;
-
       setTodayDipo(data);
     });
   };
   const currentDisposition = () => {
     dispatch(getCurrentDisposition(id)).then((response) => {
       const data = response.payload.data;
-      console.log(data, "dsata");
       setCurrentDisposition(data);
     });
   };
@@ -238,48 +186,7 @@ const MyClientsDetails = (props) => {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
-  const renderdItem = ({ item }) => (
-    <View
-      style={{
-        height: 40,
-        width: "90%",
-        alignSelf: "center",
-        alignItems: "center",
-        alignContent: "center",
-        flexDirection: "row",
-        marginTop: 20,
-        justifyContent: "space-between",
-      }}
-    >
-      <Text
-        style={{
-          color: "black",
-          fontSize: 16,
-        }}
-      >
-        {item.activity_type}
-      </Text>
-    </View>
-  );
-  const newLocal = (
-    <TouchableOpacity
-      onPress={toggleModal}
-      style={{
-        justifyContent: "center",
-        backgroundColor: Colors.PrimaryColor,
-        height: 40,
-        width: 40,
-        borderRadius: 20,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Image
-        style={{ height: 20, width: 20, resizeMode: "contain" }}
-        source={require("../../../assets/plus.png")}
-      ></Image>
-    </TouchableOpacity>
-  );
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       <View
@@ -288,32 +195,6 @@ const MyClientsDetails = (props) => {
           backgroundColor: Colors.white,
         }}
       >
-        {/* <View
-          style={{
-            height: 60,
-            width: 60,
-            borderRadius: 30,
-            backgroundColor: Colors.PrimaryColor,
-            position: 'absolute',
-            bottom: 20,
-            right: 20,
-            zIndex: 1,
-            justifyContent: 'center',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            style={{
-              height: 30,
-              width: 30,
-              borderRadius: 15,
-              backgroundColor: Colors.white,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{fontSize: 18, color: Colors.PrimaryColor}}>$</Text>
-          </TouchableOpacity>
-        </View> */}
-
         <ScrollView showsVerticalScrollIndicator={false}>
           <FlatList
             data={data}
@@ -501,7 +382,6 @@ const MyClientsDetails = (props) => {
                       style={{
                         height: 50,
                         width: 50,
-
                         resizeMode: "contain",
                       }}
                     ></Image>
@@ -602,62 +482,6 @@ const MyClientsDetails = (props) => {
                   </Text>
                 </View>
 
-                {/* <View
-              style={{
-                height: 30,
-                width: '90%',
-                alignSelf: 'center',
-                alignItems: 'center',
-                alignContent: 'center',
-                flexDirection: 'row',
-                borderBottomWidth: 1,
-                borderColor: Colors.gray,
-                marginTop: 10,
-                justifyContent: 'space-between',
-              }}>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 14,
-                }}>
-                Linkedin
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}>
-                @biffthevs
-              </Text>
-            </View> */}
-                {/* <View
-              style={{
-                height: 30,
-                width: '90%',
-                alignSelf: 'center',
-                alignItems: 'center',
-                alignContent: 'center',
-                flexDirection: 'row',
-                borderBottomWidth: 1,
-                borderColor: Colors.gray,
-                marginTop: 10,
-                justifyContent: 'space-between',
-              }}>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 14,
-                }}>
-                Twitter
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}>
-                @biffy
-              </Text>
-            </View> */}
                 <View
                   style={{
                     height: 30,
@@ -773,16 +597,7 @@ const MyClientsDetails = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              {/* <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: "bold",
-                }}
-              >
-                Type
-              </Text> */}
-              <ScrollView horizontal={true}>
+              {/* <ScrollView horizontal={true}>
                 <View
                   style={{
                     width: "95%",
@@ -862,7 +677,7 @@ const MyClientsDetails = (props) => {
                     />
                   )}
                 </View>
-              </ScrollView>
+              </ScrollView> */}
             </View>
           </View>
 
@@ -900,15 +715,6 @@ const MyClientsDetails = (props) => {
                 justifyContent: "space-between",
               }}
             >
-              {/* <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                  fontWeight: "bold",
-                }}
-              >
-                Type
-              </Text> */}
               <ScrollView horizontal={true}>
                 <View
                   style={{
@@ -981,154 +787,6 @@ const MyClientsDetails = (props) => {
                 </View>
               </ScrollView>
             </View>
-
-            {/* <View
-              style={{
-                height: 40,
-                width: "90%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                marginTop: 20,
-                justifyContent: "space-between",
-              }}
-            >
-              
-              <Text
-                style={{
-                  color: "#8d8a8a",
-                  fontSize: 14,
-                }}
-              >
-                Type
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                testtttttt
-              </Text>
-            </View> */}
-            <View
-              style={{
-                height: 40,
-                width: "95%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                marginTop: 20,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#8d8a8a",
-                  fontSize: 14,
-                }}
-              >
-                DisPosition
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                testtttttt
-              </Text>
-            </View>
-            <View
-              style={{
-                height: 40,
-                width: "95%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                marginTop: 20,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#8d8a8a",
-                  fontSize: 14,
-                }}
-              >
-                Date
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                5/05/23
-              </Text>
-            </View>
-
-            <View
-              style={{
-                height: 40,
-                width: "95%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                marginTop: 20,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#8d8a8a",
-                  fontSize: 14,
-                }}
-              >
-                Date
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                5/05/23
-              </Text>
-            </View>
-            <View
-              style={{
-                height: 40,
-                width: "95%",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                marginTop: 20,
-                justifyContent: "space-between",
-              }}
-            >
-              <Text
-                style={{
-                  color: "#8d8a8a",
-                  fontSize: 14,
-                }}
-              >
-                Date
-              </Text>
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 16,
-                }}
-              >
-                5/05/23
-              </Text>
-            </View>
           </View>
 
           <View
@@ -1156,16 +814,33 @@ const MyClientsDetails = (props) => {
                 Properties Viewed
               </Text>
             </View>
-
             {property.length === 0 ? (
-              <p>No data found</p>
+              <Text>No data found</Text>
             ) : (
-              <ul>
+              <View>
                 {property.map((title, index) => (
-                  <li key={index}>{title}</li>
+                  <View key={index}>
+                    <Text>
+                      {"\u2022"} {title}
+                    </Text>
+                  </View>
                 ))}
-              </ul>
+              </View>
             )}
+
+            {/* {property.length === 0 ? (
+              <Text>No data found</Text>
+            ) : (
+              <FlatList
+                data={property}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  <Text>
+                    <li>{item}</li>
+                  </Text>
+                )}
+              />
+            )} */}
 
             <View
               style={{
