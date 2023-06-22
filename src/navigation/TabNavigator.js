@@ -74,8 +74,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="DisPosition"
-        component={DisPosition}
+        name="Transaction"
+        component={Transactions}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>

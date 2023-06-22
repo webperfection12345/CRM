@@ -54,7 +54,7 @@ const MyClientsDetails = (props) => {
     allActivityHistory();
     MyTaskData();
     MyNoteData();
- 
+
     TodayDisPosition();
   }, [isFocused]);
 
@@ -72,7 +72,7 @@ const MyClientsDetails = (props) => {
     setShowAll(true);
   };
 
-  const renderItem = ({ item }) => {
+  const renderdfItem = ({ item }) => {
     return (
       <TouchableOpacity
         //onPress={() => navigation.navigate('MyClientsDetails')}
@@ -162,7 +162,7 @@ const MyClientsDetails = (props) => {
   const TodayDisPosition = () => {
     dispatch(getTodayDipos(id)).then((response) => {
       const data = response.payload.data;
-      console.log(data,"dsata");
+      console.log(data, "dsata");
       setTodayDipo(data);
     });
   };
@@ -246,6 +246,29 @@ const MyClientsDetails = (props) => {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+  const renderdItem = ({ item }) => (
+    <View
+      style={{
+        height: 40,
+        width: "90%",
+        alignSelf: "center",
+        alignItems: "center",
+        alignContent: "center",
+        flexDirection: "row",
+        marginTop: 20,
+        justifyContent: "space-between",
+      }}
+    >
+      <Text
+        style={{
+          color: "black",
+          fontSize: 16,
+        }}
+      >
+        {item.activity_type}
+      </Text>
+    </View>
+  );
   const newLocal = (
     <TouchableOpacity
       onPress={toggleModal}
@@ -683,7 +706,7 @@ const MyClientsDetails = (props) => {
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("AddActivity", { item })}
+                    onPress={() => navigation.navigate("DisPosition", { item })}
                     style={{
                       height: 52,
                       width: "25%",
@@ -701,7 +724,7 @@ const MyClientsDetails = (props) => {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    onPress={() => navigation.navigate("DisPosition", { item })}
+                    onPress={() => navigation.navigate("NewNote", { item })}
                     style={{
                       height: 52,
                       width: "25%",
@@ -743,9 +766,8 @@ const MyClientsDetails = (props) => {
               >
                 Today's Activities
               </Text>
-              
             </View>
-           
+
             <Text
               style={{
                 color: Colors.black,
@@ -754,11 +776,10 @@ const MyClientsDetails = (props) => {
                 marginLeft: 10,
               }}
             >
-             {todayDipo}
+              {todayDipo}
             </Text>
-               
           </View>
-              
+
           <View
             style={{
               width: "95%",
@@ -781,8 +802,88 @@ const MyClientsDetails = (props) => {
                 Activity Log
               </Text>
             </View>
-
             <View
+              style={{
+                height: 40,
+                width: "90%",
+                alignSelf: "center",
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                marginTop: 20,
+                justifyContent: "space-between",
+              }}
+            >
+              <Text
+                style={{
+                  color: "#8d8a8a",
+                  fontSize: 14,
+                }}
+              >
+                Type
+              </Text>
+              <FlatList
+                data={futureDipo}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item, index }) => (
+                  <View
+                    style={{
+                      height: 40,
+                      width: "95%",
+                      alignSelf: "center",
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      marginTop: 20,
+                      justifyContent: "space-between",
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.activity_type}
+                    </Text>
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.activity_notes}
+                    </Text>
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.next_disposition_date}
+                    </Text>
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.activity_next_disposition}
+                    </Text>
+                    <Text
+                      style={{
+                        color: "black",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.next_disposition_notes}
+                    </Text>
+                  </View>
+                )}
+              />
+            </View>
+
+            {/* <View
               style={{
                 height: 40,
                 width: "90%",
@@ -811,7 +912,7 @@ const MyClientsDetails = (props) => {
               >
                 testtttttt
               </Text>
-            </View>
+            </View> */}
             <View
               style={{
                 height: 40,
@@ -1255,7 +1356,7 @@ const MyClientsDetails = (props) => {
               <ScrollView>
                 <FlatList
                   data={showAll ? task : task.slice(0, 5)}
-                  renderItem={renderItem}
+                  renderItem={renderdfItem}
                   keyExtractor={(item) => item.id}
                 />
               </ScrollView>
