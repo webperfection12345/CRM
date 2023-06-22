@@ -118,8 +118,11 @@ const MyClientsDetails = (props) => {
       .then((response) => {
         const clientData = response.payload.data;
         setData(clientData);
-        const prop = clientData.map((item) => item.property_viewed);
-        setProperty(prop);
+        const propTitles = clientData.flatMap((item) =>
+          item.property_viewed.map((property) => property.prop_title).filter(title => title)
+        );
+        console.log(propTitles);
+        setProperty(propTitles);
         const url = clientData.map((item) => item.linked_id);
         const updatedLeadTypes = clientData.map((item) => {
           const url = item.linked_lead;
@@ -310,6 +313,7 @@ const MyClientsDetails = (props) => {
             <Text style={{fontSize: 18, color: Colors.PrimaryColor}}>$</Text>
           </TouchableOpacity>
         </View> */}
+
         <ScrollView showsVerticalScrollIndicator={false}>
           <FlatList
             data={data}
@@ -815,13 +819,11 @@ const MyClientsDetails = (props) => {
                   {typeof todayDipo === "string" ? (
                     <Text
                       style={{
-                       
                         alignSelf: "center",
                         alignItems: "flex-start",
                         alignContent: "flex-start",
                         flexDirection: "column",
                         marginTop: 20,
-                     
                       }}
                     >
                       {todayDipo}
@@ -1154,87 +1156,16 @@ const MyClientsDetails = (props) => {
                 Properties Viewed
               </Text>
             </View>
-            <View>
-              <FlatList
-                data={property}
-                scrollEnabled={false}
-                numColumns={5}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    onPress={() =>
-                      navigation.navigate("PropertiesViewed", { items })
-                    }
-                    style={{
-                      height: 200,
-                      width: "90%",
-                      alignSelf: "center",
-                      borderBottomWidth: index === 4 ? null : 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                    }}
-                  >
-                    <View style={{ width: "15%" }}>
-                      <View
-                        style={{
-                          height: 40,
-                          width: 40,
-                          borderRadius: 20,
-                          backgroundColor: Colors.gray,
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        {/* <Image
-            source={{ uri: item.prop_image }} // Replace `item.prop_image` with the actual property image URL from your API response
-            style={{
-              height: 100,
-              width: 100,
-              resizeMode: 'contain',
-            }}
-          /> */}
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        width: "80%",
-                        flexDirection: "column",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <View>
-                        <Text>{item.prop_title}</Text>
-                      </View>
-                      <Text
-                        style={{
-                          color: Colors.black,
-                          fontSize: 12,
-                        }}
-                      >
-                        {/* {item.details} */}
-                      </Text>
 
-                      {/* <View
-          style={{
-            justifyContent: "center",
-          }}
-        >
-          <Image
-            source={require("../../../assets/leftArrow.png")}
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: "contain",
-            }}
-          ></Image>
-        </View> */}
-                    </View>
-                  </TouchableOpacity>
-                )}
-                keyExtractor={(item, index) => index.toString()}
-              />
-            </View>
+            {property.length === 0 ? (
+              <p>No data found</p>
+            ) : (
+              <ul>
+                {property.map((title, index) => (
+                  <li key={index}>{title}</li>
+                ))}
+              </ul>
+            )}
 
             <View
               style={{
