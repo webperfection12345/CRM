@@ -41,7 +41,7 @@ const Leads = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View
           style={{
-            height: 60,
+            height: 10,
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",

@@ -22,6 +22,7 @@ import addContactReducer from "../modules/addContact";
 import addDispositionReducer from "../modules/addDisposition";
 import getDispositionReducer from "../modules/getDisposition";
 import getTodayDiposReducer from "../modules/getTodayDipos";
+import currentDispositionReducer from "../modules/currentDisposition";
 export const store = configureStore({
   reducer: {
     loginUser: loginUserReducer,
@@ -47,6 +48,7 @@ export const store = configureStore({
     addDispositon:addDispositionReducer,
     getDisposition:getDispositionReducer,
     getTodayDipos:getTodayDiposReducer,
+    currentDisposition:currentDispositionReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

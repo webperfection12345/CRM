@@ -24,6 +24,7 @@ import { getNoteData } from "../../modules/getNoteData";
 import { getDocument } from "../../modules/getDocument";
 import { getDisposition } from "../../modules/getDisposition";
 import { getTodayDipos } from "../../modules/getTodayDipos";
+import {getCurrentDisposition} from "../../modules/currentDisposition";
 
 const MyClientsDetails = (props) => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const MyClientsDetails = (props) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [data, setData] = useState();
   const [history, setHistory] = useState();
+  const [loading, setLoading] = useState(true);
   const [note, setNote] = useState([]);
   const [task, setTask] = useState([]);
   const [leadType, setLeadType] = useState("");
@@ -43,6 +45,8 @@ const MyClientsDetails = (props) => {
   const [showAll, setShowAll] = useState(false);
   const [todayDipo, setTodayDipo] = useState([]);
   const [futureDipo, setFutureDipo] = useState([]);
+  const [currentDipo, setCurrentDisposition] = useState([]);
+
   const id = items.item.id;
 
   useEffect(() => {
@@ -52,25 +56,11 @@ const MyClientsDetails = (props) => {
     disPosition();
     MyClientsDetails();
     allActivityHistory();
-    MyTaskData();
     MyNoteData();
-
+    currentDisposition();
     TodayDisPosition();
   }, [isFocused]);
 
-  const MyTaskData = () => {
-    dispatch(getActivityData(id)).then((response) => {
-      const taskData = response.payload.data;
-      const initialTasks = taskData; // Get the first 5 tasks
-      setTask(initialTasks);
-    });
-  };
-  const loadLessItems = () => {
-    setShowAll(false);
-  };
-  const loadMoreItems = () => {
-    setShowAll(true);
-  };
 
   const renderdfItem = ({ item }) => {
     return (
@@ -162,8 +152,14 @@ const MyClientsDetails = (props) => {
   const TodayDisPosition = () => {
     dispatch(getTodayDipos(id)).then((response) => {
       const data = response.payload.data;
-      console.log(data, "dsata");
       setTodayDipo(data);
+    });
+  };
+  const currentDisposition = () => {
+    dispatch(getCurrentDisposition(id)).then((response) => {
+      const data = response.payload.data;
+      console.log(data, "dsata");
+      setCurrentDisposition(data);
     });
   };
   const allActivityHistory = () => {
@@ -178,15 +174,7 @@ const MyClientsDetails = (props) => {
       setNote(noteData);
     });
   };
-  const MyDocsData = () => {
-    dispatch(getDocument()).then((response) => {
-      console.log(response, "note");
-    });
-  };
 
-  const fogotPassword = () => {
-    navigation.navigate("ForgotPassword");
-  };
   const panResponder = useRef(
     PanResponder.create({
       onMoveShouldSetPanResponder: (_, gestureState) => {
@@ -1056,16 +1044,7 @@ const MyClientsDetails = (props) => {
               >
                 Properties Viewed
               </Text>
-              {/* <TouchableOpacity style={{justifyContent: 'center'}}>
-                <Text
-                  style={{
-                    color: Colors.PrimaryColor,
-                    fontSize: 14,
-                    fontWeight: 'bold',
-                  }}>
-                  See All
-                </Text>
-              </TouchableOpacity> */}
+              
             </View>
             <View>
               <FlatList
@@ -1203,180 +1182,7 @@ const MyClientsDetails = (props) => {
               borderColor: Colors.gray,
             }}
           >
-            {/* <View
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: "bold",
-                  marginTop: 20,
-                  marginLeft: 15,
-                }}
-              >
-                Activities
-              </Text>
-            </View> */}
-            {/* <View
-              style={{
-                marginTop: 20,
-              }}
-            >
-              <FlatList
-                data={data}
-                scrollEnabled={false}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate("EditActivity")}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      marginTop: 8,
-                      borderRadius: 5,
-                      alignSelf: "center",
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      backgroundColor:
-                        index % 2 == 0 ? "#f9fafa" : Colors.white,
-                    }}
-                  >
-                    <View style={{ width: "15%" }}>
-                      <View
-                        style={{
-                          height: 40,
-                          width: 40,
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.PrimaryColor,
-                            fontSize: 16,
-                          }}
-                        >
-                          🗓️
-                        </Text>
-                      </View>
-                    </View>
-                    <View
-                      style={{
-                        width: "80%",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <View
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {item.name}
-                        </Text>
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 12,
-                          }}
-                        >
-                          {item.details}
-                        </Text>
-                      </View> */}
-            {/* <View
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/leftArrow.png")}
-                          style={{
-                            height: 15,
-                            width: 15,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </View> */}
-            {/* </View> */}
-            {/* </TouchableOpacity>
-                )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
-              />
-            </View> */}
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignContent: "center",
-                alignItems: "center",
-                width: "90%",
-                alignSelf: "center",
-                marginTop: 20,
-              }}
-            >
-              <Text
-                style={{
-                  color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: "bold",
-                }}
-              >
-                Activities
-              </Text>
-              {/* <TouchableOpacity
-                onPress={toggleModal}
-                style={{
-                  justifyContent: "center",
-                  backgroundColor: Colors.PrimaryColor,
-                  height: 40,
-                  width: 40,
-                  borderRadius: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  style={{ height: 20, width: 20, resizeMode: "contain" }}
-                  source={require("../../../assets/plus.png")}
-                ></Image>
-              </TouchableOpacity> */}
-            </View>
-            <View>
-              {/* Other components */}
-              <ScrollView>
-                <FlatList
-                  data={showAll ? task : task.slice(0, 5)}
-                  renderItem={renderdfItem}
-                  keyExtractor={(item) => item.id}
-                />
-              </ScrollView>
-              <View style={{ alignItems: "center", marginTop: 10 }}>
-                {!showAll && task.length > 5 && (
-                  <TouchableOpacity onPress={loadMoreItems}>
-                    <Text style={{ color: Colors.PrimaryColor }}>
-                      Show More
-                    </Text>
-                  </TouchableOpacity>
-                )}
-                {showAll && (
-                  <TouchableOpacity onPress={loadLessItems}>
-                    <Text style={{ color: Colors.PrimaryColor }}>
-                      Show Less
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              </View>
-            </View>
+        
             <View
               style={{
                 flexDirection: "row",

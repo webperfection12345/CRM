@@ -90,7 +90,7 @@ export default function Dashboard() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       <StatusBar />
- <Header label={"Agent Dashboard"} />
+      <Header label={"Agent Dashboard"} />
       {activity ? (
         <ScrollView
           style={{
@@ -590,7 +590,6 @@ export default function Dashboard() {
                         borderRadius: 20,
                         borderWidth: 1,
                         borderColor: "#576ebd",
-                        
                       }}
                     ></Image>
                     <Text
@@ -624,15 +623,15 @@ export default function Dashboard() {
                         {item.contact_name}
                       </Text>
                       <Text
-                      style={{
-                        color: Colors.black,
-                        fontSize: 14,
-                        marginTop: 5,
-                        marginLeft: 0,
-                      }}
-                    >
-                      {item.contact_email}{" "}
-                    </Text>
+                        style={{
+                          color: Colors.black,
+                          fontSize: 14,
+                          marginTop: 5,
+                          marginLeft: 0,
+                        }}
+                      >
+                        {item.contact_email}{" "}
+                      </Text>
                       <Text
                         style={{
                           color: Colors.black,
@@ -641,7 +640,6 @@ export default function Dashboard() {
                       >
                         {item.details}
                       </Text>
-                      
                     </View>
                     {/* <View
                       style={{
@@ -849,7 +847,7 @@ export default function Dashboard() {
                 // labelNoteStyle={}
               />
             </View> */}
-           {/* <View
+            {/* <View
               style={{
                 //height: 100,
                 //width: "96%",
