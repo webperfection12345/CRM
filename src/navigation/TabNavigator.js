@@ -19,6 +19,7 @@ import Transactions from "../container/Transactions/Transactions";
 import DisPosition from "../container/DisPosition/DisPosition";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
+//import Transaction from "../container/Transaction/Transaction";
 
 const Tab = createBottomTabNavigator();
 
@@ -74,7 +75,7 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="Transaction"
+        name="Transactions"
         component={Transactions}
         options={{
           tabBarLabel: (
