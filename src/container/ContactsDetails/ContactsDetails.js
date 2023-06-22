@@ -116,7 +116,9 @@ const ContactsDetails = (props) => {
             ></Image>
             <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>
+          <Text
+            style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
+          >
             ContactsDetails
           </Text>
           <TouchableOpacity
@@ -206,6 +208,8 @@ const ContactsDetails = (props) => {
                   style={{
                     color: Colors.black,
                     fontSize: 16,
+                    fontWeight: "bold",
+                    marginBottom: 2,
                   }}
                 >
                   Email
@@ -213,8 +217,7 @@ const ContactsDetails = (props) => {
                 <Text
                   style={{
                     color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: "bold",
+                    fontSize: 15,
                   }}
                 >
                   {items.contact_email}
@@ -272,8 +275,7 @@ const ContactsDetails = (props) => {
                 <Text
                   style={{
                     color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: "bold",
+                    fontSize: 15,
                   }}
                 >
                   {items.contact_number}
@@ -327,8 +329,7 @@ const ContactsDetails = (props) => {
               <Text
                 style={{
                   color: Colors.black,
-                  fontSize: 18,
-                  fontWeight: "bold",
+                  fontSize: 15,
                 }}
               >
                 {leadType}

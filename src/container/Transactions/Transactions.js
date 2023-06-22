@@ -124,17 +124,24 @@ const Transactions = ({ navigation }) => {
 
           <View
             style={{
-              backgroundColor: Colors.buttonColor,
-              flexDirection: "row",
-              justifyContent: "flex-start",
+              height: 80,
+              width: "100%",
+              justifyContent: "center",
+              alignContent: "center",
               alignItems: "center",
-              margin: 10,
-              borderRadius: 10,
-              width: "92%",
-              height: 50,
+              backgroundColor: Colors.PrimaryColor,
             }}
           >
-            <TouchableOpacity>
+            <View
+              style={{
+                backgroundColor: Colors.buttonColor,
+                borderRadius: 5,
+                width: "92%",
+                height: 50,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
               <Image
                 style={{
                   marginLeft: 10,
@@ -145,22 +152,22 @@ const Transactions = ({ navigation }) => {
                 }}
                 source={require("../../../assets/search.png")}
               />
-            </TouchableOpacity>
 
-            <TextInput
-              allowFontScaling={false}
-              placeholder="Search"
-              placeholderTextColor={Colors.white}
-              onChangeText={searchFilter}
-              style={{
-                color: Colors.white,
-                fontSize: 15,
-                marginLeft: 10,
-                marginHorizontal: 10,
-                height: "100%",
-                width: "100%",
-              }}
-            />
+              <TextInput
+                allowFontScaling={false}
+                placeholder="Search"
+                placeholderTextColor={Colors.white}
+                onChangeText={searchFilter}
+                style={{
+                  color: Colors.white,
+                  fontSize: 15,
+                  marginLeft: 10,
+                  marginHorizontal: 10,
+                  height: "100%",
+                  width: "100%",
+                }}
+              />
+            </View>
           </View>
         </View>
 

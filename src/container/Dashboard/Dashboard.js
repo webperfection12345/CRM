@@ -556,7 +556,8 @@ export default function Dashboard() {
                 fontSize: 20,
                 color: Colors.black,
                 fontWeight: "bold",
-                marginTop: 20,
+                marginTop: 30,
+                marginBottom: 20,
               }}
             >
               Most Recent
@@ -581,13 +582,13 @@ export default function Dashboard() {
                     flexDirection: "row",
                   }}
                 >
-                  <View style={{ width: "13%" }}>
+                  <View style={{ width: "15%" }}>
                     <Image
                       source={{ uri: item.contact_image }}
                       style={{
-                        height: 35,
-                        width: 35,
-                        borderRadius: 20,
+                        height: 45,
+                        width: 45,
+                        borderRadius: 100,
                         borderWidth: 1,
                         borderColor: "#576ebd",
                       }}
@@ -603,7 +604,7 @@ export default function Dashboard() {
                   </View>
                   <View
                     style={{
-                      width: "80%",
+                      width: "90%",
                       flexDirection: "row",
                       justifyContent: "space-between",
                     }}
