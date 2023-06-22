@@ -152,7 +152,6 @@ const Contacts = () => {
       await FileSystem.deleteAsync(htmlFileUri, { idempotent: true });
       await FileSystem.deleteAsync(pdfFileUri, { idempotent: true });
     } catch (error) {
-      console.log("Export PDF error:", error);
       Alert.alert(
         "Export PDF Error",
         "An error occurred while exporting contact data as PDF."
@@ -173,7 +172,6 @@ const Contacts = () => {
         console.log("Import PDF", `Selected PDF: ${name}`);
         Alert.alert("Import PDF", `Selected PDF: ${name}`);
       } else {
-        console.log("Document picker cancelled");
       }
     } catch (error) {
       console.log("Document picker error:", error);

@@ -27,11 +27,9 @@ const PropertiesDetails = (props) => {
   useEffect(() => {
     getPropertiesDetailsApiCall();
   }, []);
-  console.log("details", id);
   const [data, setdata] = useState([]);
   const getPropertiesDetailsApiCall = () => {
     dispatch(getPropertiesDetails(id)).then((response) => {
-      console.log("data hai ki nhi", response);
       setdata(response.payload);
       setActivity(true);
     });
@@ -52,7 +50,6 @@ const PropertiesDetails = (props) => {
     let message = "Hello from my app!";
     Linking.openURL(`sms:${phoneNumber}`);
   };
-  console.log(data);
   const goToMap = () => {
     const latitude = data.property_latitude;
     const longitude = data.property_longitude;

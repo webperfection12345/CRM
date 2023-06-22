@@ -43,7 +43,6 @@ const Contact = () => {
     getAllContacts();
     if (isFocused) {
       // Perform the refresh logic here
-      console.log("Page refreshed");
     }
   }, [isFocused]);
 

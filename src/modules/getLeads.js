@@ -9,7 +9,6 @@ export const getLeads = createAsyncThunk("getLeads", async () => {
     " https://surf.topsearchrealty.com/wp-json/leads/leadsall?agentid=" + id;
   return await getAPI(urlDynamic)
     .then(async (response) => {
-      console.log(response, "leadsresponse");
       const { data } = response;
       return data;
     })

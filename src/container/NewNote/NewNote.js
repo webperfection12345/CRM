@@ -42,7 +42,6 @@ const NewNote = (props) => {
   };
   const addActivity = () => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    console.log(currentDateTime, "date1");
     setDate(currentDateTime);
 
     const payload = {
@@ -52,7 +51,6 @@ const NewNote = (props) => {
       note_created_date: currentDateTime,
     };
     dispatch(activityAddnote(payload)).then((response) => {
-      console.log(response, "response");
       navigation.goBack();
     });
   };

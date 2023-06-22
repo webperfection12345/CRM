@@ -10,6 +10,7 @@ import {
   StyleSheet,
   FlatList,
   Modal,
+  Linking
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -96,9 +97,7 @@ const DisPosition = (props) => {
   };
   const handleaddDisposition = () => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    console.log(currentDateTime, "date1");
     setDate(currentDateTime);
-    console.log(data);
     const payload = {
       contact_id: data.id,
       contact_lead_id: data.contact_lead_id,
@@ -114,6 +113,22 @@ const DisPosition = (props) => {
     dispatch(addDisposition(payload)).then((response) => {
       console.log(response);
     });
+  };
+  const makePhoneCall = (item) => {
+    let phoneNumber = data.contact_number;
+    Linking.openURL(`tel:${phoneNumber}`);
+  };
+  const sendEmail = (item) => {
+    let recipient = item;
+    let subject = "Subject of email";
+    let body = "Body of email";
+    Linking.openURL(`mailto:${recipient}?subject=${subject}&body=${body}`);
+  };
+
+  const sendSMS = (item) => {
+    let phoneNumber = item;
+    let message = "Hello from my app!";
+    Linking.openURL(`sms:${phoneNumber}`);
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -217,6 +232,7 @@ const DisPosition = (props) => {
               marginRight: 12,
             }}
           />
+          
           <View>
             <Text
               style={{
@@ -228,23 +244,65 @@ const DisPosition = (props) => {
               {data.contact_name}
             </Text>
 
-            <Text
-              style={{
-                fontSize: 14,
-                color: Colors.black,
-                marginBottom: 5,
-              }}
-            >
-              {data.contact_number}{" "}
-            </Text>
-            <Text
-              style={{
-                fontSize: 14,
-                color: Colors.PrimaryColor,
-              }}
-            >
-              {data.contact_email}{" "}
-            </Text>
+            <View
+                      style={{
+                        height: 80,
+                        alignSelf: "flex-end",
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <TouchableOpacity
+                        onPress={() => sendEmail(item.contact_email)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/mail.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => sendSMS(item.contact_number)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/chat.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => makePhoneCall(item.contact_number)}
+                        style={{
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Image
+                          source={require("../../../assets/phone.png")}
+                          style={{
+                            height: 40,
+                            width: 40,
+                            marginLeft: "5%",
+                            resizeMode: "contain",
+                          }}
+                        ></Image>
+                      </TouchableOpacity>
+                    </View>
+
           </View>
         </View>
 

@@ -47,9 +47,10 @@ const MyClientsDetails = (props) => {
   const [todayDipo, setTodayDipo] = useState("");
   const [futureDipo, setFutureDipo] = useState([]);
   const [currentDipo, setCurrentDisposition] = useState([]);
+  const [selectedActivityType, setSelectedActivityType] = useState(null);
+  const [expandedActivityTypes, setExpandedActivityTypes] = useState([]);
 
   const id = items.item.id;
-
   useEffect(() => {
     if (isFocused) {
       console.log("Page refreshed");
@@ -728,7 +729,36 @@ const MyClientsDetails = (props) => {
                     justifyContent: "space-between",
                   }}
                 >
-                  <View
+                 
+                  <FlatList
+                    data={futureDipo}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) => (
+                      <React.Fragment>
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (selectedActivityType === item.activity_type) {
+                              setSelectedActivityType(null);
+                            } else {
+                              setSelectedActivityType(item.activity_type);
+                            }
+                          }}
+                          style={{
+                            paddingRight: 20,
+                            alignSelf: "flex-start",
+                            alignItems: "flex-start",
+                            alignContent: "flex-start",
+                            flexDirection: "row",
+                          }}
+                        >
+                          <Text style={styles.subheadingmaintype}>
+                            {item.activity_type}
+                          </Text>
+                          {/* Other activity type data */}
+                        </TouchableOpacity>
+                        {selectedActivityType === item.activity_type && (
+                          <View>
+                           <View
                     style={{
                       paddingRight: 20,
                       alignSelf: "flex-start",
@@ -737,51 +767,35 @@ const MyClientsDetails = (props) => {
                       flexDirection: "row",
                     }}
                   >
-                    <Text style={styles.headingmaintype}>Activity Type</Text>
+                 
                     <Text style={styles.headingmaintype}>Activity Notes</Text>
-                    <Text style={styles.headingmaintype}>
-                      Next Disposition Date
-                    </Text>
-                    <Text style={styles.headingmaintype}>
-                      Activity Next Disposition
-                    </Text>
-                    <Text style={styles.headingmaintype}>
-                      Next Disposition Notes
-                    </Text>
-                  </View>
-                  <FlatList
-                    data={futureDipo}
-                    keyExtractor={(item, index) => index.toString()}
-                    renderItem={({ item, index }) => (
-                      <View
-                        style={{
-                          paddingRight: 20,
-                          alignSelf: "flex-start",
-                          alignItems: "flex-start",
-                          alignContent: "flex-start",
-                          flexDirection: "row",
-                        }}
-                      >
-                        <Text style={styles.subheadingmaintype}>
-                          {item.activity_type}
-                        </Text>
-
-                        <Text style={styles.subheadingmaintype}>
+                    <Text style={styles.subheadingmaintype}>
                           {item.activity_notes}
                         </Text>
 
-                        <Text style={styles.subheadingmaintype}>
+                    <Text style={styles.headingmaintype}>
+                      Next Disposition Date
+                    </Text>
+                    <Text style={styles.subheadingmaintype}>
                           {item.next_disposition_date}
                         </Text>
-
-                        <Text style={styles.subheadingmaintype}>
+                    <Text style={styles.headingmaintype}>
+                      Activity Next Disposition
+                    </Text>
+                    <Text style={styles.subheadingmaintype}>
                           {item.activity_next_disposition}
                         </Text>
 
-                        <Text style={styles.subheadingmaintype}>
+                    <Text style={styles.headingmaintype}>
+                      Next Disposition Notes
+                    </Text>
+                    <Text style={styles.subheadingmaintype}>
                           {item.next_disposition_notes}
                         </Text>
-                      </View>
+                  </View>
+                          </View>
+                        )}
+                      </React.Fragment>
                     )}
                   />
                 </View>

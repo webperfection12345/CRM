@@ -91,7 +91,7 @@ export default function Login({ navigation }) {
       password: password,
     };
     dispatch(loginUser(data)).then((response) => {
-      console.log("res", response);
+    
       if (response.payload.status) {
         if (response.payload.status) {
           navigation.navigate("EnterPin", { email: email });

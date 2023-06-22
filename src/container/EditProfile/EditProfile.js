@@ -68,7 +68,7 @@ const EditProfile = () => {
     // });
     data.append("last_name", lastName);
     data.append("phone", phone);
-    console.log("form data", data);
+   
     api
       .post(
         "https://surf.topsearchrealty.com//wp-json/wp/v2/users/18",
@@ -76,8 +76,8 @@ const EditProfile = () => {
         {}
       )
       .then((res) => {
-        console.log("success data", res);
-        console.log("success response", res.data.status);
+     
+    
         if (res.data.status == "success") {
           //  saveImage(res.data.user.user_photo);
           navigation.navigate("Profile");

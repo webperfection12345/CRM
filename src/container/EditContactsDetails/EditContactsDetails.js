@@ -37,9 +37,8 @@ const EditContactsDetails = (props) => {
     setPassword(item.password);
   }, [item]);
   useEffect(() => {
-    if (isFocused) {
-      // Perform the refresh logic here
-      console.log("Page refreshed");
+    if (isFocused) {  
+  
     }
   }, [isFocused]);
   const handleDelete = () => {

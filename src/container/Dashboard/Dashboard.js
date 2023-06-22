@@ -41,7 +41,6 @@ export default function Dashboard() {
     getMeter();
     if (isFocused) {
       // Perform the refresh logic here
-      console.log("Page refreshed");
     }
   }, [isFocused]);
   const getDashboardDataApiCall = () => {

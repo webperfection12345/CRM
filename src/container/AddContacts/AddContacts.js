@@ -69,7 +69,6 @@ const AddContacts = () => {
   const [selectedContactType, setSelectedContactType] = useState("");
 
   const handleContactTypeChange = (itemValue) => {
-    console.log(itemValue, "item");
     setSelectedContactType(itemValue);
   };
   const handleConfirm = (date) => {

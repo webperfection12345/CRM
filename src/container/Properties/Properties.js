@@ -66,7 +66,6 @@ const Properties = () => {
   const getAllHistory = () => {
     dispatch(getSearchhistory()).then((response) => {
       setHistoryData(response.payload);
-      console.log("historyData", historyData);
       lo;
     });
   };

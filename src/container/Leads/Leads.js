@@ -20,22 +20,36 @@ const Leads = () => {
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
   const navigation = useNavigation();
+  const [searchText, setSearchText] = useState("");
+  const [filteredData, setFilteredData] = useState();
+  const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
     getAllContacts();
     if (isFocused) {
       // Perform the refresh logic here
-      console.log("Page refreshed");
+     
     }
   }, [isFocused]);
   const getAllContacts = () => {
     dispatch(getLeads()).then((response) => {
       const contactsData = response.payload.data;
+      console.log(contactsData);
       setData(Object.values(contactsData));
       setLoading(false);
     });
   };
-
+  const searchFilter = (text) => {
+    setSearchText(text);
+    const filteredItems = data.filter((item) =>
+    item.property_key.includes(text)
+    );
+    setFilteredData(filteredItems);
+    setIsSearching(true);
+  };
+  const handleUsernameClick =(item) =>{
+    navigation.navigate("MyClientsDetails", { item: item })
+     }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -72,7 +86,7 @@ const Leads = () => {
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
           >
-            Leads
+            Opportunities
           </Text>
           <Text></Text>
         </View>
@@ -105,20 +119,21 @@ const Leads = () => {
                 tintColor: Colors.white,
               }}
             />
-            <TextInput
+             <TextInput
               allowFontScaling={false}
               placeholder="Search"
               placeholderTextColor={Colors.white}
+              onChangeText={searchFilter}
               style={{
                 color: Colors.white,
                 fontSize: 15,
                 marginLeft: 10,
               }}
-            />
+            ></TextInput>
           </View>
         </View>
         <FlatList
-          data={data}
+          data={isSearching ? filteredData : data}
           ListFooterComponent={<View style={{ height: 50 }}></View>}
           renderItem={({ item }) => (
             <View
@@ -202,7 +217,34 @@ const Leads = () => {
                   marginBottom: 20,
                 }}
               >
-                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Message</Text>
+               
+    <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Username</Text>
+    <TouchableOpacity onPress={() => handleUsernameClick(item)}>
+    <Text
+                  style={{
+                    color: Colors.black,
+                    fontSize: 14,
+                    textAlign: "right",
+                    width: "60%",
+                  }}
+                >
+                  {item.username}
+                </Text>
+  </TouchableOpacity>
+  
+              </View>
+              <View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                }}
+              >
+                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Mobile</Text>
                 <Text
                   style={{
                     color: Colors.black,
@@ -211,9 +253,10 @@ const Leads = () => {
                     width: "60%",
                   }}
                 >
-                  {item.content.replace(/<br>/g, "")}
+                  {item.Phone}
                 </Text>
               </View>
+              
               {/* Render the Property Key */}
               <View
                 style={{
@@ -255,6 +298,11 @@ const Leads = () => {
               </View>
             </View>
           )}
+          ListEmptyComponent={
+            <View style={{ alignItems: "center", marginTop: 20 }}>
+              <Text>No data found</Text>
+            </View>
+          }
         />
       </ScrollView>
     </SafeAreaView>
