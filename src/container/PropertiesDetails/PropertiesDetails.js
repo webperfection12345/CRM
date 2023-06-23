@@ -31,6 +31,7 @@ const PropertiesDetails = (props) => {
   const getPropertiesDetailsApiCall = () => {
     dispatch(getPropertiesDetails(id)).then((response) => {
       setdata(response.payload);
+      console.log(response.payload);
       setActivity(true);
     });
   };
@@ -262,7 +263,10 @@ const PropertiesDetails = (props) => {
                 Last Price Change
               </Text>
               <Text style={{ fontSize: 16, color: Colors.black }}>
-                {data.modified}
+              {new Date(data.modified).toLocaleString("en-US", {
+      dateStyle: "short",
+      timeStyle: "short",
+    })}
               </Text>
             </View>
             <View

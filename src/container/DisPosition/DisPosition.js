@@ -125,6 +125,7 @@ const DisPosition = (props) => {
       activity_disposition: selectedThirdOption,
     };
     dispatch(addDisposition(payload)).then((response) => {
+      navigation.goBack();
       console.log(response);
     });
   };

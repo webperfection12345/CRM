@@ -7,44 +7,96 @@ import {
   ScrollView,
   SafeAreaView,
   Switch,
+  StyleSheet,
 } from "react-native";
 
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import Images from "../../utils/Images";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 // import ImagePicker from "react-native-image-crop-picker";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import updateActivity from "../../modules/editAcitivity";
 
-const EditActivity = () => {
+const EditActivity = (props) => {
   const navigation = useNavigation();
-  const [id, setID] = useState("");
-  const [login, setLogin] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [phone, setPhone] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [ActivityType, setActivityType] = useState("");
+  const [ActivityDispositionNotes, setActivityDispositionNotes] = useState("");
+  const [ActivityNextDisposition, setActivityNextDisposition] = useState("");
+  const [ActivityNextDispositionNote, setActivityNextDispositionNotes] =
+    useState("");
+  const [ActivityNextDispositionDate, setActivityNextDispositionDate] =
+    useState("");
+  const [ActivityDisposition, setActivityDisposition] = useState("");
+  const [taskId, setTaskId] = useState("");
   const [date, setDate] = useState("");
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");
   };
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
-  const _pickImage = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 400,
-      cropping: true,
-      includeBase64: true,
-      freeStyleCropEnabled: true,
-    }).then((response) => {
-      let source = { uri: response.path };
-      setAvatarSource(source);
-      seturiResponse(response.path);
+  console.log(props.route.params);
+  const item = props.route.params.item;
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    setActivityType(item.activity_type);
+    setActivityDispositionNotes(item.activity_notes);
+    setActivityNextDisposition(item.activity_next_disposition);
+    setActivityNextDispositionNotes(item.next_disposition_notes);
+    setActivityNextDispositionDate(item.next_disposition_date);
+    setActivityDisposition(item.activity_disposition);
+    setTaskId(item.task_id);
+  }, [item]);
+  useEffect(() => {
+    if (isFocused) {
+    }
+  }, [isFocused]);
+  console.log(ActivityType, "tyope");
+  
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+  const formatDate = (date) => {
+    return date.toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata", // Set the desired timezone
+      hour12: true,
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "numeric",
+      minute: "numeric",
     });
+  };
+  const handleConfirm = (date) => {
+    setSelectedDate(date);
+    hideDatePicker();
+  };
+  const onHandleClick = () => {
+    const payload = {
+      task_id: taskId,
+      activity_type: ActivityType,
+      activity_disposition: ActivityDisposition,
+      activity_disposition_notes: ActivityDispositionNotes,
+      activity_next_disposition: ActivityNextDisposition,
+      next_disposition_notes: ActivityNextDispositionNote,
+      next_disposition_date: ActivityNextDispositionDate,
+    };
+
+    updateActivity(payload)
+      .then((response) => {
+        console.log(response);
+        navigation.goBack()
+      })
+      .catch((error) => {
+        console.log('Error updating activity:', error);
+      });
   };
   return (
     <SafeAreaView style={{ backgroundColor: Colors.PrimaryColor, flex: 1 }}>
@@ -85,32 +137,13 @@ const EditActivity = () => {
               alignItems: "center",
               marginRight: 10,
             }}
+            onPress={onHandleClick}
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Submit</Text>
           </TouchableOpacity>
         </View>
         <ScrollView>
           <View style={{ width: "95%", alignSelf: "center" }}>
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={{
-                height: 35,
-                width: "40%",
-                borderRadius: 5,
-                borderColor: Colors.gray,
-                borderWidth: 0.5,
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                alignSelf: "flex-end",
-                marginTop: 10,
-                backgroundColor: Colors.PrimaryColor,
-              }}
-            >
-              <Text style={{ fontSize: 14, color: Colors.white }}>
-                🗑️ Delete
-              </Text>
-            </TouchableOpacity>
             <View
               style={{
                 flexDirection: "row",
@@ -121,9 +154,6 @@ const EditActivity = () => {
               <Text style={{ fontSize: 15, color: Colors.black }}>
                 Activity Type
               </Text>
-              <Text style={{ fontSize: 12, color: Colors.black }}>
-                Required
-              </Text>
             </View>
             <View
               style={{
@@ -146,46 +176,10 @@ const EditActivity = () => {
                   fontSize: 14,
                   padding: 2,
                 }}
+                value={ActivityType}
                 autoCorrect={false}
                 returnKeyType="done"
-                onChangeText={(text) => setID(text)}
-              />
-            </View>
-          </View>
-          <View style={{ width: "95%", alignSelf: "center" }}>
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                marginTop: 15,
-              }}
-            >
-              <Text style={{ fontSize: 15, color: Colors.black }}>Subject</Text>
-            </View>
-            <View
-              style={{
-                width: "100%",
-                height: 70,
-                marginTop: 10,
-                justifyContent: "center",
-              }}
-            >
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: "100%",
-                  borderRadius: 8,
-                  height: "100%",
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                autoCorrect={false}
-                returnKeyType="done"
-                onChangeText={(text) => setLogin(text)}
+                onChangeText={(text) => setActivityType(text)}
               />
             </View>
           </View>
@@ -198,85 +192,13 @@ const EditActivity = () => {
               }}
             >
               <Text style={{ fontSize: 15, color: Colors.black }}>
-                Due Date
-              </Text>
-              <Text style={{ fontSize: 12, color: Colors.black }}>
-                Required
+                Activity Disposition
               </Text>
             </View>
-            <TouchableOpacity
-              style={{
-                width: "100%",
-                height: 50,
-                marginTop: 10,
-                justifyContent: "center",
-              }}
-            >
-              {/* <Text
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                keyboardType="email-address"
-                autoCorrect={false}
-                returnKeyType="done"
-                onChangeText={text => setEmail(text)}
-              /> */}
-              {/* <DatePicker
-                style={{
-                  width: "100%",
-                  borderRadius: 8,
-                  height: "100%",
-                  color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                date={date}
-                mode="date"
-                placeholder="select date"
-                format="DD/mm/YYYY"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: "absolute",
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0,
-                  },
-                  dateInput: {
-                    borderColor: Colors.white,
-                    color: Colors.white,
-                    position: "absolute",
-                    left: 0,
-                    top: 4,
-                    marginLeft: 50,
-                  },
-                }}
-                onDateChange={(date) => {
-                  setDate(date);
-                }}
-              /> */}
-            </TouchableOpacity>
-          </View>
-          <View style={{ width: "95%", alignSelf: "center" }}>
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Result
-            </Text>
             <View
               style={{
                 width: "100%",
-                height: 100,
+                height: 50,
                 marginTop: 10,
                 justifyContent: "center",
               }}
@@ -294,48 +216,191 @@ const EditActivity = () => {
                   fontSize: 14,
                   padding: 2,
                 }}
+                value={ActivityDisposition}
                 autoCorrect={false}
                 returnKeyType="done"
-                onChangeText={(text) => setNickname(text)}
+                onChangeText={(text) => setActivityDisposition(text)}
               />
             </View>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              width: "95%",
-              marginTop: 20,
-              alignSelf: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <Text
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <View
               style={{
-                fontSize: 15,
-                color: Colors.black,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 15,
               }}
             >
-              Completed?
-            </Text>
-            <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
-            />
+              <Text style={{ fontSize: 15, color: Colors.black }}>
+                Activity Notes
+              </Text>
+            </View>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                allowFontScaling={false}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.gray,
+                  borderWidth: 1,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+                value={ActivityDispositionNotes}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setActivityDispositionNotes(text)}
+              />
+            </View>
           </View>
-          <View
-            style={{
-              width: "95%",
-              alignSelf: "center",
-              borderWidth: 1,
-              borderColor: Colors.gray,
-              marginTop: 30,
-              marginBottom: 20,
-            }}
-          ></View>
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 15,
+              }}
+            >
+              <Text style={{ fontSize: 15, color: Colors.black }}>
+                Activity Next Disposition
+              </Text>
+            </View>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                allowFontScaling={false}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.gray,
+                  borderWidth: 1,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+                value={ActivityNextDisposition}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setActivityNextDisposition(text)}
+              />
+            </View>
+          </View>
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 15,
+              }}
+            >
+              <Text style={{ fontSize: 15, color: Colors.black }}>
+                Next Disposition Date
+              </Text>
+            </View>
+            <View style={styles.inputContainer}>
+              <View
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingVertical: 9,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                  marginTop: 12,
+                  paddingHorizontal: 15,
+                  height: 55,
+                }}
+              >
+                <TouchableOpacity
+                  onPress={showDatePicker}
+                  style={styles.datePickerButton}
+                >
+                  <Text style={styles.datePickerText}>
+                    {selectedDate ? formatDate(selectedDate) : "None"}{" "}
+                  </Text>
+                </TouchableOpacity>
 
+                <DateTimePickerModal
+                  isVisible={isDatePickerVisible}
+                  mode="datetime"
+                  onConfirm={handleConfirm}
+                  onCancel={hideDatePicker}
+                  style={{
+                    width: "100%",
+                    borderRadius: 8,
+                    height: "100%",
+                    paddingHorizontal: 15,
+                    color: Colors.black,
+                    borderColor: Colors.PrimaryColor,
+                    backgroundColor: Colors.gray,
+                    fontSize: 14,
+                    padding: 2,
+                  }}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={{ width: "95%", alignSelf: "center" }}>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                marginTop: 15,
+              }}
+            >
+              <Text style={{ fontSize: 15, color: Colors.black }}>
+                Next Disposition Notes
+              </Text>
+            </View>
+            <View
+              style={{
+                width: "100%",
+                height: 50,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                allowFontScaling={false}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.gray,
+                  borderWidth: 1,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+                value={ActivityNextDispositionNote}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setActivityNextDispositionNotes(text)}
+              />
+            </View>
+          </View>
           <View style={{ height: 50 }}></View>
         </ScrollView>
       </View>
@@ -344,3 +409,67 @@ const EditActivity = () => {
 };
 
 export default EditActivity;
+const styles = StyleSheet.create({
+  activitytype: {
+    paddingHorizontal: 12,
+    alignItems: "center",
+    justifyContent: "space-between",
+    flexDirection: "row",
+    marginTop: 15,
+  },
+  inputContainer: { paddingHorizontal: 12, marginTop: 15 },
+
+  label: {
+    fontSize: 16,
+    fontWeight: "bold",
+  },
+  dropdownButton: {
+    backgroundColor: Colors.PrimaryColor,
+    alignItems: "center",
+    justifyContent: "center",
+    height: 40,
+    width: 40,
+    borderRadius: 100,
+    alignSelf: "center",
+    flexDirection: "row",
+  },
+  plusIcon: {
+    height: 15,
+    width: 15,
+    alignSelf: "center",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+  },
+  modalContent: {
+    backgroundColor: "#FFFFFF",
+    borderRadius: 8,
+    padding: 20,
+    alignItems: "center",
+    width: 200,
+  },
+  optionButton: {
+    paddingVertical: 10,
+    width: "100%",
+    borderBottomWidth: 1,
+    borderBottomColor: "#EEEEEE",
+  },
+  optionText: {
+    fontSize: 16,
+    textAlign: "center",
+  },
+  selectedValue: {
+    marginTop: 8,
+    fontSize: 16,
+    color: Colors.PrimaryColor,
+    textAlign: "center",
+  },
+  selectedValue: {
+    marginLeft: 10,
+  },
+});
