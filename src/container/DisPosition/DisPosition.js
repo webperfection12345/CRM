@@ -177,7 +177,7 @@ const DisPosition = (props) => {
               }}
               source={require("../../../assets/back.png")}
             ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+            {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
           </TouchableOpacity>
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
