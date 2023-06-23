@@ -128,7 +128,9 @@ const Properties = () => {
               ></Image>
               <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
             </TouchableOpacity>
-            <Text style={{ fontSize: 15, color: Colors.white }}>
+            <Text
+              style={{ fontSize: 15, fontWeight: "bold", color: Colors.white }}
+            >
               Properties
             </Text>
             <TouchableOpacity
@@ -193,9 +195,8 @@ const Properties = () => {
                 onChangeText={searchFilter}
                 style={{
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: 15,
                   marginLeft: 10,
-                  fontWeight: "bold",
                 }}
               ></TextInput>
             </View>

@@ -10,7 +10,7 @@ import {
   StyleSheet,
   FlatList,
   Modal,
-  Linking
+  Linking,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -122,7 +122,7 @@ const DisPosition = (props) => {
       contact_email: data.contact_email,
       agent_email: agentEmail,
       activity_publish_date: date,
-      activity_disposition:selectedThirdOption
+      activity_disposition: selectedThirdOption,
     };
     dispatch(addDisposition(payload)).then((response) => {
       console.log(response);
@@ -154,7 +154,6 @@ const DisPosition = (props) => {
             flexDirection: "row",
             justifyContent: "space-between",
             alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
           }}
         >
           <TouchableOpacity
@@ -193,7 +192,6 @@ const DisPosition = (props) => {
             justifyContent: "center",
             alignContent: "center",
             alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
           }}
         >
           <View
@@ -227,218 +225,227 @@ const DisPosition = (props) => {
             />
           </View>
         </View>
-
         <View
           style={{
-            width: "100%",
-            marginTop: 12,
-            alignItems: "center",
-            flexDirection: "row",
-            paddingHorizontal: 12,
+            backgroundColor: Colors.white,
           }}
         >
-          <Image
-            source={{ uri: data.contact_image }}
-            style={{
-              height: 120,
-              width: 120,
-              borderRadius: 100,
-              marginRight: 12,
-            }}
-          />
-          
-          <View>
-            <Text
-              style={{
-                fontSize: 16,
-                fontWeight: "bold",
-                marginBottom: 5,
-              }}
-            >
-              {data.contact_name}
-            </Text>
-
-            <View
-                      style={{
-                        height: 80,
-                        alignSelf: "flex-end",
-                        alignItems: "center",
-                        alignContent: "center",
-                        flexDirection: "row",
-
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <TouchableOpacity
-                        onPress={() => sendEmail(item.contact_email)}
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/mail.png")}
-                          style={{
-                            height: 40,
-                            width: 40,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => sendSMS(item.contact_number)}
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/chat.png")}
-                          style={{
-                            height: 40,
-                            width: 40,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => makePhoneCall(item.contact_number)}
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/phone.png")}
-                          style={{
-                            height: 40,
-                            width: 40,
-                            marginLeft: "5%",
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </TouchableOpacity>
-                    </View>
-
-          </View>
-        </View>
-
-        <View
-          style={{
-            width: "100%",
-            marginTop: 12,
-            alignItems: "center",
-            flexDirection: "row",
-            paddingHorizontal: 12,
-          }}
-        >
-          <Text
-            style={{
-              backgroundColor: Colors.PrimaryColor,
-              paddingHorizontal: 12,
-              paddingVertical: 6,
-              color: Colors.white,
-              borderRadius: 6,
-              fontWeight: "bold",
-              fontSize: 12,
-            }}
-          >
-            Current Deposition : <Text>4</Text>
-          </Text>
-        </View>
-        <View style={styles.activitytype}>
-          <Text style={styles.label}>Activity DisPosition
-          <Text style={styles.selectedValue}>{selectedThirdOption}</Text>  </Text>
           <View
             style={{
-              backgroundColor: Colors.PrimaryColor,
+              width: "100%",
+              marginTop: 12,
               alignItems: "center",
-              justifyContent: "center",
-              height: 40,
-              width: 40,
-              borderRadius: 100,
-              alignSelf: "center",
               flexDirection: "row",
+              paddingHorizontal: 12,
             }}
           >
-            <TouchableOpacity onPress={openThirdModal}>
-              <Image
-                source={require("../../../assets/plus.png")}
+            <Image
+              source={{ uri: data.contact_image }}
+              style={{
+                height: 120,
+                width: 120,
+                borderRadius: 100,
+                marginRight: 12,
+              }}
+            />
+
+            <View>
+              <Text
                 style={{
-                  height: 15,
-                  width: 15,
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
+                  fontSize: 18,
+                  fontWeight: "bold",
+                  position: "relative",
+                  left: 12,
                 }}
-              />
-            </TouchableOpacity>
-            <Modal
-            animationType="fade"
-            transparent={true}
-            visible={isThirdModalVisible}
-            onRequestClose={closeThirdModal}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
+              >
+                {data.contact_name}
+              </Text>
+
+              <View
+                style={{
+                  height: 80,
+                  alignSelf: "flex-end",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "flex-start",
+                }}
+              >
                 <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleThirdOptionSelect("ContactSigned")}
+                  onPress={() => sendEmail(item.contact_email)}
+                  style={{
+                    justifyContent: "center",
+                  }}
                 >
-                  <Text style={styles.optionText}>Contact Signed</Text>
+                  <Image
+                    source={require("../../../assets/mail.png")}
+                    style={{
+                      height: 40,
+                      width: 40,
+                      resizeMode: "contain",
+                      marginRight: 12,
+                    }}
+                  ></Image>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleThirdOptionSelect("Pending")}
+                  onPress={() => sendSMS(item.contact_number)}
+                  style={{
+                    justifyContent: "center",
+                  }}
                 >
-                  <Text style={styles.optionText}>Pending</Text>
+                  <Image
+                    source={require("../../../assets/chat.png")}
+                    style={{
+                      height: 40,
+                      width: 40,
+                      resizeMode: "contain",
+                      marginRight: 12,
+                    }}
+                  ></Image>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleThirdOptionSelect("prepare")}
+                  onPress={() => makePhoneCall(item.contact_number)}
+                  style={{
+                    justifyContent: "center",
+                  }}
                 >
-                  <Text style={styles.optionText}>Prepare</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleThirdOptionSelect("Hold")}
-                >
-                  <Text style={styles.optionText}>Hold</Text>
+                  <Image
+                    source={require("../../../assets/phone.png")}
+                    style={{
+                      height: 40,
+                      width: 40,
+                      marginLeft: "5%",
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
                 </TouchableOpacity>
               </View>
             </View>
-          </Modal>
           </View>
-          </View>
-     
-        <View style={styles.activitytype}>
-          <Text style={styles.label}>Activity Type
-          <Text style={styles.selectedValue}>{selectedOption}</Text>  </Text>
+
           <View
             style={{
-              backgroundColor: Colors.PrimaryColor,
+              width: "100%",
+              marginTop: 12,
               alignItems: "center",
-              justifyContent: "center",
-              height: 40,
-              width: 40,
-              borderRadius: 100,
-              alignSelf: "center",
               flexDirection: "row",
+              paddingHorizontal: 12,
             }}
           >
-            <TouchableOpacity onPress={openModal}>
-              <Image
-                source={require("../../../assets/plus.png")}
-                style={{
-                  height: 15,
-                  width: 15,
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              />
-            </TouchableOpacity>
-          
-
+            <Text
+              style={{
+                backgroundColor: Colors.PrimaryColor,
+                paddingHorizontal: 12,
+                paddingVertical: 6,
+                color: Colors.white,
+                borderRadius: 6,
+                fontWeight: "bold",
+                fontSize: 12,
+              }}
+            >
+              Current Deposition : <Text>4</Text>
+            </Text>
           </View>
-          <Modal
+          <View style={styles.activitytype}>
+            <Text style={styles.label}>
+              Activity DisPosition
+              <Text style={styles.selectedValue}>
+                {selectedThirdOption}
+              </Text>{" "}
+            </Text>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 40,
+                width: 40,
+                borderRadius: 100,
+                alignSelf: "center",
+                flexDirection: "row",
+              }}
+            >
+              <TouchableOpacity onPress={openThirdModal}>
+                <Image
+                  source={require("../../../assets/plus.png")}
+                  style={{
+                    height: 15,
+                    width: 15,
+                    alignSelf: "center",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: Colors.PrimaryColor,
+                  }}
+                />
+              </TouchableOpacity>
+              <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isThirdModalVisible}
+                onRequestClose={closeThirdModal}
+              >
+                <View style={styles.modalContainer}>
+                  <View style={styles.modalContent}>
+                    <TouchableOpacity
+                      style={styles.optionButton}
+                      onPress={() => handleThirdOptionSelect("ContactSigned")}
+                    >
+                      <Text style={styles.optionText}>Contact Signed</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.optionButton}
+                      onPress={() => handleThirdOptionSelect("Pending")}
+                    >
+                      <Text style={styles.optionText}>Pending</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.optionButton}
+                      onPress={() => handleThirdOptionSelect("prepare")}
+                    >
+                      <Text style={styles.optionText}>Prepare</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.optionButton}
+                      onPress={() => handleThirdOptionSelect("Hold")}
+                    >
+                      <Text style={styles.optionText}>Hold</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </Modal>
+            </View>
+          </View>
+
+          <View style={styles.activitytype}>
+            <Text style={styles.label}>
+              Activity Type
+              <Text style={styles.selectedValue}>{selectedOption}</Text>{" "}
+            </Text>
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 40,
+                width: 40,
+                borderRadius: 100,
+                alignSelf: "center",
+                flexDirection: "row",
+                backgroundColor: Colors.PrimaryColor,
+              }}
+            >
+              <TouchableOpacity onPress={openModal}>
+                <Image
+                  source={require("../../../assets/plus.png")}
+                  style={{
+                    height: 15,
+                    width: 15,
+                    alignSelf: "center",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+            <Modal
               animationType="fade"
               transparent={true}
               visible={isModalVisible}
@@ -465,210 +472,210 @@ const DisPosition = (props) => {
                   >
                     <Text style={styles.optionText}>Email</Text>
                   </TouchableOpacity>
-                  
                 </View>
               </View>
             </Modal>
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.label}>Activity Notes</Text>
-          <View
-            style={{
-              width: "100%",
-              height: 100,
-              marginTop: 10,
-              justifyContent: "center",
-            }}
-          >
-            <TextInput
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Activity Notes</Text>
+            <View
               style={{
                 width: "100%",
-                borderRadius: 8,
                 height: 100,
-                paddingHorizontal: 15,
-                color: Colors.black,
-                borderColor: Colors.PrimaryColor,
-                backgroundColor: "#e6e8ea",
-                fontSize: 14,
-                padding: 2,
-                height: "100%",
+                marginTop: 10,
+                justifyContent: "center",
               }}
-              autoCorrect={false}
-              returnKeyType="done"
-              onChangeText={(text) => setActivityNote(text)}
-            />
-          </View>
-        </View>
-        <View style={styles.activitytype}>
-          <Text style={styles.label}>Next Action
-          <Text style={styles.selectedValue}>{selectedSecondOption}</Text>
-          </Text>
-          
-          <View
-            style={{
-              backgroundColor: Colors.PrimaryColor,
-              alignItems: "center",
-              justifyContent: "center",
-              height: 40,
-              width: 40,
-              borderRadius: 100,
-              alignSelf: "center",
-              flexDirection: "row",
-            }}
-          >
-            <TouchableOpacity onPress={openSecondModal}>
-              <Image
-                source={require("../../../assets/plus.png")}
-                style={{
-                  height: 15,
-                  width: 15,
-                  alignSelf: "center",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              />
-            </TouchableOpacity>
-           
-          </View>
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={isSecondModalVisible}
-            onRequestClose={closeSecondModal}
-          >
-            <View style={styles.modalContainer}>
-              <View style={styles.modalContent}>
-                <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleSecondOptionSelect("Call")}
-                >
-                  <Text style={styles.optionText}>Call</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleSecondOptionSelect("Message")}
-                >
-                  <Text style={styles.optionText}>Message</Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.optionButton}
-                  onPress={() => handleSecondOptionSelect("Email")}
-                >
-                  <Text style={styles.optionText}>Email</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </Modal>
-        </View>
-        <View style={styles.activitytype}>
-          <Text style={styles.label}>Due Date</Text>
-        </View>
-        <View style={styles.inputContainer}>
-          <View
-            style={{
-              width: "100%",
-              borderRadius: 8,
-              height: "100%",
-              paddingVertical: 9,
-              color: Colors.black,
-              borderColor: Colors.PrimaryColor,
-              backgroundColor: Colors.gray,
-              fontSize: 14,
-              padding: 2,
-              marginTop: 12,
-              paddingHorizontal: 15,
-              height: 55,
-            }}
-          >
-            <TouchableOpacity
-              onPress={showDatePicker}
-              style={styles.datePickerButton}
             >
-              <Text style={styles.datePickerText}>
-                {selectedDate ? formatDate(selectedDate) : "None"}{" "}
-              </Text>
-            </TouchableOpacity>
+              <TextInput
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: 100,
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: "#e6e8ea",
+                  fontSize: 14,
+                  padding: 2,
+                  height: "100%",
+                }}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setActivityNote(text)}
+              />
+            </View>
+          </View>
+          <View style={styles.activitytype}>
+            <Text style={styles.label}>
+              Next Action
+              <Text style={styles.selectedValue}>{selectedSecondOption}</Text>
+            </Text>
 
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="datetime"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
+            <View
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                height: 40,
+                width: 40,
+                borderRadius: 100,
+                alignSelf: "center",
+                flexDirection: "row",
+              }}
+            >
+              <TouchableOpacity onPress={openSecondModal}>
+                <Image
+                  source={require("../../../assets/plus.png")}
+                  style={{
+                    height: 15,
+                    width: 15,
+                    alignSelf: "center",
+                    alignItems: "center",
+                    backgroundColor: Colors.PrimaryColor,
+                    justifyContent: "center",
+                  }}
+                />
+              </TouchableOpacity>
+            </View>
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={isSecondModalVisible}
+              onRequestClose={closeSecondModal}
+            >
+              <View style={styles.modalContainer}>
+                <View style={styles.modalContent}>
+                  <TouchableOpacity
+                    style={styles.optionButton}
+                    onPress={() => handleSecondOptionSelect("Call")}
+                  >
+                    <Text style={styles.optionText}>Call</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.optionButton}
+                    onPress={() => handleSecondOptionSelect("Message")}
+                  >
+                    <Text style={styles.optionText}>Message</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.optionButton}
+                    onPress={() => handleSecondOptionSelect("Email")}
+                  >
+                    <Text style={styles.optionText}>Email</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+          </View>
+          <View style={styles.activitytype}>
+            <Text style={styles.label}>Due Date</Text>
+          </View>
+          <View style={styles.inputContainer}>
+            <View
               style={{
                 width: "100%",
                 borderRadius: 8,
                 height: "100%",
-                paddingHorizontal: 15,
+                paddingVertical: 9,
                 color: Colors.black,
                 borderColor: Colors.PrimaryColor,
                 backgroundColor: Colors.gray,
                 fontSize: 14,
                 padding: 2,
-              }}
-            />
-          </View>
-        </View>
-          <View style={styles.inputContainer}>
-            <Text style={styles.label}>Next Deposite Message</Text>
-          <View
-            style={{
-              width: "100%",
-              height: 100,
-              marginTop: 10,
-              justifyContent: "center",
-            }}
-          >
-            <TextInput
-              style={{
-                width: "100%",
-                borderRadius: 8,
-                height: 100,
+                marginTop: 12,
                 paddingHorizontal: 15,
-                color: Colors.black,
-                borderColor: Colors.PrimaryColor,
-                backgroundColor: "#e6e8ea",
-                fontSize: 14,
-                padding: 2,
-                height: "100%",
-              }}
-              autoCorrect={false}
-              returnKeyType="done"
-              onChangeText={(text) => setFutureActivity(text)}
-            />
-          </View>
-        </View>
-        <View
-          style={{
-            flexDirection: "row",
-            width: "90%",
-            height: 60,
-            marginTop: 20,
-            alignSelf: "center",
-            justifyContent: "center",
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              height: 35,
-              width: "45%",
-              borderRadius: 5,
-              backgroundColor: Colors.PrimaryColor,
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-            onPress={handleaddDisposition}
-          >
-            <Text
-              style={{
-                fontSize: 14,
-
-                color: Colors.white,
+                height: 55,
               }}
             >
-              Submit
-            </Text>
-          </TouchableOpacity>
+              <TouchableOpacity
+                onPress={showDatePicker}
+                style={styles.datePickerButton}
+              >
+                <Text style={styles.datePickerText}>
+                  {selectedDate ? formatDate(selectedDate) : "None"}{" "}
+                </Text>
+              </TouchableOpacity>
+
+              <DateTimePickerModal
+                isVisible={isDatePickerVisible}
+                mode="datetime"
+                onConfirm={handleConfirm}
+                onCancel={hideDatePicker}
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: "100%",
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: Colors.gray,
+                  fontSize: 14,
+                  padding: 2,
+                }}
+              />
+            </View>
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.label}>Next Deposite Message</Text>
+            <View
+              style={{
+                width: "100%",
+                height: 100,
+                marginTop: 10,
+                justifyContent: "center",
+              }}
+            >
+              <TextInput
+                style={{
+                  width: "100%",
+                  borderRadius: 8,
+                  height: 100,
+                  paddingHorizontal: 15,
+                  color: Colors.black,
+                  borderColor: Colors.PrimaryColor,
+                  backgroundColor: "#e6e8ea",
+                  fontSize: 14,
+                  padding: 2,
+                  height: "100%",
+                }}
+                autoCorrect={false}
+                returnKeyType="done"
+                onChangeText={(text) => setFutureActivity(text)}
+              />
+            </View>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              width: "90%",
+              height: 60,
+              marginTop: 20,
+              alignSelf: "center",
+              justifyContent: "center",
+            }}
+          >
+            <TouchableOpacity
+              style={{
+                height: 35,
+                width: "45%",
+                borderRadius: 5,
+                backgroundColor: Colors.PrimaryColor,
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+              onPress={handleaddDisposition}
+            >
+              <Text
+                style={{
+                  fontSize: 14,
+
+                  color: Colors.white,
+                }}
+              >
+                Submit
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -737,7 +744,7 @@ const styles = StyleSheet.create({
     color: Colors.PrimaryColor,
     textAlign: "center",
   },
-  selectedValue:{
-    marginLeft:10
-  }
+  selectedValue: {
+    marginLeft: 10,
+  },
 });

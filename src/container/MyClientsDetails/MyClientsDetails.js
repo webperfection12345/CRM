@@ -940,6 +940,7 @@ const MyClientsDetails = (props) => {
                                 padding: 12,
                                 width: "100%",
                                 marginBottom: 20,
+                                borderRadius: 4,
                               }}
                             >
                               <View

@@ -224,7 +224,7 @@ const Contacts = () => {
               }}
               source={require("../../../assets/back.png")}
             />
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+            <Text style={{ fontSize: 15, color: Colors.white }}>Back </Text>
           </TouchableOpacity>
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
@@ -288,7 +288,7 @@ const Contacts = () => {
               onChangeText={searchFilter}
               style={{
                 color: Colors.white,
-                fontSize: 15,
+                fontSize: 18,
                 marginLeft: 10,
               }}
             />
