@@ -658,24 +658,25 @@ const MyClientsDetails = (props) => {
                   marginLeft: 10,
                 }}
               >
-                Today's Activities
+                Today's Activities test
               </Text>
             </View>
 
             <View
               style={{
-                width: "95%",
+                width: "100%",
                 alignSelf: "flex-start",
                 alignItems: "flex-start",
                 alignContent: "flex-start",
                 flexDirection: "column",
                 marginTop: 20,
-                paddingHorizontal: 12,
+
                 justifyContent: "space-between",
               }}
             >
               <View
                 style={{
+
                   width: "120%",
                   alignSelf: "flex-start",
                   alignItems: "flex-start",
@@ -683,6 +684,7 @@ const MyClientsDetails = (props) => {
                   flexDirection: "column",
                   marginTop: 20,
                   paddingHorizontal: 12,
+
                   justifyContent: "space-between",
                 }}
               >
@@ -748,7 +750,7 @@ const MyClientsDetails = (props) => {
                           >
                             <View
                               style={{
-                                paddingRight: 20,
+
                                 borderColor: Colors.gray,
                                 borderWidth: 1,
                                 padding: 12,
@@ -895,6 +897,7 @@ const MyClientsDetails = (props) => {
                 marginTop: 20,
                 paddingHorizontal: 12,
                 justifyContent: "space-between",
+                flexWrap: "wrap",
               }}
             >
               <ScrollView
@@ -909,7 +912,7 @@ const MyClientsDetails = (props) => {
                     alignContent: "flex-start",
                     flexDirection: "column",
                     marginTop: 20,
-                    paddingHorizontal: 12,
+
                     width: "100%",
                     justifyContent: "space-between",
                   }}
@@ -979,10 +982,12 @@ const MyClientsDetails = (props) => {
                                 <View
                                   style={{
                                     alignItems: "center",
-                                    width: "100%",
+
                                     flexDirection: "row",
                                     justifyContent: "space-between",
                                     marginBottom: 20,
+
+                                    width: 200,
                                   }}
                                 >
                                   <Text style={styles.headingmaintype}>
@@ -1944,8 +1949,9 @@ const styles = StyleSheet.create({
   headingmaintype: {
     color: "black",
     fontSize: 14,
-    paddingRight: 12,
+
     marginBottom: 3,
+
     //  width: "100%",
   },
   subheadingmaintype: {
@@ -1964,9 +1970,10 @@ const styles = StyleSheet.create({
   subheadingmaintypeinner: {
     color: "black",
     fontSize: 14,
-    paddingRight: 12,
+
     marginBottom: 3,
     // width: "100%",
+    width: 130,
     textAlign: "right",
   },
 });
