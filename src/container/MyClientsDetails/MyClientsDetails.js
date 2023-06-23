@@ -247,7 +247,23 @@ const MyClientsDetails = (props) => {
   const toggleModal = () => {
     setModalVisible(!modalVisible);
   };
+  function formatDate(dateString) {
+    const date = new Date(dateString);
 
+    const formattedDate = date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+
+    const formattedTime = date.toLocaleTimeString("en-US", {
+      hour: "numeric",
+      minute: "2-digit",
+      hour12: true,
+    });
+
+    return `${formattedDate} ${formattedTime}`;
+  }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       <View
@@ -660,12 +676,14 @@ const MyClientsDetails = (props) => {
             >
               <View
                 style={{
-                  width: "100%",
+
+                  width: "120%",
                   alignSelf: "flex-start",
                   alignItems: "flex-start",
                   alignContent: "flex-start",
                   flexDirection: "column",
                   marginTop: 20,
+                  paddingHorizontal: 12,
 
                   justifyContent: "space-between",
                 }}
@@ -732,6 +750,7 @@ const MyClientsDetails = (props) => {
                           >
                             <View
                               style={{
+
                                 borderColor: Colors.gray,
                                 borderWidth: 1,
                                 padding: 12,
@@ -1023,7 +1042,7 @@ const MyClientsDetails = (props) => {
                                     Next Disposition Date
                                   </Text>
                                   <Text style={styles.subheadingmaintypeinner}>
-                                    {item.next_disposition_date}
+                                    {formatDate(item.next_disposition_date)}
                                   </Text>
                                 </View>
                                 <View
@@ -1294,29 +1313,31 @@ const MyClientsDetails = (props) => {
                     )}
                   />
 
-                  <TouchableOpacity
-                    onPress={() => setShowAllNotes(!showAllNotes)}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      borderBottomWidth: 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      alignSelf: "center",
-                    }}
-                  >
-                    <Text
+                  {note.length > 5 && (
+                    <TouchableOpacity
+                      onPress={() => setShowAllNotes(!showAllNotes)}
                       style={{
-                        color: Colors.PrimaryColor,
-                        fontSize: 16,
-                        fontWeight: "bold",
+                        height: 60,
+                        width: "90%",
+                        borderBottomWidth: 1,
+                        borderBottomColor: Colors.gray,
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+                        alignSelf: "center",
                       }}
                     >
-                      {showAllNotes ? "Show Less" : "Show More"}
-                    </Text>
-                  </TouchableOpacity>
+                      <Text
+                        style={{
+                          color: Colors.PrimaryColor,
+                          fontSize: 16,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {showAllNotes ? "Show Less" : "Show More"}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
                 </>
               ) : (
                 <Text>No Notes found.</Text>
@@ -1352,29 +1373,31 @@ const MyClientsDetails = (props) => {
                     scrollEnabled={false}
                     renderItem={renderHistoryItem}
                   />
-                  <TouchableOpacity
-                    onPress={() => setShowAllItems(!showAllItems)}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      borderBottomWidth: 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      alignSelf: "center",
-                    }}
-                  >
-                    <Text
+                  {history.length > 5 && (
+                    <TouchableOpacity
+                      onPress={() => setShowAllItems(!showAllItems)}
                       style={{
-                        color: Colors.PrimaryColor,
-                        fontSize: 16,
-                        fontWeight: "bold",
+                        height: 60,
+                        width: "90%",
+                        borderBottomWidth: 1,
+                        borderBottomColor: Colors.gray,
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+                        alignSelf: "center",
                       }}
                     >
-                      {showAllItems ? "Show Less" : "Show More"}
-                    </Text>
-                  </TouchableOpacity>
+                      <Text
+                        style={{
+                          color: Colors.PrimaryColor,
+                          fontSize: 16,
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {showAllItems ? "Show Less" : "Show More"}
+                      </Text>
+                    </TouchableOpacity>
+                  )}
                 </>
               ) : (
                 <Text>No activity history found.</Text>
