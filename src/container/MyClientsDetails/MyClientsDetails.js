@@ -49,8 +49,12 @@ const MyClientsDetails = (props) => {
   const [currentDipo, setCurrentDisposition] = useState([]);
   const [selectedActivityType, setSelectedActivityType] = useState(null);
   const [expandedActivityTypes, setExpandedActivityTypes] = useState([]);
-
+  const [showAllItems, setShowAllItems] = useState(false);
+  const itemsToShow = showAllItems ? history.length : 5;
   const id = items.item.id;
+  const [showAllNotes, setShowAllNotes] = useState(false);
+  const notesToShow = showAllNotes ? note.length : 5;
+
   useEffect(() => {
     if (isFocused) {
       console.log("Page refreshed");
@@ -121,6 +125,58 @@ const MyClientsDetails = (props) => {
       setHistory(history);
     });
   };
+  const handleShowMoreLess = () => {
+    setShowAllNotes(!showAllNotes);
+  };
+
+  const renderHistoryItem = ({ item }) => (
+    <TouchableOpacity
+      style={{
+        height: 60,
+        width: '90%',
+        borderBottomWidth: 1,
+        borderBottomColor: Colors.gray,
+        alignItems: 'center',
+        alignContent: 'center',
+        flexDirection: 'row',
+        alignSelf: 'center',
+      }}
+    >
+      <View
+        style={{
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}
+      >
+        <View
+          style={{
+            height: 80,
+            justifyContent: 'center',
+          }}
+        >
+          <Text
+            style={{
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: 'bold',
+            }}
+          >
+            {item.activity_type}
+          </Text>
+
+          <Text
+            style={{
+              color: Colors.black,
+              fontSize: 12,
+            }}
+          >
+            {item.activity_date}
+          </Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  );
   const MyNoteData = () => {
     dispatch(getNoteData(id)).then((response) => {
       const noteData = response.payload.data;
@@ -620,17 +676,7 @@ const MyClientsDetails = (props) => {
                       flexDirection: "row",
                     }}
                   >
-                    <Text style={styles.headingmaintype}>Activity Type</Text>
-
-                    <Text style={styles.headingmaintype}>
-                      Next Disposition Date
-                    </Text>
-                    <Text style={styles.headingmaintype}>
-                      Activity Next Disposition
-                    </Text>
-                    <Text style={styles.headingmaintype}>
-                      Next Disposition Notes
-                    </Text>
+                   
                   </View>
                   {typeof todayDipo === "string" ? (
                     <Text
@@ -646,36 +692,153 @@ const MyClientsDetails = (props) => {
                     </Text>
                   ) : (
                     <FlatList
-                      data={todayDipo}
-                      keyExtractor={(item, index) => index.toString()}
-                      renderItem={({ item, index }) => (
-                        <View
+                    style={{
+                      width: "100%",
+                    }}
+                    data={todayDipo}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item, index }) => (
+                      <React.Fragment>
+                        <TouchableOpacity
+                          onPress={() => {
+                            if (
+                              selectedActivityType === item.activity_disposition
+                            ) {
+                              setSelectedActivityType(null);
+                            } else {
+                              setSelectedActivityType(
+                                item.activity_disposition
+                              );
+                            }
+                          }}
                           style={{
-                            paddingRight: 20,
-                            alignSelf: "flex-start",
-                            alignItems: "flex-start",
-                            alignContent: "flex-start",
                             flexDirection: "row",
+                            width: "100%",
                           }}
                         >
                           <Text style={styles.subheadingmaintype}>
-                            {item.activity_type}
+                            {item.activity_disposition}
                           </Text>
-
-                          <Text style={styles.subheadingmaintype}>
-                            {item.next_disposition_date}
-                          </Text>
-
-                          <Text style={styles.subheadingmaintype}>
-                            {item.activity_next_disposition}
-                          </Text>
-
-                          <Text style={styles.subheadingmaintype}>
-                            {item.next_disposition_notes}
-                          </Text>
-                        </View>
-                      )}
-                    />
+                          {/* Other activity type data */}
+                        </TouchableOpacity>
+                        {selectedActivityType === item.activity_disposition && (
+                          <View
+                            style={{
+                              width: "100%",
+                            }}
+                          >
+                            <View
+                              style={{
+                                paddingRight: 20,
+                                borderColor: Colors.gray,
+                                borderWidth: 1,
+                                padding: 12,
+                                width: "100%",
+                                marginBottom: 20,
+                              }}
+                            >
+                              <View
+                                style={{
+                                  alignItems: "center",
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                  marginBottom: 20,
+                                }}
+                              >
+                                <Text style={styles.headingmaintype}>
+                                  Activity Disposition
+                                </Text>
+                                <Text style={styles.subheadingmaintypeinner}>
+                                  {item.activity_disposition}
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  alignItems: "center",
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                  marginBottom: 20,
+                                }}
+                              >
+                                <Text style={styles.headingmaintype}>
+                                  Activity Type
+                                </Text>
+                                <Text style={styles.subheadingmaintypeinner}>
+                                  {item.activity_type}
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  alignItems: "center",
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                  marginBottom: 20,
+                                }}
+                              >
+                                <Text style={styles.headingmaintype}>
+                                  Activity Notes
+                                </Text>
+                                <Text style={styles.subheadingmaintypeinner}>
+                                  {item.activity_notes}
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  alignItems: "center",
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                  marginBottom: 20,
+                                }}
+                              >
+                                <Text style={styles.headingmaintype}>
+                                  Next Disposition Date
+                                </Text>
+                                <Text style={styles.subheadingmaintypeinner}>
+                                  {item.next_disposition_date}
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  alignItems: "center",
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                  marginBottom: 20,
+                                }}
+                              >
+                                <Text style={styles.headingmaintype}>
+                                  Activity Next Disposition
+                                </Text>
+                                <Text style={styles.subheadingmaintypeinner}>
+                                  {item.activity_next_disposition}
+                                </Text>
+                              </View>
+                              <View
+                                style={{
+                                  alignItems: "center",
+                                  width: "100%",
+                                  flexDirection: "row",
+                                  justifyContent: "space-between",
+                                  marginBottom: 20,
+                                }}
+                              >
+                                <Text style={styles.headingmaintype}>
+                                  Next Disposition Notes
+                                </Text>
+                                <Text style={styles.subheadingmaintypeinner}>
+                                  {item.next_disposition_notes}
+                                </Text>
+                              </View>
+                            </View>
+                          </View>
+                        )}
+                      </React.Fragment>
+                    )}
+                  />
                   )}
                 </View>
               </ScrollView>
@@ -1032,63 +1195,90 @@ const MyClientsDetails = (props) => {
               </TouchableOpacity> */}
             </View>
             <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
-              <FlatList
-                data={note}
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    //onPress={() => navigation.navigate('MyClientsDetails')}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      borderBottomWidth: 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      alignSelf: "center",
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: "100%",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: 80,
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {item.note_content}
-                        </Text>
+            {note && note.length > 0 ? (
+ <>
+      <FlatList
+        data={note.slice(0, notesToShow)}
+        scrollEnabled={false}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            style={{
+              height: 60,
+              width: '90%',
+              borderBottomWidth: 1,
+              borderBottomColor: Colors.gray,
+              alignItems: 'center',
+              alignContent: 'center',
+              flexDirection: 'row',
+              alignSelf: 'center',
+            }}
+          >
+            <View
+              style={{
+                width: '100%',
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+              }}
+            >
+              <View
+                style={{
+                  height: 80,
+                  justifyContent: 'center',
+                }}
+              >
+                <Text
+                  style={{
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: 'bold',
+                  }}
+                >
+                  {item.note_content}
+                </Text>
 
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 12,
-                          }}
-                        >
-                          {item.created_date}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
-              />
+                <Text
+                  style={{
+                    color: Colors.black,
+                    fontSize: 12,
+                  }}
+                >
+                  {item.created_date}
+                </Text>
+              </View>
             </View>
+          </TouchableOpacity>
+        )}
+      />
+  
+      <TouchableOpacity
+            onPress={() => setShowAllNotes(!showAllNotes)}
+            style={{
+              height: 60,
+              width: '90%',
+              borderBottomWidth: 1,
+              borderBottomColor: Colors.gray,
+              alignItems: 'center',
+              alignContent: 'center',
+              flexDirection: 'row',
+              alignSelf: 'center',
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.PrimaryColor,
+                fontSize: 16,
+                fontWeight: 'bold',
+              }}
+            >
+              {showAllNotes ? 'Show Less' : 'Show More'}
+            </Text>
+          </TouchableOpacity>
+          </>
+      ) : (
+        <Text>No Notes found.</Text>
+      )}
+    </View>
+        
             <View
               style={{
                 flexDirection: "row",
@@ -1111,6 +1301,42 @@ const MyClientsDetails = (props) => {
               </Text>
             </View>
             <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
+      {history && history.length > 0 ? (
+        <>
+          <FlatList
+            data={history.slice(0, itemsToShow)}
+            scrollEnabled={false}
+            renderItem={renderHistoryItem}
+          />
+          <TouchableOpacity
+            onPress={() => setShowAllItems(!showAllItems)}
+            style={{
+              height: 60,
+              width: '90%',
+              borderBottomWidth: 1,
+              borderBottomColor: Colors.gray,
+              alignItems: 'center',
+              alignContent: 'center',
+              flexDirection: 'row',
+              alignSelf: 'center',
+            }}
+          >
+            <Text
+              style={{
+                color: Colors.PrimaryColor,
+                fontSize: 16,
+                fontWeight: 'bold',
+              }}
+            >
+              {showAllItems ? 'Show Less' : 'Show More'}
+            </Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <Text>No activity history found.</Text>
+      )}
+    </View>
+            {/* <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
               <FlatList
                 data={history}
                 scrollEnabled={false}
@@ -1167,7 +1393,7 @@ const MyClientsDetails = (props) => {
                 //  ItemSeparatorComponent={this.renderSeparator}
                 //   key={(item) => item.id}
               />
-            </View>
+            </View> */}
             <View style={{ height: 50 }}></View>
           </View>
 
