@@ -19,7 +19,7 @@ import Transactions from "../container/Transactions/Transactions";
 import DisPosition from "../container/DisPosition/DisPosition";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
-import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
+import Transaction from "../container/Transaction/Transaction";
 
 const Tab = createBottomTabNavigator();
 
@@ -75,8 +75,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="TransactionDesk"
-        component={TransactionDesk}
+        name="Transaction"
+        component={Transaction}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>

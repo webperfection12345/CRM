@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import Colors from "../../utils/Colors";
+import { ScrollView } from "react-native-gesture-handler";
 
 const TransactionDesk = () => {
   const [isEnabled, setIsEnabled] = useState(false);
@@ -21,11 +22,12 @@ const TransactionDesk = () => {
     setToggle(!isEnabled);
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor,height:"100%" }}>
+      <ScrollView style={{ height:"100%" }}>
       <View
         style={{
           flex: 1,
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.white, height:"100%"
         }}
       >
         <View
@@ -55,7 +57,7 @@ const TransactionDesk = () => {
               }}
               source={require("../../../assets/back.png")}
             ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+            {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
           </TouchableOpacity>
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
@@ -84,6 +86,7 @@ const TransactionDesk = () => {
             alignContent: "center",
             alignItems: "center",
             backgroundColor: Colors.PrimaryColor,
+           
           }}
         >
           <View
@@ -122,7 +125,7 @@ const TransactionDesk = () => {
             />
           </View>
         </View>
-        <View style={styles.maincover}>
+       <View style={styles.maincover}>
           <View style={styles.firstcol}>
             <View style={styles.maincolumn}>
               <View style={styles.mainheading}>
@@ -133,10 +136,19 @@ const TransactionDesk = () => {
                   style={styles.checkbox}
                   value={isChecked}
                   onValueChange={setChecked}
-                  color={isChecked ? "#4630EB" : undefined}
+                  color={isChecked ? "#576ebd" : undefined}
                 />
-
-                <Text style={styles.activityname}>Escrow Due</Text>
+<Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      marginLeft:12,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                <Text style={styles.activityname}> 
+                 Escrow Due</Text>
               </View>
             </View>
             <View style={styles.maincolumn}>
@@ -151,7 +163,105 @@ const TransactionDesk = () => {
           <View style={styles.firstcol}>
             <View style={styles.maincolumn}>
               <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Action</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activityicons}>
+                  <Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </Text>
+                <Text style={styles.activityicons}>
+                  <Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </Text>
+              </View>
+            </View>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Preview</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activityicons}>
+                  <Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </Text>
+              </View>
+            </View>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}></View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activityiconstoggle}>
+                  <Switch
+                    style={styles.mainbt}
+                    trackColor={{ false: "#767577", true: "#576ebd" }}
+                    thumbColor={"#f4f3f4"}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                  />
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View> 
+        <View style={styles.maincover}>
+          <View style={styles.firstcol}>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Activities</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Checkbox
+                  style={styles.checkbox}
+                  value={isChecked}
+                  onValueChange={setChecked}
+                  color={isChecked ? "#576ebd" : undefined}
+                />
+<Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      marginLeft:12,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                <Text style={styles.activityname}>Loan Approval Due</Text>
+              </View>
+            </View>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
                 <Text style={styles.mainheadinginner}>Due Dates</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activitydatered}>4/04/2023{'\n'}
+                OVERDUE
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.firstcol}>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Action</Text>
               </View>
               <View style={styles.activitycover}>
                 <Text style={styles.activityicons}>
@@ -199,7 +309,105 @@ const TransactionDesk = () => {
                 <Text style={styles.activityiconstoggle}>
                   <Switch
                     style={{ marginRight: 12 }}
-                    trackColor={{ false: "#767577", true: "#81b0ff" }}
+                    trackColor={{ false: "#767577", true: "#576ebd" }}
+                    thumbColor={"#f4f3f4"}
+                    ios_backgroundColor="#3e3e3e"
+                    onValueChange={toggleSwitch}
+                    value={isEnabled}
+                  />
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View> 
+        <View style={styles.maincover}>
+          <View style={styles.firstcol}>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Activities</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Checkbox
+                  style={styles.checkbox}
+                  value={isChecked}
+                  onValueChange={setChecked}
+                  color={isChecked ? "#576ebd" : undefined}
+                />
+<Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      marginLeft:12,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                <Text style={styles.activityname}>Appraisal Due</Text>
+              </View>
+            </View>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Due Dates</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activitydateyellow}>4/04/2023 {'\n'}
+                 DUE TOMORROW
+                </Text>
+              </View>
+            </View>
+          </View>
+          <View style={styles.firstcol}>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Action</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activityicons}>
+                  <Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </Text>
+                <Text style={styles.activityicons}>
+                  <Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </Text>
+              </View>
+            </View>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}>Preview</Text>
+              </View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activityicons}>
+                  <Image
+                    source={require("../../../assets/share.png")}
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                    }}
+                  ></Image>
+                </Text>
+              </View>
+            </View>
+            <View style={styles.maincolumn}>
+              <View style={styles.mainheading}></View>
+              <View style={styles.activitycover}>
+                <Text style={styles.activityiconstoggle}>
+                  <Switch
+                    style={{ marginRight: 12 }}
+                    trackColor={{ false: "#767577", true: "#576ebd" }}
                     thumbColor={"#f4f3f4"}
                     ios_backgroundColor="#3e3e3e"
                     onValueChange={toggleSwitch}
@@ -211,6 +419,7 @@ const TransactionDesk = () => {
           </View>
         </View>
       </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
@@ -234,21 +443,42 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: 40,
     alignItems: "center",
+    justifyContent:"center",
+  
   },
-  activityname: { marginRight: 12, fontSize: 14 },
+  activityname: { marginLeft: 7, fontSize: 14,marginTop:-5 },
   activitydate: {
-    marginRight: 12,
-
-    fontSize: 14,
+    textAlign:"center",
+    alignItems:"center",
+        fontSize: 13,
     color: "green",
+  },
+  activitydatered:{ textAlign:"center",
+  alignItems:"center",
+      fontSize: 13,
+    color: "red",
+
   },
   firstcol: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
   },
-  mainheadinginner: { marginRight: 12, fontWeight: "bold", fontSize: 16 },
+ 
+  mainheadinginner: {  fontWeight: "bold", fontSize: 16 ,},
   activityicons: { marginRight: 6, height: 40, marginTop: 6 },
-  maincolumn: { paddingRight: 12, marginBottom: 12 },
+  maincolumn: { paddingRight: 12, marginBottom: 12 ,
+  
+  justifyContent:"center",
+  textAlign:"center"
+  
+  },
+  
+  activitydateyellow:{ 
+textAlign:"center",
+alignItems:"center",
+    fontSize: 13,
+    color: "orange",},
   activityiconstoggle: { marginTop: 12, marginRight: 6 },
+  mainheading:{alignItems:"center"},
 });

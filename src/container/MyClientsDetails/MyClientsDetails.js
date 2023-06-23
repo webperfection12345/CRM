@@ -315,7 +315,7 @@ const MyClientsDetails = (props) => {
                       source={require("../../../assets/back.png")}
                     ></Image>
                     <Text style={{ fontSize: 15, color: Colors.white }}>
-                      Back
+                     
                     </Text>
                   </TouchableOpacity>
                   <Text
@@ -325,7 +325,7 @@ const MyClientsDetails = (props) => {
                       color: Colors.white,
                     }}
                   >
-                    MyClientsDetails
+                    My Clients Details
                   </Text>
                   <TouchableOpacity
                     onPress={() =>
@@ -472,9 +472,9 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    borderBottomWidth: 1,
-                    borderColor: Colors.gray,
-                    marginTop: 20,
+                  //  borderBottomWidth: 1,
+                   // borderColor: Colors.gray,
+                    marginTop: 6,
                     justifyContent: "space-between",
                   }}
                 >
@@ -503,9 +503,9 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    borderBottomWidth: 1,
-                    borderColor: Colors.gray,
-                    marginTop: 10,
+                   // borderBottomWidth: 1,
+                   // borderColor: Colors.gray,
+                    marginTop: 6,
                     justifyContent: "space-between",
                   }}
                 >
@@ -535,9 +535,9 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    borderBottomWidth: 1,
-                    borderColor: Colors.gray,
-                    marginTop: 10,
+                   // borderBottomWidth: 1,
+                   // borderColor: Colors.gray,
+                    marginTop: 6,
                     justifyContent: "space-between",
                   }}
                 >
@@ -567,7 +567,7 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    marginTop: 10,
+                    marginTop: 6,
                     justifyContent: "space-between",
                   }}
                 >
@@ -602,8 +602,8 @@ const MyClientsDetails = (props) => {
                   <TouchableOpacity
                     onPress={() => navigation.navigate("DisPosition", { item })}
                     style={{
-                      height: 52,
-                      width: "25%",
+                      height: 42,
+                      width: "30%",
                       borderRadius: 5,
                       borderColor: Colors.gray,
                       borderWidth: 0.5,
@@ -620,8 +620,8 @@ const MyClientsDetails = (props) => {
                   <TouchableOpacity
                     onPress={() => navigation.navigate("NewNote", { item })}
                     style={{
-                      height: 52,
-                      width: "25%",
+                      height: 42,
+                      width: "30%",
                       borderRadius: 5,
                       borderColor: Colors.gray,
                       borderWidth: 0.5,
@@ -644,7 +644,7 @@ const MyClientsDetails = (props) => {
               width: "95%",
               alignSelf: "center",
               borderRadius: 5,
-              marginTop: 20,
+              marginTop: 2,
             }}
           >
             <View>
@@ -655,10 +655,10 @@ const MyClientsDetails = (props) => {
                   fontWeight: "bold",
                   marginTop: 20,
 
-                  marginLeft: 10,
+                 
                 }}
               >
-                Today's Activities test
+                Today's Activities 
               </Text>
             </View>
 
@@ -669,7 +669,7 @@ const MyClientsDetails = (props) => {
                 alignItems: "flex-start",
                 alignContent: "flex-start",
                 flexDirection: "column",
-                marginTop: 20,
+                marginTop: 3,
 
                 justifyContent: "space-between",
               }}
@@ -677,13 +677,13 @@ const MyClientsDetails = (props) => {
               <View
                 style={{
 
-                  width: "120%",
+                  width: "100%",
                   alignSelf: "flex-start",
                   alignItems: "flex-start",
                   alignContent: "flex-start",
                   flexDirection: "column",
                   marginTop: 20,
-                  paddingHorizontal: 12,
+                
 
                   justifyContent: "space-between",
                 }}
@@ -705,6 +705,7 @@ const MyClientsDetails = (props) => {
                       alignContent: "flex-start",
                       flexDirection: "column",
                       marginTop: 20,
+                      
                     }}
                   >
                     {todayDipo}
@@ -755,7 +756,9 @@ const MyClientsDetails = (props) => {
                                 borderWidth: 1,
                                 padding: 12,
                                 width: "100%",
-                                marginBottom: 20,
+                                borderRadius:4,
+                              
+                                marginBottom: 20,backgroundColor:Colors.cream
                               }}
                             >
                               <View
@@ -784,7 +787,7 @@ const MyClientsDetails = (props) => {
                                 }}
                               >
                                 <Text style={styles.headingmaintype}>
-                                  Activity Type
+                                  Activity Type 
                                 </Text>
                                 <Text style={styles.subheadingmaintypeinner}>
                                   {item.activity_type}
@@ -879,7 +882,7 @@ const MyClientsDetails = (props) => {
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: "bold",
-                  marginTop: 20,
+                  marginTop: 5,
 
                   marginLeft: 10,
                 }}
@@ -894,10 +897,11 @@ const MyClientsDetails = (props) => {
                 alignItems: "flex-start",
                 alignContent: "flex-start",
                 flexDirection: "column",
-                marginTop: 20,
-                paddingHorizontal: 12,
+                marginTop: 3,
+                paddingHorizontal: 8,
                 justifyContent: "space-between",
                 flexWrap: "wrap",
+               
               }}
             >
               <ScrollView
@@ -924,7 +928,7 @@ const MyClientsDetails = (props) => {
                         alignItems: "flex-start",
                         alignContent: "flex-start",
                         flexDirection: "column",
-                        marginTop: 20,
+                        marginTop: 20, 
                       }}
                     >
                       {futureDipo}
@@ -933,6 +937,7 @@ const MyClientsDetails = (props) => {
                     <FlatList
                       style={{
                         width: "100%",
+                       
                       }}
                       data={futureDipo}
                       keyExtractor={(item, index) => index.toString()}
@@ -953,7 +958,7 @@ const MyClientsDetails = (props) => {
                             }}
                             style={{
                               flexDirection: "row",
-                              width: "100%",
+                              
                             }}
                           >
                             <Text style={styles.subheadingmaintype}>
@@ -976,18 +981,17 @@ const MyClientsDetails = (props) => {
                                   padding: 12,
                                   width: "100%",
                                   marginBottom: 20,
-                                  borderRadius: 4,
+                                  borderRadius: 4,backgroundColor:Colors.cream
                                 }}
                               >
                                 <View
                                   style={{
                                     alignItems: "center",
-
+                                   
                                     flexDirection: "row",
                                     justifyContent: "space-between",
                                     marginBottom: 20,
 
-                                    width: 200,
                                   }}
                                 >
                                   <Text style={styles.headingmaintype}>
@@ -1088,8 +1092,20 @@ const MyClientsDetails = (props) => {
                                     justifyContent: "center",
                                     alignItems: "center",
                                     marginRight: 10,
+                                    borderRadius:100,
+                                   
+alignItems:"center",
+justifyContent:"center"
                                   }}
                                 >
+                                  <View style={{
+                                      height: 40,
+                                      width: 40,
+                                      backgroundColor:Colors.white,
+                                      alignItems:"center",
+                                      justifyContent:"center",
+                                      borderRadius:100
+                                    }}>
                                   <Image
                                     source={require("../../../assets/edit.png")}
                                     style={{
@@ -1099,6 +1115,9 @@ const MyClientsDetails = (props) => {
                                       tintColor: Colors.PrimaryColor,
                                     }}
                                   ></Image>
+                               
+                                  </View>
+                                  <Text style={styles.editactivity}>Edit Activity</Text>
                                 </TouchableOpacity>
                               </View>
                             </View>
@@ -1131,19 +1150,22 @@ const MyClientsDetails = (props) => {
                   fontSize: 18,
                   fontWeight: "bold",
                   marginTop: 20,
-                  marginLeft: 10,
+               marginBottom:5,
+                  width:"100%",
+                  textAlign:"center"
+                 
                 }}
               >
                 Properties Viewed
               </Text>
             </View>
             {property.length === 0 ? (
-              <Text>No data found</Text>
+              <Text style={styles.nodata}>No data found</Text>
             ) : (
-              <View>
+              <View style={styles.propertydata}>
                 {property.map((title, index) => (
                   <View key={index}>
-                    <Text>
+                    <Text style={styles.mainpropertydata}>
                       {"\u2022"} {title}
                     </Text>
                   </View>
@@ -1194,7 +1216,7 @@ const MyClientsDetails = (props) => {
                     color: Colors.white,
                   }}
                 >
-                  See all Properties
+                  See all Properties 
                 </Text>
               </TouchableOpacity>
             </View>
@@ -1330,7 +1352,9 @@ const MyClientsDetails = (props) => {
                       <Text
                         style={{
                           color: Colors.PrimaryColor,
-                          fontSize: 16,
+                          fontSize: 14,
+                          textAlign:"center",
+                          width:"100%",
                           fontWeight: "bold",
                         }}
                       >
@@ -1390,8 +1414,11 @@ const MyClientsDetails = (props) => {
                       <Text
                         style={{
                           color: Colors.PrimaryColor,
-                          fontSize: 16,
+                          fontSize: 14,
                           fontWeight: "bold",
+                          alignSelf: "center",
+                          marginTop: 20,
+
                         }}
                       >
                         {showAllItems ? "Show Less" : "Show More"}
@@ -1400,7 +1427,7 @@ const MyClientsDetails = (props) => {
                   )}
                 </>
               ) : (
-                <Text>No activity history found.</Text>
+                <Text style={styles.nodata}>No activity history found.</Text>
               )}
             </View>
             {/* <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
@@ -1461,7 +1488,7 @@ const MyClientsDetails = (props) => {
                 //   key={(item) => item.id}
               />
             </View> */}
-            <View style={{ height: 50 }}></View>
+            {/* <View style={{ height: 50 }}></View> */}
           </View>
 
           <Modal
@@ -1956,7 +1983,7 @@ const styles = StyleSheet.create({
   },
   subheadingmaintype: {
     color: "black",
-    fontSize: 16,
+    fontSize: 14,
 
     marginBottom: 15,
     width: "100%",
@@ -1976,5 +2003,10 @@ const styles = StyleSheet.create({
     width: 130,
     textAlign: "right",
   },
+  nodata:{textAlign:"center"},
+  mainpropertydata:{textAlign:"center",width:"100%"},
+  editactivity:{marginLeft:12,
+  color:Colors.PrimaryColor,
+fontSize:14,fontWeight:"bold"},
 });
 export default MyClientsDetails;
