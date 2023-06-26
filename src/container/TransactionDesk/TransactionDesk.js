@@ -206,7 +206,7 @@ const TransactionDesk = () => {
               </View>
             </View>
             <View style={styles.maincolumn}>
-              <View style={styles.mainheading}></View>
+            <Text style={styles.mainheadinginner}></Text>
               <View style={styles.activitycover}>
                 <Text style={styles.activityiconstoggle}>
                   <Switch
@@ -304,7 +304,7 @@ const TransactionDesk = () => {
               </View>
             </View>
             <View style={styles.maincolumn}>
-              <View style={styles.mainheading}></View>
+                <Text style={styles.mainheadinginner}></Text>
               <View style={styles.activitycover}>
                 <Text style={styles.activityiconstoggle}>
                   <Switch
@@ -347,7 +347,7 @@ const TransactionDesk = () => {
             </View>
             <View style={styles.maincolumn}>
               <View style={styles.mainheading}>
-                <Text style={styles.mainheadinginner}>Due Dates</Text>
+                <Text style={styles.mainheadinginnerend}>Due Dates</Text>
               </View>
               <View style={styles.activitycover}>
                 <Text style={styles.activitydateyellow}>4/04/2023 {'\n'}
@@ -402,7 +402,9 @@ const TransactionDesk = () => {
               </View>
             </View>
             <View style={styles.maincolumn}>
-              <View style={styles.mainheading}></View>
+            <View style={styles.mainheading}>
+                <Text style={styles.mainheadinginner}></Text>
+              </View>
               <View style={styles.activitycover}>
                 <Text style={styles.activityiconstoggle}>
                   <Switch
@@ -448,15 +450,24 @@ const styles = StyleSheet.create({
   },
   activityname: { marginLeft: 7, fontSize: 14,marginTop:-5 },
   activitydate: {
-    textAlign:"center",
-    alignItems:"center",
+    textAlign:"right",
+    alignItems:"flex-end",
         fontSize: 13,
-    color: "green",
+    color: "green", position:"relative",
+    left:4
   },
-  activitydatered:{ textAlign:"center",
-  alignItems:"center",
+  mainheadinginnerend:{ fontWeight: "bold", fontSize: 16 ,marginRight:-20,
+textAlign:"right",
+alignItems:"flex-end",
+position:"relative",
+left:27
+},
+  activitydatered:{ textAlign:"right",
+  alignItems:"flex-end",
       fontSize: 13,
     color: "red",
+    position:"relative",
+    left:4
 
   },
   firstcol: {
@@ -469,16 +480,19 @@ const styles = StyleSheet.create({
   activityicons: { marginRight: 6, height: 40, marginTop: 6 },
   maincolumn: { paddingRight: 12, marginBottom: 12 ,
   
-  justifyContent:"center",
-  textAlign:"center"
+  justifyContent:"flex-end",
+  textAlign:"right"
   
   },
   
   activitydateyellow:{ 
-textAlign:"center",
-alignItems:"center",
+textAlign:"right",
+alignItems:"flex-end",
     fontSize: 13,
     color: "orange",},
   activityiconstoggle: { marginTop: 12, marginRight: 6 },
-  mainheading:{alignItems:"center"},
+  mainheading:
+  {
+    alignItems:"flex-start"
+  }
 });

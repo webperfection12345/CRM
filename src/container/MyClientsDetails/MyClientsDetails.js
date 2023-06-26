@@ -821,7 +821,7 @@ const MyClientsDetails = (props) => {
                                 <Text style={styles.headingmaintype}>
                                   Next Disposition Date
                                 </Text>
-                                <Text style={styles.subheadingmaintypeinner}>
+                                <Text style={styles.subheadingmaintypeinnerdate}>
                                   {item.next_disposition_date}
                                 </Text>
                               </View>
@@ -1045,7 +1045,7 @@ const MyClientsDetails = (props) => {
                                   <Text style={styles.headingmaintype}>
                                     Next Disposition Date
                                   </Text>
-                                  <Text style={styles.subheadingmaintypeinner}>
+                                  <Text style={styles.subheadingmaintypeinnerdate}>
                                     {formatDate(item.next_disposition_date)}
                                   </Text>
                                 </View>
@@ -2001,6 +2001,15 @@ const styles = StyleSheet.create({
     marginBottom: 3,
     // width: "100%",
     width: 130,
+    textAlign: "right",
+  },
+  subheadingmaintypeinnerdate: {
+    color: "black",
+    fontSize: 14,
+
+    marginBottom: 3,
+    // width: "100%",
+    width: 100,
     textAlign: "right",
   },
   nodata:{textAlign:"center"},
