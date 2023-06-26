@@ -488,7 +488,7 @@ export default function Dashboard() {
             </Text>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 17,
                 color: "green",
                 fontWeight: "bold",
                 marginTop: 5,
@@ -508,7 +508,7 @@ export default function Dashboard() {
             </Text>
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 17,
                 color: "green",
                 fontWeight: "bold",
                 marginTop: 5,
@@ -521,7 +521,8 @@ export default function Dashboard() {
                 height: 1,
                 width: "100%",
                 backgroundColor: Colors.gray,
-                marginTop: 10,
+                marginTop: 30,
+                
               }}
             ></View>
             <Text
@@ -530,6 +531,7 @@ export default function Dashboard() {
                 color: Colors.black,
                 fontWeight: "bold",
                 marginTop: 20,
+                marginBottom:15
               }}
             >
               Document Portal
@@ -573,15 +575,17 @@ export default function Dashboard() {
                   }
                   style={{
                     height: 60,
-                    width: "90%",
+                    width: "100%",
                     alignSelf: "center",
                     borderBottomColor: Colors.gray,
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
+                    paddingHorizontal:12
+                  
                   }}
                 >
-                  <View style={{ width: "15%" }}>
+                  <View style={{ width: 45,marginRight:2 }}>
                     <Image
                       source={{ uri: item.contact_image }}
                       style={{
@@ -589,7 +593,8 @@ export default function Dashboard() {
                         width: 45,
                         borderRadius: 100,
                         borderWidth: 1,
-                        borderColor: "#576ebd",
+                        borderColor: Colors.gray,
+                       
                       }}
                     ></Image>
                     <Text
@@ -603,9 +608,11 @@ export default function Dashboard() {
                   </View>
                   <View
                     style={{
-                      width: "90%",
+                      width:"85%",
                       flexDirection: "row",
                       justifyContent: "space-between",
+                      marginLeft:6
+                      
                     }}
                   >
                     <View
@@ -616,7 +623,7 @@ export default function Dashboard() {
                       <Text
                         style={{
                           color: Colors.black,
-                          fontSize: 16,
+                          fontSize: 15,
                           fontWeight: "bold",
                         }}
                       >
@@ -626,7 +633,7 @@ export default function Dashboard() {
                         style={{
                           color: Colors.black,
                           fontSize: 14,
-                          marginTop: 5,
+                          marginTop: 2,
                           marginLeft: 0,
                         }}
                       >

@@ -147,8 +147,7 @@ const DisPosition = (props) => {
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
+             <View
           style={{
             height: 60,
             width: "100%",
@@ -220,12 +219,14 @@ const DisPosition = (props) => {
               placeholderTextColor={Colors.white}
               style={{
                 color: Colors.white,
-                fontSize: 12,
+                fontSize: 15,
                 marginLeft: 10,
               }}
             />
           </View>
         </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+ 
         <View
           style={{
             backgroundColor: Colors.white,
@@ -238,6 +239,7 @@ const DisPosition = (props) => {
               alignItems: "center",
               flexDirection: "row",
               paddingHorizontal: 12,
+            
             }}
           >
             <Image
@@ -246,7 +248,8 @@ const DisPosition = (props) => {
                 height: 120,
                 width: 120,
                 borderRadius: 100,
-                marginRight: 12,
+                marginRight: 12,  borderWidth:1,
+                borderColor:Colors.gray
               }}
             />
 

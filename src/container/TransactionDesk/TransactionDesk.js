@@ -23,13 +23,6 @@ const TransactionDesk = () => {
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor,height:"100%" }}>
-      <ScrollView style={{ height:"100%" }}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: Colors.white, height:"100%"
-        }}
-      >
         <View
           style={{
             height: 60,
@@ -125,6 +118,14 @@ const TransactionDesk = () => {
             />
           </View>
         </View>
+      <ScrollView style={{ height:"100%" }}>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: Colors.white, height:"100%"
+        }}
+      >
+      
        <View style={styles.maincover}>
           <View style={styles.firstcol}>
             <View style={styles.maincolumn}>
@@ -235,7 +236,7 @@ const TransactionDesk = () => {
                   onValueChange={setChecked}
                   color={isChecked ? "#576ebd" : undefined}
                 />
-<Image
+                <Image
                     source={require("../../../assets/share.png")}
                     style={{
                       height: 30,

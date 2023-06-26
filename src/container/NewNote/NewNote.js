@@ -99,8 +99,8 @@ const NewNote = (props) => {
           >
             <Image
               style={{
-                height: 20,
-                width: 20,
+                height: 15,
+                width: 15,
                 resizeMode: "contain",
                 tintColor: Colors.white,
               }}
@@ -118,8 +118,8 @@ const NewNote = (props) => {
           >
             <Image
               style={{
-                height: 20,
-                width: 20,
+                height: 15,
+                width: 15,
                 resizeMode: "contain",
                 transform: [{ rotate: "45deg" }],
               }}
@@ -153,13 +153,15 @@ const NewNote = (props) => {
                     height: 80,
                     width: 80,
                     borderRadius: 40,
+                    borderWidth:1,
+                    borderColor:Colors.gray
                   }}
                 ></Image>
                 <View>
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 24,
+                      fontSize: 19,
 
                       fontWeight: "bold",
                       marginLeft: 20,
@@ -204,11 +206,11 @@ const NewNote = (props) => {
                 height: 150,
                 marginTop: 10,
                 alignSelf: "center",
-                justifyContent: "center",
+                //justifyContent: "center",
               }}
             >
               <TextInput
-                allowFontScaling={false}
+                //allowFontScaling={false}
                 style={{
                   width: "100%",
                   borderRadius: 8,
@@ -220,6 +222,8 @@ const NewNote = (props) => {
                   backgroundColor: Colors.gray,
                   fontSize: 14,
                   padding: 2,
+                  alignItems:"flex-start",
+                  textAlignVertical: 'top'
                 }}
                 autoCorrect={false}
                 returnKeyType="done"
@@ -232,10 +236,10 @@ const NewNote = (props) => {
           <View
             style={{
               flexDirection: "row",
-              width: "90%",
+              width: "95%",
               height: 60,
               marginTop: 20,
-              alignSelf: "center",
+              alignItems:"flex-start",
               justifyContent: "flex-end"
             }}
           >
