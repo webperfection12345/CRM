@@ -339,7 +339,7 @@ const AddContacts = () => {
             </View>
           </View>
 
-          <View style={{ width: "95%", alignSelf: "center" }}>
+          <View style={{ width: "95%", alignSelf: "center", }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Properties
             </Text>
@@ -348,7 +348,7 @@ const AddContacts = () => {
                 width: "100%",
                 height: 50,
                 marginTop: 10,
-                justifyContent: "center",
+                justifyContent: "center", borderRadius: 8,
               }}
             >
               <Picker

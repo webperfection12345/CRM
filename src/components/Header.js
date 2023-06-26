@@ -10,7 +10,8 @@ const Header = (props) => {
   return (
     <View
       style={{
-        height: 120,
+        //height: 80,
+        paddingVertical:12,
         width: "100%",
         justifyContent: "space-between",
      
@@ -21,25 +22,39 @@ const Header = (props) => {
         style={{
           justifyContent: "space-between",
           flexDirection: "row",
-          marginTop: 20,
+          //marginTop: 20,
+          alignItems:"center"
         }}
       >
         <TouchableOpacity
           onPress={() => navigation.toggleDrawer()}
-          style={{ height: 50, width: 50, marginLeft: 10 }}
+          // style={{ height: 50, width: 50, marginLeft: 10 }}
+          style={{ width: 50, marginLeft: 10 }}
         >
           <Image
             style={{ height: 25, width: 25, resizeMode: "contain" }}
             source={require("../../assets/menu.png")}
           ></Image>
         </TouchableOpacity>
+        <Text
+        allowFontScaling={false}
+        style={{
+          color: Colors.white,
+          fontSize: 19,
+          fontWeight: "bold",
+          //marginBottom: 30,
+         textAlign:"center"
+        }}
+      >
+      {label} 
+      </Text>
         {plusButton == true ? (
           <TouchableOpacity
             onPress={() => navigation.navigate("AddClients")}
             style={{ height: 50, width: 50 }}
           >
             <Image
-              style={{ height: 25, width: 25, resizeMode: "contain" }}
+              style={{ height: 55, width: 25, resizeMode: "contain" }}
               source={Images.plus}
             ></Image>
           </TouchableOpacity>
@@ -47,18 +62,7 @@ const Header = (props) => {
           <View style={{ height: 50, width: 50 }}></View>
         )}
       </View>
-      <Text
-        allowFontScaling={false}
-        style={{
-          color: Colors.white,
-          fontSize: 19,
-          fontWeight: "bold",
-          marginBottom: 30,
-         textAlign:"center"
-        }}
-      >
-        {label}
-      </Text>
+     
     </View>
   );
 };

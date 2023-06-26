@@ -106,9 +106,9 @@ const PropertiesDetails = (props) => {
                 }}
                 source={require("../../../assets/back.png")}
               ></Image>
-              <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+              {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
             </TouchableOpacity>
-            <Text style={{ fontSize: 15, color: Colors.white }}>
+            <Text style={{ fontSize: 19, fontWeight:"bold", color: Colors.white }}>
               {data.property_address}
             </Text>
             <TouchableOpacity></TouchableOpacity>
@@ -138,9 +138,10 @@ const PropertiesDetails = (props) => {
                 <Text
                   style={{
                     color: Colors.black,
-                    fontSize: 22,
+                    fontSize: 20,
                     fontWeight: "bold",
                     textAlign: "center",
+                    paddingHorizontal:12,
                   }}
                 >
                   {data.title}
@@ -348,11 +349,11 @@ const PropertiesDetails = (props) => {
 
             <View style={{ width: "95%", height: 80, alignSelf: "center" }}>
               <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
+                style={{ fontSize: 15, color: Colors.black, marginTop: 15,  }}
               >
                 Listing Agent
               </Text>
-              <Text style={{ fontSize: 18, color: Colors.black, marginTop: 5 }}>
+              <Text style={{ fontSize: 15, color: Colors.black, marginTop: 5 ,fontWeight: "bold",}}>
                 {data.listagentfullname}
               </Text>
             </View>
@@ -391,7 +392,7 @@ const PropertiesDetails = (props) => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: "bold",
                     }}
                   >
@@ -466,7 +467,7 @@ const PropertiesDetails = (props) => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 18,
+                      fontSize: 15,
                       fontWeight: "bold",
                     }}
                   >

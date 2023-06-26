@@ -8,6 +8,7 @@ import {
   ScrollView,
   Linking,
   SafeAreaView,
+
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -80,12 +81,9 @@ const ContactsDetails = (props) => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: Colors.white,
-        }}
-      >
+       {/* <StatusBar /> */}
+       <View style={{ flex: 1, backgroundColor: Colors.white }}>
+       {/* <View style={{ }}>
         <View
           style={{
             height: 60,
@@ -114,12 +112,12 @@ const ContactsDetails = (props) => {
               }}
               source={require("../../../assets/back.png")}
             ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+           
           </TouchableOpacity>
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
           >
-            ContactsDetails
+            Contacts Details 
           </Text>
           <TouchableOpacity
             onPress={() =>
@@ -143,6 +141,125 @@ const ContactsDetails = (props) => {
             ></Image>
           </TouchableOpacity>
         </View>
+        </View> */}
+       <View
+            style={{
+             paddingVertical:22,
+              width: "100%",
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+              backgroundColor: Colors.PrimaryColor,
+            }}
+          >
+            <TouchableOpacity onPress={() => (
+                navigation.goBack()
+              )}
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+                marginLeft: 10,
+              }}
+            >
+              <Image
+                style={{
+                  height: 15,
+                  width: 15,
+                  resizeMode: "contain",
+                  tintColor: Colors.white,
+                }}
+                source={require("../../../assets/back.png")}
+              ></Image>
+              {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
+            </TouchableOpacity>
+            <Text
+              style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
+              >
+                Contacts Details 
+            </Text>
+            <TouchableOpacity
+            // onPress={() => navigation.navigate("AddProperties")}
+            // style={{
+            //   flexDirection: "row",
+            //   justifyContent: "center",
+            //   alignItems: "center",
+            //   marginRight: 10,
+            // }}
+            >
+              {/* <Image
+                style={{
+                  height: 15,
+                  width: 15,
+                  resizeMode: "contain",
+                  tintColor: Colors.white,
+                }}
+                source={require("../../../assets/plus.png")}
+              ></Image> */}
+            </TouchableOpacity>
+          </View>
+
+          {/* <View
+            style={{
+              height: 80,
+              width: "100%",
+              justifyContent: "center",
+              alignContent: "center",
+              alignItems: "center",
+              backgroundColor: Colors.PrimaryColor,
+              position: "relative",
+              zIndex: 9,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: Colors.buttonColor,
+                borderRadius: 5,
+                width: "92%",
+                height: 50,
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <TouchableOpacity onPress={() => getSearchPropertiesApiCall()}>
+                <Image
+                  source={require("../../../assets/search.png")}
+                  style={{
+                    height: 20,
+                    width: 20,
+                    marginLeft: 10,
+                    tintColor: Colors.white,
+                  }}
+                ></Image>
+              </TouchableOpacity>
+
+              <TextInput
+                allowFontScaling={false}
+                placeholder="Search"
+                placeholderTextColor={Colors.white}
+             
+                style={{
+                  color: Colors.white,
+                  fontSize: 15,
+                  marginLeft: 10,
+                }}
+              ></TextInput>
+            </View>
+         
+              <View
+                style={{
+                 
+                  width: "92%",
+                  backgroundColor: Colors.white,
+                  position: "absolute",
+                  top: 160 / 2 - 15,
+                  zIndex: 99,
+                }}
+              >
+            
+              </View>
+           
+          </View> */}
         <ScrollView>
           <View
             style={{
@@ -160,6 +277,8 @@ const ContactsDetails = (props) => {
                   height: 120,
                   width: 120,
                   borderRadius: 60,
+                  borderWidth:1,
+                  borderColor:Colors.gray
                 }}
               ></Image>
             </View>
@@ -268,6 +387,8 @@ const ContactsDetails = (props) => {
                   style={{
                     color: Colors.black,
                     fontSize: 16,
+                    fontWeight: "bold",
+                    marginBottom: 2,
                   }}
                 >
                   Phone
@@ -314,8 +435,11 @@ const ContactsDetails = (props) => {
               ></Image>
             </TouchableOpacity>
           </View>
-          <View style={{ width: "95%", alignSelf: "center" }}>
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+          <View style={{ width: "96%", alignSelf: "center" , paddingLeft:8}}>
+            <Text style={{ color: Colors.black, marginTop: 15,color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: "bold",
+                     }}>
               Client Type{" "}
             </Text>
             <View
@@ -324,17 +448,20 @@ const ContactsDetails = (props) => {
                 height: 50,
                 marginTop: 10,
                 justifyContent: "center",
+           
               }}
             >
               <Text
                 style={{
-                  color: Colors.black,
-                  fontSize: 15,
+                  color: Colors.black, marginTop: 15,color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: "bold",
                 }}
               >
                 {leadType}
               </Text>
             </View>
+           
           </View>
 
           <View style={{ height: 50 }}></View>

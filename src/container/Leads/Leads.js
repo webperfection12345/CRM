@@ -52,8 +52,7 @@ const Leads = () => {
      }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View
+         <View
           style={{
             height: 40,
             width: "100%",
@@ -81,7 +80,7 @@ const Leads = () => {
               }}
               source={require("../../../assets/back.png")}
             ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+            {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
           </TouchableOpacity>
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
@@ -132,6 +131,8 @@ const Leads = () => {
             ></TextInput>
           </View>
         </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+     
         <FlatList
           data={isSearching ? filteredData : data}
           ListFooterComponent={<View style={{ height: 50 }}></View>}
@@ -225,7 +226,7 @@ const Leads = () => {
                     color: Colors.black,
                     fontSize: 14,
                     textAlign: "right",
-                    width: "60%",
+                    width: "95%",
                   }}
                 >
                   {item.username}

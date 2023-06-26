@@ -12,6 +12,7 @@ import {
   StyleSheet,
   PanResponder,
   Share,
+
 } from "react-native";
 
 import Colors from "../../utils/Colors";
@@ -272,32 +273,17 @@ const MyClientsDetails = (props) => {
           backgroundColor: Colors.white,
         }}
       >
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <FlatList
-            data={data}
-            scrollEnabled={false}
-            renderItem={({ item, index }) => (
-              <View
-                style={{
-                  width: "100%",
-                  alignSelf: "center",
-                  borderRadius: 5,
-                  marginTop: 0,
-                  borderColor: Colors.gray,
-                }}
-              >
-                <View
+         <View
                   style={{
-                    height: 60,
                     width: "100%",
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: "center",
                     backgroundColor: Colors.PrimaryColor,
+                    paddingVertical:22
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => navigation.goBack()}
                     style={{
                       flexDirection: "row",
                       justifyContent: "center",
@@ -329,8 +315,8 @@ const MyClientsDetails = (props) => {
                   </Text>
                   <TouchableOpacity
                     onPress={() =>
-                      navigation.navigate("EditClientsDetails", { item })
-                    }
+                      navigation.navigate("EditClientsDetails", { item })}
+                   
                     style={{
                       flexDirection: "row",
                       justifyContent: "center",
@@ -349,6 +335,21 @@ const MyClientsDetails = (props) => {
                     ></Image>
                   </TouchableOpacity>
                 </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <FlatList
+            data={data}
+            scrollEnabled={false}
+            renderItem={({ item, index }) => (
+              <View
+                style={{
+                  width: "100%",
+                  alignSelf: "center",
+                  borderRadius: 5,
+                  marginTop: 0,
+                  borderColor: Colors.gray,
+                }}
+              >
+               
                 <View
                   style={{
                     width: "100%",
@@ -371,7 +372,7 @@ const MyClientsDetails = (props) => {
                     <Text
                       style={{
                         color: Colors.black,
-                        fontSize: 30,
+                        fontSize: 19,
 
                         fontWeight: "bold",
                         marginLeft: 20,
@@ -1364,7 +1365,7 @@ justifyContent:"center"
                   )}
                 </>
               ) : (
-                <Text>No Notes found.</Text>
+                <Text style={styles.nodata}>No Notes found.</Text>
               )}
             </View>
 

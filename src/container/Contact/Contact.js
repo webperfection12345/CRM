@@ -82,7 +82,9 @@ const Contact = () => {
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
         <View
           style={{
-            height: 40,
+           // height: 40,
+           paddingTop:20,
+           paddingBottom:12,
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -108,12 +110,12 @@ const Contact = () => {
               }}
               source={require("../../../assets/back.png")}
             ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text>
+            {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
           </TouchableOpacity>
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
           >
-            Contacts
+            Contacts 
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AddContacts")}
