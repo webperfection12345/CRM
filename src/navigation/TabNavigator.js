@@ -30,7 +30,7 @@ const BottomTabNavigator = () => {
       tabBar={(props) => <CustomTabBar {...props} size={30} />}
     >
       <Tab.Screen
-        name="homeTab"
+        name="Home"
         component={Dashboard}
         options={{
           tabBarLabel: (

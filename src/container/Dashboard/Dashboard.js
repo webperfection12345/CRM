@@ -9,6 +9,7 @@ import {
   Image,
   FlatList,
   Linking,
+  Platform,
 } from "react-native";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
@@ -523,7 +524,6 @@ export default function Dashboard() {
                 width: "100%",
                 backgroundColor: Colors.gray,
                 marginTop: 30,
-                
               }}
             ></View>
             <Text
@@ -532,7 +532,7 @@ export default function Dashboard() {
                 color: Colors.black,
                 fontWeight: "bold",
                 marginTop: 20,
-                marginBottom:15
+                marginBottom: 15,
               }}
             >
               Document Portal
@@ -582,11 +582,10 @@ export default function Dashboard() {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    paddingHorizontal:12
-                  
+                    paddingHorizontal: 12,
                   }}
                 >
-                  <View style={{ width: 45,marginRight:2 }}>
+                  <View style={{ width: 45, marginRight: 2 }}>
                     <Image
                       source={{ uri: item.contact_image }}
                       style={{
@@ -595,7 +594,6 @@ export default function Dashboard() {
                         borderRadius: 100,
                         borderWidth: 1,
                         borderColor: Colors.gray,
-                       
                       }}
                     ></Image>
                     <Text
@@ -609,11 +607,10 @@ export default function Dashboard() {
                   </View>
                   <View
                     style={{
-                      width:"85%",
+                      width: "85%",
                       flexDirection: "row",
                       justifyContent: "space-between",
-                      marginLeft:6
-                      
+                      marginLeft: 6,
                     }}
                   >
                     <View

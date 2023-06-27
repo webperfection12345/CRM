@@ -1,11 +1,14 @@
 {
   "name": "crm",
   "version": "1.0.0",
+  "homepage": "http://webperfection12345.github.io/CRM",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "deploy": "gh-pages -d web-build",
+    "predeploy": "expo build:web"
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
@@ -59,7 +62,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@babel/plugin-proposal-export-namespace-from": "^7.18.9"
+    "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
+    "gh-pages": "^5.0.0"
   },
   "resolutions": {
     "@expo/config-plugins": "~6.0.0",

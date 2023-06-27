@@ -28,111 +28,117 @@ const Leads = () => {
     getAllContacts();
     if (isFocused) {
       // Perform the refresh logic here
-     
     }
   }, [isFocused]);
   const getAllContacts = () => {
-    dispatch(getLeads()).then((response) => {
-      const contactsData = response.payload.data;
-      console.log(contactsData);
-      setData(Object.values(contactsData));
-      setLoading(false);
-    });
+    dispatch(getLeads())
+      .then((response) => {
+        if (response && response.payload && response.payload.data) {
+          const contactsData = response.payload.data;
+          console.log(contactsData, "aaasa");
+          setData(contactsData);
+          setLoading(false);
+        } else {
+          console.error("Invalid response data:", response);
+          // Handle the error case here, such as displaying an error message or taking appropriate action
+        }
+      })
+      .catch((error) => {
+        console.error("Error retrieving leads:", error);
+        // Handle the error case here, such as displaying an error message or taking appropriate action
+      });
   };
   const searchFilter = (text) => {
     setSearchText(text);
     const filteredItems = data.filter((item) =>
-    item.property_key.includes(text)
+      item.property_key.includes(text)
     );
     setFilteredData(filteredItems);
     setIsSearching(true);
   };
-  const handleUsernameClick =(item) =>{
-    navigation.navigate("MyClientsDetails", { item: item })
-     }
+  const handleUsernameClick = (item) => {
+    navigation.navigate("MyClientsDetails", { item: item });
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
-         <View
+      <View
+        style={{
+          height: 40,
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+          backgroundColor: Colors.PrimaryColor,
+        }}
+      >
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
           style={{
-            height: 40,
-            width: "100%",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
+            marginLeft: 10,
           }}
         >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
+          <Image
             style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: 10,
+              height: 15,
+              width: 15,
+              resizeMode: "contain",
+              tintColor: Colors.white,
             }}
-          >
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-                tintColor: Colors.white,
-              }}
-              source={require("../../../assets/back.png")}
-            ></Image>
-            {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
-          </TouchableOpacity>
-          <Text
-            style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
-          >
-            Opportunities
-          </Text>
-          <Text></Text>
-        </View>
+            source={require("../../../assets/back.png")}
+          ></Image>
+          {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
+        </TouchableOpacity>
+        <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
+          Opportunities
+        </Text>
+        <Text></Text>
+      </View>
+      <View
+        style={{
+          height: 80,
+          width: "100%",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+          backgroundColor: Colors.PrimaryColor,
+        }}
+      >
         <View
           style={{
-            height: 80,
-            width: "100%",
-            justifyContent: "center",
-            alignContent: "center",
+            backgroundColor: Colors.buttonColor,
+            borderRadius: 5,
+            width: "92%",
+            height: 50,
+            flexDirection: "row",
             alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
           }}
         >
-          <View
+          <Image
+            source={require("../../../assets/search.png")}
             style={{
-              backgroundColor: Colors.buttonColor,
-              borderRadius: 5,
-              width: "92%",
-              height: 50,
-              flexDirection: "row",
-              alignItems: "center",
+              height: 20,
+              width: 20,
+              marginLeft: 10,
+              tintColor: Colors.white,
             }}
-          >
-            <Image
-              source={require("../../../assets/search.png")}
-              style={{
-                height: 20,
-                width: 20,
-                marginLeft: 10,
-                tintColor: Colors.white,
-              }}
-            />
-             <TextInput
-              allowFontScaling={false}
-              placeholder="Search"
-              placeholderTextColor={Colors.white}
-              onChangeText={searchFilter}
-              style={{
-                color: Colors.white,
-                fontSize: 15,
-                marginLeft: 10,
-              }}
-            ></TextInput>
-          </View>
+          />
+          <TextInput
+            allowFontScaling={false}
+            placeholder="Search"
+            placeholderTextColor={Colors.white}
+            onChangeText={searchFilter}
+            style={{
+              color: Colors.white,
+              fontSize: 15,
+              marginLeft: 10,
+            }}
+          ></TextInput>
         </View>
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-     
         <FlatList
           data={isSearching ? filteredData : data}
           ListFooterComponent={<View style={{ height: 50 }}></View>}
@@ -221,6 +227,7 @@ const Leads = () => {
                   
                 }}
               >
+
                
     <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Username</Text>
     <TouchableOpacity onPress={() => handleUsernameClick(item)}>
@@ -239,6 +246,7 @@ const Leads = () => {
                 </Text>
   </TouchableOpacity>
   
+
               </View>
               <View
                 style={{
@@ -263,7 +271,7 @@ const Leads = () => {
                   {item.Phone}
                 </Text>
               </View>
-              
+
               {/* Render the Property Key */}
               <View
                 style={{
