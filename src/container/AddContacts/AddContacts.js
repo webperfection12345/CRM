@@ -193,7 +193,7 @@ const AddContacts = () => {
               marginLeft: 10,
             }}
           >
-            <Text style={{ fontSize: 15, color: Colors.white }}>Cancel</Text>
+            <Text style={{ fontSize: 15, color: Colors.white }}>Cancel </Text>
           </TouchableOpacity>
           {/* <Text style={{ fontSize: 15, color: Colors.white }}></Text> */}
           <TouchableOpacity
@@ -212,7 +212,7 @@ const AddContacts = () => {
             </Text>
           </TouchableOpacity>
         </View>
-        <ScrollView>
+        <ScrollView style={{flex: "1 1 0"}}>
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               First Name
@@ -234,7 +234,9 @@ const AddContacts = () => {
                   paddingHorizontal: 15,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
+                  //backgroundColor: Colors.gray,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   padding: 2,
                 }}
@@ -264,7 +266,9 @@ const AddContacts = () => {
                   height: "100%",
                   paddingHorizontal: 15,
                   color: Colors.black,
-                  backgroundColor: Colors.gray,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
+                  //backgroundColor: Colors.gray,
                   fontSize: 14,
                   padding: 2,
                 }}
@@ -295,7 +299,9 @@ const AddContacts = () => {
                   paddingHorizontal: 15,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
+                  //backgroundColor: Colors.gray,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   padding: 2,
                 }}
@@ -327,7 +333,9 @@ const AddContacts = () => {
                   paddingHorizontal: 15,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
+                 // backgroundColor: Colors.gray,
+                 borderColor:Colors.cream,
+                 borderWidth:1,
                   fontSize: 14,
                   padding: 2,
                 }}
@@ -339,7 +347,7 @@ const AddContacts = () => {
             </View>
           </View>
 
-          <View style={{ width: "95%", alignSelf: "center", }}>
+          <View style={{ width: "95%", alignSelf: "center", borderRadius: 8,}}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Properties
             </Text>
@@ -361,10 +369,13 @@ const AddContacts = () => {
                   height: "100%",
                   paddingHorizontal: 15,
                   color: Colors.black,
-                  backgroundColor: Colors.gray,
+                  //backgroundColor: Colors.gray,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   padding: 2,
-                  borderColor: Colors.gray,
+               
+                
                 }}
               >
                 <Picker.Item label="Select an option" value="" />
@@ -386,7 +397,7 @@ const AddContacts = () => {
             <View
               style={{
                 width: "100%",
-                height: 50,
+                height: 100,
                 marginTop: 10,
                 justifyContent: "center",
               }}
@@ -400,9 +411,12 @@ const AddContacts = () => {
                   paddingHorizontal: 15,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
+                  //backgroundColor: Colors.gray,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   padding: 2,
+                  
                 }}
                 autoCorrect={false}
                 returnKeyType="done"
@@ -411,12 +425,24 @@ const AddContacts = () => {
             </View>
           </View>
           <View style={{ width: "95%", alignSelf: "center" }}>
+          <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+              Date & Time
+            </Text>
             <View
               style={{
+                borderRadius: 8,
+               // backgroundColor: Colors.gray,
                 width: "100%",
-                height: 50,
-                marginTop: 10,
-                justifyContent: "center",
+                height:55,
+                paddingHorizontal: 15,
+                color: Colors.black,
+                borderColor:Colors.cream,
+                  borderWidth:1,
+                fontSize: 14,
+                padding: 2,
+                borderColor: Colors.gray,
+                marginTop:10,
+                paddingTop:17
               }}
             >
               <TouchableOpacity onPress={showDatePicker}>
@@ -429,6 +455,7 @@ const AddContacts = () => {
                 mode="datetime"
                 onConfirm={handleConfirm}
                 onCancel={hideDatePicker}
+                
               />
             </View>
           </View>
@@ -451,9 +478,12 @@ const AddContacts = () => {
                   height: "100%",
                   paddingHorizontal: 15,
                   color: Colors.black,
-                  backgroundColor: Colors.gray,
+                  //backgroundColor: Colors.gray,
                   fontSize: 14,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   padding: 2,
+                  
                   borderColor: Colors.gray,
                 }}
               >
@@ -565,7 +595,9 @@ const AddContacts = () => {
                   height: "100%",
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
+                  //backgroundColor: Colors.gray,
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   alignSelf: "center",
                   alignItems: "center",

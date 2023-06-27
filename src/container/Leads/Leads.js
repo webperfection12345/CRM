@@ -216,6 +216,9 @@ const Leads = () => {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   marginBottom: 20,
+                  flexWrap:"wrap",
+
+                  
                 }}
               >
                
@@ -226,10 +229,13 @@ const Leads = () => {
                     color: Colors.black,
                     fontSize: 14,
                     textAlign: "right",
-                    width: "95%",
+                 
+                  
+                    
+                    
                   }}
                 >
-                  {item.username}
+             {item.username} 
                 </Text>
   </TouchableOpacity>
   

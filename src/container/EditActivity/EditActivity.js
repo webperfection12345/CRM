@@ -127,7 +127,7 @@ const EditActivity = (props) => {
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Cancel</Text>
           </TouchableOpacity>
-          <Text style={{ fontSize: 15, color: Colors.white }}>
+          <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white  }}>
             Activity Details
           </Text>
           <TouchableOpacity
@@ -303,7 +303,7 @@ const EditActivity = (props) => {
               />
             </View>
           </View>
-          <View style={{ width: "95%", alignSelf: "center" }}>
+          <View style={{ width: "100%", alignSelf: "center" }}>
             <View
               style={{
                 flexDirection: "row",
@@ -311,7 +311,7 @@ const EditActivity = (props) => {
                 marginTop: 15,
               }}
             >
-              <Text style={{ fontSize: 15, color: Colors.black }}>
+              <Text style={{ fontSize: 15, color: Colors.black, paddingHorizontal:12}}>
                 Next Disposition Date
               </Text>
             </View>
@@ -324,12 +324,13 @@ const EditActivity = (props) => {
                   paddingVertical: 9,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: Colors.gray,
+                 // backgroundColor: Colors.gray,
+                 borderColor: Colors.gray,
+                  borderWidth: 1,
                   fontSize: 14,
-                  padding: 2,
-                  marginTop: 12,
                   paddingHorizontal: 15,
                   height: 55,
+                  paddingTop:17
                 }}
               >
                 <TouchableOpacity
@@ -417,7 +418,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 15,
   },
-  inputContainer: { paddingHorizontal: 12, marginTop: 15 },
+  inputContainer: { paddingHorizontal: 12, marginTop: 10 },
 
   label: {
     fontSize: 16,

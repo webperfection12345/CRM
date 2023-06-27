@@ -283,7 +283,7 @@ const MyClientsDetails = (props) => {
                     paddingVertical:22
                   }}
                 >
-                  <TouchableOpacity
+                  <TouchableOpacity 
                     style={{
                       flexDirection: "row",
                       justifyContent: "center",
@@ -311,7 +311,7 @@ const MyClientsDetails = (props) => {
                       color: Colors.white,
                     }}
                   >
-                    My Clients Details
+                    My Clients Details 
                   </Text>
                   <TouchableOpacity
                     onPress={() =>
@@ -335,7 +335,10 @@ const MyClientsDetails = (props) => {
                     ></Image>
                   </TouchableOpacity>
                 </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
+
+
+
+        <ScrollView showsVerticalScrollIndicator={false} style={{flex: "1 1 0"}}>
           <FlatList
             data={data}
             scrollEnabled={false}
@@ -1150,8 +1153,8 @@ justifyContent:"center"
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: "bold",
-                  marginTop: 20,
-               marginBottom:5,
+                  marginTop: 25,
+               marginBottom:15,
                   width:"100%",
                   textAlign:"center"
                  
@@ -1941,7 +1944,7 @@ justifyContent:"center"
             </View>
           </Modal>
 
-          <View
+          {/* <View
             style={{
               borderWidth: 1,
               width: "95%",
@@ -1960,7 +1963,7 @@ justifyContent:"center"
               marginTop: 30,
               borderColor: Colors.gray,
             }}
-          ></View>
+          ></View> */}
           <View
             style={{
               width: "95%",
@@ -2014,7 +2017,8 @@ const styles = StyleSheet.create({
     textAlign: "right",
   },
   nodata:{textAlign:"center"},
-  mainpropertydata:{textAlign:"center",width:"100%"},
+  mainpropertydata:{textAlign:"left",width:"100%",
+paddingLeft:12,marginBottom:9},
   editactivity:{marginLeft:12,
   color:Colors.PrimaryColor,
 fontSize:14,fontWeight:"bold"},

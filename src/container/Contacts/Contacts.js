@@ -259,7 +259,7 @@ const Contacts = () => {
             alignContent: "center",
             alignItems: "center",
             backgroundColor: Colors.PrimaryColor,
-            marginBottom: 20,
+            //marginBottom: 20,
           }}
         >
           <View
@@ -288,7 +288,7 @@ const Contacts = () => {
               onChangeText={searchFilter}
               style={{
                 color: Colors.white,
-                fontSize: 18,
+                fontSize: 15,
                 marginLeft: 10,
               }}
             />
@@ -372,7 +372,7 @@ const Contacts = () => {
           </TouchableOpacity>
         </View> */}
 
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, marginTop:15 }}>
           {loading ? (
             <Activity />
           ) : (

@@ -234,7 +234,7 @@ const CustomDrawerContent = () => {
                   <Text
                     style={{
                       color: Colors.black,
-                      fontSize: 12,
+                      fontSize: 16,
                       fontWeight: "bold",
                     }}
                   >

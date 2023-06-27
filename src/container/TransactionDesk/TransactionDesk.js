@@ -12,17 +12,18 @@ import {
 import Checkbox from "expo-checkbox";
 import Colors from "../../utils/Colors";
 import { ScrollView } from "react-native-gesture-handler";
-
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 const TransactionDesk = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isChecked, setChecked] = useState(false);
+  const navigation = useNavigation();
   const [toggle, setToggle] = useState(false);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     setToggle(!isEnabled);
   };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor,height:"100%" }}>
+    <SafeAreaView style={{ flex: 1, height:"100%" }}>
         <View
           style={{
             height: 60,
@@ -33,7 +34,7 @@ const TransactionDesk = () => {
             backgroundColor: Colors.PrimaryColor,
           }}
         >
-          <TouchableOpacity
+          <TouchableOpacity onPress={() => navigation.goBack()}
             style={{
               flexDirection: "row",
               justifyContent: "center",
@@ -118,7 +119,7 @@ const TransactionDesk = () => {
             />
           </View>
         </View>
-      <ScrollView style={{ height:"100%" }}>
+      <ScrollView style={{ height:"100%",flex: 1, }}>
       <View
         style={{
           flex: 1,
@@ -127,7 +128,7 @@ const TransactionDesk = () => {
       >
       
        <View style={styles.maincover}>
-          <View style={styles.firstcol}>
+          <View style={styles.firstcolnew}>
             <View style={styles.maincolumn}>
               <View style={styles.mainheading}>
                 <Text style={styles.mainheadinginner}>Activities</Text>
@@ -153,12 +154,14 @@ const TransactionDesk = () => {
               </View>
             </View>
             <View style={styles.maincolumn}>
-              <View style={styles.mainheading}>
+              <View style={styles.mainheadingend}>
                 <Text style={styles.mainheadinginner}>Due Dates</Text>
               </View>
-              <View style={styles.activitycover}>
-                <Text style={styles.activitydate}>4/04/2023</Text>
+              <View style={styles.activitycoverone}>
+                <Text style={styles.activitydate}>4/04/2023 </Text>
+                
               </View>
+              
             </View>
           </View>
           <View style={styles.firstcol}>
@@ -224,7 +227,7 @@ const TransactionDesk = () => {
           </View>
         </View> 
         <View style={styles.maincover}>
-          <View style={styles.firstcol}>
+          <View style={styles.firstcolnew}>
             <View style={styles.maincolumn}>
               <View style={styles.mainheading}>
                 <Text style={styles.mainheadinginner}>Activities</Text>
@@ -249,11 +252,13 @@ const TransactionDesk = () => {
               </View>
             </View>
             <View style={styles.maincolumn}>
-              <View style={styles.mainheading}>
+              <View style={styles.mainheadingend}>
                 <Text style={styles.mainheadinginner}>Due Dates</Text>
               </View>
-              <View style={styles.activitycover}>
-                <Text style={styles.activitydatered}>4/04/2023{'\n'}
+              <View style={styles.activitycoverone}>
+                <Text style={styles.activitydatered}>4/04/2023
+                </Text>
+                <Text style={styles.activitydatered}>
                 OVERDUE
                 </Text>
               </View>
@@ -322,7 +327,7 @@ const TransactionDesk = () => {
           </View>
         </View> 
         <View style={styles.maincover}>
-          <View style={styles.firstcol}>
+          <View style={styles.firstcolnew}>
             <View style={styles.maincolumn}>
               <View style={styles.mainheading}>
                 <Text style={styles.mainheadinginner}>Activities</Text>
@@ -347,11 +352,14 @@ const TransactionDesk = () => {
               </View>
             </View>
             <View style={styles.maincolumn}>
-              <View style={styles.mainheading}>
+              <View style={styles.mainheadingend}>
                 <Text style={styles.mainheadinginnerend}>Due Dates</Text>
               </View>
-              <View style={styles.activitycover}>
-                <Text style={styles.activitydateyellow}>4/04/2023 {'\n'}
+              <View style={styles.activitycoverone}>
+                <Text style={styles.activitydateyellow}>4/04/2023 
+                
+                </Text>
+                <Text style={styles.activitydateyellow}>
                  DUE TOMORROW
                 </Text>
               </View>
@@ -440,6 +448,7 @@ const styles = StyleSheet.create({
     borderBottomColor: Colors.gray,
     borderBottomWidth: 1,
     paddingBottom: 12,
+    //height:"100%"
   },
 
   activitycover: {
@@ -449,34 +458,49 @@ const styles = StyleSheet.create({
     justifyContent:"center",
   
   },
+  activitycoverred: {
+    flexDirection: "column",
+    height: 40,
+    alignItems: "center",
+    justifyContent:"flex-end",textAlign:"right",
+  
+  },
+  
   activityname: { marginLeft: 7, fontSize: 14,marginTop:-5 },
   activitydate: {
     textAlign:"right",
     alignItems:"flex-end",
         fontSize: 13,
-    color: "green", position:"relative",
-    left:4
+    color: "green",
   },
-  mainheadinginnerend:{ fontWeight: "bold", fontSize: 16 ,marginRight:-20,
+  mainheadinginnerend:{ 
+fontWeight: "bold", 
+fontSize: 16 ,
+//marginRight:-20,
 textAlign:"right",
 alignItems:"flex-end",
-position:"relative",
-left:27
+//position:"relative",
+//left:27
 },
   activitydatered:{ textAlign:"right",
   alignItems:"flex-end",
       fontSize: 13,
     color: "red",
-    position:"relative",
-    left:4
+    //position:"relative",
+    //left:4
 
   },
   firstcol: {
     flexDirection: "row",
     justifyContent: "space-between",
     width: "100%",
+    alignItems:"center"
   },
- 
+  firstcolnew:{ flexDirection: "row",
+  justifyContent: "space-between",
+  width: "100%",
+alignItems:"flex-start"
+},
   mainheadinginner: {  fontWeight: "bold", fontSize: 16 ,},
   activityicons: { marginRight: 6, height: 40, marginTop: 6 },
   maincolumn: { paddingRight: 12, marginBottom: 12 ,
@@ -491,9 +515,13 @@ textAlign:"right",
 alignItems:"flex-end",
     fontSize: 13,
     color: "orange",},
-  activityiconstoggle: { marginTop: 12, marginRight: 6 },
+  // activityiconstoggle: { marginTop: 12, marginRight: 6 },
   mainheading:
   {
     alignItems:"flex-start"
+  },
+  activitycoverone:{marginTop:10},
+  activitycover:{marginTop:10,
+    flexDirection:"row",alignItems:"center"
   }
 });
