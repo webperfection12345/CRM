@@ -270,6 +270,74 @@ const MyClientsDetails = (props) => {
           backgroundColor: Colors.white,
         }}
       >
+
+         <View
+                  style={{
+                    width: "100%",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    backgroundColor: Colors.PrimaryColor,
+                    paddingVertical:22
+                  }}
+                >
+                  <TouchableOpacity 
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginLeft: 10,
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 15,
+                        width: 15,
+                        resizeMode: "contain",
+                        tintColor: Colors.white,
+                      }}
+                      source={require("../../../assets/back.png")}
+                    ></Image>
+                    <Text style={{ fontSize: 15, color: Colors.white }}>
+                     
+                    </Text>
+                  </TouchableOpacity>
+                  <Text
+                    style={{
+                      fontSize: 19,
+                      fontWeight: "bold",
+                      color: Colors.white,
+                    }}
+                  >
+                    My Clients Details 
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() =>
+                      navigation.navigate("EditClientsDetails", { item })}
+                   
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      marginRight: 10,
+                    }}
+                  >
+                    <Image
+                      source={require("../../../assets/edit.png")}
+                      style={{
+                        height: 15,
+                        width: 15,
+                        resizeMode: "contain",
+                        tintColor: Colors.white,
+                      }}
+                    ></Image>
+                  </TouchableOpacity>
+                </View>
+
+
+
+        <ScrollView showsVerticalScrollIndicator={false} style={{flex: "1 1 0"}}>
+
         <View
           style={{
             width: "100%",
@@ -330,6 +398,7 @@ const MyClientsDetails = (props) => {
           </TouchableOpacity>
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
+
           <FlatList
             data={data}
             scrollEnabled={false}
@@ -1142,10 +1211,12 @@ const MyClientsDetails = (props) => {
                   color: Colors.black,
                   fontSize: 18,
                   fontWeight: "bold",
-                  marginTop: 20,
-                  marginBottom: 5,
-                  width: "100%",
-                  textAlign: "center",
+                  marginTop: 25,
+               marginBottom:15,
+                  width:"100%",
+                  textAlign:"center"
+                 
+
                 }}
               >
                 Properties Viewed
@@ -1931,7 +2002,7 @@ const MyClientsDetails = (props) => {
             </View>
           </Modal>
 
-          <View
+          {/* <View
             style={{
               borderWidth: 1,
               width: "95%",
@@ -1950,7 +2021,7 @@ const MyClientsDetails = (props) => {
               marginTop: 30,
               borderColor: Colors.gray,
             }}
-          ></View>
+          ></View> */}
           <View
             style={{
               width: "95%",
@@ -2003,13 +2074,13 @@ const styles = StyleSheet.create({
     width: 100,
     textAlign: "right",
   },
-  nodata: { textAlign: "center" },
-  mainpropertydata: { textAlign: "center", width: "100%" },
-  editactivity: {
-    marginLeft: 12,
-    color: Colors.PrimaryColor,
-    fontSize: 14,
-    fontWeight: "bold",
-  },
+
+  nodata:{textAlign:"center"},
+  mainpropertydata:{textAlign:"left",width:"100%",
+paddingLeft:12,marginBottom:9},
+  editactivity:{marginLeft:12,
+  color:Colors.PrimaryColor,
+fontSize:14,fontWeight:"bold"},
+
 });
 export default MyClientsDetails;

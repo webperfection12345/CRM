@@ -135,7 +135,8 @@ export default function Dashboard() {
                     style={{
                       width: 50,
                       height: 50,
-                      marginLeft: 10,
+                      //marginLeft: 10,
+                      marginHorizontal:2,
                       borderRadius: 25,
                       alignSelf: "center",
                       justifyContent: "center",

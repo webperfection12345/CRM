@@ -498,10 +498,15 @@ const DisPosition = (props) => {
                   paddingHorizontal: 15,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: "#e6e8ea",
+                  //backgroundColor: "#e6e8ea",
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   padding: 2,
                   height: "100%",
+                  verticalAlign:"top",
+                  paddingTop:12
+                 
                 }}
                 autoCorrect={false}
                 returnKeyType="done"
@@ -582,12 +587,15 @@ const DisPosition = (props) => {
                 paddingVertical: 9,
                 color: Colors.black,
                 borderColor: Colors.PrimaryColor,
-                backgroundColor: Colors.gray,
+               // backgroundColor: Colors.gray,
+               borderColor:Colors.cream,
+               borderWidth:1,
                 fontSize: 14,
-                padding: 2,
-                marginTop: 12,
+                paddingTop:18,
+               
                 paddingHorizontal: 15,
                 height: 55,
+                
               }}
             >
               <TouchableOpacity
@@ -636,10 +644,13 @@ const DisPosition = (props) => {
                   paddingHorizontal: 15,
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
-                  backgroundColor: "#e6e8ea",
+                  //backgroundColor: "#e6e8ea",
+                  borderColor:Colors.cream,
+                  borderWidth:1,
                   fontSize: 14,
                   padding: 2,
-                  height: "100%",
+                  height: "100%", verticalAlign:"top",
+                  paddingTop:12
                 }}
                 autoCorrect={false}
                 returnKeyType="done"

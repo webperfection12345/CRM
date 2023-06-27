@@ -362,7 +362,7 @@ const PropertiesDetails = (props) => {
                 height: 80,
                 width: "96%",
                 alignSelf: "flex-end",
-
+                justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "center",
                 flexDirection: "row",
@@ -437,7 +437,7 @@ const PropertiesDetails = (props) => {
                 height: 80,
                 width: "96%",
                 alignSelf: "flex-end",
-
+                justifyContent: "space-between",
                 alignItems: "center",
                 alignContent: "center",
                 flexDirection: "row",

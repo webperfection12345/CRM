@@ -115,7 +115,7 @@ const Contact = () => {
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
           >
-            Contacts 
+            Contacts
           </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("AddContacts")}
@@ -206,6 +206,7 @@ const Contact = () => {
                     padding: 12,
                     justifyContent: "space-between",
                     borderRadius: 6,
+                  
                   }}
                 >
                   <View
@@ -213,6 +214,9 @@ const Contact = () => {
                       justifyContent: "space-between",
                       flexDirection: "row",
                       alignItems: "center",
+                    //flexWrap:"wrap",
+                   // width:"100%"
+                  // Width: 70,
                     }}
                   >
                     <Image
@@ -220,27 +224,26 @@ const Contact = () => {
                       style={{
                         height: 50,
                         width: 50,
-                        borderRadius: 30,
+                        borderRadius: 100,
                         resizeMode: "cover",
+                        marginRight:7,
+                        borderColor:Colors.white,
+                        borderWidth:1
                       }}
                     ></Image>
 
-                    <Text
-                      style={{
-                        color: Colors.PrimaryColor,
-                        fontSize: 12,
-                      }}
-                    ></Text>
+                   
                     <Text
                       style={{
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: "bold",
-                        Width: 200,
+                     width:100,
                         paddingHorizontal: 4,
+                        //flexWrap:"wrap"
                       }}
                     >
-                      {item.contact_name}
+                    {item.contact_name} 
                     </Text>
                   </View>
                   <View
