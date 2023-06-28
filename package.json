@@ -1,7 +1,7 @@
 {
   "name": "crm",
   "version": "1.0.0",
-  "homepage": "http://webperfection12345.github.io/CRM",
+  "homepage": "http://webperfection12345.github.io",
   "scripts": {
     "start": "expo start --dev-client",
     "android": "expo run:android",
