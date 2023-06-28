@@ -12,7 +12,9 @@ import {
   StyleSheet,
   PanResponder,
   Share,
+
 } from "react-native";
+
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -49,6 +51,7 @@ const MyClientsDetails = (props) => {
   const [selectedActivityType, setSelectedActivityType] = useState(null);
   const [selectedTodayActivityType, setSelectedTodayActivityType] =
     useState(null);
+
   const [expandedActivityTypes, setExpandedActivityTypes] = useState([]);
   const [showAllItems, setShowAllItems] = useState(false);
   const itemsToShow = showAllItems ? history.length : 5;
@@ -270,7 +273,6 @@ const MyClientsDetails = (props) => {
           backgroundColor: Colors.white,
         }}
       >
-
          <View
                   style={{
                     width: "100%",
@@ -337,68 +339,6 @@ const MyClientsDetails = (props) => {
 
 
         <ScrollView showsVerticalScrollIndicator={false} style={{flex: "1 1 0"}}>
-
-        <View
-          style={{
-            width: "100%",
-            flexDirection: "row",
-            justifyContent: "space-between",
-            alignItems: "center",
-            backgroundColor: Colors.PrimaryColor,
-            paddingVertical: 22,
-          }}
-        >
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: 10,
-            }}
-          >
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-                tintColor: Colors.white,
-              }}
-              source={require("../../../assets/back.png")}
-            ></Image>
-            <Text style={{ fontSize: 15, color: Colors.white }}></Text>
-          </TouchableOpacity>
-          <Text
-            style={{
-              fontSize: 19,
-              fontWeight: "bold",
-              color: Colors.white,
-            }}
-          >
-            My Clients Details
-          </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("EditClientsDetails", { item })}
-            style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginRight: 10,
-            }}
-          >
-            <Image
-              source={require("../../../assets/edit.png")}
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-                tintColor: Colors.white,
-              }}
-            ></Image>
-          </TouchableOpacity>
-        </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
-
           <FlatList
             data={data}
             scrollEnabled={false}
@@ -412,6 +352,7 @@ const MyClientsDetails = (props) => {
                   borderColor: Colors.gray,
                 }}
               >
+               
                 <View
                   style={{
                     width: "100%",
@@ -535,8 +476,8 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    //  borderBottomWidth: 1,
-                    // borderColor: Colors.gray,
+                  //  borderBottomWidth: 1,
+                   // borderColor: Colors.gray,
                     marginTop: 6,
                     justifyContent: "space-between",
                   }}
@@ -566,8 +507,8 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    // borderBottomWidth: 1,
-                    // borderColor: Colors.gray,
+                   // borderBottomWidth: 1,
+                   // borderColor: Colors.gray,
                     marginTop: 6,
                     justifyContent: "space-between",
                   }}
@@ -598,8 +539,8 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    // borderBottomWidth: 1,
-                    // borderColor: Colors.gray,
+                   // borderBottomWidth: 1,
+                   // borderColor: Colors.gray,
                     marginTop: 6,
                     justifyContent: "space-between",
                   }}
@@ -717,9 +658,11 @@ const MyClientsDetails = (props) => {
                   fontSize: 18,
                   fontWeight: "bold",
                   marginTop: 20,
+
+                 
                 }}
               >
-                Today's Activities
+                Today's Activities 
               </Text>
             </View>
 
@@ -737,12 +680,14 @@ const MyClientsDetails = (props) => {
             >
               <View
                 style={{
+
                   width: "100%",
                   alignSelf: "flex-start",
                   alignItems: "flex-start",
                   alignContent: "flex-start",
                   flexDirection: "column",
                   marginTop: 20,
+                
 
                   justifyContent: "space-between",
                 }}
@@ -764,6 +709,7 @@ const MyClientsDetails = (props) => {
                       alignContent: "flex-start",
                       flexDirection: "column",
                       marginTop: 20,
+                      
                     }}
                   >
                     {todayDipo}
@@ -809,14 +755,14 @@ const MyClientsDetails = (props) => {
                           >
                             <View
                               style={{
+
                                 borderColor: Colors.gray,
                                 borderWidth: 1,
                                 padding: 12,
                                 width: "100%",
-                                borderRadius: 4,
-
-                                marginBottom: 20,
-                                backgroundColor: Colors.cream,
+                                borderRadius:4,
+                              
+                                marginBottom: 20,backgroundColor:Colors.cream
                               }}
                             >
                               <View
@@ -845,7 +791,7 @@ const MyClientsDetails = (props) => {
                                 }}
                               >
                                 <Text style={styles.headingmaintype}>
-                                  Activity Type
+                                  Activity Type 
                                 </Text>
                                 <Text style={styles.subheadingmaintypeinner}>
                                   {item.activity_type}
@@ -879,9 +825,7 @@ const MyClientsDetails = (props) => {
                                 <Text style={styles.headingmaintype}>
                                   Next Disposition Date
                                 </Text>
-                                <Text
-                                  style={styles.subheadingmaintypeinnerdate}
-                                >
+                                <Text style={styles.subheadingmaintypeinnerdate}>
                                   {item.next_disposition_date}
                                 </Text>
                               </View>
@@ -961,6 +905,7 @@ const MyClientsDetails = (props) => {
                 paddingHorizontal: 8,
                 justifyContent: "space-between",
                 flexWrap: "wrap",
+               
               }}
             >
               <ScrollView
@@ -987,7 +932,7 @@ const MyClientsDetails = (props) => {
                         alignItems: "flex-start",
                         alignContent: "flex-start",
                         flexDirection: "column",
-                        marginTop: 20,
+                        marginTop: 20, 
                       }}
                     >
                       {futureDipo}
@@ -996,6 +941,7 @@ const MyClientsDetails = (props) => {
                     <FlatList
                       style={{
                         width: "100%",
+                       
                       }}
                       data={futureDipo}
                       keyExtractor={(item, index) => index.toString()}
@@ -1016,6 +962,7 @@ const MyClientsDetails = (props) => {
                             }}
                             style={{
                               flexDirection: "row",
+                              
                             }}
                           >
                             <Text style={styles.subheadingmaintype}>
@@ -1038,17 +985,17 @@ const MyClientsDetails = (props) => {
                                   padding: 12,
                                   width: "100%",
                                   marginBottom: 20,
-                                  borderRadius: 4,
-                                  backgroundColor: Colors.cream,
+                                  borderRadius: 4,backgroundColor:Colors.cream
                                 }}
                               >
                                 <View
                                   style={{
                                     alignItems: "center",
-
+                                   
                                     flexDirection: "row",
                                     justifyContent: "space-between",
                                     marginBottom: 20,
+
                                   }}
                                 >
                                   <Text style={styles.headingmaintype}>
@@ -1102,9 +1049,7 @@ const MyClientsDetails = (props) => {
                                   <Text style={styles.headingmaintype}>
                                     Next Disposition Date
                                   </Text>
-                                  <Text
-                                    style={styles.subheadingmaintypeinnerdate}
-                                  >
+                                  <Text style={styles.subheadingmaintypeinnerdate}>
                                     {formatDate(item.next_disposition_date)}
                                   </Text>
                                 </View>
@@ -1151,35 +1096,32 @@ const MyClientsDetails = (props) => {
                                     justifyContent: "center",
                                     alignItems: "center",
                                     marginRight: 10,
-                                    borderRadius: 100,
-
-                                    alignItems: "center",
-                                    justifyContent: "center",
+                                    borderRadius:100,
+                                   
+alignItems:"center",
+justifyContent:"center"
                                   }}
                                 >
-                                  <View
-                                    style={{
+                                  <View style={{
                                       height: 40,
                                       width: 40,
-                                      backgroundColor: Colors.white,
-                                      alignItems: "center",
-                                      justifyContent: "center",
-                                      borderRadius: 100,
+                                      backgroundColor:Colors.white,
+                                      alignItems:"center",
+                                      justifyContent:"center",
+                                      borderRadius:100
+                                    }}>
+                                  <Image
+                                    source={require("../../../assets/edit.png")}
+                                    style={{
+                                      height: 15,
+                                      width: 15,
+                                      resizeMode: "contain",
+                                      tintColor: Colors.PrimaryColor,
                                     }}
-                                  >
-                                    <Image
-                                      source={require("../../../assets/edit.png")}
-                                      style={{
-                                        height: 15,
-                                        width: 15,
-                                        resizeMode: "contain",
-                                        tintColor: Colors.PrimaryColor,
-                                      }}
-                                    ></Image>
+                                  ></Image>
+                               
                                   </View>
-                                  <Text style={styles.editactivity}>
-                                    Edit Activity
-                                  </Text>
+                                  <Text style={styles.editactivity}>Edit Activity</Text>
                                 </TouchableOpacity>
                               </View>
                             </View>
@@ -1216,7 +1158,6 @@ const MyClientsDetails = (props) => {
                   width:"100%",
                   textAlign:"center"
                  
-
                 }}
               >
                 Properties Viewed
@@ -1279,7 +1220,7 @@ const MyClientsDetails = (props) => {
                     color: Colors.white,
                   }}
                 >
-                  See all Properties
+                  See all Properties 
                 </Text>
               </TouchableOpacity>
             </View>
@@ -1416,8 +1357,8 @@ const MyClientsDetails = (props) => {
                         style={{
                           color: Colors.PrimaryColor,
                           fontSize: 14,
-                          textAlign: "center",
-                          width: "100%",
+                          textAlign:"center",
+                          width:"100%",
                           fontWeight: "bold",
                         }}
                       >
@@ -1481,6 +1422,7 @@ const MyClientsDetails = (props) => {
                           fontWeight: "bold",
                           alignSelf: "center",
                           marginTop: 20,
+
                         }}
                       >
                         {showAllItems ? "Show Less" : "Show More"}
@@ -2074,13 +2016,11 @@ const styles = StyleSheet.create({
     width: 100,
     textAlign: "right",
   },
-
   nodata:{textAlign:"center"},
   mainpropertydata:{textAlign:"left",width:"100%",
 paddingLeft:12,marginBottom:9},
   editactivity:{marginLeft:12,
   color:Colors.PrimaryColor,
 fontSize:14,fontWeight:"bold"},
-
 });
 export default MyClientsDetails;
