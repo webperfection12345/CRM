@@ -108,7 +108,9 @@ const PropertiesDetails = (props) => {
               ></Image>
               {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
             </TouchableOpacity>
-            <Text style={{ fontSize: 19, fontWeight:"bold", color: Colors.white }}>
+            <Text
+              style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
+            >
               {data.property_address}
             </Text>
             <TouchableOpacity></TouchableOpacity>
@@ -141,7 +143,7 @@ const PropertiesDetails = (props) => {
                     fontSize: 20,
                     fontWeight: "bold",
                     textAlign: "center",
-                    paddingHorizontal:12,
+                    paddingHorizontal: 12,
                   }}
                 >
                   {data.title}
@@ -264,10 +266,10 @@ const PropertiesDetails = (props) => {
                 Last Price Change
               </Text>
               <Text style={{ fontSize: 16, color: Colors.black }}>
-              {new Date(data.modified).toLocaleString("en-US", {
-      dateStyle: "short",
-      timeStyle: "short",
-    })}
+                {new Date(data.modified).toLocaleString("en-US", {
+                  dateStyle: "short",
+                  timeStyle: "short",
+                })}
               </Text>
             </View>
             <View
@@ -349,11 +351,18 @@ const PropertiesDetails = (props) => {
 
             <View style={{ width: "95%", height: 80, alignSelf: "center" }}>
               <Text
-                style={{ fontSize: 15, color: Colors.black, marginTop: 15,  }}
+                style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}
               >
                 Listing Agent
               </Text>
-              <Text style={{ fontSize: 15, color: Colors.black, marginTop: 5 ,fontWeight: "bold",}}>
+              <Text
+                style={{
+                  fontSize: 15,
+                  color: Colors.black,
+                  marginTop: 5,
+                  fontWeight: "bold",
+                }}
+              >
                 {data.listagentfullname}
               </Text>
             </View>

@@ -63,7 +63,7 @@ const Contact = () => {
   const makePhoneCall = (item) => {
     let phoneNumber = item;
     Linking.openURL(`tel:${phoneNumber}`);
-  };  
+  };
   const sendEmail = (item) => {
     let recipient = item;
     let subject = "Subject of email";
@@ -82,9 +82,9 @@ const Contact = () => {
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
         <View
           style={{
-           // height: 40,
-           paddingTop:20,
-           paddingBottom:12,
+            // height: 40,
+            paddingTop: 20,
+            paddingBottom: 12,
             width: "100%",
             flexDirection: "row",
             justifyContent: "space-between",
@@ -93,7 +93,7 @@ const Contact = () => {
           }}
         >
           <TouchableOpacity
-            onPress={() => navigation.goBack()}
+            onPress={() => navigation.navigate("Home")}
             style={{
               flexDirection: "row",
               justifyContent: "center",
@@ -206,7 +206,6 @@ const Contact = () => {
                     padding: 12,
                     justifyContent: "space-between",
                     borderRadius: 6,
-                  
                   }}
                 >
                   <View
@@ -214,9 +213,9 @@ const Contact = () => {
                       justifyContent: "space-between",
                       flexDirection: "row",
                       alignItems: "center",
-                    //flexWrap:"wrap",
-                   // width:"100%"
-                  // Width: 70,
+                      //flexWrap:"wrap",
+                      // width:"100%"
+                      // Width: 70,
                     }}
                   >
                     <Image
@@ -226,24 +225,23 @@ const Contact = () => {
                         width: 50,
                         borderRadius: 100,
                         resizeMode: "cover",
-                        marginRight:7,
-                        borderColor:Colors.white,
-                        borderWidth:1
+                        marginRight: 7,
+                        borderColor: Colors.white,
+                        borderWidth: 1,
                       }}
                     ></Image>
 
-                   
                     <Text
                       style={{
                         color: Colors.black,
                         fontSize: 14,
                         fontWeight: "bold",
-                     width:100,
+                        width: 100,
                         paddingHorizontal: 4,
                         //flexWrap:"wrap"
                       }}
                     >
-                    {item.contact_name} 
+                      {item.contact_name}
                     </Text>
                   </View>
                   <View

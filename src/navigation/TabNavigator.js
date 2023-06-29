@@ -20,8 +20,12 @@ import DisPosition from "../container/DisPosition/DisPosition";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
+
 //import SingleClientDetail from "../components/SingleClientDetail/SingleClientDetail";
 
+
+
+import Properties from "../container/Properties/Properties";
 
 
 const Tab = createBottomTabNavigator();
@@ -31,19 +35,18 @@ const BottomTabNavigator = () => {
     <Tab.Navigator
       screenOptions={{ headerShown: false, keyboardHidesTabBar: true }}
       tabBar={(props) => <CustomTabBar {...props} size={30} />}
+      initialRouteName="Home"
     >
       <Tab.Screen
-        name="Home"
-        component={Dashboard}
+        name="MLS"
+        component={Properties}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
-              DashBoard
+              MLS
             </Text>
           ),
-
-          tabBarIcon: require("./../assets/images/home.png"),
-
+          tabBarIcon: require("./../assets/images/contactss.png"),
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         }}
@@ -58,6 +61,22 @@ const BottomTabNavigator = () => {
             </Text>
           ),
           tabBarIcon: require("./../assets/images/contactss.png"),
+          //keyboardHidesTabBar: true,
+          tabBarHideOnKeyboard: true,
+        }}
+      />
+      <Tab.Screen
+        name="Home"
+        component={Dashboard}
+        options={{
+          tabBarLabel: (
+            <Text style={{ fontSize: 14 }} allowFontScaling={false}>
+              DashBoard
+            </Text>
+          ),
+
+          tabBarIcon: require("./../assets/images/home.png"),
+
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         }}

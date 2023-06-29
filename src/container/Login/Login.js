@@ -27,7 +27,7 @@ import * as AuthSession from "expo-auth-session";
 // } from "@react-native-google-signin/google-signin";
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("john123");
-  const [password, setPassword] = useState("test123456");
+  const [password, setPassword] = useState("test12345");
   const [activity, setActivity] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -91,7 +91,6 @@ export default function Login({ navigation }) {
       password: password,
     };
     dispatch(loginUser(data)).then((response) => {
-    
       if (response.payload.status) {
         if (response.payload.status) {
           navigation.navigate("EnterPin", { email: email });

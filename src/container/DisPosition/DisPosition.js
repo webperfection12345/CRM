@@ -38,6 +38,7 @@ const DisPosition = (props) => {
   const [selectedSecondOption, setSelectedSecondOption] = useState(null);
   const [isThirdModalVisible, setThirdModalVisible] = useState(false);
   const [selectedThirdOption, setSelectedThirdOption] = useState(null);
+
   useEffect(() => {
     getData();
   });
@@ -107,10 +108,20 @@ const DisPosition = (props) => {
     const parsedUserDetails = JSON.parse(userDetails);
     const email = parsedUserDetails.user_email;
     setAgentEmail(email);
+    fetch(
+      `https://surf.topsearchrealty.com/wp-json/activity/currentdispositions?Contactid=${item.id}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        setDate(data.data[0].current_disposition);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
+
   const handleaddDisposition = () => {
     const currentDateTime = moment().format("YYYY-MM-DD HH:mm:ss");
-    setDate(currentDateTime);
     const payload = {
       contact_id: data.id,
       contact_lead_id: data.contact_lead_id,
@@ -121,7 +132,7 @@ const DisPosition = (props) => {
       next_disposition_date: selectedDate,
       contact_email: data.contact_email,
       agent_email: agentEmail,
-      activity_publish_date: date,
+      activity_publish_date: currentDateTime,
       activity_disposition: selectedThirdOption,
     };
     dispatch(addDisposition(payload)).then((response) => {
@@ -147,86 +158,83 @@ const DisPosition = (props) => {
   };
   return (
     <SafeAreaView style={{ flex: 1 }}>
-             <View
+      <View
+        style={{
+          height: 60,
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("MyClientsDetails", { item: item })
+          }
           style={{
-            height: 60,
-            width: "100%",
             flexDirection: "row",
-            justifyContent: "space-between",
+            justifyContent: "center",
             alignItems: "center",
+            marginLeft: 10,
           }}
         >
-          <TouchableOpacity
-            onPress={() =>
-              navigation.navigate("MyClientsDetails", { item: item })
-            }
+          <Image
             style={{
-              flexDirection: "row",
-              justifyContent: "center",
-              alignItems: "center",
-              marginLeft: 10,
+              height: 15,
+              width: 15,
+              resizeMode: "contain",
+              tintColor: Colors.white,
             }}
-          >
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-                tintColor: Colors.white,
-              }}
-              source={require("../../../assets/back.png")}
-            ></Image>
-            {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
-          </TouchableOpacity>
-          <Text
-            style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
-          >
-            DisPosition
-          </Text>
-          <Text></Text>
-        </View>
+            source={require("../../../assets/back.png")}
+          ></Image>
+          {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
+        </TouchableOpacity>
+        <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
+          DisPosition
+        </Text>
+        <Text></Text>
+      </View>
+      <View
+        style={{
+          height: 80,
+          width: "100%",
+          justifyContent: "center",
+          alignContent: "center",
+          alignItems: "center",
+        }}
+      >
         <View
           style={{
-            height: 80,
-            width: "100%",
-            justifyContent: "center",
-            alignContent: "center",
+            backgroundColor: Colors.buttonColor,
+            borderRadius: 5,
+            width: "92%",
+            height: 50,
+            flexDirection: "row",
             alignItems: "center",
           }}
         >
-          <View
+          <Image
+            source={require("../../../assets/search.png")}
             style={{
-              backgroundColor: Colors.buttonColor,
-              borderRadius: 5,
-              width: "92%",
-              height: 50,
-              flexDirection: "row",
-              alignItems: "center",
+              height: 20,
+              width: 20,
+              marginLeft: 10,
+              tintColor: Colors.white,
             }}
-          >
-            <Image
-              source={require("../../../assets/search.png")}
-              style={{
-                height: 20,
-                width: 20,
-                marginLeft: 10,
-                tintColor: Colors.white,
-              }}
-            />
-            <TextInput
-              allowFontScaling={false}
-              placeholder="Search"
-              placeholderTextColor={Colors.white}
-              style={{
-                color: Colors.white,
-                fontSize: 15,
-                marginLeft: 10,
-              }}
-            />
-          </View>
+          />
+          <TextInput
+            allowFontScaling={false}
+            placeholder="Search"
+            placeholderTextColor={Colors.white}
+            style={{
+              color: Colors.white,
+              fontSize: 15,
+              marginLeft: 10,
+            }}
+          />
         </View>
+      </View>
       <ScrollView showsVerticalScrollIndicator={false}>
- 
         <View
           style={{
             backgroundColor: Colors.white,
@@ -239,7 +247,6 @@ const DisPosition = (props) => {
               alignItems: "center",
               flexDirection: "row",
               paddingHorizontal: 12,
-            
             }}
           >
             <Image
@@ -248,8 +255,9 @@ const DisPosition = (props) => {
                 height: 120,
                 width: 120,
                 borderRadius: 100,
-                marginRight: 12,  borderWidth:1,
-                borderColor:Colors.gray
+                marginRight: 12,
+                borderWidth: 1,
+                borderColor: Colors.gray,
               }}
             />
 
@@ -347,7 +355,7 @@ const DisPosition = (props) => {
                 fontSize: 12,
               }}
             >
-              Current Deposition : <Text>4</Text>
+              Current Deposition : <Text>{date}</Text>
             </Text>
           </View>
           <View style={styles.activitytype}>
@@ -499,14 +507,13 @@ const DisPosition = (props) => {
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
                   //backgroundColor: "#e6e8ea",
-                  borderColor:Colors.cream,
-                  borderWidth:1,
+                  borderColor: Colors.cream,
+                  borderWidth: 1,
                   fontSize: 14,
                   padding: 2,
                   height: "100%",
-                  verticalAlign:"top",
-                  paddingTop:12
-                 
+                  verticalAlign: "top",
+                  paddingTop: 12,
                 }}
                 autoCorrect={false}
                 returnKeyType="done"
@@ -587,15 +594,14 @@ const DisPosition = (props) => {
                 paddingVertical: 9,
                 color: Colors.black,
                 borderColor: Colors.PrimaryColor,
-               // backgroundColor: Colors.gray,
-               borderColor:Colors.cream,
-               borderWidth:1,
+                // backgroundColor: Colors.gray,
+                borderColor: Colors.cream,
+                borderWidth: 1,
                 fontSize: 14,
-                paddingTop:18,
-               
+                paddingTop: 18,
+
                 paddingHorizontal: 15,
                 height: 55,
-                
               }}
             >
               <TouchableOpacity
@@ -645,12 +651,13 @@ const DisPosition = (props) => {
                   color: Colors.black,
                   borderColor: Colors.PrimaryColor,
                   //backgroundColor: "#e6e8ea",
-                  borderColor:Colors.cream,
-                  borderWidth:1,
+                  borderColor: Colors.cream,
+                  borderWidth: 1,
                   fontSize: 14,
                   padding: 2,
-                  height: "100%", verticalAlign:"top",
-                  paddingTop:12
+                  height: "100%",
+                  verticalAlign: "top",
+                  paddingTop: 12,
                 }}
                 autoCorrect={false}
                 returnKeyType="done"
