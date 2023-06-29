@@ -22,6 +22,7 @@ import { getDashboardData } from "../../modules/getDashboardData";
 import Activity from "../../components/Activity";
 import { getContacts } from "../../modules/getContacts";
 import { getMeterData } from "../../modules/getMeterValue";
+import { getRatings } from "../../modules/getActiveClient";
 export default function Dashboard() {
   const navigation = useNavigation();
   const [meterValue, setMeterValue] = useState();
@@ -41,6 +42,7 @@ export default function Dashboard() {
     getDashboardDataApiCall();
     getAllContacts();
     getMeter();
+    getActiveClient();
     if (isFocused) {
       // Perform the refresh logic here
     }
@@ -63,6 +65,22 @@ export default function Dashboard() {
       setData(Object.values(contactsData));
       setLoading(false);
     });
+  };
+  const getActiveClient = async () => {
+    try {
+      const response = await fetch(
+        "https://surf.topsearchrealty.com/api/v1/googleapi/allactivedata"
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch active client data.");
+      }
+      const data = await response.json();
+      console.log(data);
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      // Handle the error condition
+    }
   };
 
   const handleRefresh = () => {
@@ -135,7 +153,9 @@ export default function Dashboard() {
                     style={{
                       width: 50,
                       height: 50,
+
                       marginHorizontal:2,
+
                       borderRadius: 25,
                       alignSelf: "center",
                       justifyContent: "center",
