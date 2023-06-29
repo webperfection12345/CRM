@@ -767,6 +767,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   selectedValue: {
-    marginLeft: 10,
+    //marginLeft: 10,
+    paddingLeft:10
   },
 });
