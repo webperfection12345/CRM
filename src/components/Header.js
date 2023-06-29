@@ -134,19 +134,13 @@ const Header = (props) => {
           {label}
         </Text>
         <View style={styles.headericons}>
-          <TouchableOpacity
-            onPress={() => navigation.toggleDrawer()}
-            style={styles.notificationicon}
-          >
+          <TouchableOpacity style={styles.notificationicon}>
             <Image
               style={{ height: 25, width: 25, resizeMode: "contain" }}
               source={require("../../assets/calender.png")}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.toggleDrawer()}
-            style={styles.notificationicon}
-          >
+          <TouchableOpacity style={styles.notificationicon}>
             <Image
               style={{
                 height: 25,

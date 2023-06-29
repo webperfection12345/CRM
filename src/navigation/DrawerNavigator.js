@@ -139,6 +139,93 @@ const CustomDrawerContent = () => {
   const [userImage, setUserImage] = useState([]);
   const [isPressed, setIsPressed] = useState(false);
   const [isPressed1, setIsPressed1] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered2, setIsHovered2] = useState(false);
+  const [isHovered3, setIsHovered3] = useState(false);
+  const [isHovered4, setIsHovered4] = useState(false);
+  const [isHovered5, setIsHovered5] = useState(false);
+  const [isHovered6, setIsHovered6] = useState(false);
+  const [isHovered7, setIsHovered7] = useState(false);
+
+  const tabBackgroundColor = isHovered ? "#fff" : "#576ebd";
+  const textColor = isHovered ? "#000" : "white";
+  const imageTintColor = isHovered ? "#000" : "white";
+
+  const tab2BackgroundColor = isHovered2 ? "#fff" : "#576ebd";
+  const tab2TextColor = isHovered2 ? "#000" : "white";
+  const tab2ImageTintColor = isHovered2 ? "#000" : "white";
+
+  const tab3BackgroundColor = isHovered3 ? "#fff" : "#576ebd";
+  const tab3TextColor = isHovered3 ? "#000" : "white";
+  const tab3ImageTintColor = isHovered3 ? "#000" : "white";
+
+  const tab4BackgroundColor = isHovered4 ? "#fff" : "#576ebd";
+  const tab4TextColor = isHovered4 ? "#000" : "white";
+  const tab4ImageTintColor = isHovered4 ? "#000" : "white";
+
+  const tab5BackgroundColor = isHovered5 ? "#fff" : "#576ebd";
+  const tab5TextColor = isHovered5 ? "#000" : "white";
+  const tab5ImageTintColor = isHovered5 ? "#000" : "white";
+
+  const tab6BackgroundColor = isHovered6 ? "#fff" : "#576ebd";
+  const tab6TextColor = isHovered6 ? "#000" : "white";
+  const tab6ImageTintColor = isHovered6 ? "#000" : "white";
+
+  const tab7BackgroundColor = isHovered7 ? "#fff" : "#576ebd";
+  const tab7TextColor = isHovered7 ? "#000" : "white";
+  const tab7ImageTintColor = isHovered7 ? "#000" : "white";
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+  const handleMouseEnter2 = () => {
+    setIsHovered2(true);
+  };
+
+  const handleMouseLeave2 = () => {
+    setIsHovered2(false);
+  };
+  const handleMouseEnter3 = () => {
+    setIsHovered3(true);
+  };
+
+  const handleMouseLeave3 = () => {
+    setIsHovered3(false);
+  };
+  const handleMouseEnter4 = () => {
+    setIsHovered4(true);
+  };
+
+  const handleMouseLeave4 = () => {
+    setIsHovered4(false);
+  };
+
+  const handleMouseEnter5 = () => {
+    setIsHovered5(true);
+  };
+
+  const handleMouseLeave5 = () => {
+    setIsHovered5(false);
+  };
+  const handleMouseEnter6 = () => {
+    setIsHovered6(true);
+  };
+
+  const handleMouseLeave6 = () => {
+    setIsHovered6(false);
+  };
+  const handleMouseEnter7 = () => {
+    setIsHovered7(true);
+  };
+
+  const handleMouseLeave7 = () => {
+    setIsHovered7(false);
+  };
+
   const handlePress = () => {
     setIsPressed(!isPressed);
   };
@@ -287,10 +374,12 @@ const CustomDrawerContent = () => {
           <TouchableHighlight
             onPress={handlePress1}
             underlayColor="transparent"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
           >
             <View
               style={{
-                backgroundColor: isPressed1 ? "#fff" : "#576ebd",
+                backgroundColor: tabBackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -310,7 +399,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/Dashboardwhite.png")}
                   style={{
-                    tintColor: isPressed1 ? "#000" : "white",
+                    tintColor: imageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -321,7 +410,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed1 ? "#000" : "white",
+                  color: textColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
@@ -333,10 +422,12 @@ const CustomDrawerContent = () => {
           <TouchableHighlight
             onPress={() => navigation.navigate("Contacts")}
             underlayColor="transparent"
+            onMouseEnter={handleMouseEnter2}
+            onMouseLeave={handleMouseLeave2}
           >
             <View
               style={{
-                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                backgroundColor: tab2BackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -356,7 +447,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/contactwhite.png")}
                   style={{
-                    tintColor: isPressed ? "#000" : "white",
+                    tintColor: tab2ImageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -367,7 +458,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed ? "#000" : "white",
+                  color: tab2TextColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
@@ -379,10 +470,12 @@ const CustomDrawerContent = () => {
           <TouchableHighlight
             onPress={() => navigation.navigate("Leads")}
             underlayColor="transparent"
+            onMouseEnter={handleMouseEnter3}
+            onMouseLeave={handleMouseLeave3}
           >
             <View
               style={{
-                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                backgroundColor: tab3BackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -402,7 +495,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/transactionwqhite.png")}
                   style={{
-                    tintColor: isPressed ? "#000" : "white",
+                    tintColor: tab3ImageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -413,7 +506,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed ? "#000" : "white",
+                  color: tab3TextColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
@@ -425,10 +518,12 @@ const CustomDrawerContent = () => {
           <TouchableHighlight
             onPress={() => navigation.navigate("TransactionDesk")}
             underlayColor="transparent"
+            onMouseEnter={handleMouseEnter4}
+            onMouseLeave={handleMouseLeave4}
           >
             <View
               style={{
-                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                backgroundColor: tab4BackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -448,7 +543,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/opporrtubitywhite.png")}
                   style={{
-                    tintColor: isPressed ? "#000" : "white",
+                    tintColor: tab4ImageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -459,7 +554,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed ? "#000" : "white",
+                  color: tab4TextColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
@@ -468,10 +563,15 @@ const CustomDrawerContent = () => {
               </Text>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={handlePress} underlayColor="transparent">
+          <TouchableHighlight
+            onPress={handlePress}
+            underlayColor="transparent"
+            onMouseEnter={handleMouseEnter5}
+            onMouseLeave={handleMouseLeave5}
+          >
             <View
               style={{
-                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                backgroundColor: tab5BackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -491,7 +591,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/folderwhite.png")}
                   style={{
-                    tintColor: isPressed ? "#000" : "white",
+                    tintColor: tab5ImageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -502,7 +602,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed ? "#000" : "white",
+                  color: tab5TextColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
@@ -514,10 +614,12 @@ const CustomDrawerContent = () => {
           <TouchableHighlight
             onPress={() => navigation.navigate("Properties")}
             underlayColor="transparent"
+            onMouseEnter={handleMouseEnter6}
+            onMouseLeave={handleMouseLeave6}
           >
             <View
               style={{
-                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                backgroundColor: tab6BackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -537,7 +639,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/mlscallcenter.png")}
                   style={{
-                    tintColor: isPressed ? "#000" : "white",
+                    tintColor: tab6ImageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -548,7 +650,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed ? "#000" : "white",
+                  color: tab6TextColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
@@ -557,10 +659,15 @@ const CustomDrawerContent = () => {
               </Text>
             </View>
           </TouchableHighlight>
-          <TouchableHighlight onPress={handlePress} underlayColor="transparent">
+          <TouchableHighlight
+            onPress={handlePress}
+            underlayColor="transparent"
+            onMouseEnter={handleMouseEnter7}
+            onMouseLeave={handleMouseLeave7}
+          >
             <View
               style={{
-                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                backgroundColor: tab7BackgroundColor,
                 height: 60,
                 alignItems: "center",
                 alignContent: "center",
@@ -580,7 +687,7 @@ const CustomDrawerContent = () => {
                 <Image
                   source={require("../../assets/callwhite.png")}
                   style={{
-                    tintColor: isPressed ? "#000" : "white",
+                    tintColor: tab7ImageTintColor,
                     height: "50%",
                     width: "50%",
                     justifyContent: "center",
@@ -591,7 +698,7 @@ const CustomDrawerContent = () => {
               </View>
               <Text
                 style={{
-                  color: isPressed ? "#000" : "white",
+                  color: tab7TextColor,
                   fontSize: 16,
                   fontWeight: "bold",
                 }}
