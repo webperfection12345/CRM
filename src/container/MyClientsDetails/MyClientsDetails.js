@@ -60,14 +60,19 @@ const MyClientsDetails = (props) => {
 
   useEffect(() => {
     if (isFocused) {
+      disPosition();
+      MyClientsDetails();
+      allActivityHistory();
+      MyNoteData();
+      TodayDisPosition();
       console.log("Page refreshed");
     }
-    disPosition();
-    MyClientsDetails();
-    allActivityHistory();
-    MyNoteData();
-    currentDisposition();
-    TodayDisPosition();
+    // disPosition();
+    // MyClientsDetails();
+    // allActivityHistory();
+    // MyNoteData();
+    // currentDisposition();
+    // TodayDisPosition();
   }, [isFocused]);
 
   const MyClientsDetails = () => {
@@ -117,12 +122,12 @@ const MyClientsDetails = (props) => {
       console.log(data, "dfsdf");
     });
   };
-  const currentDisposition = () => {
-    dispatch(getCurrentDisposition(id)).then((response) => {
-      const data = response.payload.data;
-      setCurrentDisposition(data);
-    });
-  };
+  // const currentDisposition = () => {
+  //   dispatch(getCurrentDisposition(id)).then((response) => {
+  //     const data = response.payload.data;
+  //     setCurrentDisposition(data);
+  //   });
+  // };
   const allActivityHistory = () => {
     dispatch(activityHistory()).then((response) => {
       const history = response.payload.data;
@@ -884,6 +889,7 @@ const MyClientsDetails = (props) => {
                 Activity Log
               </Text>
             </View>
+
             <View
               style={{
                 width: "100%",
