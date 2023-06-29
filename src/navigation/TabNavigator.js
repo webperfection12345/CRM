@@ -20,6 +20,9 @@ import DisPosition from "../container/DisPosition/DisPosition";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
+//import SingleClientDetail from "../components/SingleClientDetail/SingleClientDetail";
+
+
 
 const Tab = createBottomTabNavigator();
 
