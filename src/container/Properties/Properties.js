@@ -8,7 +8,6 @@ import {
   ActivityIndicator,
   SafeAreaView,
   Platform,
-
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -109,7 +108,7 @@ const Properties = () => {
           >
             <TouchableOpacity
               onPress={() => (
-                navigation.goBack(), setSearchView(true), setSearch("")
+                navigation.navigate("Home"), setSearchView(true), setSearch("")
               )}
               style={{
                 flexDirection: "row",

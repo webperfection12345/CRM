@@ -16,7 +16,7 @@ import {
   FlatList,
   SafeAreaView,
   StyleSheet,
-  TouchableHighlight
+  TouchableHighlight,
 } from "react-native";
 import Images from "../utils/Images";
 import Fonts from "../utils/Fonts";
@@ -64,14 +64,9 @@ const data = [
   //   index: 6,
   //   img: require("../../assets/callwhite.png"),
   // },
-
- 
-
 ];
 
 const Drawer = createDrawerNavigator();
-
-  
 
 const DrawerNavigator = () => {
   return (
@@ -135,7 +130,6 @@ const DrawerNavigator = () => {
         }}
         component={Profile}
       />
-     
     </Drawer.Navigator>
   );
 };
@@ -161,7 +155,7 @@ const CustomDrawerContent = () => {
     // setUserImage(JSON.parse(userImage));
   };
   const navigation = useNavigation();
-  
+
   const signOut = (index) => {
     if (index == 0) {
       return navigation.navigate("Contacts");
@@ -188,16 +182,16 @@ const CustomDrawerContent = () => {
             height: 130,
             width: "100%",
             backgroundColor: Colors.PrimaryColor,
-            flexDirection:"row",
-            alignItems:"center",
-            paddingTop:30
+            flexDirection: "row",
+            alignItems: "center",
+            paddingTop: 30,
           }}
         >
           <View
             style={{
               height: 70,
               width: 70,
-              
+
               marginLeft: 20,
             }}
           >
@@ -205,10 +199,11 @@ const CustomDrawerContent = () => {
               source={require("../../assets/profilePic.png")}
               style={{
                 height: 70,
-                width: 70,borderColor:Colors.white,
-                borderWidth:1,
+                width: 70,
+                borderColor: Colors.white,
+                borderWidth: 1,
                 resizeMode: "contain",
-                borderRadius:100
+                borderRadius: 100,
               }}
             ></Image>
           </View>
@@ -219,15 +214,19 @@ const CustomDrawerContent = () => {
               fontSize: 20,
               marginLeft: 15,
               fontWeight: "700",
-              textTransform:"capitalize"
+              textTransform: "capitalize",
             }}
           >
             {userData.display_name}
           </Text>
-    
         </TouchableOpacity>
-        <View style={{ justifyContent: "center" , backgroundColor:Colors.PrimaryColor,height:"78%" }}>
-       
+        <View
+          style={{
+            justifyContent: "center",
+            backgroundColor: Colors.PrimaryColor,
+            height: "78%",
+          }}
+        >
           {/* <FlatList
             data={data}
             renderItem={({ item }) => (
@@ -285,255 +284,352 @@ const CustomDrawerContent = () => {
             )}
          
           /> */}
- <TouchableHighlight onPress={handlePress1} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed1 ? '#fff' : '#576ebd', height: 60,
+          <TouchableHighlight
+            onPress={handlePress1}
+            underlayColor="transparent"
+          >
+            <View
+              style={{
+                backgroundColor: isPressed1 ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/Dashboardwhite.png")}
+                  style={{
+                    tintColor: isPressed1 ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/Dashboardwhite.png')}
-          style={{ tintColor: isPressed1 ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed1 ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>DashBoard</Text>
-
-      </View>
-      
-    </TouchableHighlight>
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed ? '#fff' : '#576ebd', height: 60,
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed1 ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                DashBoard
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => navigation.navigate("Contacts")}
+            underlayColor="transparent"
+          >
+            <View
+              style={{
+                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/contactwhite.png")}
+                  style={{
+                    tintColor: isPressed ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/contactwhite.png')}
-          style={{ tintColor: isPressed ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>Contacts</Text>
-
-      </View>
-      
-    </TouchableHighlight>
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed ? '#fff' : '#576ebd', height: 60,
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Contacts
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => navigation.navigate("Leads")}
+            underlayColor="transparent"
+          >
+            <View
+              style={{
+                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/transactionwqhite.png")}
+                  style={{
+                    tintColor: isPressed ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/transactionwqhite.png')}
-          style={{ tintColor: isPressed ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>Opportunities</Text>
-
-      </View>
-      
-    </TouchableHighlight>
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed ? '#fff' : '#576ebd', height: 60,
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Opportunities
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => navigation.navigate("TransactionDesk")}
+            underlayColor="transparent"
+          >
+            <View
+              style={{
+                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/opporrtubitywhite.png")}
+                  style={{
+                    tintColor: isPressed ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/opporrtubitywhite.png')}
-          style={{ tintColor: isPressed ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>Transactions</Text>
-
-      </View>
-      
-    </TouchableHighlight>
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed ? '#fff' : '#576ebd', height: 60,
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Transactions
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={handlePress} underlayColor="transparent">
+            <View
+              style={{
+                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/folderwhite.png")}
+                  style={{
+                    tintColor: isPressed ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/folderwhite.png')}
-          style={{ tintColor: isPressed ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>Document Folder</Text>
-
-      </View>
-      
-    </TouchableHighlight>
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed ? '#fff' : '#576ebd', height: 60,
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Document Folder
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() => navigation.navigate("Properties")}
+            underlayColor="transparent"
+          >
+            <View
+              style={{
+                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/mlscallcenter.png")}
+                  style={{
+                    tintColor: isPressed ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/mlscallcenter.png')}
-          style={{ tintColor: isPressed ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>MLS</Text>
-
-      </View>
-      
-    </TouchableHighlight>
-    <TouchableHighlight onPress={handlePress} underlayColor="transparent">
-      <View style={{ backgroundColor: isPressed ? '#fff' : '#576ebd', height: 60,
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                MLS
+              </Text>
+            </View>
+          </TouchableHighlight>
+          <TouchableHighlight onPress={handlePress} underlayColor="transparent">
+            <View
+              style={{
+                backgroundColor: isPressed ? "#fff" : "#576ebd",
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
                   alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1}}>
-        <View style={{
-                    height: 70,
-                    width: 70,
+                }}
+              >
+                <Image
+                  source={require("../../assets/callwhite.png")}
+                  style={{
+                    tintColor: isPressed ? "#000" : "white",
+                    height: "50%",
+                    width: "50%",
                     justifyContent: "center",
                     alignItems: "center",
+                    resizeMode: "contain",
                   }}
-                 
-                > 
-                <Image
-          source={require('../../assets/callwhite.png')}
-          style={{ tintColor: isPressed ? '#000' : 'white' ,  height: "50%",
-          width: "50%",
-          justifyContent: "center",
-          alignItems: "center",
-        resizeMode:"contain"
-        }}
-        /></View> 
-       <Text style={{ color: isPressed ? '#000' : 'white',
-                      fontSize: 16,
-                      fontWeight: "bold",}}>Call Center</Text>
-
-      </View>
-      
-    </TouchableHighlight>
+                />
+              </View>
+              <Text
+                style={{
+                  color: isPressed ? "#000" : "white",
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Call Center
+              </Text>
+            </View>
+          </TouchableHighlight>
         </View>
-       
       </View>
       <View
-            style={{
-              justifyContent:"center",
-              alignItems:"center",
-                resizeMode: "contain",
-            }}
-          ><Image
-              source={require("../../assets/bottomlogosidebar.png")}
-              style={{
-                height: 150,
-                width: 150,
-              justifyContent:"center",
-              alignItems:"center",
-                resizeMode: "contain",
-                
-               
-              }}
-            ></Image></View>
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          resizeMode: "contain",
+        }}
+      >
+        <Image
+          source={require("../../assets/bottomlogosidebar.png")}
+          style={{
+            height: 150,
+            width: 150,
+            justifyContent: "center",
+            alignItems: "center",
+            resizeMode: "contain",
+          }}
+        ></Image>
+      </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
   button: {
-    
-                    backgroundColor:"blue"
+    backgroundColor: "blue",
   },
   buttonPressed: {
-    backgroundColor: 'red', 
+    backgroundColor: "red",
   },
 });
 export default DrawerNavigator;

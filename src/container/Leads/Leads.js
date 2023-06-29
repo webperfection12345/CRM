@@ -72,7 +72,7 @@ const Leads = () => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.goBack()}
+          onPress={() => navigation.navigate("Home")}
           style={{
             flexDirection: "row",
             justifyContent: "center",
@@ -222,31 +222,21 @@ const Leads = () => {
                   flexDirection: "row",
                   justifyContent: "space-between",
                   marginBottom: 20,
-                  flexWrap:"wrap",
-
-                  
+                  flexWrap: "wrap",
                 }}
               >
-
-               
-    <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Username</Text>
-    <TouchableOpacity onPress={() => handleUsernameClick(item)}>
-    <Text
-                  style={{
-                    color: Colors.black,
-                    fontSize: 14,
-                    textAlign: "right",
-                 
-                  
-                    
-                    
-                  }}
-                >
-             {item.username} 
-                </Text>
-  </TouchableOpacity>
-  
-
+                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Username</Text>
+                <TouchableOpacity onPress={() => handleUsernameClick(item)}>
+                  <Text
+                    style={{
+                      color: Colors.black,
+                      fontSize: 14,
+                      textAlign: "right",
+                    }}
+                  >
+                    {item.username}
+                  </Text>
+                </TouchableOpacity>
               </View>
               <View
                 style={{

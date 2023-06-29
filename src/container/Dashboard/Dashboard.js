@@ -5,55 +5,41 @@ import {
   View,
   StatusBar,
   ScrollView,
-  TouchableOpacity,
   Image,
-  FlatList,
   Linking,
-  Platform,
-  StyleSheet
+  StyleSheet,
 } from "react-native";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
-import Images from "../../utils/Images";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import RNSpeedometer from "react-native-speedometer";
-import { getDashboardData } from "../../modules/getDashboardData";
 import Activity from "../../components/Activity";
 import { getContacts } from "../../modules/getContacts";
 import { getMeterData } from "../../modules/getMeterValue";
-import { getRatings } from "../../modules/getActiveClient";
+import getLeads from "../../modules/getLeads";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export default function Dashboard() {
   const navigation = useNavigation();
   const [meterValue, setMeterValue] = useState();
-  const [meter2Value, setMeter2Value] = useState(60);
+  const [name, setName] = useState("");
   const [totalLeadValue, setTotalLeadValue] = useState("");
-  const [underContarct, setUnderContarct] = useState("");
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
-  const [soldValue, setSoldValue] = useState("");
-  const [underContractValue, setUnderContarctValue] = useState("");
   const [activity, setActivity] = useState(false);
   const [data, setData] = useState([]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getDashboardDataApiCall();
     getAllContacts();
     getMeter();
-    getActiveClient();
+    getLeadCount();
     if (isFocused) {
-      // Perform the refresh logic here
     }
   }, [isFocused]);
-  const getDashboardDataApiCall = () => {
-    dispatch(getDashboardData()).then((response) => {
-      setActivity(true);
-      // setMeterValue(response.payload.data[0].under_contract_percent);
-      // setMeter2Value(response.payload.data[0].sold_percent);
-    });
-  };
+
   const getMeter = () => {
     dispatch(getMeterData()).then((response) => {
       setMeterValue(response.payload.data);
@@ -66,21 +52,26 @@ export default function Dashboard() {
       setLoading(false);
     });
   };
-  const getActiveClient = async () => {
-    try {
-      const response = await fetch(
-        "https://surf.topsearchrealty.com/api/v1/googleapi/allactivedata"
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch active client data.");
-      }
-      const data = await response.json();
-      console.log(data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error.message);
-      // Handle the error condition
-    }
+  const getLeadCount = () => {
+    dispatch(getLeads())
+      .then(async (response) => {
+        if (response && response.payload && response.payload.data) {
+          const contactsData = response.payload.data;
+          const leadsCount = contactsData.length;
+          console.log("Total leads:", leadsCount);
+          setTotalLeadValue(leadsCount);
+          const name = await AsyncStorage.getItem("userDetails");
+          const userDetails = JSON.parse(name);
+          const displayName = `Welcome ${userDetails.display_name}!`;
+          setName(displayName);
+          setActivity(true);
+        } else {
+          console.error("Invalid response data:", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Error retrieving leads:", error);
+      });
   };
 
   const handleRefresh = () => {
@@ -109,7 +100,7 @@ export default function Dashboard() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <StatusBar />
-      <Header label={"Welcome John!"} />
+      <Header label={name} />
       {activity ? (
         <ScrollView
           style={{
@@ -125,52 +116,7 @@ export default function Dashboard() {
               alignContent: "center",
               alignItems: "center",
             }}
-          >
-            {/* <Text
-              style={{
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: "bold",
-                marginTop: 20,
-              }}
-            >
-              Current Clients Online
-            </Text> */}
-            {/* <View
-              style={{
-                height: 60,
-                marginTop: 20,
-                alignItems: "center",
-                justifyContent: "space-evenly",
-                width: "100%",
-              }}
-            >
-              <FlatList
-                data={data}
-                horizontal={true}
-                renderItem={({ item, index }) => (
-                  <TouchableOpacity
-                    style={{
-                      width: 50,
-                      height: 50,
-
-                      marginHorizontal:2,
-
-                      borderRadius: 25,
-                      alignSelf: "center",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    <Text style={{ fontSize: 16, color: Colors.white }}>
-                      {item.contact_name.charAt(0)}
-                    </Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </View> */}
-          </View>
+          ></View>
           <View
             style={{
               justifyContent: "center",
@@ -298,258 +244,50 @@ export default function Dashboard() {
                   },
                 ]}
               />
-              {/* <Image
-                style={{
-                  height: 120,
-                  width: 120,
-                  resizeMode: "contain",
-                  alignSelf: "center",
-                  marginTop: 50,
-                }}
-                source={require("../../../assets/fastGun.png")}
-              ></Image> */}
-              {/* <Text
-                style={{
-                  fontSize: 20,
-                  marginTop: 10,
-                  color: Colors.black,
-                  fontWeight: "bold",
-                  alignSelf: "center",
-                }}
-              >
-                Fast Gun
-              </Text> */}
             </View>
 
-            {/* <Text
-              style={{
-                fontSize: 20,
-                marginTop: 20,
-                color: Colors.black,
-                fontWeight: "bold",
-              }}
-            >
-              Active Pipeline
-            </Text>
-            <Text
-              style={{
-                fontSize: 17,
-                color: "green",
-                fontWeight: "bold",
-                marginTop: 5,
-              }}
-            >
-              $ 6,511,000
-            </Text>
-            <Text
-              style={{
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: "bold",
-                marginTop: 20,
-              }}
-            >
-              Under Contract
-            </Text>
-            <Text
-              style={{
-                fontSize: 17,
-                color: "green",
-                fontWeight: "bold",
-                marginTop: 5,
-              }}
-            >
-              $ 829,000
-            </Text> */}
-            {/* <View
-              style={{
-                height: 1,
-                width: "100%",
-                backgroundColor: Colors.gray,
-                marginTop: 30,
-              }}
-            ></View>
-            <Text
-              style={{
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: "bold",
-                marginTop: 20,
-                marginBottom: 15,
-              }}
-            >
-              Document Portal
-            </Text> */}
-            {/* <TouchableOpacity
-              style={{
-                justifyContent: "center",
-                alignItems: "center",
-                marginTop: 10,
-              }}
-            >
-              <Image
-                style={{
-                  height: 120,
-                  width: 120,
-                  resizeMode: "contain",
-                }}
-                source={require("./../../assets/images/documentPortal.png")}
-              ></Image>
-            </TouchableOpacity>
-            <Text
-              style={{
-                fontSize: 20,
-                color: Colors.black,
-                fontWeight: "bold",
-                marginTop: 30,
-                marginBottom: 20,
-              }}
-            >
-              Most Recent
-            </Text>
-
-            <FlatList
-              data={data}
-              scrollEnabled={false}
-              style={{ width: "100%" }}
-              renderItem={({ item }) => (
-                <TouchableOpacity
-                  onPress={() =>
-                    navigation.navigate("ContactsDetails", { item: item })
-                  }
+            <View style={styles.maincoverop}>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltext}>Opportunites</Text>
+                <Text style={styles.bigtext}>{totalLeadValue}</Text>
+              </View>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltext}>Transactions</Text>
+                <Text style={styles.bigtext}>$2.7MM</Text>
+              </View>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltext}>Earnings</Text>
+                <Text style={styles.bigtext}>$29.500</Text>
+              </View>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltext}>Document</Text>
+                <Image
                   style={{
-                    height: 60,
-                    width: "100%",
-                    alignSelf: "center",
-                    borderBottomColor: Colors.gray,
+                    height: 40,
+                    width: 40,
+                    resizeMode: "contain",
+                    marginVertical: 6,
                     alignItems: "center",
-                    alignContent: "center",
-                    flexDirection: "row",
-                    paddingHorizontal: 12,
                   }}
-                >
-                  <View style={{ width: 45, marginRight: 2 }}>
-                    <Image
-                      source={{ uri: item.contact_image }}
-                      style={{
-                        height: 45,
-                        width: 45,
-                        borderRadius: 100,
-                        borderWidth: 1,
-                        borderColor: Colors.gray,
-                      }}
-                    ></Image>
-                    <Text
-                      style={{
-                        color: Colors.PrimaryColor,
-                        fontSize: 12,
-                      }}
-                    >
-                      {item.name}
-                    </Text>
-                  </View>
-                  <View
-                    style={{
-                      width: "85%",
-                      flexDirection: "row",
-                      justifyContent: "space-between",
-                      marginLeft: 6,
-                    }}
-                  >
-                    <View
-                      style={{
-                        justifyContent: "center",
-                      }}
-                    >
-                      <Text
-                        style={{
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {item.contact_name}
-                      </Text>
-                      <Text
-                        style={{
-                          color: Colors.black,
-                          fontSize: 14,
-                          marginTop: 2,
-                          marginLeft: 0,
-                        }}
-                      >
-                        {item.contact_email}{" "}
-                      </Text>
-                      <Text
-                        style={{
-                          color: Colors.black,
-                          fontSize: 12,
-                        }}
-                      >
-                        {item.details}
-                      </Text>
-                    </View>
-                  
-                    <View
-                      style={{
-                        justifyContent: "center",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <Image
-                        source={require("../../../assets/more.png")}
-                        style={{
-                          height: 15,
-                          width: 15,
-                          resizeMode: "contain",
-                        }}
-                      ></Image>
-                      <Image
-                        source={require("../../../assets/leftArrow.png")}
-                        style={{
-                          height: 13,
-                          width: 13,
-                          marginLeft: 10,
-                          resizeMode: "contain",
-                        }}
-                      ></Image>
-                    </View>
-                  </View>
-                </TouchableOpacity>
-              )}
-             
-            /> */}
-<View style={styles.maincoverop}>
-  <View style={styles.boxcover}>
-    <Text style={styles.smalltext}>Opportunites</Text>
-    <Text style={styles.bigtext}>142</Text>
-  </View>
-  <View style={styles.boxcover}>
-    <Text style={styles.smalltext}>Transactions</Text>
-    <Text style={styles.bigtext}>$2.7MM</Text>
-  </View>
-  <View style={styles.boxcover}>
-    <Text style={styles.smalltext}>Earnings</Text>
-    <Text style={styles.bigtext}>$29.500</Text>
-  </View>
-  <View style={styles.boxcover}>
-    <Text style={styles.smalltext}>Document</Text>
-    <Image
-            style={{ height: 40, width: 40,  resizeMode: "contain",marginVertical:6,alignItems:"center" }}
-            source={require("../../../assets/menu.png")}
-          ></Image>
-    <Text style={styles.smalltext}>Portal</Text>
-  </View>
-  <View style={styles.boxcover}>
-    <Text style={styles.smalltext}>Call</Text>
-    <Image
-            style={{ height: 40, width: 40,  resizeMode: "contain",marginVertical:6,alignItems:"center" }}
-            source={require("../../../assets/menu.png")}
-          ></Image>
-    <Text style={styles.smalltext}>Center</Text>
-  </View>
-</View>
-           
+                  source={require("../../../assets/menu.png")}
+                ></Image>
+                <Text style={styles.smalltext}>Portal</Text>
+              </View>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltext}>Call</Text>
+                <Image
+                  style={{
+                    height: 40,
+                    width: 40,
+                    resizeMode: "contain",
+                    marginVertical: 6,
+                    alignItems: "center",
+                  }}
+                  source={require("../../../assets/menu.png")}
+                ></Image>
+                <Text style={styles.smalltext}>Center</Text>
+              </View>
+            </View>
           </View>
         </ScrollView>
       ) : (
@@ -559,26 +297,27 @@ export default function Dashboard() {
   );
 }
 const styles = StyleSheet.create({
-  boxcover:{
-    backgroundColor:Colors.darkblue,
-    height:130,
-    width:130,
-    marginBottom:30,
-    borderRadius:100,
-    alignItems:"center",
-    lineHeight:130,
-justifyContent:"center",
-shadowColor: Colors.black,
-  shadowOpacity: 0.26,
-  shadowOffset: { width: 0, height: 2},
-  shadowRadius: 10,
-  elevation: 3,
-
-
+  boxcover: {
+    backgroundColor: Colors.darkblue,
+    height: 130,
+    width: 130,
+    marginBottom: 30,
+    borderRadius: 100,
+    alignItems: "center",
+    lineHeight: 130,
+    justifyContent: "center",
+    shadowColor: Colors.black,
+    shadowOpacity: 0.26,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 10,
+    elevation: 3,
   },
-  maincoverop:{marginTop:50,
-  marginBottom:40},
-  smalltext:{color:Colors.white,fontWeight:300,fontSize:14},
-  bigtext:{fontSize:28,color:Colors.white,lineHeight:60,
-  fontWeight:"bold"},
+  maincoverop: { marginTop: 50, marginBottom: 40 },
+  smalltext: { color: Colors.white, fontWeight: 300, fontSize: 14 },
+  bigtext: {
+    fontSize: 28,
+    color: Colors.white,
+    lineHeight: 60,
+    fontWeight: "bold",
+  },
 });
