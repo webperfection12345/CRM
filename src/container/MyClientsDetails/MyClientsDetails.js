@@ -338,8 +338,8 @@ const MyClientsDetails = (props) => {
 
 
 
-        <ScrollView showsVerticalScrollIndicator={false} style={{flex: "1 1 0"}}>
-          <FlatList
+           <ScrollView showsVerticalScrollIndicator={false}>
+      <FlatList
             data={data}
             scrollEnabled={false}
             renderItem={({ item, index }) => (
@@ -744,7 +744,7 @@ const MyClientsDetails = (props) => {
                           <Text style={styles.subheadingmaintype}>
                             {item.activity_disposition}
                           </Text>
-                          {/* Other activity type data */}
+                         
                         </TouchableOpacity>
                         {selectedTodayActivityType ===
                           item.activity_disposition && (
@@ -968,7 +968,7 @@ const MyClientsDetails = (props) => {
                             <Text style={styles.subheadingmaintype}>
                               {item.activity_disposition}
                             </Text>
-                            {/* Other activity type data */}
+                           
                           </TouchableOpacity>
                           {selectedActivityType ===
                             item.activity_disposition && (
@@ -1098,8 +1098,8 @@ const MyClientsDetails = (props) => {
                                     marginRight: 10,
                                     borderRadius:100,
                                    
-alignItems:"center",
-justifyContent:"center"
+                                    alignItems:"center",
+                                    justifyContent:"center"
                                   }}
                                 >
                                   <View style={{
@@ -1176,22 +1176,7 @@ justifyContent:"center"
                 ))}
               </View>
             )}
-
-            {/* {property.length === 0 ? (
-              <Text>No data found</Text>
-            ) : (
-              <FlatList
-                data={property}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => (
-                  <Text>
-                    <li>{item}</li>
-                  </Text>
-                )}
-              />
-            )} */}
-
-            <View
+<View
               style={{
                 flexDirection: "row",
                 width: "90%",
@@ -1265,23 +1250,7 @@ justifyContent:"center"
               >
                 Notes
               </Text>
-              {/* <TouchableOpacity
-                onPress={toggleModal}
-                style={{
-                  justifyContent: "center",
-                  backgroundColor: Colors.PrimaryColor,
-                  height: 40,
-                  width: 40,
-                  borderRadius: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image
-                  style={{ height: 20, width: 20, resizeMode: "contain" }}
-                  source={require("../../../assets/plus.png")}
-                ></Image>
-              </TouchableOpacity> */}
+             
             </View>
             <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
               {note && note.length > 0 ? (
@@ -1434,65 +1403,7 @@ justifyContent:"center"
                 <Text style={styles.nodata}>No activity history found.</Text>
               )}
             </View>
-            {/* <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
-              <FlatList
-                data={history}
-                scrollEnabled={false}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    //onPress={() => navigation.navigate('MyClientsDetails')}
-                    style={{
-                      height: 60,
-                      width: "90%",
-                      borderBottomWidth: 1,
-                      borderBottomColor: Colors.gray,
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      alignSelf: "center",
-                    }}
-                  >
-                    <View
-                      style={{
-                        width: "100%",
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <View
-                        style={{
-                          height: 80,
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: "bold",
-                          }}
-                        >
-                          {item.activity_type}
-                        </Text>
-
-                        <Text
-                          style={{
-                            color: Colors.black,
-                            fontSize: 12,
-                          }}
-                        >
-                          {item.activity_date}
-                        </Text>
-                      </View>
-                    </View>
-                  </TouchableOpacity>
-                )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
-              />
-            </View> */}
-            {/* <View style={{ height: 50 }}></View> */}
+           
           </View>
 
           <Modal
@@ -1638,7 +1549,7 @@ justifyContent:"center"
                       }}
                       autoCorrect={false}
                       returnKeyType="done"
-                      //onChangeText={text => setID(text)}
+                     
                     />
                   </View>
                 </View>
@@ -1755,7 +1666,7 @@ justifyContent:"center"
                       }}
                       autoCorrect={false}
                       returnKeyType="done"
-                      // onChangeText={text => setNickname(text)}
+                      
                     />
                   </View>
                 </View>
@@ -1833,7 +1744,7 @@ justifyContent:"center"
                       returnKeyType="done"
                       placeholder="biff@bowser.com"
                       placeholderTextColor={Colors.black}
-                      // onChangeText={text => setLastName(text)}
+                     
                     />
                   </View>
                 </View>
@@ -1872,7 +1783,7 @@ justifyContent:"center"
                       autoCorrect={false}
                       returnKeyType="done"
                       placeholderTextColor={Colors.black}
-                      //onChangeText={text => setMobile(text)}
+                     
                     />
                   </View>
                 </View>
@@ -1944,26 +1855,7 @@ justifyContent:"center"
             </View>
           </Modal>
 
-          {/* <View
-            style={{
-              borderWidth: 1,
-              width: "95%",
-              alignSelf: "center",
-              borderRadius: 5,
-              marginTop: 30,
-              borderColor: Colors.gray,
-            }}
-          ></View>
-          <View
-            style={{
-              borderWidth: 1,
-              width: "95%",
-              alignSelf: "center",
-              borderRadius: 5,
-              marginTop: 30,
-              borderColor: Colors.gray,
-            }}
-          ></View> */}
+         
           <View
             style={{
               width: "95%",

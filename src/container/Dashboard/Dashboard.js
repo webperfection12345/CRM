@@ -10,6 +10,7 @@ import {
   FlatList,
   Linking,
   Platform,
+  StyleSheet
 } from "react-native";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
@@ -88,9 +89,9 @@ export default function Dashboard() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
       <StatusBar />
-      <Header label={"Agent Dashboard"} />
+      <Header label={"Welcome John!"} />
       {activity ? (
         <ScrollView
           style={{
@@ -107,7 +108,7 @@ export default function Dashboard() {
               alignItems: "center",
             }}
           >
-            <Text
+            {/* <Text
               style={{
                 fontSize: 20,
                 color: Colors.black,
@@ -116,8 +117,8 @@ export default function Dashboard() {
               }}
             >
               Current Clients Online
-            </Text>
-            <View
+            </Text> */}
+            {/* <View
               style={{
                 height: 60,
                 marginTop: 20,
@@ -131,11 +132,9 @@ export default function Dashboard() {
                 horizontal={true}
                 renderItem={({ item, index }) => (
                   <TouchableOpacity
-                    //onPress={() => makePhoneCall()}
                     style={{
                       width: 50,
                       height: 50,
-                      //marginLeft: 10,
                       marginHorizontal:2,
                       borderRadius: 25,
                       alignSelf: "center",
@@ -149,11 +148,8 @@ export default function Dashboard() {
                     </Text>
                   </TouchableOpacity>
                 )}
-                //   keyExtractor={(item) => item.id}
-                //  ItemSeparatorComponent={this.renderSeparator}
-                //   key={(item) => item.id}
               />
-            </View>
+            </View> */}
           </View>
           <View
             style={{
@@ -166,13 +162,13 @@ export default function Dashboard() {
           >
             <Text
               style={{
-                fontSize: 20,
+                fontSize: 17,
                 color: Colors.black,
                 fontWeight: "bold",
                 marginTop: 20,
               }}
             >
-              My Surf Level
+              Surf Level
             </Text>
 
             <View
@@ -281,17 +277,8 @@ export default function Dashboard() {
                     activeBarColor: "#5dba46",
                   },
                 ]}
-                //needleImage={Images.meter}
-                // wrapperStyle={}
-                //outerCircleStyle={{height: 80}}
-                // halfCircleStyle={}
-                //imageWrapperStyle={{resizeMode: 'contain', height: 100, width: 100}}
-                //innerCircleStyle={{width: 130, borderRadius: 65}}
-                // labelWrapperStyle={}
-                // labelStyle={}
-                // labelNoteStyle={}
               />
-              <Image
+              {/* <Image
                 style={{
                   height: 120,
                   width: 120,
@@ -300,8 +287,8 @@ export default function Dashboard() {
                   marginTop: 50,
                 }}
                 source={require("../../../assets/fastGun.png")}
-              ></Image>
-              <Text
+              ></Image> */}
+              {/* <Text
                 style={{
                   fontSize: 20,
                   marginTop: 10,
@@ -311,174 +298,10 @@ export default function Dashboard() {
                 }}
               >
                 Fast Gun
-              </Text>
+              </Text> */}
             </View>
-            {/* <View
-              style={{
-                height: 1,
-                width: "100%",
-                backgroundColor: Colors.gray,
-                marginTop: 10,
-              }}
-            ></View> */}
-            {/* <AnimatedCircularProgress
-            size={250}
-            width={25}
-            fill={180}
-            style={{
-              transform: [{rotate: '180deg'}],
-              marginTop: 20,
-              borderRadius: 20,
-            }}
-            tintColor={Colors.PrimaryColor}
-            fillLineCap="10"
-            backgroundColor={Colors.buttonColor}
-            arcSweepAngle={160}>
-            {fill => (
-              <View
-                style={{
-                  transform: [{rotate: '180deg'}],
-                  position: 'absolute',
-                  bottom: 20,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
-                <Text
-                  style={{
-                    fontSize: 20,
-                    color: Colors.black,
-                    fontWeight: 'bold',
-                    marginTop: 20,
-                  }}>
-                  69%
-                </Text>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    color: Colors.gray,
-                  }}>
-                  $506.000.00
-                </Text>
-              </View>
-            )}
-          </AnimatedCircularProgress> */}
-            {/* <View
-              style={{
-                height: 60,
-                width: "96%",
-                alignSelf: "flex-end",
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-                backgroundColor: Colors.white,
-              }}
-            >
-              <View
-                style={{
-                  width: "80%",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View
-                  style={{
-                    height: 80,
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: Colors.gray,
-                      fontSize: 16,
-                    }}
-                  >
-                    Toatl Lead Value
-                  </Text>
-                  <Text
-                    style={{
-                      color: Colors.gray,
-                      fontSize: 16,
-                    }}
-                  >
-                    $734.000.00
-                  </Text>
-                </View>
-              </View>
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={Images.mail}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    resizeMode: "contain",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-            </View> */}
-            {/* <View
-              style={{
-                height: 60,
-                width: "96%",
-                alignSelf: "flex-end",
 
-                alignItems: "center",
-                alignContent: "center",
-                flexDirection: "row",
-              }}
-            >
-              <View
-                style={{
-                  width: "80%",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <View
-                  style={{
-                    height: 80,
-                    justifyContent: "center",
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: Colors.gray,
-                      fontSize: 16,
-                    }}
-                  >
-                    Under Contract
-                  </Text>
-                  <Text
-                    style={{
-                      color: Colors.gray,
-                      fontSize: 16,
-                    }}
-                  >
-                    1
-                  </Text>
-                </View>
-              </View>
-
-              <TouchableOpacity
-                style={{
-                  justifyContent: "center",
-                }}
-              >
-                <Image
-                  source={Images.phone}
-                  style={{
-                    height: 40,
-                    width: 40,
-                    marginLeft: "5%",
-                    resizeMode: "contain",
-                  }}
-                ></Image>
-              </TouchableOpacity>
-            </View> */}
-            <Text
+            {/* <Text
               style={{
                 fontSize: 20,
                 marginTop: 20,
@@ -517,8 +340,8 @@ export default function Dashboard() {
               }}
             >
               $ 829,000
-            </Text>
-            <View
+            </Text> */}
+            {/* <View
               style={{
                 height: 1,
                 width: "100%",
@@ -536,8 +359,8 @@ export default function Dashboard() {
               }}
             >
               Document Portal
-            </Text>
-            <TouchableOpacity
+            </Text> */}
+            {/* <TouchableOpacity
               style={{
                 justifyContent: "center",
                 alignItems: "center",
@@ -646,63 +469,7 @@ export default function Dashboard() {
                         {item.details}
                       </Text>
                     </View>
-                    {/* <View
-                      style={{
-                        height: 80,
-                        width: "96%",
-                        alignSelf: "flex-end",
-                        alignItems: "center",
-                        alignContent: "center",
-                        flexDirection: "row",
-                      }}
-                    >
-                      <TouchableOpacity
-                        onPress={() => sendEmail(item.contact_email)}
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/mail.png")}
-                          style={{
-                            height: 40,
-                            width: 40,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => sendSMS(item.contact_number)}
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/chat.png")}
-                          style={{
-                            height: 40,
-                            width: 40,
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => makePhoneCall(item.contact_number)}
-                        style={{
-                          justifyContent: "center",
-                        }}
-                      >
-                        <Image
-                          source={require("../../../assets/phone.png")}
-                          style={{
-                            height: 40,
-                            width: 40,
-                            marginLeft: "5%",
-                            resizeMode: "contain",
-                          }}
-                        ></Image>
-                      </TouchableOpacity>
-                    </View> */}
+                  
                     <View
                       style={{
                         justifyContent: "center",
@@ -730,140 +497,39 @@ export default function Dashboard() {
                   </View>
                 </TouchableOpacity>
               )}
-              //   keyExtractor={(item) => item.id}
-              //  ItemSeparatorComponent={this.renderSeparator}
-              //   key={(item) => item.id}
-            />
-
-            {/* <View
-              style={{
-                marginTop: 10,
-                backgroundColor: Colors.white,
-                width: "100%",
-              }}
-            >
-              <RNSpeedometer
-                value={meter2Value}
-                size={180}
-                minValue={0}
-                maxValue={100}
-                allowedDecimals={0}
-                labels={[
-                  {
-                    name: "",
-                    labelColor: "#ed2024",
-                    activeBarColor: "#ec1a1e",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#ee3323",
-                    activeBarColor: "#ee3323",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f05622",
-                    activeBarColor: "#f05622",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f36f21",
-                    activeBarColor: "#f36f21",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f68620",
-                    activeBarColor: "#f68620",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f99d1c",
-                    activeBarColor: "#f99d1c",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#fcb218",
-                    activeBarColor: "#fcb218",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#ffc907",
-                    activeBarColor: "#ffc907",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#fedf00",
-                    activeBarColor: "#fedf00",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f7de00",
-                    activeBarColor: "#f7de00",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#e7dd1c",
-                    activeBarColor: "#e7dd1c",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#dadf26",
-                    activeBarColor: "#dadf26",
-                  },
-
-                  {
-                    name: "",
-                    labelColor: "#c2d82f",
-                    activeBarColor: "#c2d82f",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#afd136",
-                    activeBarColor: "#afd136",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#9ccb3b",
-                    activeBarColor: "#9ccb3b",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#8bc63f",
-                    activeBarColor: "#8bc63f",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#7ac143",
-                    activeBarColor: "#7ac143",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#ffffff",
-                    activeBarColor: "#5dba46",
-                  },
-                ]}
-                //needleImage={Images.meter}
-                // wrapperStyle={}
-                //outerCircleStyle={{height: 80}}
-                // halfCircleStyle={}
-                //imageWrapperStyle={{resizeMode: 'contain', height: 100, width: 100}}
-                //innerCircleStyle={{width: 130, borderRadius: 65}}
-                // labelWrapperStyle={}
-                // labelStyle={}
-                // labelNoteStyle={}
-              />
-            </View> */}
-            {/* <View
-              style={{
-                //height: 100,
-                //width: "96%",
-               // alignSelf: "flex-end",
-                //backgroundColor: Colors.white,
-                //alignItems: "center",
-               // alignContent: "center",
-                //flexDirection: "row",
-              }}
-            >
-            </View>*/}
+             
+            /> */}
+<View style={styles.maincoverop}>
+  <View style={styles.boxcover}>
+    <Text style={styles.smalltext}>Opportunites</Text>
+    <Text style={styles.bigtext}>142</Text>
+  </View>
+  <View style={styles.boxcover}>
+    <Text style={styles.smalltext}>Transactions</Text>
+    <Text style={styles.bigtext}>$2.7MM</Text>
+  </View>
+  <View style={styles.boxcover}>
+    <Text style={styles.smalltext}>Earnings</Text>
+    <Text style={styles.bigtext}>$29.500</Text>
+  </View>
+  <View style={styles.boxcover}>
+    <Text style={styles.smalltext}>Document</Text>
+    <Image
+            style={{ height: 40, width: 40,  resizeMode: "contain",marginVertical:6,alignItems:"center" }}
+            source={require("../../../assets/menu.png")}
+          ></Image>
+    <Text style={styles.smalltext}>Portal</Text>
+  </View>
+  <View style={styles.boxcover}>
+    <Text style={styles.smalltext}>Call</Text>
+    <Image
+            style={{ height: 40, width: 40,  resizeMode: "contain",marginVertical:6,alignItems:"center" }}
+            source={require("../../../assets/menu.png")}
+          ></Image>
+    <Text style={styles.smalltext}>Center</Text>
+  </View>
+</View>
+           
           </View>
         </ScrollView>
       ) : (
@@ -872,3 +538,27 @@ export default function Dashboard() {
     </SafeAreaView>
   );
 }
+const styles = StyleSheet.create({
+  boxcover:{
+    backgroundColor:Colors.darkblue,
+    height:130,
+    width:130,
+    marginBottom:30,
+    borderRadius:100,
+    alignItems:"center",
+    lineHeight:130,
+justifyContent:"center",
+shadowColor: Colors.black,
+  shadowOpacity: 0.26,
+  shadowOffset: { width: 0, height: 2},
+  shadowRadius: 10,
+  elevation: 3,
+
+
+  },
+  maincoverop:{marginTop:50,
+  marginBottom:40},
+  smalltext:{color:Colors.white,fontWeight:300,fontSize:14},
+  bigtext:{fontSize:28,color:Colors.white,lineHeight:60,
+  fontWeight:"bold"},
+});
