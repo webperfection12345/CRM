@@ -327,6 +327,7 @@ const MyClientsDetails = (props) => {
                   fontSize: 19,
                   fontWeight: "bold",
                   color: Colors.white,
+                marginLeft:60
                 }}
               >
                 {item.contact_name}{" "}
@@ -392,6 +393,7 @@ const MyClientsDetails = (props) => {
             </View>
           )}
         />
+        <ScrollView>
         <FlatList
           data={data}
           scrollEnabled={false}
@@ -771,6 +773,7 @@ const MyClientsDetails = (props) => {
             </View>
           )}
         />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

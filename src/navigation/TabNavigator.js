@@ -23,7 +23,10 @@ import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 
 import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
 
+
+
 import Properties from "../container/Properties/Properties";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -35,16 +38,17 @@ const BottomTabNavigator = () => {
       initialRouteName="Home"
     >
       <Tab.Screen
-        name="MLS"
-        component={Properties}
+        name="SingleClientDetail"
+        component={SingleClientDetail}
         options={{
           tabBarLabel: (
-            <Text style={{ fontSize: 14 }} allowFontScaling={false}>
+            <Text style={{ fontSize: 11 }} allowFontScaling={false}>
               MLS
             </Text>
           ),
-          tabBarIcon: require("./../assets/images/contactss.png"),
+          tabBarIcon: require("./../assets/images/mlscallcenterb.png"),
           tabBarHideOnKeyboard: true,
+          tintColor:"red"
         }}
       />
       <Tab.Screen
@@ -52,11 +56,11 @@ const BottomTabNavigator = () => {
         component={Contact}
         options={{
           tabBarLabel: (
-            <Text style={{ fontSize: 14 }} allowFontScaling={false}>
+            <Text style={{ fontSize: 11 }} allowFontScaling={false}>
               Contact
             </Text>
           ),
-          tabBarIcon: require("./../assets/images/contactss.png"),
+          tabBarIcon: require("./../assets/images/contactwhiteb.png"),
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         }}
@@ -66,12 +70,12 @@ const BottomTabNavigator = () => {
         component={Dashboard}
         options={{
           tabBarLabel: (
-            <Text style={{ fontSize: 14 }} allowFontScaling={false}>
+            <Text style={{ fontSize: 11 }} allowFontScaling={false}>
               DashBoard
             </Text>
           ),
 
-          tabBarIcon: require("./../assets/images/home.png"),
+          tabBarIcon: require("./../assets/images/Dashboab.png"),
 
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
@@ -82,12 +86,12 @@ const BottomTabNavigator = () => {
         component={Leads}
         options={{
           tabBarLabel: (
-            <Text style={{ fontSize: 14 }} allowFontScaling={false}>
+            <Text style={{ fontSize: 11 }} allowFontScaling={false}>
               Opportunities
             </Text>
           ),
 
-          tabBarIcon: require("./../assets/images/clientsss.png"),
+          tabBarIcon: require("./../assets/images/transactionwqhiteb.png"),
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         }}
@@ -97,11 +101,11 @@ const BottomTabNavigator = () => {
         component={TransactionDesk}
         options={{
           tabBarLabel: (
-            <Text style={{ fontSize: 14 }} allowFontScaling={false}>
+            <Text style={{ fontSize: 11 }} allowFontScaling={false}>
               Transactions
             </Text>
           ),
-          tabBarIcon: require("./../assets/images/transss.png"),
+          tabBarIcon: require("./../assets/images/opporrtubitb.png"),
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
           tabBarBackground: "grey",
@@ -185,7 +189,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
                   onLongPress={onLongPress}
                   style={{
                     height: 70,
-                    width: 100,
+                    width: 85,
                     alignItems: "center",
                     justifyContent: "center",
                     alignContent: "center",
@@ -193,8 +197,8 @@ function CustomTabBar({ state, descriptors, navigation }) {
                 >
                   <View
                     style={{
-                      height: 50,
-                      width: 50,
+                      height: 45,
+                      width: 45,
                       justifyContent: "center",
                       alignItems: "center",
                     }}
@@ -232,3 +236,7 @@ function CustomTabBar({ state, descriptors, navigation }) {
   );
 }
 export default BottomTabNavigator;
+
+
+
+
