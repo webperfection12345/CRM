@@ -266,12 +266,11 @@ const CustomDrawerContent = () => {
           onPress={() => navigation.navigate("Profile")}
           activeOpacity={1}
           style={{
-            height: 130,
+            height: 95,
             width: "100%",
             backgroundColor: Colors.PrimaryColor,
             flexDirection: "row",
             alignItems: "center",
-            paddingTop: 30,
           }}
         >
           <View
@@ -309,68 +308,11 @@ const CustomDrawerContent = () => {
         </TouchableOpacity>
         <View
           style={{
-            justifyContent: "center",
+            justifyContent: "flex-start",
             backgroundColor: Colors.PrimaryColor,
             height: "78%",
           }}
         >
-          {/* <FlatList
-            data={data}
-            renderItem={({ item }) => (
-             
-              <TouchableOpacity
-                onPress={() => signOut(item.index)}
-                style={{
-                  height: 60,
-                  alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                 marginHorizontal:12,
-                  borderBottomColor:Colors.borderlightcolor,
-                    borderBottomWidth:1
-                }}
-                
-              >
-                <View
-                  style={{
-                    height: 50,
-                    width: 70,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                 
-                >
-                  <Image
-                    source={item.img}
-                    resizeMode="contain"
-                    style={{
-                      height: "50%",
-                      width: "50%",
-                    }}
-                  ></Image>
-                </View>
-                <View
-                  style={{
-                    height: 70,
-                    justifyContent: "center",
-                    
-                  }}
-                >
-                  <Text
-                    style={{
-                      color: Colors.white,
-                      fontSize: 16,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    {item.name}
-                  </Text>
-                </View>
-                
-              </TouchableOpacity>
-            )}
-         
-          /> */}
           <TouchableHighlight
             onPress={handlePress1}
             underlayColor="transparent"
@@ -720,7 +662,7 @@ const CustomDrawerContent = () => {
           source={require("../../assets/bottomlogosidebar.png")}
           style={{
             height: 150,
-            width: 150,
+            width: 110,
             justifyContent: "center",
             alignItems: "center",
             resizeMode: "contain",

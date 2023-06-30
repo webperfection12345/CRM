@@ -63,7 +63,7 @@ const Header = (props) => {
       <View style={styles.onlinepeoples}>
         <ScrollView horizontal={true} style={styles.maincent}>
           {currentActive.length > 0 ? (
-            <FlatList
+            <FlatList style={{padding:5}}
               data={currentActive}
               horizontal={true}
               renderItem={({ item, index }) => (
@@ -76,8 +76,9 @@ const Header = (props) => {
                     alignSelf: "center",
                     justifyContent: "center",
                     alignItems: "center",
-                    backgroundColor: "purple",
+                    backgroundColor: Colors.PrimaryColor,
                     outline: "2px solid green",
+                    marginRight:8
                   }}
                 >
                   {item.User_image ? (
