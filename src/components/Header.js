@@ -56,7 +56,6 @@ const Header = (props) => {
     setSelectedDate(date.dateString);
     setSelectedOption("date"); // Update the selectedOption state to "date"
     // setShowPicker(false);
-    console.log(date);
   };
 
   const renderCalendar = () => {
@@ -187,7 +186,6 @@ const Header = (props) => {
   }, [isFocused]);
   const getActiveClient = async () => {
     const id = await AsyncStorage.getItem("userId");
-    console.log(id);
     try {
       const response = await fetch(
         "https://surf.topsearchrealty.com/wp-json/activeuser/currentactive?user_id=" +
@@ -197,7 +195,6 @@ const Header = (props) => {
         throw new Error("Failed to fetch active client data.");
       }
       const data = await response.json();
-      console.log(data.data);
 
       // Check if the data is an array or a string
       if (Array.isArray(data.data)) {
@@ -205,8 +202,6 @@ const Header = (props) => {
       } else {
         SetCurrentActive([]); // Set an empty array if there are no active clients
       }
-
-      setLoading(false);
     } catch (error) {
       console.log(error.message);
       // Handle the error condition

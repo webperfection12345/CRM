@@ -90,7 +90,6 @@ export default function Dashboard() {
         if (response && response.payload && response.payload.data) {
           const contactsData = response.payload.data;
           const leadsCount = contactsData.length;
-          console.log("Total leads:", leadsCount);
           setTotalLeadValue(leadsCount);
           const name = await AsyncStorage.getItem("userDetails");
           const userDetails = JSON.parse(name);

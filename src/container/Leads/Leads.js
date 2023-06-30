@@ -35,7 +35,6 @@ const Leads = () => {
       .then((response) => {
         if (response && response.payload && response.payload.data) {
           const contactsData = response.payload.data;
-          console.log(contactsData, "aaasa");
           setData(contactsData);
           setLoading(false);
         } else {

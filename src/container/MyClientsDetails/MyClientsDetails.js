@@ -65,7 +65,6 @@ const MyClientsDetails = (props) => {
       allActivityHistory();
       MyNoteData();
       TodayDisPosition();
-      console.log("Page refreshed");
     }
     // disPosition();
     // MyClientsDetails();
@@ -111,7 +110,6 @@ const MyClientsDetails = (props) => {
     dispatch(getDisposition(id)).then((response) => {
       const data = response.payload.data;
       setFutureDipo(data);
-      console.log(data);
     });
   };
 
@@ -119,7 +117,6 @@ const MyClientsDetails = (props) => {
     dispatch(getTodayDipos(id)).then((response) => {
       const data = response.payload.data;
       setTodayDipo(data);
-      console.log(data, "dfsdf");
     });
   };
   // const currentDisposition = () => {
@@ -337,10 +334,8 @@ const MyClientsDetails = (props) => {
           </TouchableOpacity>
         </View>
 
-
-           <ScrollView showsVerticalScrollIndicator={false}>
-      <FlatList
-
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <FlatList
             data={data}
             scrollEnabled={false}
             renderItem={({ item, index }) => (
@@ -739,7 +734,6 @@ const MyClientsDetails = (props) => {
                           <Text style={styles.subheadingmaintype}>
                             {item.activity_disposition}
                           </Text>
-                         
                         </TouchableOpacity>
                         {selectedTodayActivityType ===
                           item.activity_disposition && (
@@ -963,7 +957,6 @@ const MyClientsDetails = (props) => {
                             <Text style={styles.subheadingmaintype}>
                               {item.activity_disposition}
                             </Text>
-                           
                           </TouchableOpacity>
                           {selectedActivityType ===
                             item.activity_disposition && (
@@ -1094,11 +1087,10 @@ const MyClientsDetails = (props) => {
                                     alignItems: "center",
                                     marginRight: 10,
 
-                                    borderRadius:100,
-                                   
-                                    alignItems:"center",
-                                    justifyContent:"center"
+                                    borderRadius: 100,
 
+                                    alignItems: "center",
+                                    justifyContent: "center",
                                   }}
                                 >
                                   <View
@@ -1177,7 +1169,7 @@ const MyClientsDetails = (props) => {
                 ))}
               </View>
             )}
-<View
+            <View
               style={{
                 flexDirection: "row",
                 width: "90%",
@@ -1251,7 +1243,6 @@ const MyClientsDetails = (props) => {
               >
                 Notes
               </Text>
-             
             </View>
             <View style={{ backgroundColor: Colors.white, marginTop: 20 }}>
               {note && note.length > 0 ? (
@@ -1403,7 +1394,6 @@ const MyClientsDetails = (props) => {
                 <Text style={styles.nodata}>No activity history found.</Text>
               )}
             </View>
-           
           </View>
 
           <Modal
@@ -1549,7 +1539,6 @@ const MyClientsDetails = (props) => {
                       }}
                       autoCorrect={false}
                       returnKeyType="done"
-                     
                     />
                   </View>
                 </View>
@@ -1666,7 +1655,6 @@ const MyClientsDetails = (props) => {
                       }}
                       autoCorrect={false}
                       returnKeyType="done"
-                      
                     />
                   </View>
                 </View>
@@ -1744,7 +1732,6 @@ const MyClientsDetails = (props) => {
                       returnKeyType="done"
                       placeholder="biff@bowser.com"
                       placeholderTextColor={Colors.black}
-                     
                     />
                   </View>
                 </View>
@@ -1783,7 +1770,6 @@ const MyClientsDetails = (props) => {
                       autoCorrect={false}
                       returnKeyType="done"
                       placeholderTextColor={Colors.black}
-                     
                     />
                   </View>
                 </View>
@@ -1855,7 +1841,6 @@ const MyClientsDetails = (props) => {
             </View>
           </Modal>
 
-         
           <View
             style={{
               width: "95%",

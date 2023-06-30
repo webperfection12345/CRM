@@ -8,7 +8,6 @@ export const getProperties = createAsyncThunk("getProperties", async (page) => {
   return await getAPI(urlDynamic)
     .then(async (response) => {
       const { data } = response;
-      console.log("rohan");
       return data;
     })
     .catch((e) => {
