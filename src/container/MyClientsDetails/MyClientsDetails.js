@@ -225,7 +225,18 @@ const MyClientsDetails = (props) => {
     let body = "Body of email";
     Linking.openURL(`mailto:${recipient}?subject=${subject}&body=${body}`);
   };
-
+  const handleAPICall = () => {
+    fetch("https://surf.topsearchrealty.com/webapi/v1/twilio/voice_call.php")
+      .then((response) => response.json())
+      .then((data) => {
+        // Handle the response data
+        console.log(data);
+      })
+      .catch((error) => {
+        // Handle any errors
+        console.error(error);
+      });
+  };
   const sendSMS = () => {
     let phoneNumber = items.item.contact_number;
     let message = "Hello from my app!";
@@ -328,6 +339,7 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     marginRight: 10,
                   }}
+                  onPress={handleAPICall}
                 >
                   <Image
                     style={{

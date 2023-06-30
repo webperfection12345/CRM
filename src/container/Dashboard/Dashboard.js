@@ -60,6 +60,7 @@ export default function Dashboard() {
       setLoading(false);
     });
   };
+
   const getMeterImage = (value) => {
     let imagePath = "";
     console.log(value);
@@ -84,6 +85,7 @@ export default function Dashboard() {
     console.log(imagePath);
     return imagePath;
   };
+
   const getLeadCount = () => {
     dispatch(getLeads())
       .then(async (response) => {
