@@ -21,7 +21,7 @@ import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 
-//import SingleClientDetail from "../components/SingleClientDetail/SingleClientDetail";
+import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
 
 
 
@@ -38,8 +38,8 @@ const BottomTabNavigator = () => {
       initialRouteName="Home"
     >
       <Tab.Screen
-        name="MLS"
-        component={Properties}
+        name="SingleClientDetail"
+        component={SingleClientDetail}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
@@ -47,7 +47,6 @@ const BottomTabNavigator = () => {
             </Text>
           ),
           tabBarIcon: require("./../assets/images/contactss.png"),
-          //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         }}
       />
