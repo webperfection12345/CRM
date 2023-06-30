@@ -7,18 +7,178 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
+  Modal,
+  Button,
 } from "react-native";
 import Colors from "../utils/Colors";
-import Images from "../utils/Images";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Calendar } from "react-native-calendars";
+import moment from "moment";
+import { Picker } from "@react-native-picker/picker";
 
+const activities = {
+  "2023-06-01": [{ name: "Meeting", time: "10:00 AM" }],
+  "2023-06-10": [{ name: "Birthday Party", time: "7:00 PM" }],
+  "2023-06-15": [{ name: "Dinner", time: "8:30 PM" }],
+  "2024-01-01": [{ name: "Dinner", time: "8:30 PM" }],
+  "2022-01-01": [{ name: "Dinner", time: "8:30 PM" }],
+};
 const Header = (props) => {
   const { label, plusButton } = props;
   const navigation = useNavigation();
   const [currentActive, SetCurrentActive] = useState([]);
   const isFocused = useIsFocused();
+  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedDate, setSelectedDate] = useState(
+    moment().format("YYYY-MM-DD")
+  );
+  const [showPicker, setShowPicker] = useState(true);
 
+  const handleOptionChange = (option) => {
+    setSelectedOption(option);
+    setSelectedDate(moment().format("YYYY-MM-DD"));
+    setShowPicker(true);
+  };
+
+  const handleMonthChange = (month) => {
+    const selectedMonth = moment(selectedDate).month(
+      moment.months().indexOf(month)
+    );
+    setSelectedDate(selectedMonth.format("YYYY-MM-DD"));
+  };
+
+  const handleYearChange = (year) => {
+    const selectedYear = moment(selectedDate).year(year);
+    setSelectedDate(selectedYear.format("YYYY-MM-DD"));
+  };
+  const handleDateSelect = (date) => {
+    setSelectedDate(date.dateString);
+    setSelectedOption("date"); // Update the selectedOption state to "date"
+    // setShowPicker(false);
+    console.log(date);
+  };
+
+  const renderCalendar = () => {
+    if (selectedOption === "date" && showPicker === true) {
+      const activitiesForDate = activities[selectedDate] || [];
+
+      return (
+        <Modal
+          visible={showPicker}
+          onRequestClose={() => setShowPicker(false)}
+          animationType="slide"
+        >
+          <View>
+            <Calendar
+              markedDates={{
+                [selectedDate]: { selected: true, selectedColor: "blue" },
+              }}
+              onDayPress={handleDateSelect}
+            />
+            <Text>Activities for {selectedDate}:</Text>
+            {activitiesForDate.map((activity, index) => (
+              <Text key={index}>
+                {activity.name} - {activity.time}
+              </Text>
+            ))}
+          </View>
+          <Button title="Close" onPress={() => setShowPicker(false)} />
+        </Modal>
+      );
+    } else if (selectedOption === "month") {
+      const month = moment(selectedDate).format("MMMM");
+      const activitiesForMonth = Object.entries(activities).filter(
+        ([date]) => moment(date).format("MMMM") === month
+      );
+
+      const markedDates = {};
+      activitiesForMonth.forEach(([date]) => {
+        markedDates[date] = { marked: true };
+      });
+
+      return (
+        <Modal
+          visible={showPicker}
+          onRequestClose={() => setShowPicker(false)}
+          animationType="slide"
+        >
+          <View>
+            <Picker
+              selectedValue={month}
+              onValueChange={handleMonthChange}
+              style={styles.picker}
+            >
+              {moment.months().map((monthName, index) => (
+                <Picker.Item key={index} label={monthName} value={monthName} />
+              ))}
+            </Picker>
+            <Calendar markedDates={markedDates} onDayPress={handleDateSelect} />
+            <Text>Activities for {month}:</Text>
+            {activitiesForMonth.map(([date, activities]) => (
+              <View key={date}>
+                <Text>{date}:</Text>
+                {activities.map((activity, index) => (
+                  <Text key={index}>
+                    {activity.name} - {activity.time}
+                  </Text>
+                ))}
+              </View>
+            ))}
+          </View>
+          <Button title="Close" onPress={() => setShowPicker(false)} />
+        </Modal>
+      );
+    } else if (selectedOption === "year") {
+      const year = moment(selectedDate).format("YYYY");
+      const currentYear = moment().year();
+      const years = [];
+      for (let i = currentYear - 10; i <= currentYear + 10; i++) {
+        years.push(i.toString());
+      }
+      const activitiesForYear = Object.entries(activities).filter(
+        ([date]) => moment(date).format("YYYY") === year
+      );
+
+      const markedDates = {};
+      activitiesForYear.forEach(([date]) => {
+        markedDates[date] = { marked: true };
+      });
+
+      return (
+        <Modal
+          visible={showPicker}
+          onRequestClose={() => setShowPicker(false)}
+          animationType="slide"
+        >
+          <View>
+            <Picker
+              selectedValue={year}
+              onValueChange={handleYearChange}
+              style={styles.picker}
+            >
+              {years.map((yearValue, index) => (
+                <Picker.Item key={index} label={yearValue} value={yearValue} />
+              ))}
+            </Picker>
+            <Calendar markedDates={markedDates} onDayPress={handleDateSelect} />
+            <Text>Activities for {year}:</Text>
+            {activitiesForYear.map(([date, activities]) => (
+              <View key={date}>
+                <Text>{date}:</Text>
+                {activities.map((activity, index) => (
+                  <Text key={index}>
+                    {activity.name} - {activity.time}
+                  </Text>
+                ))}
+              </View>
+            ))}
+          </View>
+          <Button title="Close" onPress={() => setShowPicker(false)} />
+        </Modal>
+      );
+    }
+  };
   useEffect(() => {
     getActiveClient();
     if (isFocused) {
@@ -135,10 +295,19 @@ const Header = (props) => {
         </Text>
         <View style={styles.headericons}>
           <TouchableOpacity style={styles.notificationicon}>
-            <Image
-              style={{ height: 25, width: 25, resizeMode: "contain" }}
-              source={require("../../assets/calender.png")}
-            ></Image>
+            <View style={styles.container}>
+              <Picker
+                selectedValue={selectedOption}
+                onValueChange={handleOptionChange}
+                style={styles.picker}
+              >
+                <Picker.Item label="Select Option" value="" />
+                <Picker.Item label="Date" value="date" />
+                <Picker.Item label="Month" value="month" />
+                <Picker.Item label="Year" value="year" />
+              </Picker>
+              {renderCalendar()}
+            </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.notificationicon}>
             <Image
@@ -188,6 +357,21 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     lineHeight: 60,
     fontSize: 20,
+  },
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  activitiesContainer: {
+    marginTop: 16,
+  },
+  dateText: {
+    fontSize: 18,
+    fontWeight: "bold",
+    marginBottom: 8,
+  },
+  activityText: {
+    marginBottom: 4,
   },
 });
 export default Header;

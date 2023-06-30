@@ -8,6 +8,8 @@ import {
   Image,
   Linking,
   StyleSheet,
+  TouchableOpacity,
+  Modal,
 } from "react-native";
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
@@ -29,7 +31,7 @@ export default function Dashboard() {
   const isFocused = useIsFocused();
   const [activity, setActivity] = useState(false);
   const [data, setData] = useState([]);
-
+  const [showPopup, setShowPopup] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -39,7 +41,13 @@ export default function Dashboard() {
     if (isFocused) {
     }
   }, [isFocused]);
+  const openPopup = () => {
+    setShowPopup(true);
+  };
 
+  const closePopup = () => {
+    setShowPopup(false);
+  };
   const getMeter = () => {
     dispatch(getMeterData()).then((response) => {
       setMeterValue(response.payload.data);
@@ -51,6 +59,30 @@ export default function Dashboard() {
       setData(Object.values(contactsData));
       setLoading(false);
     });
+  };
+  const getMeterImage = (value) => {
+    let imagePath = "";
+    console.log(value);
+    switch (true) {
+      case value >= 0 && value < 25:
+        imagePath = "../../../assets/menu.png";
+        break;
+      case value >= 25 && value < 50:
+        imagePath = "../path/to/secondImage.png";
+        break;
+      case value >= 50 && value < 75:
+        imagePath = "../path/to/thirdImage.png";
+        break;
+      case value >= 75 && value <= 100:
+        imagePath = "../path/to/fourthImage.png";
+        break;
+      default:
+        // Handle default case or display a placeholder image
+        imagePath = "../path/to/placeholderImage.png";
+        break;
+    }
+    console.log(imagePath);
+    return imagePath;
   };
   const getLeadCount = () => {
     dispatch(getLeads())
@@ -136,116 +168,135 @@ export default function Dashboard() {
             >
               Surf Level
             </Text>
+            <TouchableOpacity onPress={openPopup}>
+              <View
+                style={{
+                  marginTop: 10,
+                  backgroundColor: Colors.white,
+                  width: "100%",
+                }}
+              >
+                <RNSpeedometer
+                  value={meterValue}
+                  size={180}
+                  minValue={0}
+                  maxValue={100}
+                  allowedDecimals={0}
+                  labels={[
+                    {
+                      name: "",
+                      labelColor: "#ed2024",
+                      activeBarColor: "#ec1a1e",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#ee3323",
+                      activeBarColor: "#ee3323",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#f05622",
+                      activeBarColor: "#f05622",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#f36f21",
+                      activeBarColor: "#f36f21",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#f68620",
+                      activeBarColor: "#f68620",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#f99d1c",
+                      activeBarColor: "#f99d1c",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#fcb218",
+                      activeBarColor: "#fcb218",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#ffc907",
+                      activeBarColor: "#ffc907",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#fedf00",
+                      activeBarColor: "#fedf00",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#f7de00",
+                      activeBarColor: "#f7de00",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#e7dd1c",
+                      activeBarColor: "#e7dd1c",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#dadf26",
+                      activeBarColor: "#dadf26",
+                    },
 
-            <View
-              style={{
-                marginTop: 10,
-                backgroundColor: Colors.white,
-                width: "100%",
-              }}
+                    {
+                      name: "",
+                      labelColor: "#c2d82f",
+                      activeBarColor: "#c2d82f",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#afd136",
+                      activeBarColor: "#afd136",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#9ccb3b",
+                      activeBarColor: "#9ccb3b",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#8bc63f",
+                      activeBarColor: "#8bc63f",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#7ac143",
+                      activeBarColor: "#7ac143",
+                    },
+                    {
+                      name: "",
+                      labelColor: "#ffffff",
+                      activeBarColor: "#5dba46",
+                    },
+                  ]}
+                />
+              </View>
+            </TouchableOpacity>
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={showPopup}
+              onRequestClose={closePopup}
             >
-              <RNSpeedometer
-                value={meterValue}
-                size={180}
-                minValue={0}
-                maxValue={100}
-                allowedDecimals={0}
-                labels={[
-                  {
-                    name: "",
-                    labelColor: "#ed2024",
-                    activeBarColor: "#ec1a1e",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#ee3323",
-                    activeBarColor: "#ee3323",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f05622",
-                    activeBarColor: "#f05622",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f36f21",
-                    activeBarColor: "#f36f21",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f68620",
-                    activeBarColor: "#f68620",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f99d1c",
-                    activeBarColor: "#f99d1c",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#fcb218",
-                    activeBarColor: "#fcb218",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#ffc907",
-                    activeBarColor: "#ffc907",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#fedf00",
-                    activeBarColor: "#fedf00",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#f7de00",
-                    activeBarColor: "#f7de00",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#e7dd1c",
-                    activeBarColor: "#e7dd1c",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#dadf26",
-                    activeBarColor: "#dadf26",
-                  },
+              <View style={styles.popupContainer}>
+                <View style={styles.popupContent}>
+                  <Text>aasasasasa</Text>
 
-                  {
-                    name: "",
-                    labelColor: "#c2d82f",
-                    activeBarColor: "#c2d82f",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#afd136",
-                    activeBarColor: "#afd136",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#9ccb3b",
-                    activeBarColor: "#9ccb3b",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#8bc63f",
-                    activeBarColor: "#8bc63f",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#7ac143",
-                    activeBarColor: "#7ac143",
-                  },
-                  {
-                    name: "",
-                    labelColor: "#ffffff",
-                    activeBarColor: "#5dba46",
-                  },
-                ]}
-              />
-            </View>
-
+                  <TouchableOpacity
+                    style={styles.popupButton}
+                    onPress={closePopup}
+                  >
+                    <Text style={styles.popupButtonText}>Close</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
             <View style={styles.maincoverop}>
               <View style={styles.boxcover}>
                 <Text style={styles.smalltext}>Opportunites</Text>
@@ -319,5 +370,32 @@ const styles = StyleSheet.create({
     color: Colors.white,
     lineHeight: 60,
     fontWeight: "bold",
+  },
+  popupContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  popupContent: {
+    backgroundColor: Colors.white,
+    padding: 20,
+    borderRadius: 10,
+    width: "80%",
+    maxHeight: "70%",
+  },
+  popupText: {
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  popupButton: {
+    backgroundColor: Colors.PrimaryColor,
+    padding: 10,
+    borderRadius: 5,
+    alignSelf: "flex-end",
+  },
+  popupButtonText: {
+    color: Colors.white,
+    fontSize: 16,
   },
 });
