@@ -23,10 +23,7 @@ import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 
 import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
 
-
-
 import Properties from "../container/Properties/Properties";
-
 
 const Tab = createBottomTabNavigator();
 
@@ -38,8 +35,8 @@ const BottomTabNavigator = () => {
       initialRouteName="Home"
     >
       <Tab.Screen
-        name="SingleClientDetail"
-        component={SingleClientDetail}
+        name="MLS"
+        component={Properties}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 14 }} allowFontScaling={false}>
