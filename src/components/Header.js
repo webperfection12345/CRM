@@ -9,6 +9,7 @@ import {
   FlatList,
   Modal,
   Button,
+  Platform,
 } from "react-native";
 import Colors from "../utils/Colors";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -46,6 +47,13 @@ const Header = (props) => {
       moment.months().indexOf(month)
     );
     setSelectedDate(selectedMonth.format("YYYY-MM-DD"));
+  };
+  const handleItemClick = () => {
+    if (Platform.OS === "web") {
+      navigation.toggleDrawer();
+    } else {
+      // navigation.toggleDrawer();
+    }
   };
 
   const handleYearChange = (year) => {
@@ -180,6 +188,11 @@ const Header = (props) => {
   };
   useEffect(() => {
     getActiveClient();
+    // if (Platform.OS === "web") {
+    //   navigation.openDrawer();
+    // } else {
+    //   navigation.closeDrawer();
+    // }
     if (isFocused) {
       // Perform the refresh logic here
     }
@@ -218,7 +231,8 @@ const Header = (props) => {
       <View style={styles.onlinepeoples}>
         <ScrollView horizontal={true} style={styles.maincent}>
           {currentActive.length > 0 ? (
-            <FlatList style={{padding:5}}
+            <FlatList
+              style={{ padding: 5 }}
               data={currentActive}
               horizontal={true}
               renderItem={({ item, index }) => (
@@ -233,7 +247,7 @@ const Header = (props) => {
                     alignItems: "center",
                     backgroundColor: Colors.PrimaryColor,
                     outline: "2px solid green",
-                    marginRight:8
+                    marginRight: 8,
                   }}
                 >
                   {item.User_image ? (
@@ -290,21 +304,18 @@ const Header = (props) => {
           {label}
         </Text>
         <View style={styles.headericons}>
-          <TouchableOpacity style={styles.notificationicon}>
-            <View style={styles.container}>
-              <Picker
-                selectedValue={selectedOption}
-                onValueChange={handleOptionChange}
-                style={styles.picker}
-              >
-                <Picker.Item label="Select Option" value="" />
-                <Picker.Item label="Date" value="date" />
-                <Picker.Item label="Month" value="month" />
-                <Picker.Item label="Year" value="year" />
-              </Picker>
-              {renderCalendar()}
-            </View>
-          </TouchableOpacity>
+          <View style={styles.container}>
+            <Picker
+              selectedValue={selectedOption}
+              onValueChange={handleOptionChange}
+              style={styles.picker}
+            >
+              <Picker.Item label="Date" value="date" />
+              <Picker.Item label="Month" value="month" />
+              <Picker.Item label="Year" value="year" />
+            </Picker>
+          </View>
+          {renderCalendar()}
           <TouchableOpacity style={styles.notificationicon}>
             <Image
               style={{
