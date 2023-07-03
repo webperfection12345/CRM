@@ -56,7 +56,7 @@ const SurfStats = () => {
           <Text
             style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
           >
-           surf Stats
+            surf Stats
           </Text>
           <View style={styles.threeiconmain}>
             <TouchableOpacity
@@ -95,174 +95,191 @@ const SurfStats = () => {
                 source={require("../../../assets/messengerwhite.png")}
               />
             </TouchableOpacity>
-           
           </View>
         </View>
 
-        <View style={{ flex: 1,}}>
+        <View style={{ flex: 1 }}>
           <ScrollView
             style={{
               flex: 1,
               paddingHorizontal: 12,
               backgroundColor: Colors.cream,
-              
             }}
           >
             <View style={styles.maincover}>
-             
               <View style={styles.clientinformation}>
-         
                 <View style={styles.clientinformationinner}>
                   <Text style={styles.username}>Jessica Kent</Text>
                   <Text style={styles.clientid}>Client ID: 76867</Text>
                 </View>
               </View>
+            </View>
 
-    
-            </View>
- 
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
-              <View style={styles.signlecolumn}>
-              <View style={styles.innermains}>
-              <Text style={styles.simplename}>Favorites</Text>
-              <TouchableOpacity style={styles.iconnextarrow}>
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                marginLeft: 20,
-                resizeMode: "contain",
-              
-              }}
-              source={require("../../../assets/arrownext.png")}
-            ></Image>
-          </TouchableOpacity>
-        </View>
-          <Text style={styles.boldname}>124</Text>
-              </View>
+                <View style={styles.signlecolumn}>
+                  <View style={styles.innermains}>
+                    <Text style={styles.simplename}>Favorites</Text>
+                    <TouchableOpacity style={styles.iconnextarrow}>
+                      <Image
+                        style={{
+                          height: 15,
+                          width: 15,
+                          marginLeft: 20,
+                          resizeMode: "contain",
+                        }}
+                        source={require("../../../assets/arrownext.png")}
+                      ></Image>
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.boldname}>124</Text>
+                </View>
               </View>
               <View style={styles.covercolsingle}>
-              <View style={styles.signlecolumn}>
-                 <View style={styles.innermains}>
-                 <Text style={styles.simplename}>Saved Searches</Text>
-              <TouchableOpacity style={styles.iconnextarrow}>
-            <Image
-              style={{
-                height: 15,
-                width: 15,
-                resizeMode: "contain",
-              
-              }}
-              source={require("../../../assets/arrownext.png")}
-            ></Image>
-          </TouchableOpacity>
-         
-          </View>
-          <Text style={styles.boldname}>8</Text>
+                <View style={styles.signlecolumn}>
+                  <View style={styles.innermains}>
+                    <Text style={styles.simplename}>Saved Searches</Text>
+                    <TouchableOpacity style={styles.iconnextarrow}>
+                      <Image
+                        style={{
+                          height: 15,
+                          width: 15,
+                          resizeMode: "contain",
+                        }}
+                        source={require("../../../assets/arrownext.png")}
+                      ></Image>
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.boldname}>8</Text>
+                </View>
               </View>
-            </View>
             </View>
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
-              <View style={[styles.signlecolumn ,{minHeight:210,justifyContent:"center",position:"relative"}]}>
-           
-          <Text style={[styles.simplename, {marginBottom:15,position:"absolute",top:19}]}>Engagement</Text>
-          <Text style={styles.boldname}>00:13:53</Text>
-              </View>
-              
+                <View
+                  style={[
+                    styles.signlecolumn,
+                    {
+                      minHeight: 210,
+                      justifyContent: "center",
+                      position: "relative",
+                    },
+                  ]}
+                >
+                  <Text
+                    style={[
+                      styles.simplename,
+                      { marginBottom: 15, position: "absolute", top: 19 },
+                    ]}
+                  >
+                    Engagement
+                  </Text>
+                  <Text style={styles.boldname}>00:13:53</Text>
+                </View>
               </View>
               <View style={styles.covercolsingle}>
-              <View style={styles.signlecolumn}>
-              
-          <Text style={[styles.simplename , {marginBottom:15}]}>Search Criteria</Text>
-          <View style={styles.mainsimpleprog}>
-          <Text style={styles.progheading}>Boynton Beach</Text>
-        <View style={styles.progresscover}>
-<View style={[styles.inerprogcover, {width:"70%"}]}>
-</View>
-</View>
-<Text style={styles.progresstext}>7,366</Text>
-        </View>
-        <View style={styles.mainsimpleprog}>
-          <Text style={styles.progheading}>4 Bedrooms</Text>
-        <View style={styles.progresscover}>
-<View style={[styles.inerprogcover, {width:"40%"}]}>
-</View>
-</View>
-<Text style={styles.progresstext}>5,298</Text>
-        </View>
-        <View style={styles.mainsimpleprog}>
-          <Text style={styles.progheading}>Master of main Level</Text>
-        <View style={[styles.progresscover, {}]}>
-<View style={[styles.inerprogcover, {width:"60%", backgroundColor:"#eb9d22"}]}>
-</View>
-</View>
-<Text style={styles.progresstext}>12,85</Text>
-        </View>
-        <View style={styles.mainsimpleprog}>
-          <Text style={styles.progheading}>Pickleball</Text>
-        <View style={[styles.progresscover, {}]}>
-<View style={[styles.inerprogcover, {width:"20%", backgroundColor:"#d4445c"}]}>
-</View>
-</View>
-<Text style={styles.progresstext}>12,85</Text>
-        </View>
+                <View style={styles.signlecolumn}>
+                  <Text style={[styles.simplename, { marginBottom: 15 }]}>
+                    Search Criteria
+                  </Text>
+                  <View style={styles.mainsimpleprog}>
+                    <Text style={styles.progheading}>Boynton Beach</Text>
+                    <View style={styles.progresscover}>
+                      <View
+                        style={[styles.inerprogcover, { width: "70%" }]}
+                      ></View>
+                    </View>
+                    <Text style={styles.progresstext}>7,366</Text>
+                  </View>
+                  <View style={styles.mainsimpleprog}>
+                    <Text style={styles.progheading}>4 Bedrooms</Text>
+                    <View style={styles.progresscover}>
+                      <View
+                        style={[styles.inerprogcover, { width: "40%" }]}
+                      ></View>
+                    </View>
+                    <Text style={styles.progresstext}>5,298</Text>
+                  </View>
+                  <View style={styles.mainsimpleprog}>
+                    <Text style={styles.progheading}>Master of main Level</Text>
+                    <View style={[styles.progresscover, {}]}>
+                      <View
+                        style={[
+                          styles.inerprogcover,
+                          { width: "60%", backgroundColor: "#eb9d22" },
+                        ]}
+                      ></View>
+                    </View>
+                    <Text style={styles.progresstext}>12,85</Text>
+                  </View>
+                  <View style={styles.mainsimpleprog}>
+                    <Text style={styles.progheading}>Pickleball</Text>
+                    <View style={[styles.progresscover, {}]}>
+                      <View
+                        style={[
+                          styles.inerprogcover,
+                          { width: "20%", backgroundColor: "#d4445c" },
+                        ]}
+                      ></View>
+                    </View>
+                    <Text style={styles.progresstext}>12,85</Text>
+                  </View>
+                </View>
               </View>
-            </View>
             </View>
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
-              <View style={styles.signlecolumn}>
-           
-          <Text style={[styles.simplename,, {marginBottom:15}]}>Search Behaviour</Text>
-          <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                style={{
-                  height: 130,
-                  width: 130,
-                  resizeMode: "contain",
-                }}
-                source={require("../../../assets/graphone.png")}
-              />
-            </TouchableOpacity>
-              </View>
+                <View style={styles.signlecolumn}>
+                  <Text style={[styles.simplename, , { marginBottom: 15 }]}>
+                    Search Behaviour
+                  </Text>
+                  <TouchableOpacity
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 130,
+                        width: 130,
+                        resizeMode: "contain",
+                      }}
+                      source={require("../../../assets/graphone.png")}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
               <View style={styles.covercolsingle}>
-              <View style={styles.signlecolumn}>
-              
-              <Text style={[styles.simplename,, {marginBottom:15}]}>Surf Level</Text>
-          <TouchableOpacity
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Image
-                style={{
-                  height: 108,
-                  width: 108,
-                  resizeMode: "contain",
-                }}
-                source={require("../../../assets/grommet.png")}
-              />
-            </TouchableOpacity>
-            <Text style={styles.grommt}>Grommet</Text>
+                <View style={styles.signlecolumn}>
+                  <Text style={[styles.simplename, , { marginBottom: 15 }]}>
+                    Surf Level
+                  </Text>
+                  <TouchableOpacity
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "center",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Image
+                      style={{
+                        height: 108,
+                        width: 108,
+                        resizeMode: "contain",
+                      }}
+                      source={require("../../../assets/grommet.png")}
+                    />
+                  </TouchableOpacity>
+                  <Text style={styles.grommt}>Grommet</Text>
+                </View>
               </View>
             </View>
-            </View>
-            <View style={{height:50}}></View>
+            <View style={{ height: 50 }}></View>
           </ScrollView>
         </View>
       </View>
-    
     </SafeAreaView>
   );
 };
@@ -283,11 +300,35 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     elevation: 3,
   },
-  innermains:{flexDirection:"row",alignItems:"center",justifyContent:"center",width:"100%",marginBottom:15
-},
-  progresscover:{width:"100%",height:3,borderRadius:22,backgroundColor:Colors.cream,position:"relative"},
-  inerprogcover:{height:3,borderRadius:22,backgroundColor:"#2bbcee",position:"absolute",left:0,top:0,bottom:0},
-  progresstext:{textAlign:"right",fontSize:7,marginTop:4,color:"#979897"},
+  innermains: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    marginBottom: 15,
+  },
+  progresscover: {
+    width: "100%",
+    height: 3,
+    borderRadius: 22,
+    backgroundColor: Colors.cream,
+    position: "relative",
+  },
+  inerprogcover: {
+    height: 3,
+    borderRadius: 22,
+    backgroundColor: "#2bbcee",
+    position: "absolute",
+    left: 0,
+    top: 0,
+    bottom: 0,
+  },
+  progresstext: {
+    textAlign: "right",
+    fontSize: 7,
+    marginTop: 4,
+    color: "#979897",
+  },
   bigtextone: {
     fontSize: 17,
     color: Colors.white,
@@ -295,7 +336,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
   },
-  grommt:{fontSize:17,fontWeight:"bold"},
+  grommt: { fontSize: 17, fontWeight: "bold" },
   addrewd: { width: "100%", flexDirection: "column" },
   dispos: {
     marginTop: 5,
@@ -315,7 +356,6 @@ const styles = StyleSheet.create({
   transactionheading: { fontSize: 20, fontWeight: "bold" },
 
   boldphone: { fontWeight: "bold", fontSize: 14 },
-
 
   threeiconmain: {
     flexDirection: "row",
@@ -341,7 +381,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "flex-start",
-    marginTop:15
+    marginTop: 15,
   },
   clientinformation: { flexDirection: "column", alignItems: "center" },
 
@@ -355,25 +395,37 @@ const styles = StyleSheet.create({
   username: { fontSize: 24, fontWeight: "bold", marginBottom: 5 },
 
   clientid: { fontSize: 14, marginBottom: 5 },
-  covercolsingle:{width:"50%",height:"100%",backgroundColor:color.white},
-  signlecolumn:{backgroundColor:Colors.white,padding:10,borderRadius:5,
-  alignItems:"center",marginHorizontal:5,
-paddingTop:19,
-paddingBottom:2,paddingBottom:10
-
-},
-//   iconnextarrow:{alignItems:"flex-end",
-// position:"absolute",
-// right:10,
-// top:10
-// },
-iconnextarrow:{position:"absolute",right:0},
-simplename:{fontSize:12,fontWeight:"bold",textAlign:"center"
-},
-boldname:{color:"#0d8dba",fontWeight:"bold",fontSize:30,},
-maincovercolumns:{flexDirection:"row",alignItems:"center",justifyContent:"space-between",marginTop:12,},
-mainsimpleprog:{width:"100%",marginBottom:2},
-progheading:{fontSize:11,marginBottom:4}
+  covercolsingle: {
+    width: "50%",
+    height: "100%",
+    backgroundColor: color.white,
+  },
+  signlecolumn: {
+    backgroundColor: Colors.white,
+    padding: 10,
+    borderRadius: 5,
+    alignItems: "center",
+    marginHorizontal: 5,
+    paddingTop: 19,
+    paddingBottom: 2,
+    paddingBottom: 10,
+  },
+  //   iconnextarrow:{alignItems:"flex-end",
+  // position:"absolute",
+  // right:10,
+  // top:10
+  // },
+  iconnextarrow: { position: "absolute", right: 0 },
+  simplename: { fontSize: 12, fontWeight: "bold", textAlign: "center" },
+  boldname: { color: "#0d8dba", fontWeight: "bold", fontSize: 30 },
+  maincovercolumns: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginTop: 12,
+  },
+  mainsimpleprog: { width: "100%", marginBottom: 2 },
+  progheading: { fontSize: 11, marginBottom: 4 },
 });
 
 export default SurfStats;

@@ -82,7 +82,13 @@ const Header = (props) => {
               </Text>
             ))}
           </View>
-          <Button title="Close" onPress={() => setShowPicker(false)} />
+          <Button
+            title="Close"
+            onPress={() => {
+              setShowPicker(false);
+              setSelectedOption("option");
+            }}
+          />
         </Modal>
       );
     } else if (selectedOption === "month") {
@@ -125,7 +131,13 @@ const Header = (props) => {
               </View>
             ))}
           </View>
-          <Button title="Close" onPress={() => setShowPicker(false)} />
+          <Button
+            title="Close"
+            onPress={() => {
+              setShowPicker(false);
+              setSelectedOption("option");
+            }}
+          />
         </Modal>
       );
     } else if (selectedOption === "year") {
@@ -173,7 +185,13 @@ const Header = (props) => {
               </View>
             ))}
           </View>
-          <Button title="Close" onPress={() => setShowPicker(false)} />
+          <Button
+            title="Close"
+            onPress={() => {
+              setShowPicker(false);
+              setSelectedOption("option");
+            }}
+          />
         </Modal>
       );
     }
@@ -218,7 +236,8 @@ const Header = (props) => {
       <View style={styles.onlinepeoples}>
         <ScrollView horizontal={true} style={styles.maincent}>
           {currentActive.length > 0 ? (
-            <FlatList style={{padding:5}}
+            <FlatList
+              style={{ padding: 5 }}
               data={currentActive}
               horizontal={true}
               renderItem={({ item, index }) => (
@@ -233,7 +252,7 @@ const Header = (props) => {
                     alignItems: "center",
                     backgroundColor: Colors.PrimaryColor,
                     outline: "2px solid green",
-                    marginRight:8
+                    marginRight: 8,
                   }}
                 >
                   {item.User_image ? (
@@ -290,15 +309,15 @@ const Header = (props) => {
           {label}
         </Text>
         <View style={styles.headericons}>
-        <TouchableOpacity style={styles.notificationicon}>
+          <TouchableOpacity style={styles.notificationicon}>
             <Image
               style={{
                 height: 22,
                 width: 22,
                 marginLeft: 20,
                 resizeMode: "contain",
-                position:"relative",
-                left:10
+                position: "relative",
+                left: 10,
               }}
               source={require("../../assets/notification.png")}
             ></Image>
@@ -306,21 +325,21 @@ const Header = (props) => {
           <TouchableOpacity style={styles.calicon}>
             <View style={styles.containermain}>
               <View style={styles.iconmaincol}>
-            <Image
-              style={{
-                height: 22,
-                width: 22,
-                marginLeft: 22,
-                resizeMode: "contain",
-                position:"relative",
-                bottom:-26
-              }}
-              source={require("../../assets/calender.png")}
-            ></Image>
-            </View>
-              <Picker selectedValue={selectedOption}
+                <Image
+                  style={{
+                    height: 22,
+                    width: 22,
+                    marginLeft: 22,
+                    resizeMode: "contain",
+                    position: "relative",
+                    bottom: -26,
+                  }}
+                  source={require("../../assets/calender.png")}
+                ></Image>
+              </View>
+              <Picker
+                selectedValue={selectedOption}
                 onValueChange={handleOptionChange}
-              
                 style={styles.picker}
               >
                 <Picker.Item label="Select Value" value="" />
@@ -329,11 +348,8 @@ const Header = (props) => {
                 <Picker.Item label="Year" value="year" />
               </Picker>
               {renderCalendar()}
-              
             </View>
-            
           </TouchableOpacity>
-         
         </View>
       </View>
     </View>
@@ -357,8 +373,7 @@ const styles = StyleSheet.create({
     borderColor: "#00ff17",
     marginHorizontal: 5,
   },
-  calicon:{flexDirection:"row",
-alignItems:"center",},
+  calicon: { flexDirection: "row", alignItems: "center" },
   noimage: {
     height: 60,
     width: 60,
@@ -388,15 +403,14 @@ alignItems:"center",},
   activityText: {
     marginBottom: 4,
   },
-picker:{borderWidth:0,
-// backgroundColor:"red",
-position:"relative",
-top:-12,
+  picker: {
+    borderWidth: 0,
+    // backgroundColor:"red",
+    position: "relative",
+    top: -12,
 
-  opacity:0
-
-},
-iconmaincol:{flexDirection:"row",}
+    opacity: 0,
+  },
+  iconmaincol: { flexDirection: "row" },
 });
 export default Header;
-

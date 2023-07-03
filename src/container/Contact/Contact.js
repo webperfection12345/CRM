@@ -118,7 +118,7 @@ const Contact = () => {
             Contacts
           </Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate("AddContacts")}
+            // onPress={() => navigation.navigate("AddContacts")}
             style={{
               flexDirection: "row",
               justifyContent: "center",
