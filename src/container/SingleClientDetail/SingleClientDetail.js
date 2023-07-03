@@ -171,7 +171,7 @@ const SingleClientDetail = () => {
             </View>
             <View style={styles.informationicons}>
               <View style={styles.maininfoicons}>
-                <TouchableOpacity style={styles.iconcover}>
+                <TouchableOpacity style={styles.iconcover} onPress={() => navigation.navigate('PropertiesViewedByLeads')} >
                   <Image
                     style={{
                       height: 22,

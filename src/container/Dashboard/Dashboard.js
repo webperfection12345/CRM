@@ -321,7 +321,7 @@ export default function Dashboard() {
                     marginVertical: 6,
                     alignItems: "center",
                   }}
-                  source={require("../../../assets/menu.png")}
+                  source={require("../../../assets/bluedocumnet.png")}
                 ></Image>
                 <Text style={styles.smalltext}>Portal</Text>
               </View>
@@ -335,7 +335,7 @@ export default function Dashboard() {
                     marginVertical: 6,
                     alignItems: "center",
                   }}
-                  source={require("../../../assets/menu.png")}
+                  source={require("../../../assets/telephone-iconwhite.png")}
                 ></Image>
                 <Text style={styles.smalltext}>Center</Text>
               </View>

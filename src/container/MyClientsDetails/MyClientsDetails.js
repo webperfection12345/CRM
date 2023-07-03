@@ -442,7 +442,7 @@ const MyClientsDetails = (props) => {
                     </View>
                   </View>
 
-                  <View>
+                  <View style={styles.togglepencil}>
                     <Text style={styles.switchermain}>
                       {" "}
                       <Switch
@@ -454,6 +454,17 @@ const MyClientsDetails = (props) => {
                         value={isEnabled}
                       />
                     </Text>
+                    <TouchableOpacity style={styles.iconcovernew} onPress={() => navigation.navigate('EditClientsDetails',{item})} >
+                      <Image
+                        style={{
+                          height: 18,
+                          width: 18,
+                          resizeMode: "contain",
+                          tintColor: Colors.PrimaryColor,
+                        }}
+                        source={require("../../../assets/pencilwhite.png")}
+                      />
+                    </TouchableOpacity>
                   </View>
                 </View>
                 <View style={styles.informationicons}>
@@ -512,7 +523,7 @@ const MyClientsDetails = (props) => {
                         source={require("../../../assets/videowhite.png")}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.iconcover}>
+                    <TouchableOpacity style={styles.iconcover} onPress={() => navigation.navigate('EditClientsDetails',{item})}>
                       <Image
                         style={{
                           height: 22,
@@ -802,7 +813,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
   },
-  switchermain: { marginTop: 30 },
+  switchermain: { marginTop: 33 },
   addrewd: { width: "100%", flexDirection: "column" },
   dispos: {
     marginTop: 5,
@@ -853,6 +864,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  togglepencil:{alignContent:"center",flexDirection:"row",justifyContent:"space-between"},
   boldphoneadd: {
     fontWeight: "bold",
     fontSize: 14,
@@ -887,7 +899,7 @@ const styles = StyleSheet.create({
   imagewithdot: { position: "relative" },
   clientinformation: { flexDirection: "column", alignItems: "center" },
   speedcover: {
-    width: "20%",
+   // width: "20%",
   },
 
   idinnerbold: { fontSize: 14, lineHeight: 22 },
@@ -931,5 +943,6 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     marginTop: 5,
   },
+  iconcovernew:{marginTop:34}
 });
 export default MyClientsDetails;
