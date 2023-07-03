@@ -13,6 +13,7 @@ import Colors from "../../utils/Colors";
 import getLeads from "../../modules/getLeads";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
+import Activity from "../../components/Activity";
 
 const Leads = () => {
   const [data, setData] = useState([]);
@@ -23,6 +24,7 @@ const Leads = () => {
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState();
   const [isSearching, setIsSearching] = useState(false);
+  const [activity, setActivity] = useState(false);
 
   useEffect(() => {
     getAllContacts();
@@ -37,6 +39,7 @@ const Leads = () => {
           const contactsData = response.payload.data;
           setData(contactsData);
           setLoading(false);
+          setActivity(true);
         } else {
           console.error("Invalid response data:", response);
           // Handle the error case here, such as displaying an error message or taking appropriate action
@@ -138,176 +141,182 @@ const Leads = () => {
         </View>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <FlatList
-          data={isSearching ? filteredData : data}
-          ListFooterComponent={<View style={{ height: 50 }}></View>}
-          renderItem={({ item }) => (
-            <View
-              style={{
-                backgroundColor: Colors.cream,
-                width: "100%",
-
-                paddingVertical: 20,
-                borderBottomWidth: 1,
-                borderBottomColor: "#ddd",
-              }}
-            >
-              {/* Render the content for each item */}
+        {activity ? (
+          <FlatList
+            data={isSearching ? filteredData : data}
+            ListFooterComponent={<View style={{ height: 50 }}></View>}
+            renderItem={({ item }) => (
               <View
                 style={{
-                  width: "90%",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 20,
-                  height: 50,
+                  backgroundColor: Colors.cream,
+                  width: "100%",
+
+                  paddingVertical: 20,
+                  borderBottomWidth: 1,
+                  borderBottomColor: "#ddd",
                 }}
               >
-                {/* Render the Type */}
-                <Text
+                {/* Render the content for each item */}
+                <View
                   style={{
-                    color: "#8d8a8a",
-                    fontSize: 14,
-                    height: 50,
+                    width: "90%",
                     alignSelf: "center",
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    marginTop: 25,
+                    justifyContent: "space-between",
+                    marginBottom: 20,
+                    height: 50,
                   }}
                 >
-                  Type
-                </Text>
-                {/* Render the icon based on the item type */}
+                  {/* Render the Type */}
+                  <Text
+                    style={{
+                      color: "#8d8a8a",
+                      fontSize: 14,
+                      height: 50,
+                      alignSelf: "center",
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      marginTop: 25,
+                    }}
+                  >
+                    Type
+                  </Text>
+                  {/* Render the icon based on the item type */}
 
-                {item.type === "Email" ? (
-                  <Image
-                    source={require("../../../assets/mail.png")}
-                    style={{
-                      height: 35,
-                      width: 35,
-                      alignSelf: "center",
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      resizeMode: "contain",
-                    }}
-                  />
-                ) : item.type === "Message" ? (
-                  <Image
-                    source={require("../../../assets/chat.png")}
-                    style={{
-                      height: 35,
-                      width: 35,
-                      alignSelf: "center",
-                      alignItems: "center",
-                      alignContent: "center",
-                      flexDirection: "row",
-                      resizeMode: "contain",
-                      marginTop: 12,
-                    }}
-                  />
-                ) : null}
-              </View>
-              {/* Render the Message */}
-              <View
-                style={{
-                  width: "90%",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 20,
-                  flexWrap: "wrap",
-                }}
-              >
-                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Username</Text>
-                <TouchableOpacity onPress={() => handleUsernameClick(item)}>
+                  {item.type === "Email" ? (
+                    <Image
+                      source={require("../../../assets/mail.png")}
+                      style={{
+                        height: 35,
+                        width: 35,
+                        alignSelf: "center",
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+                        resizeMode: "contain",
+                      }}
+                    />
+                  ) : item.type === "Message" ? (
+                    <Image
+                      source={require("../../../assets/chat.png")}
+                      style={{
+                        height: 35,
+                        width: 35,
+                        alignSelf: "center",
+                        alignItems: "center",
+                        alignContent: "center",
+                        flexDirection: "row",
+                        resizeMode: "contain",
+                        marginTop: 12,
+                      }}
+                    />
+                  ) : null}
+                </View>
+                {/* Render the Message */}
+                <View
+                  style={{
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: 20,
+                    flexWrap: "wrap",
+                  }}
+                >
+                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
+                    Username
+                  </Text>
+                  <TouchableOpacity onPress={() => handleUsernameClick(item)}>
+                    <Text
+                      style={{
+                        color: Colors.black,
+                        fontSize: 14,
+                        textAlign: "right",
+                      }}
+                    >
+                      {item.username}
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: 20,
+                  }}
+                >
+                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Mobile</Text>
                   <Text
                     style={{
                       color: Colors.black,
                       fontSize: 14,
                       textAlign: "right",
+                      width: "60%",
                     }}
                   >
-                    {item.username}
+                    {item.Phone}
                   </Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  width: "90%",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 20,
-                }}
-              >
-                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Mobile</Text>
-                <Text
+                </View>
+
+                {/* Render the Property Key */}
+                <View
                   style={{
-                    color: Colors.black,
-                    fontSize: 14,
-                    textAlign: "right",
-                    width: "60%",
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: 20,
                   }}
                 >
-                  {item.Phone}
-                </Text>
-              </View>
+                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
+                    Property Key
+                  </Text>
+                  <Text style={{ color: Colors.black, fontSize: 14 }}>
+                    {item.property_key}
+                  </Text>
+                </View>
+                {/* Render the Date Created */}
+                <View
+                  style={{
+                    width: "90%",
+                    alignSelf: "center",
+                    alignItems: "center",
+                    alignContent: "center",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: 20,
+                  }}
+                >
+                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
+                    Date Created
+                  </Text>
 
-              {/* Render the Property Key */}
-              <View
-                style={{
-                  width: "90%",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 20,
-                }}
-              >
-                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                  Property Key
-                </Text>
-                <Text style={{ color: Colors.black, fontSize: 14 }}>
-                  {item.property_key}
-                </Text>
+                  <Text style={{ color: Colors.black, fontSize: 14 }}>
+                    {new Date(item.created_date).toLocaleDateString("en-US")}
+                  </Text>
+                </View>
               </View>
-              {/* Render the Date Created */}
-              <View
-                style={{
-                  width: "90%",
-                  alignSelf: "center",
-                  alignItems: "center",
-                  alignContent: "center",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  marginBottom: 20,
-                }}
-              >
-                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                  Date Created
-                </Text>
-
-                <Text style={{ color: Colors.black, fontSize: 14 }}>
-                  {new Date(item.created_date).toLocaleDateString("en-US")}
-                </Text>
+            )}
+            ListEmptyComponent={
+              <View style={{ alignItems: "center", marginTop: 20 }}>
+                <Text>No data found</Text>
               </View>
-            </View>
-          )}
-          ListEmptyComponent={
-            <View style={{ alignItems: "center", marginTop: 20 }}>
-              <Text>No data found</Text>
-            </View>
-          }
-        />
+            }
+          />
+        ) : (
+          <Activity />
+        )}
       </ScrollView>
     </SafeAreaView>
   );

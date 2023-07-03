@@ -21,9 +21,9 @@ import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 
-//import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
-import Properties from "../container/Properties/Properties";
 
+
+import Properties from "../container/Properties/Properties";
 
 const Tab = createBottomTabNavigator();
 
@@ -37,6 +37,7 @@ const BottomTabNavigator = () => {
       <Tab.Screen
         name="SurfStats"
         component={SurfStats}
+
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
@@ -45,7 +46,7 @@ const BottomTabNavigator = () => {
           ),
           tabBarIcon: require("./../assets/images/mlscallcenterb.png"),
           tabBarHideOnKeyboard: true,
-          tintColor:"red"
+          tintColor: "red",
         }}
       />
       <Tab.Screen
@@ -233,7 +234,3 @@ function CustomTabBar({ state, descriptors, navigation }) {
   );
 }
 export default BottomTabNavigator;
-
-
-
-

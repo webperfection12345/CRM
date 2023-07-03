@@ -61,31 +61,42 @@ export default function Dashboard() {
     });
   };
 
-  const getMeterImage = (value) => {
-    let imagePath = "";
-    console.log(value);
-    switch (true) {
-      case value >= 0 && value < 25:
-        imagePath = "../../../assets/menu.png";
-        break;
-      case value >= 25 && value < 50:
-        imagePath = "../path/to/secondImage.png";
-        break;
-      case value >= 50 && value < 75:
-        imagePath = "../path/to/thirdImage.png";
-        break;
-      case value >= 75 && value <= 100:
-        imagePath = "../path/to/fourthImage.png";
-        break;
-      default:
-        // Handle default case or display a placeholder image
-        imagePath = "../path/to/placeholderImage.png";
-        break;
-    }
-    console.log(imagePath);
-    return imagePath;
+  // const getMeterImage = (value) => {
+  //   switch (true) {
+  //     case value >= 0 && value < 25:
+  //       return require("../../../assets/menu.png");
+  //     // case value >= 25 && value < 50:
+  //     //   return require("../../../assets/menu.png");
+  //     // case value >= 50 && value < 75:
+  //     //   return require("path/to/thirdImage.png");
+  //     // case value >= 75 && value <= 100:
+  //     //   return require("path/to/fourthImage.png");
+  //     // default:
+  //     // return require("path/to/placeholderImage.png");
+  //   }
+  // };
+
+  const meterImages = {
+    0: require("../../assets/images/user.png"),
+    25: require("../../../assets/level1.png"),
+    50: require("../../../assets/level1.png"),
+    75: require("../../../assets/level1.png"),
   };
 
+  // Modify the getMeterImage function
+  const getMeterImage = (value) => {
+    let imageKey = 0;
+    if (value >= 0 && value < 25) {
+      imageKey = 0;
+    } else if (value >= 25 && value < 50) {
+      imageKey = 25;
+    } else if (value >= 50 && value < 75) {
+      imageKey = 50;
+    } else if (value >= 75 && value <= 100) {
+      imageKey = 75;
+    }
+    return meterImages[imageKey];
+  };
   const getLeadCount = () => {
     dispatch(getLeads())
       .then(async (response) => {
@@ -288,6 +299,10 @@ export default function Dashboard() {
               <View style={styles.popupContainer}>
                 <View style={styles.popupContent}>
                   <Text>aasasasasa</Text>
+                  <Image
+                    source={getMeterImage(meterValue)}
+                    style={styles.meterImage}
+                  />
 
                   <TouchableOpacity
                     style={styles.popupButton}
@@ -323,6 +338,9 @@ export default function Dashboard() {
                   }}
                   source={require("../../../assets/bluedocumnet.png")}
                 ></Image>
+                  source={getMeterImage(meterValue)}
+                  style={styles.meterImage}
+                />
                 <Text style={styles.smalltext}>Portal</Text>
               </View>
               <View style={styles.boxcover}>

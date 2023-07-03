@@ -19,6 +19,8 @@ import { useNavigation } from "@react-navigation/native";
 import { getPropertiesDetails } from "../../modules/getPropertiesDetails";
 import { useSelector, useDispatch } from "react-redux";
 import Activity from "../../components/Activity";
+import MapWebView from "../../modules/webview";
+
 const PropertiesDetails = (props) => {
   const navigation = useNavigation();
   const id = props.route.params.id;
@@ -168,6 +170,17 @@ const PropertiesDetails = (props) => {
                 marginTop: 20,
               }}
             >
+              <View
+                style={{
+                  height: 250,
+                  width: "100%",
+                }}
+              >
+                <MapWebView
+                  latitude={data.property_latitude}
+                  longitude={data.property_longitude}
+                />
+              </View>
               {/* <MapView
                 provider={PROVIDER_GOOGLE}
                 style={{
