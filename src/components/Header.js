@@ -304,6 +304,15 @@ const Header = (props) => {
           {label}
         </Text>
         <View style={styles.headericons}>
+        <TouchableOpacity style={styles.notificationicon}>
+            <Image
+              style={{
+                height: 22,
+                width: 22,
+                marginLeft: 20,
+                resizeMode: "contain",
+                position:"relative",
+                left:10
           <View style={styles.container}>
             <Picker
               selectedValue={selectedOption}
@@ -327,6 +336,38 @@ const Header = (props) => {
               source={require("../../assets/notification.png")}
             ></Image>
           </TouchableOpacity>
+          <TouchableOpacity style={styles.calicon}>
+            <View style={styles.containermain}>
+              <View style={styles.iconmaincol}>
+            <Image
+              style={{
+                height: 22,
+                width: 22,
+                marginLeft: 22,
+                resizeMode: "contain",
+                position:"relative",
+                bottom:-26
+              }}
+              source={require("../../assets/calender.png")}
+            ></Image>
+            </View>
+              <Picker selectedValue={selectedOption}
+                onValueChange={handleOptionChange}
+              
+                style={styles.picker}
+              >
+                <Picker.Item label="Select Value" value="" />
+                <Picker.Item label="Date" value="date" />
+                <Picker.Item label="Month" value="month" />
+                <Picker.Item label="Year" value="year" />
+              </Picker>
+              {renderCalendar()}
+              
+            </View>
+            
+          </TouchableOpacity>
+         
+
         </View>
       </View>
     </View>
@@ -334,7 +375,6 @@ const Header = (props) => {
 };
 const styles = StyleSheet.create({
   headericons: { flexDirection: "row", alignItems: "center", paddingRight: 12 },
-  // maincent:{justifyContent:"center",flex:1},
   onlinepeoples: {
     flexDirection: "row",
     alignItems: "center",
@@ -351,6 +391,8 @@ const styles = StyleSheet.create({
     borderColor: "#00ff17",
     marginHorizontal: 5,
   },
+  calicon:{flexDirection:"row",
+alignItems:"center",},
   noimage: {
     height: 60,
     width: 60,
@@ -380,5 +422,14 @@ const styles = StyleSheet.create({
   activityText: {
     marginBottom: 4,
   },
+picker:{borderWidth:0,
+// backgroundColor:"red",
+position:"relative",
+top:-12,
+
+  opacity:0
+
+},
+iconmaincol:{flexDirection:"row",}
 });
 export default Header;

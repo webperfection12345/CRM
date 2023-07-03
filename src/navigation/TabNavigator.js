@@ -12,7 +12,7 @@ import Images from "../utils/Images";
 import Fonts from "../utils/Fonts";
 import Colors from "../utils/Colors";
 import Dashboard from "../container/Dashboard/Dashboard";
-//import MyClients from "../container/MyClients/MyClients";
+import SurfStats from "../container/SurfStats/SurfStats";
 import Leads from "../container/Leads/Leads";
 import Contact from "../container/Contact/Contact";
 import Transactions from "../container/Transactions/Transactions";
@@ -21,7 +21,7 @@ import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 
-import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
+
 
 import Properties from "../container/Properties/Properties";
 
@@ -35,8 +35,9 @@ const BottomTabNavigator = () => {
       initialRouteName="Home"
     >
       <Tab.Screen
-        name="MLS"
-        component={Properties}
+        name="SurfStats"
+        component={SurfStats}
+
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>

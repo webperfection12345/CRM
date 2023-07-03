@@ -143,7 +143,7 @@ const EditClientsDetails = (props) => {
               }}
             >
               <Text style={{ fontSize: 15, color: Colors.black }}>
-                Full_Name
+                Full Name
               </Text>
               <Text style={{ fontSize: 12, color: "#950000" }}>
                 Required

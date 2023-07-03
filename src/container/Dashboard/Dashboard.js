@@ -329,6 +329,15 @@ export default function Dashboard() {
               <View style={styles.boxcover}>
                 <Text style={styles.smalltext}>Document</Text>
                 <Image
+                  style={{
+                    height: 40,
+                    width: 40,
+                    resizeMode: "contain",
+                    marginVertical: 6,
+                    alignItems: "center",
+                  }}
+                  source={require("../../../assets/bluedocumnet.png")}
+                ></Image>
                   source={getMeterImage(meterValue)}
                   style={styles.meterImage}
                 />
@@ -344,7 +353,7 @@ export default function Dashboard() {
                     marginVertical: 6,
                     alignItems: "center",
                   }}
-                  source={require("../../../assets/menu.png")}
+                  source={require("../../../assets/telephone-iconwhite.png")}
                 ></Image>
                 <Text style={styles.smalltext}>Center</Text>
               </View>

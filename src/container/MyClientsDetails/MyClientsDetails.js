@@ -356,6 +356,148 @@ const MyClientsDetails = (props) => {
                       }}
                       source={require("../../../assets/whitecall.png")}
                     />
+
+                  </View>
+                  <View style={styles.clientinformation}>
+                    <View style={styles.imagewithdot}>
+                      <Image
+                        style={{
+                          height: 100,
+                          width: 100,
+                          resizeMode: "cover",
+                          borderRadius: 100,
+                        }}
+                        source={{ uri: item.contact_image }}
+                      />
+                      <Text style={styles.onlinedot}></Text>
+                    </View>
+                    <View style={styles.clientinformationinner}>
+                      <Text style={styles.username}> {item.contact_name} </Text>
+                      <Text style={styles.phonenumber}>
+                        {" "}
+                        {item.contact_number}
+                      </Text>
+                      <Text style={styles.clientid}>
+                        Client ID: {item.contact_lead_id}
+                      </Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.togglepencil}>
+                    <Text style={styles.switchermain}>
+                      {" "}
+                      <Switch
+                        style={{ marginRight: 12 }}
+                        trackColor={{ false: "#767577", true: "#576ebd" }}
+                        thumbColor={"#f4f3f4"}
+                        ios_backgroundColor="#3e3e3e"
+                        onValueChange={toggleSwitch}
+                        value={isEnabled}
+                      />
+                    </Text>
+                    <TouchableOpacity style={styles.iconcovernew} onPress={() => navigation.navigate('EditClientsDetails',{item})} >
+                      <Image
+                        style={{
+                          height: 18,
+                          width: 18,
+                          resizeMode: "contain",
+                          tintColor: Colors.PrimaryColor,
+                        }}
+                        source={require("../../../assets/pencilwhite.png")}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.informationicons}>
+                  <View style={styles.maininfoicons}>
+                    <TouchableOpacity
+                      style={styles.iconcover}
+                      onPress={() => makePhoneCall()}
+                    >
+                      <Image
+                        style={{
+                          height: 22,
+                          width: 22,
+                          resizeMode: "contain",
+                          tintColor: Colors.white,
+                        }}
+                        source={require("../../../assets/whitecall.png")}
+                      />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity
+                      style={styles.iconcover}
+                      onPress={() => sendSMS()}
+                    >
+                      <Image
+                        style={{
+                          height: 22,
+                          width: 22,
+                          resizeMode: "contain",
+                          tintColor: Colors.white,
+                        }}
+                        source={require("../../../assets/messengerwhite.png")}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.iconcover}
+                      onPress={() => sendEmail()}
+                    >
+                      <Image
+                        style={{
+                          height: 22,
+                          width: 22,
+                          resizeMode: "contain",
+                          tintColor: Colors.white,
+                        }}
+                        source={require("../../../assets/emailwhite.png")}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconcover}>
+                      <Image
+                        style={{
+                          height: 22,
+                          width: 22,
+                          resizeMode: "contain",
+                          tintColor: Colors.white,
+                        }}
+                        source={require("../../../assets/videowhite.png")}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.iconcover} onPress={() => navigation.navigate('EditClientsDetails',{item})}>
+                      <Image
+                        style={{
+                          height: 22,
+                          width: 22,
+                          resizeMode: "contain",
+                          tintColor: Colors.white,
+                        }}
+                        source={require("../../../assets/pencilwhite.png")}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                <View style={styles.pendingdetail}>
+                  <Text style={styles.phonenumber}>
+                    <Text style={styles.boldphone}> Phone: </Text>
+                    {item.contact_number}
+                  </Text>
+                </View>
+                <View style={styles.pendingdetail}>
+                  <Text style={styles.phonenumber}>
+                    <Text style={styles.boldphone}> Email: </Text>
+                    {item.contact_email}
+                  </Text>
+                </View>
+                <View style={styles.pendingdetailaddress}>
+                  <Text style={styles.boldphoneadd}> Main Address: </Text>
+                  <Text style={styles.phonenumberadd}>
+                    {item.property_address}
+                  </Text>
+                </View>
+                <View style={styles.mainareacover}>
+                  <Text style={styles.boldphone}>Note</Text>
+                  <View
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
@@ -834,7 +976,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingHorizontal: 20,
   },
-  switchermain: { marginTop: 30 },
+  switchermain: { marginTop: 33 },
   addrewd: { width: "100%", flexDirection: "column" },
   dispos: {
     marginTop: 5,
@@ -885,6 +1027,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
+  togglepencil:{alignContent:"center",flexDirection:"row",justifyContent:"space-between"},
   boldphoneadd: {
     fontWeight: "bold",
     fontSize: 14,
@@ -919,7 +1062,7 @@ const styles = StyleSheet.create({
   imagewithdot: { position: "relative" },
   clientinformation: { flexDirection: "column", alignItems: "center" },
   speedcover: {
-    width: "20%",
+   // width: "20%",
   },
 
   idinnerbold: { fontSize: 14, lineHeight: 22 },
@@ -963,5 +1106,6 @@ const styles = StyleSheet.create({
     marginLeft: 7,
     marginTop: 5,
   },
+  iconcovernew:{marginTop:34}
 });
 export default MyClientsDetails;

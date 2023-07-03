@@ -314,7 +314,7 @@ const EditContactsDetails = (props) => {
             style={{ alignSelf: "center", marginTop: 30 }}
             onPress={handleDelete}
           >
-            <Text style={{ fontSize: 20, fontWeight: "bold", color: "red" }}>
+            <Text style={{ fontSize: 16, fontWeight: 400, color: Colors.white, backgroundColor:Colors.PrimaryColor,paddingHorizontal:25,paddingVertical:19,borderRadius:9 }}>
               Update Contact
             </Text>
           </TouchableOpacity>
