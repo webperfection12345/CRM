@@ -407,7 +407,7 @@ const MyClientsDetails = (props) => {
                 }}
               >
                 <View style={styles.maincover}>
-                  <View style={styles.speedcover}>
+                  <TouchableOpacity style={styles.speedcover}  onPress={() => navigation.navigate('SurfStats',{item})}>
                     <Image
                       style={{
                         height: 100,
@@ -416,7 +416,7 @@ const MyClientsDetails = (props) => {
                       }}
                       source={require("../../../assets/speed3.png")}
                     />
-                  </View>
+                  </TouchableOpacity>
                   <View style={styles.clientinformation}>
                     <View style={styles.imagewithdot}>
                       <Image
