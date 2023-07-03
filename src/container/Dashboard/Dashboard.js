@@ -338,9 +338,7 @@ export default function Dashboard() {
                   }}
                   source={require("../../../assets/bluedocumnet.png")}
                 ></Image>
-                  source={getMeterImage(meterValue)}
-                  style={styles.meterImage}
-                />
+                 
                 <Text style={styles.smalltext}>Portal</Text>
               </View>
               <View style={styles.boxcover}>
