@@ -36,6 +36,7 @@ const SurfStats = () => {
           }}
         >
           <TouchableOpacity
+            onPress={() => navigation.navigate("Contact")}
             style={{
               flexDirection: "row",
               justifyContent: "center",
