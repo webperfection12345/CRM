@@ -21,8 +21,6 @@ import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 
-
-
 import Properties from "../container/Properties/Properties";
 
 const Tab = createBottomTabNavigator();
@@ -35,9 +33,8 @@ const BottomTabNavigator = () => {
       initialRouteName="Home"
     >
       <Tab.Screen
-        name="SurfStats"
-        component={SurfStats}
-
+        name="MLS"
+        component={Properties}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>

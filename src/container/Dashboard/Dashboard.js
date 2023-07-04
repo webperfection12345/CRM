@@ -293,6 +293,7 @@ export default function Dashboard() {
             </TouchableOpacity>
             <Modal style={{}}
               animationType="slide"
+
               transparent={true}
               visible={showPopup}
               onRequestClose={closePopup}
@@ -420,6 +421,7 @@ export default function Dashboard() {
           </View>
           </View>
         </ScrollView>
+        
                   {/* <Image
                     source={getMeterImage(meterValue)}
                     style={styles.meterImage}
@@ -455,6 +457,7 @@ export default function Dashboard() {
                 ></Image>
                  
                 <Text style={styles.smalltexttwo}>Portal</Text>
+
               </View>
               <View style={styles.boxcover}>
                 <Text style={styles.smalltexttwo}>Call</Text>
@@ -515,6 +518,8 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 10,
     width: "100%",
+
+
   },
   popupText: {
     fontSize: 16,
@@ -565,4 +570,5 @@ popupdes:{fontSize:12,textAlign:"center",},
 popupdesdown:{fontSize:12,
 textAlign:"center"
 },
+
 });
