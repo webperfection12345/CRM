@@ -590,7 +590,7 @@ const MyClientsDetails = (props) => {
                 </View>
                 <View style={styles.transactionmain}>
                   <Text style={styles.transactionheading}>Transactions</Text>
-                  <View style={styles.iconcover}>
+                  <TouchableOpacity style={styles.iconcover} onPress={() => navigation.navigate('TransactionDesk')}>
                     <Image
                       style={{
                         height: 20,
@@ -600,7 +600,7 @@ const MyClientsDetails = (props) => {
                       }}
                       source={require("../../../assets/plus.png")}
                     />
-                  </View>
+                  </TouchableOpacity>
                 </View>
                 <View style={styles.maincoverid}>
                   <View style={styles.mainheadingid}>
@@ -764,9 +764,9 @@ const MyClientsDetails = (props) => {
                 </View>
 
                 <View style={styles.maincoverop}>
-                  <View style={styles.boxcover}>
+                  <TouchableOpacity style={styles.boxcover} onPress={() => navigation.navigate('TransactionDesk')}>
                     <Text style={styles.bigtextone}>Documents</Text>
-                  </View>
+                  </TouchableOpacity>
                   <View style={styles.boxcover}>
                     <Text style={styles.bigtextone}>Partner Contacts</Text>
                   </View>

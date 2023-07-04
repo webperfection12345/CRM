@@ -21,6 +21,7 @@ import { getContacts } from "../../modules/getContacts";
 import { getMeterData } from "../../modules/getMeterValue";
 import getLeads from "../../modules/getLeads";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { color } from "react-native-reanimated";
 
 export default function Dashboard() {
   const navigation = useNavigation();
@@ -291,22 +292,38 @@ export default function Dashboard() {
               </View>
             </TouchableOpacity>
             <Modal style={{}}
-              animationType="fade"
+              animationType="slide"
               transparent={true}
               visible={showPopup}
               onRequestClose={closePopup}
             >
               <View style={styles.popupContainer}>
                 <View style={styles.popupContent}>
+                  <View style={{alignSelf:"flex-end",position:"absolute",zIndex:9999,right:6,
+                top:6}}>
+                <TouchableOpacity
+                    style={styles.popupButton}
+                    onPress={closePopup}
+                  >
+                     <Image
+                  style={{
+                    height: 15,
+                    width: 15,
+                    resizeMode: "contain",
+                  }}
+                  source={require("../../../assets/closeblack.png")}
+                ></Image>
+                  </TouchableOpacity>
+                  </View>
                 <ScrollView
           style={{
             backgroundColor: Colors.cream,
-          height:"60%"
+          height:"78%"
           }}
         >
           <View
             style={{
-              marginTop: 10,
+              marginTop: 0,
               width: "100%",
               justifyContent: "center",
               alignContent: "center",
@@ -327,7 +344,7 @@ export default function Dashboard() {
                 fontSize: 17,
                 color: Colors.black,
                 fontWeight: "bold",
-                marginTop: 20,
+                marginTop: 0,
               }}
             >
               Your Surf Level
@@ -343,7 +360,7 @@ export default function Dashboard() {
             >
  <View><Image
                 style={{
-                  height: 120,
+                  height: 100,
                   width: 150,
               resizeMode:"contain",
               alignItems:"center",
@@ -364,13 +381,13 @@ export default function Dashboard() {
               ></Image> 
          <Text
                 style={{
-                  fontSize: 30,
-                  marginTop: 25,
+                  fontSize: 25,
+                  marginTop: 15,
                   color: Colors.black,
                   fontWeight: "bo400ld",
                   alignSelf: "center",
                   width:"100%",
-                  textAlign:"center"
+                  textAlign:"center",fontWeight:"bold"
                 }}
               >
                Grommet
@@ -385,7 +402,7 @@ export default function Dashboard() {
        <View style={styles.manimag}>
         <Image
                 style={{
-                  height: 250,
+                  height: 230,
                   width: "100%",
                   resizeMode: "contain",
                   alignSelf: "flex-start",
@@ -408,12 +425,6 @@ export default function Dashboard() {
                     style={styles.meterImage}
                   /> */}
 
-                  <TouchableOpacity
-                    style={styles.popupButton}
-                    onPress={closePopup}
-                  >
-                    <Text style={styles.popupButtonText}>Close</Text>
-                  </TouchableOpacity>
                 </View>
               </View>
             </Modal>
@@ -431,7 +442,7 @@ export default function Dashboard() {
                 <Text style={styles.bigtext}>$29.500</Text>
               </View>
               <View style={styles.boxcover}>
-                <Text style={styles.smalltext}>Document</Text>
+                <Text style={styles.smalltexttwo}>Document</Text>
                 <Image
                   style={{
                     height: 40,
@@ -443,10 +454,10 @@ export default function Dashboard() {
                   source={require("../../../assets/bluedocumnet.png")}
                 ></Image>
                  
-                <Text style={styles.smalltext}>Portal</Text>
+                <Text style={styles.smalltexttwo}>Portal</Text>
               </View>
               <View style={styles.boxcover}>
-                <Text style={styles.smalltext}>Call</Text>
+                <Text style={styles.smalltexttwo}>Call</Text>
                 <Image
                   style={{
                     height: 40,
@@ -457,7 +468,7 @@ export default function Dashboard() {
                   }}
                   source={require("../../../assets/telephone-iconwhite.png")}
                 ></Image>
-                <Text style={styles.smalltext}>Center</Text>
+                <Text style={styles.smalltexttwo}>Center</Text>
               </View>
             </View>
           </View>
@@ -485,48 +496,45 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   maincoverop: { marginTop: 50, marginBottom: 40 },
-  smalltext: { color: Colors.white, fontWeight: 300, fontSize: 14 },
+  smalltext: { color: Colors.white, fontWeight: 300, fontSize: 14,position:"relative",top:-15 },
+  smalltexttwo:{ color: Colors.white, fontWeight: 300, fontSize: 14,},
   bigtext: {
-    fontSize: 28,
+    fontSize: 17,
     color: Colors.white,
-    lineHeight: 60,
+    lineHeight: 27,
     fontWeight: "bold",
   },
   popupContainer: {
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center", //height:"100%"
-    //height:"50%"
+    justifyContent: "flex-end",
+    alignItems: "flex-end", 
   },
   popupContent: {
-    backgroundColor: Colors.white,
+    backgroundColor: Colors.cream,
     padding: 12,
     borderRadius: 10,
-    width: "80%",
-   // height:"100%"
-    //maxHeight: "70%",
+    width: "100%",
   },
   popupText: {
     fontSize: 16,
     marginBottom: 10,
   },
   popupButton: {
-    backgroundColor: Colors.PrimaryColor,
-    padding: 10,
-    borderRadius: 5,
-    alignSelf: "flex-end",
-marginTop:12
+    backgroundColor: Colors.white,
+    alignSelf: "center",
+borderRadius:100,
+height:35,
+width:35,justifyContent:"center",
+alignItems:"center",
+
   },
-  popupButtonText: {
-    color: Colors.white,
-    fontSize: 14,
-  },
+
   manimag:{ 
     alignSelf: "flex-end",
     justifyContent:"flex-end",
     alignItems:"flex-end",
-    height: 200,
+    height: 180,
     width: "25%",    
 },
 covermainpopup:{
@@ -535,7 +543,7 @@ covermainpopup:{
   paddingHorizontal:12, 
   justifyContent:"space-between",
   width:"100%",
-  marginVertical:22
+  marginVertical:22,marginBottom:0
 },
 mainview:{
 textAlign:"center",
@@ -553,8 +561,8 @@ fontSize:15,
 paddingVertical:5,
 fontWeight:"bold"
 },
-popupdes:{fontSize:13,textAlign:"center",},
-popupdesdown:{fontSize:13,
+popupdes:{fontSize:12,textAlign:"center",},
+popupdesdown:{fontSize:12,
 textAlign:"center"
 },
 });

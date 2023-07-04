@@ -262,6 +262,7 @@ const CustomDrawerContent = () => {
       }}
     >
       <View style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
+       <View style={{flexDirection:"row",alignItems:"center",width:"90%"}}> 
         <TouchableOpacity
           onPress={() => navigation.navigate("Profile")}
           activeOpacity={1}
@@ -304,8 +305,19 @@ const CustomDrawerContent = () => {
             }}
           >
             {userData.display_name}
-          </Text>
-        </TouchableOpacity>
+          </Text></TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+          <Image
+              source={require("../../assets/setting-icons.png")}
+              style={{
+                height: 25,
+                width: 25,
+                resizeMode: "contain",
+                marginLeft:-12
+              }}
+            ></Image>
+            </TouchableOpacity>
+        </View>
         <View
           style={{
             justifyContent: "flex-start",
