@@ -13,12 +13,13 @@ import {
 import Colors from "../utils/Colors";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Calendar } from "react-native-calendars";
+import { Calendar, CalendarTheme } from "react-native-calendars";
 import moment from "moment";
 import { Picker } from "@react-native-picker/picker";
+import { color } from "react-native-reanimated";
 
 const activities = {
-  "2023-06-01": [{ name: "Meeting", time: "10:00 AM" }],
+  "2023-06-01": [{ name: "Meeting", time: "10:00 AM"}],
   "2023-06-10": [{ name: "Birthday Party", time: "7:00 PM" }],
   "2023-06-15": [{ name: "Dinner", time: "8:30 PM" }],
   "2024-01-01": [{ name: "Dinner", time: "8:30 PM" }],
@@ -61,34 +62,60 @@ const Header = (props) => {
   const renderCalendar = () => {
     if (selectedOption === "date" && showPicker === true) {
       const activitiesForDate = activities[selectedDate] || [];
-
+      const calendarTheme = {
+        arrowColor: Colors.PrimaryColor, // Change the default arrow color here
+        // You can customize other theme properties as well
+      };
       return (
         <Modal
           visible={showPicker}
           onRequestClose={() => setShowPicker(false)}
           animationType="slide"
         >
+           <View style={{justifyContent:"flex-end",alignItems:"flex-end",backgroundColor:Colors.white}}>
+          <View style={{backgroundColor:Colors.PrimaryColor,height:30,width:30,alignItems:"center",justifyContent:"center",borderRadius:100,marginRight:12,marginTop:5,marginBottom:5}}>
+          <TouchableOpacity onPress={() => {
+              setShowPicker(false);
+              setSelectedOption("option");
+              
+            }}>
+               <Image
+            style={{ height: 12, width: 12, resizeMode: "contain" }}
+            source={require("../../assets/closewhite.png")}
+          ></Image>
+{/* <Text style={{color:Colors.white,fontSize:14,fontWeight:"bold"}}>Close</Text> */}
+          </TouchableOpacity>
+          </View>
+          </View>
+          <ScrollView>
           <View>
             <Calendar
               markedDates={{
-                [selectedDate]: { selected: true, selectedColor: "blue" },
+                [selectedDate]: { selected: true, selectedColor: Colors.PrimaryColor },
               }}
               onDayPress={handleDateSelect}
+              theme={calendarTheme}
             />
-            <Text>Activities for {selectedDate}:</Text>
+            <View style={{paddingHorizontal:20}}>
+            <Text style={{paddingVertical:12,fontWeight:"bold"}}>Activities for <Text style={{color:Colors.PrimaryColor,fontWeight:"bold"}}>{selectedDate}</Text></Text>
             {activitiesForDate.map((activity, index) => (
               <Text key={index}>
                 {activity.name} - {activity.time}
               </Text>
             ))}
-          </View>
-          <Button
+          
+          {/* <Button
             title="Close"
             onPress={() => {
               setShowPicker(false);
               setSelectedOption("option");
             }}
-          />
+          /> */}
+         
+         
+          </View>
+          </View>
+          </ScrollView>
         </Modal>
       );
     } else if (selectedOption === "month") {
@@ -96,10 +123,13 @@ const Header = (props) => {
       const activitiesForMonth = Object.entries(activities).filter(
         ([date]) => moment(date).format("MMMM") === month
       );
-
+      const calendarTheme = {
+        arrowColor: Colors.PrimaryColor, // Change the default arrow color here
+        // You can customize other theme properties as well
+      };
       const markedDates = {};
       activitiesForMonth.forEach(([date]) => {
-        markedDates[date] = { marked: true };
+        markedDates[date] = { marked: true ,dotColor: Colors.PrimaryColor};
       });
 
       return (
@@ -107,37 +137,64 @@ const Header = (props) => {
           visible={showPicker}
           onRequestClose={() => setShowPicker(false)}
           animationType="slide"
-        >
+        > 
+        <View style={{justifyContent:"flex-end",alignItems:"flex-end",backgroundColor:Colors.white}}>
+        <View style={{backgroundColor:Colors.PrimaryColor,height:30,width:30,alignItems:"center",justifyContent:"center",borderRadius:100,marginRight:12,marginTop:5,marginBottom:5}}>
+        <TouchableOpacity onPress={() => {
+            setShowPicker(false);
+            setSelectedOption("option");
+            
+          }}> 
+          <Image
+          style={{ height: 12, width: 12, resizeMode: "contain" }}
+          source={require("../../assets/closewhite.png")}
+        ></Image>
+{/* <Text style={{color:Colors.white,fontSize:14,fontWeight:"bold"}}>Close</Text> */}
+        </TouchableOpacity>
+        </View>
+        </View>
+           <ScrollView>
           <View>
             <Picker
               selectedValue={month}
               onValueChange={handleMonthChange}
-              style={styles.picker}
+              style={styles.pickerzz}
             >
               {moment.months().map((monthName, index) => (
-                <Picker.Item key={index} label={monthName} value={monthName} />
+                <Picker.Item key={index} label={monthName} value={monthName} style={{ color: Colors.PrimaryColor }}/>
               ))}
             </Picker>
-            <Calendar markedDates={markedDates} onDayPress={handleDateSelect} />
-            <Text>Activities for {month}:</Text>
+            <Calendar markedDates={{
+                [selectedDate]: { selected: true, selectedColor: Colors.PrimaryColor },
+              }} onDayPress={handleDateSelect}
+              theme={calendarTheme}
+              />
+            </View>
+            <View style={{paddingHorizontal:20}}>
+            <Text style={{paddingVertical:12,fontWeight:"bold"}}>Activities for <Text style={{color:Colors.PrimaryColor,fontWeight:"bold"}}>{month}</Text></Text>
             {activitiesForMonth.map(([date, activities]) => (
-              <View key={date}>
-                <Text>{date}:</Text>
+              <View key={date} style={styles.mainactivity}>
+                 <Text style={styles.maindate}>{date}</Text>
                 {activities.map((activity, index) => (
-                  <Text key={index}>
+                  <Text key={index} style={styles.mainactperform}>
                     {activity.name} - {activity.time}
                   </Text>
                 ))}
               </View>
             ))}
-          </View>
-          <Button
-            title="Close"
+         {/* <View style={{backgroundColor:Colors.PrimaryColor,height:50,width:"50%",alignItems:"center",justifyContent:"center",borderRadius:100}}> */}
+          {/* <Button
+            title="Close" 
+            buttonStyle={{ backgroundColor: 'rgba(39, 39, 39, 1)' }}
             onPress={() => {
               setShowPicker(false);
               setSelectedOption("option");
+              
             }}
-          />
+          /> */}
+          
+          </View>
+          </ScrollView>
         </Modal>
       );
     } else if (selectedOption === "year") {
@@ -150,10 +207,13 @@ const Header = (props) => {
       const activitiesForYear = Object.entries(activities).filter(
         ([date]) => moment(date).format("YYYY") === year
       );
-
+      const calendarTheme = {
+        arrowColor: Colors.PrimaryColor, // Change the default arrow color here
+        // You can customize other theme properties as well
+      };
       const markedDates = {};
       activitiesForYear.forEach(([date]) => {
-        markedDates[date] = { marked: true };
+        markedDates[date] = { marked: true, dotColor: Colors.PrimaryColor };
       });
 
       return (
@@ -162,36 +222,66 @@ const Header = (props) => {
           onRequestClose={() => setShowPicker(false)}
           animationType="slide"
         >
+           <View style={{justifyContent:"flex-end",alignItems:"flex-end",backgroundColor:Colors.white}}>
+          <View style={{backgroundColor:Colors.PrimaryColor,height:30,width:30,alignItems:"center",justifyContent:"center",borderRadius:100,marginRight:12,marginTop:5,marginBottom:5}}>
+          <TouchableOpacity onPress={() => {
+              setShowPicker(false);
+              setSelectedOption("option");
+              
+            }}>
+               <Image
+            style={{ height: 12, width: 12, resizeMode: "contain" }}
+            source={require("../../assets/closewhite.png")}
+          ></Image>
+{/* <Text style={{color:Colors.white,fontSize:14,fontWeight:"bold"}}>Close</Text> */}
+          </TouchableOpacity>
+          </View>
+          </View>
+          <ScrollView>
           <View>
+            <View style={styles.bgc}>
+             
             <Picker
               selectedValue={year}
               onValueChange={handleYearChange}
-              style={styles.picker}
+              style={styles.pickerzz}
             >
               {years.map((yearValue, index) => (
-                <Picker.Item key={index} label={yearValue} value={yearValue} />
+                <Picker.Item key={index} label={yearValue} value={yearValue} style={{ color: Colors.PrimaryColor }}/>
               ))}
             </Picker>
-            <Calendar markedDates={markedDates} onDayPress={handleDateSelect} />
-            <Text>Activities for {year}:</Text>
+            </View>
+            {/* <Calendar markedDates={markedDates} onDayPress={handleDateSelect} /> */}
+            <Calendar markedDates={{
+                [selectedDate]: { selected: true, selectedColor: Colors.PrimaryColor },
+              }} onDayPress={handleDateSelect}
+              theme={calendarTheme}
+              />
+            </View>
+            <View style={{paddingHorizontal:20}}>
+            <Text style={{paddingVertical:12,fontWeight:"bold",fontSize:17,marginTop:12,
+          marginBottom:12}}>Activities for <Text style={{color:Colors.PrimaryColor,fontWeight:"bold"}}> {year}</Text></Text>
             {activitiesForYear.map(([date, activities]) => (
-              <View key={date}>
-                <Text>{date}:</Text>
+              <View key={date} style={styles.mainactivity}>
+                <Text style={styles.maindate}>{date}</Text>
                 {activities.map((activity, index) => (
-                  <Text key={index}>
+                  <Text key={index} style={styles.mainactperform}>
                     {activity.name} - {activity.time}
                   </Text>
                 ))}
               </View>
             ))}
-          </View>
-          <Button
+         
+          {/* <Button
             title="Close"
             onPress={() => {
               setShowPicker(false);
               setSelectedOption("option");
             }}
-          />
+          /> */}
+         
+          </View>
+          </ScrollView>
         </Modal>
       );
     }
@@ -258,7 +348,7 @@ const Header = (props) => {
                   {item.User_image ? (
                     <Image
                       source={{ uri: item.User_image }}
-                      style={{ width: 50, height: 50, borderRadius: 25 }}
+                      style={{ width: 50, height: 50, borderRadius: 25, backgroundColor:Colors.PrimaryColor }}
                       resizeMode="cover"
                     />
                   ) : (
@@ -388,6 +478,9 @@ const styles = StyleSheet.create({
     lineHeight: 60,
     fontSize: 20,
   },
+  mainactivity:{paddingBottom:15,
+  borderBottomWidth:1,
+borderBottomColor:Colors.gray,marginBottom:15},
   container: {
     flex: 1,
     padding: 16,
@@ -412,5 +505,18 @@ const styles = StyleSheet.create({
     opacity: 0,
   },
   iconmaincol: { flexDirection: "row" },
+  closecalenderbutton:{backgroundColor:Colors.PrimaryColor,marginTop:25},
+  maindate:{color:Colors.PrimaryColor,fontWeight:"bold",marginBottom:2},
+  mainactperform:{marginTop:4,fontSize:13},button:{backgroundColor:"transparent",},
+  pickerzz:{
+ paddingVertical:12,
+borderRadius:6,
+backgroundColor:Colors.white,
+width:"100%",
+height:60,
+
+  },
+  pickertext:{color:"red"},
+  // bgc:{backgroundColor:"red",height:100,width:"100%",padding:12}
 });
 export default Header;

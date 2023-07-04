@@ -365,6 +365,34 @@ const MyClientsDetails = (props) => {
                       marginRight: 10,
                     }}
                   >
+                    <TextInput
+                      style={{
+                        width: "100%",
+                        borderRadius: 8,
+                        height: "100%",
+                        paddingHorizontal: 15,
+                        paddingVertical: 15,
+                        color: Colors.black,
+                        borderColor: Colors.PrimaryColor,
+                        borderColor: Colors.gray,
+                        borderWidth: 1,
+                        fontSize: 14,
+                        padding: 2,
+                        alignItems: "flex-start",
+                        textAlignVertical: "top",
+                      }}
+                      autoCorrect={false}
+                      returnKeyType="done"
+                      multiline={true}
+                      placeholder="Enter your note here...."
+                      onChangeText={(text) => setNote(text)}
+                    />
+                  </View>
+                </View>
+                <View style={styles.transactionmain}>
+                  <Text style={styles.transactionheading}>Transactions</Text>
+                  <TouchableOpacity style={styles.iconcover} onPress={() => navigation.navigate('TransactionDesk')}>
+
                     <Image
                       style={{
                         height: 22,
@@ -375,15 +403,82 @@ const MyClientsDetails = (props) => {
                       source={require("../../../assets/messengerwhite.png")}
                     />
                   </TouchableOpacity>
-                  <TouchableOpacity
-                    onPress={() => navigation.navigate("")}
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginRight: 10,
-                    }}
-                  >
+                </View>
+                <View style={styles.maincoverid}>
+                  <View style={styles.mainheadingid}>
+                    <Text style={styles.idheading}>ID</Text>
+                    <Text style={styles.idinnerbold}>23456</Text>
+                  </View>
+                  <View style={styles.mainheadingid}>
+                    <Text style={styles.idheading}>Property Address</Text>
+                    <Text style={styles.idinnerbold}>
+                      047 Jefferson Street City Kettlersville 047 Jeffe St. City
+                      Kettlersville
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.maincoverid}>
+                  <View style={styles.mainheadingid}>
+                    <Text style={styles.idheading}>ID</Text>
+                    <Text style={styles.idinnerbold}>23456</Text>
+                  </View>
+                  <View style={styles.mainheadingid}>
+                    <Text style={styles.idheading}>Property Address</Text>
+                    <Text style={styles.idinnerbold}>
+                      047 Jefferson Street City Kettlersville 047 Jeffe St. City
+                      Kettlersville
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.maincoverid}>
+                  <View style={styles.mainheadingid}>
+                    <Text style={styles.idheading}>ID</Text>
+                    <Text style={styles.idinnerbold}>23456</Text>
+                  </View>
+                  <View style={styles.mainheadingid}>
+                    <Text style={styles.idheading}>Property Address</Text>
+                    <Text style={styles.idinnerbold}>
+                      047 Jefferson Street City Kettlersville 047 Jeffe St. City
+                      Kettlersville
+                    </Text>
+                  </View>
+                </View>
+                <View style={styles.transactionmaindis}>
+                  <Text style={styles.transactionheading}>Dispositions</Text>
+                </View>
+                <View style={styles.dispos}>
+                  <View style={styles.activitycol}>
+                    <Image
+                      style={{
+                        height: 25,
+                        width: 25,
+                        resizeMode: "contain",
+                        marginRight: 5,
+                        tintColor: Colors.PrimaryColor,
+                      }}
+                      source={require("../../../assets/viewtel.png")}
+                    />
+                    <Text style={styles.activityheading}>Last Activity</Text>
+                  </View>
+                  <View style={styles.activitycolnew}>
+                    <TouchableOpacity style={styles.iconcoverlatest}>
+                      <Image
+                        style={{
+                          height: 22,
+                          width: 22,
+                          resizeMode: "contain",
+                          tintColor: Colors.PrimaryColor,
+                          marginRight: 5,
+                        }}
+                        source={require("../../../assets/messengerwhite.png")}
+                      />
+                    </TouchableOpacity>
+                    <Text style={styles.activityheading}>ChatGPT Handoff</Text>
+                  </View>
+                </View>
+                <View style={styles.dispos}>
+                  <View style={styles.activitycol}>
+
                     <Image
                       style={{
                         height: 22,
@@ -798,26 +893,23 @@ const MyClientsDetails = (props) => {
                       </View>
                     </View>
 
-                    <View style={styles.maincoverop}>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Documents</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Partner Contacts</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Transactions</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Activities Log</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>
-                          Start Transactions
-                        </Text>
-                      </View>
-                    </View>
-                  </ScrollView>
+                <View style={styles.maincoverop}>
+                  <TouchableOpacity style={styles.boxcover} onPress={() => navigation.navigate('TransactionDesk')}>
+                    <Text style={styles.bigtextone}>Documents</Text>
+                  </TouchableOpacity>
+                  <View style={styles.boxcover}>
+                    <Text style={styles.bigtextone}>Partner Contacts</Text>
+                  </View>
+                  <View style={styles.boxcover}>
+                    <Text style={styles.bigtextone}>Transactions</Text>
+                  </View>
+                  <View style={styles.boxcover}>
+                    <Text style={styles.bigtextone}>Activities Log</Text>
+                  </View>
+                  <View style={styles.boxcover}>
+                    <Text style={styles.bigtextone}>Start Transactions</Text>
+                  </View>
+
                 </View>
               )}
             />
