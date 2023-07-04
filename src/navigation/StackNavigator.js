@@ -27,6 +27,7 @@ import TransactionDetails from "../container/Transactions/TransactionDetails";
 import Leads from "../container/Leads/Leads";
 import DisPosition from "../container/DisPosition/DisPosition";
 import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
+import SurfStats from "../container/SurfStats/SurfStats";
 const Stack = createStackNavigator();
 
 function StackNavigator() {
@@ -71,6 +72,7 @@ function StackNavigator() {
         component={PropertiesViewedByLeads}
       />
       <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} />
+      <Stack.Screen name="SurfStats" component={SurfStats} />
     </Stack.Navigator>
   );
 }

@@ -6,22 +6,79 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StyleSheet,
+  Modal,
+  FlatList,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 
 import Colors from "../../utils/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { color } from "react-native-reanimated";
+import { getSearchFav } from "../../modules/getSearchFav";
+import { getContactFav } from "../../modules/getContactFav";
+import { useDispatch } from "react-redux";
 
-const SurfStats = () => {
+const SurfStats = (props) => {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
   const [isEnabled, setIsEnabled] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [contactData, setContactData] = useState("");
+  const [searchData, setSearchData] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [modalData, setModalData] = useState(""); // Initialize an empty string as the initial value
+  const [modal2Data, setModal2Data] = useState(""); // Initialize an empty string as the initial value
+  const [showPopup2, setShowPopup2] = useState(false);
+
+  const openPopup = () => {
+    console.log(modalData);
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+  const openPopup2 = () => {
+    console.log(modal2Data);
+    setShowPopup2(true);
+  };
+
+  const closePopup2 = () => {
+    setShowPopup2(false);
+  };
+
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     setToggle(!isEnabled);
   };
+  const items = props.route.params;
+  const id = items.item.id;
 
+  useEffect(() => {
+    getContact();
+    getSearch();
+  });
+
+  const getSearch = () => {
+    dispatch(getSearchFav(id)).then((response) => {
+      const contactsData = response.payload.data;
+      setModal2Data(contactsData);
+      if (contactsData === "Record not found!") {
+        setSearchData("0");
+      } else {
+        const contactFav = contactsData.length;
+        setSearchData(contactFav);
+      }
+    });
+  };
+  const getContact = () => {
+    dispatch(getContactFav(id)).then((response) => {
+      const contactsData = response.payload.data;
+      setModalData(contactsData);
+      const leadsCount = contactsData.length;
+      setContactData(leadsCount);
+    });
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
@@ -110,8 +167,10 @@ const SurfStats = () => {
             <View style={styles.maincover}>
               <View style={styles.clientinformation}>
                 <View style={styles.clientinformationinner}>
-                  <Text style={styles.username}>Jessica Kent</Text>
-                  <Text style={styles.clientid}>Client ID: 76867</Text>
+                  <Text style={styles.username}>{items.item.contact_name}</Text>
+                  <Text style={styles.clientid}>
+                    Client ID: {items.item.id}
+                  </Text>
                 </View>
               </View>
             </View>
@@ -133,7 +192,95 @@ const SurfStats = () => {
                       ></Image>
                     </TouchableOpacity>
                   </View>
-                  <Text style={styles.boldname}>124</Text>
+                  <TouchableOpacity onPress={() => openPopup()}>
+                    <Text style={styles.boldname}>{contactData}</Text>
+                  </TouchableOpacity>
+                </View>
+                <View
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    marginTop: 10,
+                    justifyContent: "center",
+                    backgroundColor: Colors.cream,
+                    alignItems: "center",
+                    alignSelf: "center",
+                  }}
+                >
+                  <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={showPopup}
+                    onRequestClose={closePopup}
+                  >
+                    <View style={{ justifyContent: "space-between" }}>
+                      <FlatList
+                        data={modalData}
+                        numColumns={2}
+                        ListFooterComponent={() => (
+                          <View style={{ height: 200 }}></View>
+                        )}
+                        renderItem={({ item }) => (
+                          <TouchableOpacity
+                            activeOpacity={1}
+                            onPress={() => {
+                              navigation.navigate("PropertiesDetails", {
+                                id: item.property_id,
+                              });
+                              closePopup(); // Call the closepopup function after navigation
+                            }}
+                            style={{
+                              height: 250,
+                              margin: "2.5%",
+                              width: "45%",
+                            }}
+                          >
+                            <View
+                              style={{
+                                height: "75%",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Image
+                                source={{ uri: item.property_image[0] }}
+                                style={{
+                                  height: "100%",
+                                  width: "100%",
+                                  borderRadius: 20,
+                                  backgroundColor: Colors.gray,
+                                }}
+                              ></Image>
+                            </View>
+                            <View
+                              style={{
+                                height: 80,
+                                justifyContent: "center",
+                              }}
+                            >
+                              <Text
+                                style={{
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {item.property_id}
+                              </Text>
+                              <Text
+                                style={{
+                                  color: Colors.black,
+                                  fontSize: 12,
+                                }}
+                              >
+                                {item.prop_title}
+                              </Text>
+                            </View>
+                          </TouchableOpacity>
+                        )}
+                        keyExtractor={(item) => item.id}
+                      />
+                    </View>
+                  </Modal>
                 </View>
               </View>
               <View style={styles.covercolsingle}>
@@ -151,8 +298,83 @@ const SurfStats = () => {
                       ></Image>
                     </TouchableOpacity>
                   </View>
-                  <Text style={styles.boldname}>8</Text>
+                  <TouchableOpacity onPress={() => openPopup2()}>
+                    <Text style={styles.boldname}>{searchData}</Text>
+                  </TouchableOpacity>
                 </View>
+                <Modal
+                  animationType="fade"
+                  transparent={true}
+                  visible={showPopup2}
+                  onRequestClose={closePopup2}
+                >
+                  <FlatList
+                    data={modal2Data}
+                    ListFooterComponent={<View style={{ height: 50 }}></View>}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity
+                        style={{
+                          height: 80,
+                          width: "97%",
+                          alignSelf: "center",
+                          borderWidth: 1,
+                          borderColor: "#bbbbbb52",
+                          alignItems: "center",
+                          alignContent: "center",
+                          flexDirection: "row",
+                          backgroundColor: "#987e7e17",
+                          marginBottom: 5,
+                          padding: 12,
+                          justifyContent: "space-between",
+                          borderRadius: 6,
+                        }}
+                      >
+                        <View
+                          style={{
+                            justifyContent: "space-between",
+                            flexDirection: "row",
+                            alignItems: "center",
+                            //flexWrap:"wrap",
+                            // width:"100%"
+                            // Width: 70,
+                          }}
+                        >
+                          <Image
+                            source={{ uri: item.image }}
+                            style={{
+                              height: 50,
+                              width: 50,
+                              borderRadius: 100,
+                              resizeMode: "cover",
+                              marginRight: 7,
+                              borderColor: Colors.white,
+                              borderWidth: 1,
+                            }}
+                          ></Image>
+
+                          <Text
+                            style={{
+                              color: Colors.black,
+                              fontSize: 14,
+                              fontWeight: "bold",
+                              width: 100,
+                              paddingHorizontal: 4,
+                              //flexWrap:"wrap"
+                            }}
+                          >
+                            {item.search_parameters}
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                    ListEmptyComponent={
+                      <View style={{ alignItems: "center", marginTop: 20 }}>
+                        <Text>No data found</Text>
+                      </View>
+                    }
+                    keyExtractor={(item) => item.id}
+                  />
+                </Modal>
               </View>
             </View>
             <View style={styles.maincovercolumns}>

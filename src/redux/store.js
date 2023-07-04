@@ -24,6 +24,8 @@ import getDispositionReducer from "../modules/getDisposition";
 import getTodayDiposReducer from "../modules/getTodayDipos";
 // import currentDispositionReducer from "../modules/currentDisposition";
 // import getRatingsReducer from "../modules/getActiveClient";
+import getSearchFavReducer from "../modules/getSearchFav";
+import getContactFavReducer from "../modules/getContactFav";
 export const store = configureStore({
   reducer: {
     loginUser: loginUserReducer,
@@ -51,6 +53,8 @@ export const store = configureStore({
     getTodayDipos: getTodayDiposReducer,
     // currentDisposition: currentDispositionReducer,
     // getRatings: getRatingsReducer,
+    getSearchFav: getSearchFavReducer,
+    getContactFav: getContactFavReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
