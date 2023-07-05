@@ -198,13 +198,8 @@ const SurfStats = (props) => {
                 </View>
                 <View
                   style={{
-                    width: "100%",
-                    height: "100%",
-                    marginTop: 10,
-                    justifyContent: "center",
-                    backgroundColor: Colors.cream,
-                    alignItems: "center",
-                    alignSelf: "center",
+                    backgroundColor: Colors.cream, width:"100%",
+                    height:"100%"
                   }}
                 >
                   <Modal
@@ -212,13 +207,30 @@ const SurfStats = (props) => {
                     transparent={true}
                     visible={showPopup}
                     onRequestClose={closePopup}
+                    
                   >
-                    <View style={{ justifyContent: "space-between" }}>
+                           <View style={{justifyContent:"flex-end",alignItems:"flex-end",backgroundColor:Colors.cream}}>
+        <View style={{backgroundColor:Colors.PrimaryColor,height:30,width:30,alignItems:"center",justifyContent:"center",borderRadius:100,marginRight:12,marginTop:5,marginBottom:5}}>
+        <TouchableOpacity onPress={() => {
+            // setShowPicker(false);
+            // setSelectedOption("option");
+            
+          }}> 
+          <Image
+          style={{ height: 12, width: 12, resizeMode: "contain" }}
+          source={require("../../../assets/closewhite.png")}
+        ></Image>
+{/* <Text style={{color:Colors.white,fontSize:14,fontWeight:"bold"}}>Close</Text> */}
+        </TouchableOpacity>
+        </View>
+        </View>
+                    <View style={{ justifyContent: "space-between", backgroundColor: Colors.cream, width:"100%",
+                    height:"100%"}}>
                       <FlatList
                         data={modalData}
                         numColumns={2}
                         ListFooterComponent={() => (
-                          <View style={{ height: 200 }}></View>
+                       <View style={{ height: "100%" ,backgroundColor:"red"}}></View>
                         )}
                         renderItem={({ item }) => (
                           <TouchableOpacity
@@ -230,24 +242,33 @@ const SurfStats = (props) => {
                               closePopup(); // Call the closepopup function after navigation
                             }}
                             style={{
-                              height: 250,
-                              margin: "2.5%",
-                              width: "45%",
+                              // height: 50,
+                              // margin: "2.5%",
+                              // width: "45%",
+                              flexDirection:"row",
+                              width:"100%",
+                              height:"100%",
+                            alignItems:"center",
+                              paddingHorizontal:12,
+                              borderBottomColor:Colors.white,
+                              borderBottomWidth:1
+
                             }}
                           >
                             <View
                               style={{
-                                height: "75%",
-                                justifyContent: "center",
+                                // height: "75%",
+                                // justifyContent: "center",
                               }}
                             >
                               <Image
                                 source={{ uri: item.property_image[0] }}
                                 style={{
-                                  height: "100%",
-                                  width: "100%",
-                                  borderRadius: 20,
+                                  height: 50,
+                                  width: 50,
+                                  borderRadius: 100,
                                   backgroundColor: Colors.gray,
+                                  marginRight:10
                                 }}
                               ></Image>
                             </View>
@@ -308,25 +329,30 @@ const SurfStats = (props) => {
                   visible={showPopup2}
                   onRequestClose={closePopup2}
                 >
+                  <View style={{flex: 1,
+    backgroundColor: Colors.cream,
+    justifyContent: "flex-end",
+    alignItems: "flex-end", }}>
                   <FlatList
                     data={modal2Data}
                     ListFooterComponent={<View style={{ height: 50 }}></View>}
                     renderItem={({ item }) => (
                       <TouchableOpacity
                         style={{
-                          height: 80,
-                          width: "97%",
-                          alignSelf: "center",
-                          borderWidth: 1,
-                          borderColor: "#bbbbbb52",
-                          alignItems: "center",
-                          alignContent: "center",
-                          flexDirection: "row",
-                          backgroundColor: "#987e7e17",
-                          marginBottom: 5,
-                          padding: 12,
-                          justifyContent: "space-between",
-                          borderRadius: 6,
+                          // height: 80,
+                          // width: "97%",
+                          // alignSelf: "center",
+                          // borderWidth: 1,
+                          // borderColor: "#bbbbbb52",
+                          // alignItems: "center",
+                          // alignContent: "center",
+                          // flexDirection: "row",
+                          // backgroundColor: "#987e7e17",
+                          // marginBottom: 5,
+                          // padding: 12,
+                          // justifyContent: "space-between",
+                          // borderRadius: 6,
+                          
                         }}
                       >
                         <View
@@ -374,6 +400,7 @@ const SurfStats = (props) => {
                     }
                     keyExtractor={(item) => item.id}
                   />
+                  </View>
                 </Modal>
               </View>
             </View>
