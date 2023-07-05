@@ -200,7 +200,6 @@ const SurfStats = (props) => {
                   style={{
                     backgroundColor: Colors.cream,
                     width: "100%",
-                    height: "100%",
                   }}
                 >
                   <Modal
@@ -346,7 +345,6 @@ const SurfStats = (props) => {
                   style={{
                     backgroundColor: Colors.cream,
                     width: "100%",
-                    height: "100%",
                   }}
                 >
                   <Modal
