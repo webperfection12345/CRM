@@ -187,6 +187,19 @@ const Contact = () => {
             <FlatList
               data={isSearching ? filteredData : data}
               ListFooterComponent={<View style={{ height: 50 }}></View>}
+              ListEmptyComponent={() =>
+                !isSearching && Array.isArray(data) && data.length === 0 ? (
+                  <View style={{ alignItems: "center", marginTop: 20 }}>
+                    <Text>No data found</Text>
+                  </View>
+                ) : (
+                  <View style={{ alignItems: "center", marginTop: 20 }}>
+                    <Text>
+                      {typeof data === "string" ? data : "No data found"}
+                    </Text>
+                  </View>
+                )
+              }
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() =>
@@ -343,11 +356,6 @@ const Contact = () => {
                   </View>
                 </TouchableOpacity>
               )}
-              ListEmptyComponent={
-                <View style={{ alignItems: "center", marginTop: 20 }}>
-                  <Text>No data found</Text>
-                </View>
-              }
               onRefresh={handleRefresh}
               refreshing={loading}
               keyExtractor={(item) => item.id}

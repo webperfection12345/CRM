@@ -57,7 +57,7 @@ const SurfStats = (props) => {
   useEffect(() => {
     getContact();
     getSearch();
-  });
+  }, []);
 
   const getSearch = () => {
     dispatch(getSearchFav(id)).then((response) => {

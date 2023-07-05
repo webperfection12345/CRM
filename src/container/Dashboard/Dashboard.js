@@ -59,6 +59,7 @@ export default function Dashboard() {
       const contactsData = response.payload.data;
       setData(Object.values(contactsData));
       setLoading(false);
+      setActivity(true);
     });
   };
 
@@ -109,7 +110,6 @@ export default function Dashboard() {
           const userDetails = JSON.parse(name);
           const displayName = `Welcome ${userDetails.display_name}!`;
           setName(displayName);
-          setActivity(true);
         } else {
           console.error("Invalid response data:", response);
         }
@@ -291,142 +291,152 @@ export default function Dashboard() {
                 />
               </View>
             </TouchableOpacity>
-            <Modal style={{}}
+            <Modal
+              style={{}}
               animationType="slide"
-
               transparent={true}
               visible={showPopup}
               onRequestClose={closePopup}
             >
               <View style={styles.popupContainer}>
                 <View style={styles.popupContent}>
-                  <View style={{alignSelf:"flex-end",position:"absolute",zIndex:9999,right:6,
-                top:6}}>
-                <TouchableOpacity
-                    style={styles.popupButton}
-                    onPress={closePopup}
+                  <View
+                    style={{
+                      alignSelf: "flex-end",
+                      position: "absolute",
+                      zIndex: 9999,
+                      right: 6,
+                      top: 6,
+                    }}
                   >
-                     <Image
-                  style={{
-                    height: 15,
-                    width: 15,
-                    resizeMode: "contain",
-                  }}
-                  source={require("../../../assets/closeblack.png")}
-                ></Image>
-                  </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.popupButton}
+                      onPress={closePopup}
+                    >
+                      <Image
+                        style={{
+                          height: 15,
+                          width: 15,
+                          resizeMode: "contain",
+                        }}
+                        source={require("../../../assets/closeblack.png")}
+                      ></Image>
+                    </TouchableOpacity>
                   </View>
-                <ScrollView
-          style={{
-            backgroundColor: Colors.cream,
-          height:"78%"
-          }}
-        >
-          <View
-            style={{
-              marginTop: 0,
-              width: "100%",
-              justifyContent: "center",
-              alignContent: "center",
-              alignItems: "center",
-            }}
-          >
-          </View>
-          <View
-            style={{
-              justifyContent: "center",
-              alignItems: "center",
-              height: "100%",
-              width: "100%",
-            }}
-          >
-            <Text
-              style={{
-                fontSize: 17,
-                color: Colors.black,
-                fontWeight: "bold",
-                marginTop: 0,
-              }}
-            >
-              Your Surf Level
-            </Text>
+                  <ScrollView
+                    style={{
+                      backgroundColor: Colors.cream,
+                      height: "78%",
+                    }}
+                  >
+                    <View
+                      style={{
+                        marginTop: 0,
+                        width: "100%",
+                        justifyContent: "center",
+                        alignContent: "center",
+                        alignItems: "center",
+                      }}
+                    ></View>
+                    <View
+                      style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: "100%",
+                        width: "100%",
+                      }}
+                    >
+                      <Text
+                        style={{
+                          fontSize: 17,
+                          color: Colors.black,
+                          fontWeight: "bold",
+                          marginTop: 0,
+                        }}
+                      >
+                        Your Surf Level
+                      </Text>
 
-            <View
-              style={{
-                //marginTop: 10,
-             justifyContent:"center",
-             alignItems:"center",
-                width: "100%",
-              }}
-            >
- <View><Image
-                style={{
-                  height: 100,
-                  width: 150,
-              resizeMode:"contain",
-              alignItems:"center",
-              justifyContent:"center"
-                }}
-                source={require("../../../assets/level1.png")}
-              ></Image> 
-              </View>
-          <Image
-                style={{
-                  height: 150,
-                  width: 200,
-                  resizeMode: "contain",
-                  alignSelf: "center",
-                  marginTop: 20,
-                }}
-                source={require("../../../assets/grommet.png")}
-              ></Image> 
-         <Text
-                style={{
-                  fontSize: 25,
-                  marginTop: 15,
-                  color: Colors.black,
-                  fontWeight: "bo400ld",
-                  alignSelf: "center",
-                  width:"100%",
-                  textAlign:"center",fontWeight:"bold"
-                }}
-              >
-               Grommet
-              </Text> 
-            </View>
-<View style={styles.covermainpopup}>
-    <View style={styles.mainview}>
-    <Text style={styles.popupdes}>You are only 5 points away from the</Text>
-        <Text style={styles.popbigtext}>BIG CAHOUNA</Text>
-     <Text style={styles.popupdesdown}>Here are 3 tips to get you the fast!</Text>
-     </View>
-       <View style={styles.manimag}>
-        <Image
-                style={{
-                  height: 230,
-                  width: "100%",
-                  resizeMode: "contain",
-                  alignSelf: "flex-start",
-                  marginTop: 50,
-                  justifyContent:"flex-start",
-                  marginRight:12,
-                  alignItems:"flex-start",
-                 position:"absolute",
-                 top:-80
-                }}
-                source={require("../../../assets/rightman.png")}
-              ></Image> 
-              </View>
-           
-          </View>
-          </View>
-        </ScrollView>
-        
+                      <View
+                        style={{
+                          //marginTop: 10,
+                          justifyContent: "center",
+                          alignItems: "center",
+                          width: "100%",
+                        }}
+                      >
+                        <View>
+                          <Image
+                            style={{
+                              height: 100,
+                              width: 150,
+                              resizeMode: "contain",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                            source={require("../../../assets/level1.png")}
+                          ></Image>
+                        </View>
+                        <Image
+                          style={{
+                            height: 150,
+                            width: 200,
+                            resizeMode: "contain",
+                            alignSelf: "center",
+                            marginTop: 20,
+                          }}
+                          source={require("../../../assets/grommet.png")}
+                        ></Image>
+                        <Text
+                          style={{
+                            fontSize: 25,
+                            marginTop: 15,
+                            color: Colors.black,
+                            fontWeight: "bo400ld",
+                            alignSelf: "center",
+                            width: "100%",
+                            textAlign: "center",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          Grommet
+                        </Text>
+                      </View>
+                      <View style={styles.covermainpopup}>
+                        <View style={styles.mainview}>
+                          <Text style={styles.popupdes}>
+                            You are only 5 points away from the
+                          </Text>
+                          <Text style={styles.popbigtext}>BIG CAHOUNA</Text>
+                          <Text style={styles.popupdesdown}>
+                            Here are 3 tips to get you the fast!
+                          </Text>
+                        </View>
+                        <View style={styles.manimag}>
+                          <Image
+                            style={{
+                              height: 230,
+                              width: "100%",
+                              resizeMode: "contain",
+                              alignSelf: "flex-start",
+                              marginTop: 50,
+                              justifyContent: "flex-start",
+                              marginRight: 12,
+                              alignItems: "flex-start",
+                              position: "absolute",
+                              top: -80,
+                            }}
+                            source={require("../../../assets/rightman.png")}
+                          ></Image>
+                        </View>
+                      </View>
+                    </View>
+                  </ScrollView>
+
                   {/* <Image
                     source={getMeterImage(meterValue)}
                     style={styles.meterImage}
                   /> */}
-
                 </View>
               </View>
             </Modal>
@@ -455,9 +465,8 @@ export default function Dashboard() {
                   }}
                   source={require("../../../assets/bluedocumnet.png")}
                 ></Image>
-                 
-                <Text style={styles.smalltexttwo}>Portal</Text>
 
+                <Text style={styles.smalltexttwo}>Portal</Text>
               </View>
               <View style={styles.boxcover}>
                 <Text style={styles.smalltexttwo}>Call</Text>
@@ -499,8 +508,14 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   maincoverop: { marginTop: 50, marginBottom: 40 },
-  smalltext: { color: Colors.white, fontWeight: 300, fontSize: 14,position:"relative",top:-15 },
-  smalltexttwo:{ color: Colors.white, fontWeight: 300, fontSize: 14,},
+  smalltext: {
+    color: Colors.white,
+    fontWeight: 300,
+    fontSize: 14,
+    position: "relative",
+    top: -15,
+  },
+  smalltexttwo: { color: Colors.white, fontWeight: 300, fontSize: 14 },
   bigtext: {
     fontSize: 17,
     color: Colors.white,
@@ -511,15 +526,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "rgba(0, 0, 0, 0.5)",
     justifyContent: "flex-end",
-    alignItems: "flex-end", 
+    alignItems: "flex-end",
   },
   popupContent: {
     backgroundColor: Colors.cream,
     padding: 12,
     borderRadius: 10,
     width: "100%",
-
-
   },
   popupText: {
     fontSize: 16,
@@ -528,47 +541,45 @@ const styles = StyleSheet.create({
   popupButton: {
     backgroundColor: Colors.white,
     alignSelf: "center",
-borderRadius:100,
-height:35,
-width:35,justifyContent:"center",
-alignItems:"center",
-
+    borderRadius: 100,
+    height: 35,
+    width: 35,
+    justifyContent: "center",
+    alignItems: "center",
   },
 
-  manimag:{ 
+  manimag: {
     alignSelf: "flex-end",
-    justifyContent:"flex-end",
-    alignItems:"flex-end",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
     height: 180,
-    width: "25%",    
-},
-covermainpopup:{
-  alignItems:"flex-start",
-  flexDirection:"row" ,
-  paddingHorizontal:12, 
-  justifyContent:"space-between",
-  width:"100%",
-  marginVertical:22,marginBottom:0
-},
-mainview:{
-textAlign:"center",
-width:"75%",
-lineHeight:40,
-paddingRight:12,
-backgroundColor:Colors.white,
-borderRadius:12,
-paddingHorizontal:12,
-paddingVertical:8
-},
-popbigtext:{
-textAlign:"center",
-fontSize:15,
-paddingVertical:5,
-fontWeight:"bold"
-},
-popupdes:{fontSize:12,textAlign:"center",},
-popupdesdown:{fontSize:12,
-textAlign:"center"
-},
-
+    width: "25%",
+  },
+  covermainpopup: {
+    alignItems: "flex-start",
+    flexDirection: "row",
+    paddingHorizontal: 12,
+    justifyContent: "space-between",
+    width: "100%",
+    marginVertical: 22,
+    marginBottom: 0,
+  },
+  mainview: {
+    textAlign: "center",
+    width: "75%",
+    lineHeight: 40,
+    paddingRight: 12,
+    backgroundColor: Colors.white,
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+  },
+  popbigtext: {
+    textAlign: "center",
+    fontSize: 15,
+    paddingVertical: 5,
+    fontWeight: "bold",
+  },
+  popupdes: { fontSize: 12, textAlign: "center" },
+  popupdesdown: { fontSize: 12, textAlign: "center" },
 });
