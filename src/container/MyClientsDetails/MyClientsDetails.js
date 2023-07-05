@@ -28,7 +28,7 @@ import { getDisposition } from "../../modules/getDisposition";
 import { getTodayDipos } from "../../modules/getTodayDipos";
 import { getCurrentDisposition } from "../../modules/currentDisposition";
 import Activity from "../../components/Activity";
-import { Device } from "@twilio/voice-sdk";
+// import { Device } from "@twilio/voice-sdk";
 import axios from "axios";
 import * as WebBrowser from "expo-web-browser";
 

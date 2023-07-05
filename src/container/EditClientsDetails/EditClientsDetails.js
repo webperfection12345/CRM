@@ -53,7 +53,7 @@ const EditClientsDetails = (props) => {
     dispatch(updateContact(payload))
       .then((res) => {
         console.log("Contact update successfully");
-        navigation.navigate("MyClients");
+        navigation.goBack();
       })
       .catch((error) => {
         console.log("Error deleting contact:", error);
@@ -120,7 +120,11 @@ const EditClientsDetails = (props) => {
           >
             <Text style={{ fontSize: 15, color: Colors.white }}>Cancel</Text>
           </TouchableOpacity>
-          <Text style={{  fontSize: 19, fontWeight: "bold", color: Colors.white }}>Edit Client</Text>
+          <Text
+            style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}
+          >
+            Edit Client
+          </Text>
           <TouchableOpacity
             onPress={onHandleClick}
             style={{
@@ -145,9 +149,7 @@ const EditClientsDetails = (props) => {
               <Text style={{ fontSize: 15, color: Colors.black }}>
                 Full Name
               </Text>
-              <Text style={{ fontSize: 12, color: "#950000" }}>
-                Required
-              </Text>
+              <Text style={{ fontSize: 12, color: "#950000" }}>Required</Text>
             </View>
             <View
               style={{
@@ -550,15 +552,15 @@ const EditClientsDetails = (props) => {
                     flexDirection: "row",
                   }}
                 >
-                   <Image
-                  style={{
-                    height: 30,
-                    width: 30,
-                    resizeMode: "contain",
-                    marginLeft: 10,
-                  }}
-                  source={require("../../../assets/uploadImage.png")}
-                ></Image>
+                  <Image
+                    style={{
+                      height: 30,
+                      width: 30,
+                      resizeMode: "contain",
+                      marginLeft: 10,
+                    }}
+                    source={require("../../../assets/uploadImage.png")}
+                  ></Image>
 
                   <Text
                     style={{
