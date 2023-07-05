@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/static/js/main.035a2b69.js",
-    "static/js/553.24ade163.js": "/static/js/553.24ade163.js",
+    "main.js": "/static/js/main.1bde9d6b.js",
+    "static/js/84.c7a10165.js": "/static/js/84.c7a10165.js",
     "static/media/1.png": "/static/media/1.29db9b3a1a7606b8cdf0.png",
     "static/media/1.jpg": "/static/media/1.e30325f015aa5829369b.jpg",
     "static/media/rightman.png": "/static/media/rightman.6a68d47a74500ae04f38.png",
@@ -62,11 +62,11 @@
     "favicon-16.png": "/favicon-16.png",
     "manifest.json": "/manifest.json",
     "serve.json": "/serve.json",
-    "main.035a2b69.js.map": "/static/js/main.035a2b69.js.map",
-    "553.24ade163.js.map": "/static/js/553.24ade163.js.map"
+    "main.1bde9d6b.js.map": "/static/js/main.1bde9d6b.js.map",
+    "84.c7a10165.js.map": "/static/js/84.c7a10165.js.map"
   },
   "entrypoints": [
-    "static/js/553.24ade163.js",
-    "static/js/main.035a2b69.js"
+    "static/js/84.c7a10165.js",
+    "static/js/main.1bde9d6b.js"
   ]
 }
