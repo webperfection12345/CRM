@@ -24,4 +24,24 @@ export const getLeads = createAsyncThunk("getLeads", async () => {
     });
 });
 
-export default getLeads;
+const getLeadsSlice = createSlice({
+  name: "getLeads",
+  initialState: {
+    getLeadsData: [],
+    status: null,
+  },
+  extraReducers: {
+    [getLeads.pending]: (state, action) => {
+      state.status = "loading";
+    },
+    [getLeads.fulfilled]: (state, action) => {
+      state.status = "success";
+      state.getLeadsData = action.payload;
+    },
+    [getLeads.rejected]: (state, action) => {
+      state.status = "failed";
+    },
+  },
+});
+
+export default getLeadsSlice.reducer;

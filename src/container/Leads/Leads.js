@@ -10,7 +10,7 @@ import {
   FlatList,
 } from "react-native";
 import Colors from "../../utils/Colors";
-import getLeads from "../../modules/getLeads";
+import { getLeads } from "../../modules/getLeads";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import Activity from "../../components/Activity";
@@ -32,26 +32,29 @@ const Leads = () => {
       // Perform the refresh logic here
     }
   }, [isFocused]);
-  const getAllContacts = () => {
-    dispatch(getLeads())
-      .then((response) => {
-        if (response && response.payload && response.payload.data) {
-          const contactsData = response.payload.data;
-          setData(contactsData);
-          setLoading(false);
-          setActivity(true);
-        } else {
-          console.error("Invalid response data:", response);
-          // Handle the error case here, such as displaying an error message or taking appropriate action
-        }
-      })
-      .catch((error) => {
-        console.error("Error retrieving leads:", error);
+
+  const getAllContacts = async () => {
+    try {
+      const response = await dispatch(getLeads());
+      console.log(response, "response");
+      if (response && response.payload && response.payload.data) {
+        const contactsData = response.payload.data;
+        setData(contactsData);
+        setLoading(false);
+        setActivity(true);
+      } else {
+        console.error("Invalid response data:", response);
         // Handle the error case here, such as displaying an error message or taking appropriate action
-      });
+      }
+    } catch (error) {
+      console.error("Error retrieving leads:", error);
+      // Handle the error case here, such as displaying an error message or taking appropriate action
+    }
   };
+
   const searchFilter = (text) => {
     setSearchText(text);
+    console.log(data);
     const filteredItems = data.filter((item) =>
       item.property_key.includes(text)
     );

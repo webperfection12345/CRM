@@ -9,6 +9,7 @@ import {
   FlatList,
   Modal,
   Button,
+  Platform,
 } from "react-native";
 import Colors from "../utils/Colors";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -34,6 +35,7 @@ const Header = (props) => {
   const [selectedDate, setSelectedDate] = useState(
     moment().format("YYYY-MM-DD")
   );
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [showPicker, setShowPicker] = useState(true);
 
   const handleOptionChange = (option) => {
@@ -41,7 +43,13 @@ const Header = (props) => {
     setSelectedDate(moment().format("YYYY-MM-DD"));
     setShowPicker(true);
   };
-
+  const handleItemClick = () => {
+    if (Platform.OS === "web") {
+      navigation.openDrawer();
+    } else {
+      navigation.toggleDrawer();
+    }
+  };
   const handleMonthChange = (month) => {
     const selectedMonth = moment(selectedDate).month(
       moment.months().indexOf(month)
@@ -392,6 +400,9 @@ const Header = (props) => {
   };
   useEffect(() => {
     getActiveClient();
+    if (Platform.OS === "web") {
+      navigation.openDrawer();
+    }
     if (isFocused) {
       // Perform the refresh logic here
     }
@@ -488,7 +499,7 @@ const Header = (props) => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.toggleDrawer()}
+          onPress={handleItemClick}
           style={{ width: 50, marginLeft: 10 }}
         >
           <Image

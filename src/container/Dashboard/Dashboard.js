@@ -19,7 +19,7 @@ import RNSpeedometer from "react-native-speedometer";
 import Activity from "../../components/Activity";
 import { getContacts } from "../../modules/getContacts";
 import { getMeterData } from "../../modules/getMeterValue";
-import getLeads from "../../modules/getLeads";
+import { getLeads } from "../../modules/getLeads";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { color } from "react-native-reanimated";
 

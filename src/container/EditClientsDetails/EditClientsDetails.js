@@ -41,6 +41,7 @@ const EditClientsDetails = (props) => {
     setEmail(item.contact_email);
     setPhone(item.contact_number);
     setID(item.linked_lead);
+    setComments(item.property_address);
   }, [item]);
 
   const onHandleClick = () => {
@@ -181,112 +182,6 @@ const EditClientsDetails = (props) => {
               />
             </View>
           </View>
-          {/* <View style={{width: '95%', alignSelf: 'center'}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginTop: 15,
-              }}>
-              <Text style={{fontSize: 15, color: Colors.black}}>
-                Company Name
-              </Text>
-              <Text style={{fontSize: 12, color: Colors.black}}></Text>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                height: 50,
-                marginTop: 10,
-                justifyContent: 'center',
-              }}>
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                autoCorrect={false}
-                returnKeyType="done"
-              />
-            </View>
-          </View> */}
-
-          {/* <View style={{width: '95%', alignSelf: 'center'}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                marginTop: 15,
-              }}>
-              <Text style={{fontSize: 15, color: Colors.black}}>Job_Title</Text>
-              <Text style={{fontSize: 12, color: Colors.black}}></Text>
-            </View>
-            <View
-              style={{
-                width: '100%',
-                height: 50,
-                marginTop: 10,
-                justifyContent: 'center',
-              }}>
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                keyboardType="email-address"
-                autoCorrect={false}
-                returnKeyType="done"
-                //onChangeText={text => setEmail(text)}
-              />
-            </View>
-          </View> */}
-
-          {/* <View style={{width: '95%', alignSelf: 'center'}}>
-            <Text style={{fontSize: 15, color: Colors.black, marginTop: 15}}>
-              Client Type
-            </Text>
-            <View
-              style={{
-                width: '100%',
-                height: 50,
-                marginTop: 10,
-                justifyContent: 'center',
-              }}>
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderColor: Colors.gray,
-                  borderWidth: 1,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                autoCorrect={false}
-                returnKeyType="done"
-                onChangeText={text => setNickname(text)}
-              />
-            </View>
-          </View> */}
 
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
@@ -355,105 +250,6 @@ const EditClientsDetails = (props) => {
               />
             </View>
           </View>
-          {/* 
-          <View style={{width: '95%', alignSelf: 'center'}}>
-            <Text style={{fontSize: 15, color: Colors.black, marginTop: 15}}>
-              Linkedin
-            </Text>
-            <View
-              style={{
-                width: '100%',
-                height: 50,
-                marginTop: 10,
-                justifyContent: 'center',
-              }}>
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderWidth: 1,
-                  borderColor: Colors.gray,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                autoCorrect={false}
-                returnKeyType="done"
-                placeholder="biff@bowser.com"
-                placeholderTextColor={Colors.black}
-                //onChangeText={text => setLastName(text)}
-              />
-            </View>
-          </View> */}
-
-          {/* <View style={{width: '95%', alignSelf: 'center'}}>
-            <Text style={{fontSize: 15, color: Colors.black, marginTop: 15}}>
-              Twitter
-            </Text>
-            <View
-              style={{
-                width: '100%',
-                height: 50,
-                marginTop: 10,
-                justifyContent: 'center',
-              }}>
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderWidth: 1,
-                  borderColor: Colors.gray,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                autoCorrect={false}
-                returnKeyType="done"
-                placeholder="biff@bowser.com"
-                placeholderTextColor={Colors.black}
-                //onChangeText={text => setLastName(text)}
-              />
-            </View>
-          </View> */}
-
-          {/* <View style={{width: '95%', alignSelf: 'center'}}>
-            <Text style={{fontSize: 15, color: Colors.black, marginTop: 15}}>
-              Role
-            </Text>
-            <View
-              style={{
-                width: '100%',
-                height: 50,
-                marginTop: 10,
-                justifyContent: 'center',
-              }}>
-              <TextInput
-                allowFontScaling={false}
-                style={{
-                  width: '100%',
-                  borderRadius: 8,
-                  height: '100%',
-                  paddingHorizontal: 15,
-                  color: Colors.black,
-                  borderWidth: 1,
-                  borderColor: Colors.gray,
-                  fontSize: 14,
-                  padding: 2,
-                }}
-                autoCorrect={false}
-                returnKeyType="done"
-                placeholder="Decision Maker"
-                placeholderTextColor={Colors.black}
-                //onChangeText={text => setLastName(text)}
-              />
-            </View>
-          </View> */}
 
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
@@ -491,20 +287,21 @@ const EditClientsDetails = (props) => {
             </View>
           </View>
 
-          {/* <View style={{ width: "95%", alignSelf: "center" }}>
+          <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Comments
+              Address
             </Text>
             <View
               style={{
                 width: "100%",
-                height: 100,
+                height: 50,
                 marginTop: 10,
                 justifyContent: "center",
               }}
             >
               <TextInput
                 allowFontScaling={false}
+                editable={true}
                 style={{
                   width: "100%",
                   borderRadius: 8,
@@ -516,6 +313,7 @@ const EditClientsDetails = (props) => {
                   fontSize: 14,
                   padding: 2,
                 }}
+                value={comments}
                 multiline={true}
                 autoCorrect={false}
                 returnKeyType="done"
@@ -523,7 +321,7 @@ const EditClientsDetails = (props) => {
                 onChangeText={(text) => setComments(text)}
               />
             </View>
-          </View> */}
+          </View>
           <View style={{ width: "95%", alignSelf: "center" }}>
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Profile Picture

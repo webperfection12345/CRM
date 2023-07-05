@@ -10,6 +10,7 @@ export const getClientDetails = createAsyncThunk(
       id;
     return await getAPI(urlDynamic)
       .then(async (response) => {
+        console.log(response);
         const { data } = response;
         return data;
       })

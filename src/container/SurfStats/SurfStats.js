@@ -17,6 +17,8 @@ import { color } from "react-native-reanimated";
 import { getSearchFav } from "../../modules/getSearchFav";
 import { getContactFav } from "../../modules/getContactFav";
 import { useDispatch } from "react-redux";
+import { getEngagement } from "../../modules/getEngagement";
+// import { BarChart } from "react-native-svg-charts";
 
 const SurfStats = (props) => {
   const dispatch = useDispatch();
@@ -29,6 +31,8 @@ const SurfStats = (props) => {
   const [modalData, setModalData] = useState(""); // Initialize an empty string as the initial value
   const [modal2Data, setModal2Data] = useState(""); // Initialize an empty string as the initial value
   const [showPopup2, setShowPopup2] = useState(false);
+  const [timeData, setTimeData] = useState("");
+  const data = [20, 45, 28, 80, 99, 43];
 
   const openPopup = () => {
     console.log(modalData);
@@ -57,6 +61,7 @@ const SurfStats = (props) => {
   useEffect(() => {
     getContact();
     getSearch();
+    getEngageTime();
   }, []);
 
   const getSearch = () => {
@@ -79,8 +84,23 @@ const SurfStats = (props) => {
       setContactData(leadsCount);
     });
   };
+  const getEngageTime = () => {
+    dispatch(getEngagement(id)).then((response) => {
+      const contactsData = response.payload.data;
+      setTimeData(contactsData);
+      console.log(contactsData, "contacts");
+    });
+  };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
+      {/* <View>
+        <BarChart
+          style={{ height: 200 }}
+          data={data}
+          svg={{ fill: "rgb(134, 65, 244)" }}
+          contentInset={{ top: 30, bottom: 30 }}
+        />
+      </View> */}
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
         <View
           style={{
@@ -479,7 +499,9 @@ const SurfStats = (props) => {
                   >
                     Engagement
                   </Text>
-                  <Text style={styles.boldname}>00:13:53</Text>
+                  <Text style={styles.boldname}>
+                    {timeData.user_session_time}
+                  </Text>
                 </View>
               </View>
               <View style={styles.covercolsingle}>
