@@ -200,6 +200,7 @@ const SurfStats = (props) => {
                   style={{
                     backgroundColor: Colors.cream, width:"100%",
                     // height:"100%"
+
                   }}
                 >
                   <Modal
@@ -207,27 +208,56 @@ const SurfStats = (props) => {
                     transparent={true}
                     visible={showPopup}
                     onRequestClose={closePopup}
-                    
                   >
-                           <View style={{justifyContent:"flex-end",alignItems:"flex-end",backgroundColor:Colors.cream}}>
-        <View style={{backgroundColor:Colors.PrimaryColor,height:30,width:30,alignItems:"center",justifyContent:"center",borderRadius:100,marginRight:12,marginTop:5,marginBottom:5}}>
-        <TouchableOpacity onPress={() => {
-            closePopup()
-          }}> 
-          <Image
-          style={{ height: 12, width: 12, resizeMode: "contain" }}
-          source={require("../../../assets/closewhite.png")}
-        ></Image>
-        </TouchableOpacity>
-        </View>
-        </View>
-                    <View style={{ justifyContent: "space-between", backgroundColor: Colors.cream, width:"100%",
-                    height:"100%"}}>
+                    <View
+                      style={{
+                        justifyContent: "flex-end",
+                        alignItems: "flex-end",
+                        backgroundColor: Colors.cream,
+                      }}
+                    >
+                      <View
+                        style={{
+                          backgroundColor: Colors.PrimaryColor,
+                          height: 30,
+                          width: 30,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: 100,
+                          marginRight: 12,
+                          marginTop: 5,
+                          marginBottom: 5,
+                        }}
+                      >
+                        <TouchableOpacity
+                          onPress={() => {
+                            closePopup();
+                          }}
+                        >
+                          <Image
+                            style={{
+                              height: 12,
+                              width: 12,
+                              resizeMode: "contain",
+                            }}
+                            source={require("../../../assets/closewhite.png")}
+                          ></Image>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: "space-between",
+                        backgroundColor: Colors.cream,
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
                       <FlatList
                         data={modalData}
                         numColumns={2}
                         ListFooterComponent={() => (
-                       <View style={{ height: 200 }}></View>
+                          <View style={{ height: 200 }}></View>
                         )}
                         renderItem={({ item }) => (
                           <TouchableOpacity
@@ -266,7 +296,6 @@ const SurfStats = (props) => {
                                 justifyContent: "center",
                               }}
                             >
-                              
                               <Text
                                 style={{
                                   color: Colors.black,
@@ -280,7 +309,7 @@ const SurfStats = (props) => {
                                   color: Colors.PrimaryColor,
                                   fontSize: 12,
                                   fontWeight: "bold",
-                                  marginTop:5
+                                  marginTop: 5,
                                 }}
                               >
                                 {item.property_id}
@@ -317,61 +346,79 @@ const SurfStats = (props) => {
                   style={{
                     backgroundColor: Colors.cream, width:"100%",
                     // height:"100%"
+
                   }}
                 >
-                <Modal
-                  animationType="fade"
-                  transparent={true}
-                  visible={showPopup2}
-                  onRequestClose={closePopup2}
-                >
-                   <View style={{justifyContent:"flex-end",alignItems:"flex-end",backgroundColor:Colors.cream}}>
-        <View style={{backgroundColor:Colors.PrimaryColor,height:30,width:30,alignItems:"center",justifyContent:"center",borderRadius:100,marginRight:12,marginTop:5,marginBottom:5}}>
-        <TouchableOpacity onPress={() => {
-            closePopup2()
-          }}> 
-          <Image
-          style={{ height: 12, width: 12, resizeMode: "contain" }}
-          source={require("../../../assets/closewhite.png")}
-        ></Image>
-        </TouchableOpacity>
-        </View>
-        </View>
-        <View style={{ justifyContent: "space-between", backgroundColor: Colors.cream, width:"100%",
-                    height:"100%"}}>
-                  <FlatList
-                    data={modal2Data}
-                    ListFooterComponent={<View style={{ height: 100 }}></View>}
-                    renderItem={({ item }) => (
-                      <TouchableOpacity
+                  <Modal
+                    animationType="fade"
+                    transparent={true}
+                    visible={showPopup2}
+                    onRequestClose={closePopup2}
+                  >
+                    <View
+                      style={{
+                        justifyContent: "flex-end",
+                        alignItems: "flex-end",
+                        backgroundColor: Colors.cream,
+                      }}
+                    >
+                      <View
                         style={{
-                          
-                          alignItems:"center",justifyContent:"flex-start",flexDirection:"row",paddingHorizontal:12,marginBottom:12,paddingBottom:7,backgroundColor:Colors.white,paddingTop:7,marginHorizontal:12,borderRadius:5,borderColor:"#ddd",borderWidth:1
+                          backgroundColor: Colors.PrimaryColor,
+                          height: 30,
+                          width: 30,
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: 100,
+                          marginRight: 12,
+                          marginTop: 5,
+                          marginBottom: 5,
                         }}
                       >
-                        <View
-                          style={{
-                            alignItems:"center",justifyContent:"flex-start",flexDirection:"row", flexWrap:"wrap",width:"100%",position:"relative"
+                        <TouchableOpacity
+                          onPress={() => {
+                            closePopup2();
                           }}
                         >
                           <Image
-                            source={{ uri: item.image }}
                             style={{
-                              height: 65,
-                          width: 65,
-                          borderRadius:100,
-                          resizeMode:"contain",
-                          marginRight:12
+                              height: 12,
+                              width: 12,
+                              resizeMode: "contain",
                             }}
+                            source={require("../../../assets/closewhite.png")}
                           ></Image>
-
-                          <Text
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                    <View
+                      style={{
+                        justifyContent: "space-between",
+                        backgroundColor: Colors.cream,
+                        width: "100%",
+                        height: "100%",
+                      }}
+                    >
+                      <FlatList
+                        data={modal2Data}
+                        ListFooterComponent={
+                          <View style={{ height: 100 }}></View>
+                        }
+                        renderItem={({ item }) => (
+                          <TouchableOpacity
                             style={{
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: "bold",
-                              
-                              flexWrap:"wrap"
+                              alignItems: "center",
+                              justifyContent: "flex-start",
+                              flexDirection: "row",
+                              paddingHorizontal: 12,
+                              marginBottom: 12,
+                              paddingBottom: 7,
+                              backgroundColor: Colors.white,
+                              paddingTop: 7,
+                              marginHorizontal: 12,
+                              borderRadius: 5,
+                              borderColor: "#ddd",
+                              borderWidth: 1,
                             }}
                           >
                             {item.search_parameters}
@@ -393,6 +440,8 @@ const SurfStats = (props) => {
                   <Text>hjghjgjhgjhg</Text>
                   </View>
                 </Modal>
+
+             
                 </View>
               </View>
             </View>
@@ -557,8 +606,13 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.cream,
     position: "relative",
   },
-  trashicon:{height:20,
-  width:20, position:"absolute",right:10,tintColor:Colors.PrimaryColor},
+  trashicon: {
+    height: 20,
+    width: 20,
+    position: "absolute",
+    right: 10,
+    tintColor: Colors.PrimaryColor,
+  },
   inerprogcover: {
     height: 3,
     borderRadius: 22,
