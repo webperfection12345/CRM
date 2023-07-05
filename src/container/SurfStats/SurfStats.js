@@ -199,7 +199,7 @@ const SurfStats = (props) => {
                 <View
                   style={{
                     backgroundColor: Colors.cream, width:"100%",
-                    height:"100%"
+                    // height:"100%"
                   }}
                 >
                   <Modal
@@ -316,7 +316,7 @@ const SurfStats = (props) => {
                 <View
                   style={{
                     backgroundColor: Colors.cream, width:"100%",
-                    height:"100%"
+                    // height:"100%"
                   }}
                 >
                 <Modal
@@ -390,11 +390,13 @@ const SurfStats = (props) => {
                     }
                     keyExtractor={(item) => item.id}
                   />
+                  <Text>hjghjgjhgjhg</Text>
                   </View>
                 </Modal>
                 </View>
               </View>
             </View>
+          
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
                 <View
@@ -517,7 +519,7 @@ const SurfStats = (props) => {
                 </View>
               </View>
             </View>
-            <View style={{ height: 50 }}></View>
+            {/* <View style={{ height: 50 }}></View> */}
           </ScrollView>
         </View>
       </View>
