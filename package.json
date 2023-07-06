@@ -51,6 +51,7 @@
     "react-native-file-picker": "^0.0.21",
     "react-native-gesture-handler": "~2.9.0",
     "react-native-maps": "~1.7.1",
+    "react-native-material-menu": "^2.0.0",
     "react-native-modal-datetime-picker": "^15.0.1",
     "react-native-month-year-picker": "^1.9.0",
     "react-native-reanimated": "~2.14.4",
