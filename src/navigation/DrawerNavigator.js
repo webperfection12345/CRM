@@ -24,6 +24,7 @@ import Colors from "../utils/Colors";
 import Contacts from "../container/Contacts/Contacts";
 import Properties from "../container/Properties/Properties";
 import Profile from "../container/Profile/Profile";
+import Settings from "../container/Settings/Settings";
 import PropertiesFavorites from "../container/PropertiesFavorites/PropertiesFavorites";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -362,6 +363,7 @@ const CustomDrawerContent = () => {
                   }}
                 />
               </View>
+              
               <Text
                 style={{
                   color: textColor,
@@ -373,6 +375,14 @@ const CustomDrawerContent = () => {
               </Text>
             </View>
           </TouchableHighlight>
+
+
+
+
+
+
+
+          
           <TouchableHighlight
             onPress={() => navigation.navigate("Contacts")}
             underlayColor="transparent"

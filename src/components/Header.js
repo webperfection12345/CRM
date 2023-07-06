@@ -546,13 +546,13 @@ const Header = (props) => {
                     width: 22,
                     marginLeft: 22,
                     resizeMode: "contain",
-                    position: "relative",
-                    bottom: -26,
+                    // position: "relative",
+                    // bottom: -26,
                   }}
                   source={require("../../assets/calender.png")}
                 ></Image>
               </View>
-              <Picker
+              {/* <Picker
                 selectedValue={selectedOption}
                 onValueChange={handleOptionChange}
                 style={styles.picker}
@@ -561,7 +561,7 @@ const Header = (props) => {
                 <Picker.Item label="Date" value="date" />
                 <Picker.Item label="Month" value="month" />
                 <Picker.Item label="Year" value="year" />
-              </Picker>
+              </Picker> */}
               {renderCalendar()}
             </View>
           </TouchableOpacity> */}
