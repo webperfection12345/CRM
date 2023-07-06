@@ -18,6 +18,7 @@ import { Calendar, CalendarTheme } from "react-native-calendars";
 import moment from "moment";
 import { Picker } from "@react-native-picker/picker";
 import { color } from "react-native-reanimated";
+import { Menu, MenuItem, MenuDivider } from 'react-native-material-menu';
 
 const activities = {
   "2023-06-01": [{ name: "Meeting", time: "10:00 AM" }],
@@ -37,8 +38,12 @@ const Header = (props) => {
   );
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [showPicker, setShowPicker] = useState(true);
+  const [visible, setVisible] = useState(false);
+
+  const hideMenu = () => setVisible(false);
 
   const handleOptionChange = (option) => {
+    hideMenu(true)
     setSelectedOption(option);
     setSelectedDate(moment().format("YYYY-MM-DD"));
     setShowPicker(true);
@@ -207,7 +212,7 @@ const Header = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <ScrollView>
+          <ScrollView >
             <View>
               <Picker
                 selectedValue={month}
@@ -326,7 +331,7 @@ const Header = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <ScrollView>
+          <ScrollView >
             <View>
               <View style={styles.bgc}>
                 <Picker
@@ -412,7 +417,7 @@ const Header = (props) => {
     try {
       const response = await fetch(
         "https://surf.topsearchrealty.com/wp-json/activeuser/currentactive?user_id=" +
-          id
+        id
       );
       if (!response.ok) {
         throw new Error("Failed to fetch active client data.");
@@ -532,7 +537,7 @@ const Header = (props) => {
               source={require("../../assets/notification.png")}
             ></Image>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.calicon}>
+          {/* <TouchableOpacity style={styles.calicon}>
             <View style={styles.containermain}>
               <View style={styles.iconmaincol}>
                 <Image
@@ -559,9 +564,38 @@ const Header = (props) => {
               </Picker>
               {renderCalendar()}
             </View>
+          </TouchableOpacity> */}
+          <TouchableOpacity onPress={() => { setVisible(!visible) }}>
+            <Image
+              style={{
+                height: 22,
+                width: 22,
+                marginLeft: 22,
+                resizeMode: "contain",
+                position: "relative",
+              }}
+              source={require("../../assets/calender.png")}
+            ></Image>
+
+            <Menu
+              visible={visible}
+              onRequestClose={hideMenu}
+            >
+              <MenuItem onPress={() => { handleOptionChange('date') }}>Date</MenuItem>
+              <MenuDivider />
+              <MenuItem onPress={() => { handleOptionChange('month') }}>Month</MenuItem>
+              <MenuDivider />
+              <MenuItem onPress={() => { handleOptionChange('year') }}>Year</MenuItem>
+            </Menu>
+           
           </TouchableOpacity>
+
+          
         </View>
+       
       </View>
+      {renderCalendar()}
+
     </View>
   );
 };
@@ -624,7 +658,6 @@ const styles = StyleSheet.create({
     // backgroundColor:"red",
     position: "relative",
     top: -12,
-
     opacity: 0,
   },
   iconmaincol: { flexDirection: "row" },
