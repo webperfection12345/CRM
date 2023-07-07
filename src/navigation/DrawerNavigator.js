@@ -24,7 +24,7 @@ import Colors from "../utils/Colors";
 import Contacts from "../container/Contacts/Contacts";
 import Properties from "../container/Properties/Properties";
 import Profile from "../container/Profile/Profile";
-import Settings from "../container/Settings/Settings";
+import CallCenter from "../container/CallCenter/index";
 import PropertiesFavorites from "../container/PropertiesFavorites/PropertiesFavorites";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
@@ -624,7 +624,7 @@ const CustomDrawerContent = () => {
             </View>
           </TouchableHighlight>
           <TouchableHighlight
-            onPress={handlePress}
+            onPress={() => navigation.navigate("CallCenter")}
             underlayColor="transparent"
             onMouseEnter={handleMouseEnter7}
             onMouseLeave={handleMouseLeave7}

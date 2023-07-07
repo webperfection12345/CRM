@@ -71,7 +71,7 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ width: "40%" }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.propertytext}>Property Info</Text>
             <Text>233 Royal Palm Way
               Boca Raton, FL 33496</Text>
@@ -161,7 +161,7 @@ const TransactionDeskNew = () => {
             </View>
           </View>
           <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "center", marginBottom: 12, flexDirection: "row", justifyContent: "flex-end" }}>
+            <TouchableOpacity style={{ alignItems: "center", marginBottom: 5, flexDirection: "row", justifyContent: "flex-end" }}>
 
               <View style={styles.greencover}>
 
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     width: 15,
     resizeMode: "contain",
   },
-  maincobvericons: { justifyContent: "center", flexDirection: "row", width: "100%", alignItems: "center", paddingVertical: 20 },
+  maincobvericons: { justifyContent: "center", flexDirection: "row", width: "100%", alignItems: "center", paddingVertical: 10 },
   maincoverbox: width => ({
     backgroundColor: Colors.white, borderRadius: 12, padding: 12,
     width: width,
@@ -244,16 +244,16 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   propertytext: { fontSize: 16, marginBottom: 3, fontWeight: "bold" },
-  greenimage: { height: 20, width: 20, resizeMode: "contain", alignItems: "center" },
+  greenimage: { height: 16, width: 16, resizeMode: "contain", alignItems: "center" },
   greencover: {
-    alignItems: "center", height: 40, width: 40, borderRadius: 100, backgroundColor: Colors.white, justifyContent: "center", shadowColor: '#000',
+    alignItems: "center", height: 35, width: 35, borderRadius: 100, backgroundColor: Colors.white, justifyContent: "center", shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 4,
   },
-  namegreen: { fontSize: 18, marginBottom: 12, textAlign: "center" },
-  timedate: { fontSize: 27, fontWeight: "bold", color: "#00ff24", textAlign: "center" },
-  cloudphoto: { height: 25, width: 25, resizeMode: "contain", marginHorizontal: 12 },
-  cloudphoto2: { height: 30, width: 30, resizeMode: "contain", marginHorizontal: 12 }
+  namegreen: { fontSize: 14, marginBottom: 8, textAlign: "center" },
+  timedate: { fontSize:18, fontWeight: "bold", color: "#00ff24", textAlign: "center" },
+  cloudphoto: { height: 20, width: 20, resizeMode: "contain", marginHorizontal: 12 },
+  cloudphoto2: { height: 25, width: 25, resizeMode: "contain", marginHorizontal: 12 }
 });

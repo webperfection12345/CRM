@@ -29,6 +29,7 @@ import DisPosition from "../container/DisPosition/DisPosition";
 import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
 import SurfStats from "../container/SurfStats/SurfStats";
 import Settings from "../container/Settings/Settings";
+import CallCenter from "../container/CallCenter/index";
 const Stack = createStackNavigator();
 
 function StackNavigator() {
@@ -75,6 +76,7 @@ function StackNavigator() {
       />
       <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} />
       <Stack.Screen name="SurfStats" component={SurfStats} />
+      <Stack.Screen name="CallCenter" component={CallCenter} />
     </Stack.Navigator>
   );
 }
