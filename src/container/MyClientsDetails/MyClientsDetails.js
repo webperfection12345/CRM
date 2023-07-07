@@ -12,9 +12,8 @@ import {
   StyleSheet,
   PanResponder,
   Share,
-  Switch,
 } from "react-native";
-
+import { Switch } from 'react-native-switch';
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -31,6 +30,7 @@ import Activity from "../../components/Activity";
 // import { Device } from "@twilio/voice-sdk";
 import axios from "axios";
 import * as WebBrowser from "expo-web-browser";
+import { MenuDivider } from "react-native-material-menu";
 
 const MyClientsDetails = (props) => {
   const dispatch = useDispatch();
@@ -72,6 +72,35 @@ const MyClientsDetails = (props) => {
   const [showAllNotes, setShowAllNotes] = useState(false);
   const notesToShow = showAllNotes ? note.length : 5;
 
+  const transactionData = [
+    {
+      title: 'a'
+    },
+    {
+      title: 'a'
+    },
+    {
+      title: 'a'
+    },
+  ]
+
+  const rounds = [
+    {
+      label: 'Document'
+    },
+    {
+      label: 'Partner Contacts'
+    },
+    {
+      label: 'Transactions'
+    },
+    {
+      label: 'Activities'
+    },
+    {
+      label: 'Start Transaction'
+    },
+  ]
   useEffect(() => {
     if (isFocused) {
       disPosition();
@@ -139,7 +168,7 @@ const MyClientsDetails = (props) => {
     };
   };
 
-  
+
   const disPosition = () => {
     dispatch(getDisposition(id)).then((response) => {
       const data = response.payload.data;
@@ -315,8 +344,7 @@ const MyClientsDetails = (props) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       {activity ? (
-        <ScrollView>
-              <View style={{  backgroundColor: Colors.white }}>
+        <View>
           <FlatList
             data={data}
             scrollEnabled={false}
@@ -423,47 +451,66 @@ const MyClientsDetails = (props) => {
             )}
           />
           <ScrollView>
-            <FlatList
-              data={data}
-              scrollEnabled={false}
-              renderItem={({ item, index }) => (
-                <View style={{ flex: 1, marginTop: 15 }}>
-                  <ScrollView
-                    style={{
-                      flex: 1,
-                      paddingHorizontal: 12,
-                      backgroundColor: Colors.white,
-                    }}
-                  >
-                    <View style={styles.maincover}>
-                      <TouchableOpacity
-                        style={styles.speedcover}
-                        onPress={() =>
-                          navigation.navigate("SurfStats", { item })
-                        }
-                      >
-                        <Image
-                          style={{
-                            height: 100,
-                            width: 100,
-                            resizeMode: "contain",
-                          }}
-                          source={require("../../../assets/speed3.png")}
-                        />
-                      </TouchableOpacity>
-                      <View style={styles.clientinformation}>
-                        <View style={styles.imagewithdot}>
-                          <Image
-                            style={{
-                              height: 100,
-                              width: 100,
-                              resizeMode: "cover",
-                              borderRadius: 100,
-                            }}
-                            source={{ uri: item.contact_image }}
+            <View style={{ backgroundColor: Colors.white }}>
+              <View>
+
+                <FlatList
+                  style={{ padding: 16 }}
+                  data={data}
+                  scrollEnabled={false}
+                  renderItem={({ item, index }) => {
+                    return (
+                      <View>
+                        <View style={styles.maincover}>
+                          <TouchableOpacity
+                            style={styles.speedcover}
+                            onPress={() =>
+                              navigation.navigate("SurfStats", { item })
+                            }
+                          >
+                            <Image
+                              style={{
+                                resizeMode: "contain",
+                              }}
+                              source={require("../../../assets/speed3/speed3.png")}
+                            />
+                          </TouchableOpacity>
+                          <View style={styles.clientinformation}>
+                            <View style={styles.imagewithdot}>
+                              <Image
+                                style={{
+                                  height: 100,
+                                  width: 100,
+                                  resizeMode: "cover",
+                                  borderColor: '#000000',
+                                  borderWidth: 1,
+                                  borderRadius: 100,
+                                }}
+                                source={{ uri: item.contact_image }}
+                              />
+                              <View style={styles.onlinedot}></View>
+                            </View>
+
+                          </View>
+                          <View style={{height:30,width:70,borderRadius:20,backgroundColor:isEnabled ? Colors.PrimaryColor :Colors.boderColor}}>
+                          <Switch
+                            activeText='Loan'
+                            inActiveText="Cash"
+                            outerCircleStyle={{ width: 50 }}
+                            switchRightPx={60}
+                            backgroundActive={Colors.PrimaryColor}
+                            backgroundInactive={Colors.boderColor}
+                            thumbColor={"#f4f3f4"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleSwitch}
+                            value={isEnabled}
+
                           />
-                          <Text style={styles.onlinedot}></Text>
+                          </View>
+                          
+
                         </View>
+
                         <View style={styles.clientinformationinner}>
                           <Text style={styles.username}>
                             {" "}
@@ -477,384 +524,326 @@ const MyClientsDetails = (props) => {
                             Client ID: {item.contact_lead_id}
                           </Text>
                         </View>
+
+                        <View style={styles.informationicons}>
+                          <View style={styles.maininfoicons}>
+                            <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() => makePhoneCall()}
+                            >
+                              <Image
+                                style={{
+                                  height: 15,
+                                  width: 15,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/whitecall.png")}
+                              />
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() => sendSMS()}
+                            >
+                              <Image
+                                style={{
+                                  height: 15,
+                                  width: 15,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/messengerwhite.png")}
+                              />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() => sendEmail()}
+                            >
+                              <Image
+                                style={{
+                                  height: 15,
+                                  width: 15,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/emailwhite.png")}
+                              />
+                            </TouchableOpacity>
+                            <TouchableOpacity style={styles.iconcover}>
+                              <Image
+                                style={{
+                                  height: 15,
+                                  width: 15,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/videowhite.png")}
+                              />
+                            </TouchableOpacity>
+                            <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() =>
+                                navigation.navigate("EditClientsDetails", { item })
+                              }
+                            >
+                              <Image
+                                style={{
+                                  height: 15,
+                                  width: 15,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/pencilwhite.png")}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                        <Text style={styles.profiledetailtext}> Phone: {item.contact_number} </Text>
+                        <View style={styles.divider}></View>
+                        <Text style={styles.profiledetailtext}> Email:{item.contact_email}  </Text>
+                        <View style={styles.divider}></View>
+
+                        <Text style={styles.profiledetailtext}> Main Address:{item.property_address} </Text>
+
+                        <View style={styles.mainareacover}>
+                          <Text>Note</Text>
+                          <View
+                            style={{
+                              width: "100%",
+                              height: 150,
+                              marginTop: 10,
+                              alignSelf: "center",
+                              borderWidth: 1,
+                              padding: 5,
+                              borderColor: Colors.boderColor,
+                              borderRadius: 5
+                            }}
+                          >
+                            <TextInput
+                              style={{
+                                width: "100%",
+                                borderRadius: 8,
+                                height: "100%",
+                                paddingHorizontal: 15,
+                                paddingVertical: 15,
+                                color: Colors.black,
+                                borderColor: Colors.PrimaryColor,
+                                borderColor: Colors.gray,
+                                borderWidth: 1,
+                                fontSize: 14,
+                                padding: 2,
+                                alignItems: "flex-start",
+                                textAlignVertical: "top",
+                              }}
+                              autoCorrect={false}
+                              returnKeyType="done"
+                              multiline={true}
+                              placeholder="Enter your note here...."
+                              onChangeText={(text) => setNote(text)}
+                            />
+                          </View>
+                        </View>
+                        <View style={styles.transactionmain}>
+                          <Text style={styles.transactionheading}>
+                            Transactions
+                          </Text>
+                          <TouchableOpacity
+                            style={styles.iconcover}
+                            onPress={() => navigation.navigate("TransactionDesk")}
+                          >
+                            <Image
+                              style={{
+                                height: 20,
+                                width: 20,
+                                resizeMode: "contain",
+                                tintColor: Colors.white,
+                              }}
+                              source={require("../../../assets/plus.png")}
+                            />
+                          </TouchableOpacity>
+                        </View>
+
+                        <FlatList
+                          data={transactionData}
+                          ItemSeparatorComponent={() => (<View style={styles.divider}></View>)}
+                          renderItem={() => {
+                            return (
+                              <View style={styles.maincoverid}>
+                                <View style={styles.mainheadingid}>
+                                  <Text style={styles.idheading}>ID</Text>
+                                  <Text style={styles.idinnerbold}>23456</Text>
+                                </View>
+                                <View style={styles.mainheadingid}>
+                                  <Text style={styles.idheading}>Property Address</Text>
+                                  <Text style={styles.idinnerbold}>
+                                    047 Jefferson Street City Kettlersville 047 Jeffe St.
+                                    City Kettlersville
+                                  </Text>
+                                </View>
+                              </View>
+                            )
+                          }}>
+
+                        </FlatList>
+
+                        <View style={styles.transactionmaindis}>
+                          <Text style={styles.transactionheading}>
+                            Dispositions
+                          </Text>
+                        </View>
+                        <View style={styles.dispos}>
+                          <View style={styles.activitycol}>
+                            <Image
+                              style={{
+                                height: 25,
+                                width: 25,
+                                resizeMode: "contain",
+                                marginRight: 5,
+                                tintColor: Colors.PrimaryColor,
+                              }}
+                              source={require("../../../assets/viewtel.png")}
+                            />
+                            <Text style={styles.activityheading}>
+                              Last Activity
+                            </Text>
+                          </View>
+                          <View style={styles.activitycolnew}>
+                            <TouchableOpacity style={styles.iconcoverlatest}>
+                              <Image
+                                style={{
+                                  height: 22,
+                                  width: 22,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.PrimaryColor,
+                                  marginRight: 5,
+                                }}
+                                source={require("../../../assets/messengerwhite.png")}
+                              />
+                            </TouchableOpacity>
+                            <Text style={styles.activityheading}>
+                              ChatGPT Handoff
+                            </Text>
+                          </View>
+                        </View>
+                        <View style={styles.dispos}>
+                          <View style={styles.activitycol}>
+                            <Image
+                              style={{
+                                height: 25,
+                                width: 25,
+                                resizeMode: "contain",
+                                marginRight: 5,
+                                tintColor: Colors.PrimaryColor,
+                              }}
+                              source={require("../../../assets/viewtel.png")}
+                            />
+                            <Text style={styles.activityheading}>
+                              Last Activity
+                            </Text>
+                          </View>
+                          <View style={styles.activitycol}>
+                            <TouchableOpacity style={styles.iconcoverlatest}>
+                              <Image
+                                style={{
+                                  height: 22,
+                                  width: 22,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.PrimaryColor,
+                                  marginRight: 5,
+                                }}
+                                source={require("../../../assets/whitecall.png")}
+                              />
+                            </TouchableOpacity>
+                            <Text style={styles.activityheading}>
+                              ChatGPT Handoff
+                            </Text>
+                            <TouchableOpacity style={styles.iconcoverlatest}>
+                              <Image
+                                style={{
+                                  height: 12,
+                                  width: 12,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.black,
+                                  marginLeft: 5,
+                                  marginTop: 5,
+                                }}
+                                source={require("../../../assets/downarrow.png")}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+                        <View style={styles.dispos}>
+                          <View style={styles.activitycol}>
+                            <Image
+                              style={{
+                                height: 25,
+                                width: 25,
+                                resizeMode: "contain",
+                                marginRight: 5,
+                                tintColor: Colors.PrimaryColor,
+                              }}
+                              source={require("../../../assets/viewtel.png")}
+                            />
+                            <Text style={styles.activityheading}>Next Up</Text>
+                          </View>
+                          <View style={styles.activitycol}>
+                            <TouchableOpacity style={styles.iconcoverlatest}>
+                              <Image
+                                style={{
+                                  height: 22,
+                                  width: 22,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.PrimaryColor,
+                                  marginRight: 5,
+                                }}
+                                source={require("../../../assets/emailwhite.png")}
+                              />
+                            </TouchableOpacity>
+                            <Text style={styles.activityheading}>
+                              Drip Campaign Initiated
+                            </Text>
+                            <TouchableOpacity style={styles.iconcoverlatest}>
+                              <Image
+                                style={{
+                                  height: 12,
+                                  width: 12,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.black,
+                                  marginLeft: 5,
+                                  marginTop: 5,
+                                }}
+                                source={require("../../../assets/downarrow.png")}
+                              />
+                            </TouchableOpacity>
+                          </View>
+                        </View>
+
+                        <FlatList
+                          data={rounds}
+                          renderItem={(item, index) => {
+                            return (
+                              <View style={styles.maincoverop}>
+                                <TouchableOpacity
+                                  style={styles.boxcover}
+                                  onPress={() => navigation.navigate("TransactionDesk")}
+                                >
+                                  <Text style={styles.bigtextone}>{item.item.label}</Text>
+                                </TouchableOpacity>
+                              </View>
+                            )
+                          }}></FlatList>
                       </View>
 
-                      <View style={styles.togglepencil}>
-                        <Text style={styles.switchermain}>
-                          {" "}
-                          <Switch
-                            style={{ marginRight: 12 }}
-                            trackColor={{ false: "#767577", true: "#576ebd" }}
-                            thumbColor={"#f4f3f4"}
-                            ios_backgroundColor="#3e3e3e"
-                            onValueChange={toggleSwitch}
-                            value={isEnabled}
-                          />
-                        </Text>
-                        <TouchableOpacity
-                          style={styles.iconcovernew}
-                          onPress={() =>
-                            navigation.navigate("EditClientsDetails", { item })
-                          }
-                        >
-                          <Image
-                            style={{
-                              height: 18,
-                              width: 18,
-                              resizeMode: "contain",
-                              tintColor: Colors.PrimaryColor,
-                            }}
-                            source={require("../../../assets/pencilwhite.png")}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    <View style={styles.informationicons}>
-                      <View style={styles.maininfoicons}>
-                        <TouchableOpacity
-                          style={styles.iconcover}
-                          onPress={() => makePhoneCall()}
-                        >
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.white,
-                            }}
-                            source={require("../../../assets/whitecall.png")}
-                          />
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                          style={styles.iconcover}
-                          onPress={() => sendSMS()}
-                        >
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.white,
-                            }}
-                            source={require("../../../assets/messengerwhite.png")}
-                          />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={styles.iconcover}
-                          onPress={() => sendEmail()}
-                        >
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.white,
-                            }}
-                            source={require("../../../assets/emailwhite.png")}
-                          />
-                        </TouchableOpacity>
-                        <TouchableOpacity style={styles.iconcover}>
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.white,
-                            }}
-                            source={require("../../../assets/videowhite.png")}
-                          />
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                          style={styles.iconcover}
-                          onPress={() =>
-                            navigation.navigate("EditClientsDetails", { item })
-                          }
-                        >
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.white,
-                            }}
-                            source={require("../../../assets/pencilwhite.png")}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    <View style={styles.pendingdetail}>
-                      <Text style={styles.phonenumber}>
-                        <Text style={styles.boldphone}> Phone: </Text>
-                        {item.contact_number}
-                      </Text>
-                    </View>
-                    <View style={styles.pendingdetail}>
-                      <Text style={styles.phonenumber}>
-                        <Text style={styles.boldphone}> Email: </Text>
-                        {item.contact_email}
-                      </Text>
-                    </View>
-                    <View style={styles.pendingdetailaddress}>
-                      <Text style={styles.boldphoneadd}> Main Address </Text>
-                      <Text style={styles.phonenumberadd}>
-                        {item.property_address}
-                      </Text>
-                    </View>
-                    <View style={styles.mainareacover}>
-                      <Text style={styles.boldphone}>Note</Text>
-                      <View
-                        style={{
-                          width: "100%",
-                          height: 150,
-                          marginTop: 10,
-                          alignSelf: "center",
-                        }}
-                      >
-                        <TextInput
-                          style={{
-                            width: "100%",
-                            borderRadius: 8,
-                            height: "100%",
-                            paddingHorizontal: 15,
-                            paddingVertical: 15,
-                            color: Colors.black,
-                            borderColor: Colors.PrimaryColor,
-                            borderColor: Colors.gray,
-                            borderWidth: 1,
-                            fontSize: 14,
-                            padding: 2,
-                            alignItems: "flex-start",
-                            textAlignVertical: "top",
-                          }}
-                          autoCorrect={false}
-                          returnKeyType="done"
-                          multiline={true}
-                          placeholder="Enter your note here...."
-                          onChangeText={(text) => setNote(text)}
-                        />
-                      </View>
-                    </View>
-                    <View style={styles.transactionmain}>
-                      <Text style={styles.transactionheading}>
-                        Transactions
-                      </Text>
-                      <TouchableOpacity
-                        style={styles.iconcover}
-                        onPress={() => navigation.navigate("TransactionDesk")}
-                      >
-                        <Image
-                          style={{
-                            height: 20,
-                            width: 20,
-                            resizeMode: "contain",
-                            tintColor: Colors.white,
-                          }}
-                          source={require("../../../assets/plus.png")}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                    <View style={styles.maincoverid}>
-                      <View style={styles.mainheadingid}>
-                        <Text style={styles.idheading}>ID</Text>
-                        <Text style={styles.idinnerbold}>23456</Text>
-                      </View>
-                      <View style={styles.mainheadingid}>
-                        <Text style={styles.idheading}>Property Address</Text>
-                        <Text style={styles.idinnerbold}>
-                          047 Jefferson Street City Kettlersville 047 Jeffe St.
-                          City Kettlersville
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.maincoverid}>
-                      <View style={styles.mainheadingid}>
-                        <Text style={styles.idheading}>ID</Text>
-                        <Text style={styles.idinnerbold}>23456</Text>
-                      </View>
-                      <View style={styles.mainheadingid}>
-                        <Text style={styles.idheading}>Property Address</Text>
-                        <Text style={styles.idinnerbold}>
-                          047 Jefferson Street City Kettlersville 047 Jeffe St.
-                          City Kettlersville
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.maincoverid}>
-                      <View style={styles.mainheadingid}>
-                        <Text style={styles.idheading}>ID</Text>
-                        <Text style={styles.idinnerbold}>23456</Text>
-                      </View>
-                      <View style={styles.mainheadingid}>
-                        <Text style={styles.idheading}>Property Address</Text>
-                        <Text style={styles.idinnerbold}>
-                          047 Jefferson Street City Kettlersville 047 Jeffe St.
-                          City Kettlersville
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.transactionmaindis}>
-                      <Text style={styles.transactionheading}>
-                        Dispositions
-                      </Text>
-                    </View>
-                    <View style={styles.dispos}>
-                      <View style={styles.activitycol}>
-                        <Image
-                          style={{
-                            height: 25,
-                            width: 25,
-                            resizeMode: "contain",
-                            marginRight: 5,
-                            tintColor: Colors.PrimaryColor,
-                          }}
-                          source={require("../../../assets/viewtel.png")}
-                        />
-                        <Text style={styles.activityheading}>
-                          Last Activity
-                        </Text>
-                      </View>
-                      <View style={styles.activitycolnew}>
-                        <TouchableOpacity style={styles.iconcoverlatest}>
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.PrimaryColor,
-                              marginRight: 5,
-                            }}
-                            source={require("../../../assets/messengerwhite.png")}
-                          />
-                        </TouchableOpacity>
-                        <Text style={styles.activityheading}>
-                          ChatGPT Handoff
-                        </Text>
-                      </View>
-                    </View>
-                    <View style={styles.dispos}>
-                      <View style={styles.activitycol}>
-                        <Image
-                          style={{
-                            height: 25,
-                            width: 25,
-                            resizeMode: "contain",
-                            marginRight: 5,
-                            tintColor: Colors.PrimaryColor,
-                          }}
-                          source={require("../../../assets/viewtel.png")}
-                        />
-                        <Text style={styles.activityheading}>
-                          Last Activity
-                        </Text>
-                      </View>
-                      <View style={styles.activitycol}>
-                        <TouchableOpacity style={styles.iconcoverlatest}>
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.PrimaryColor,
-                              marginRight: 5,
-                            }}
-                            source={require("../../../assets/whitecall.png")}
-                          />
-                        </TouchableOpacity>
-                        <Text style={styles.activityheading}>
-                          ChatGPT Handoff
-                        </Text>
-                        <TouchableOpacity style={styles.iconcoverlatest}>
-                          <Image
-                            style={{
-                              height: 12,
-                              width: 12,
-                              resizeMode: "contain",
-                              tintColor: Colors.black,
-                              marginLeft: 5,
-                              marginTop: 5,
-                            }}
-                            source={require("../../../assets/downarrow.png")}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    <View style={styles.dispos}>
-                      <View style={styles.activitycol}>
-                        <Image
-                          style={{
-                            height: 25,
-                            width: 25,
-                            resizeMode: "contain",
-                            marginRight: 5,
-                            tintColor: Colors.PrimaryColor,
-                          }}
-                          source={require("../../../assets/viewtel.png")}
-                        />
-                        <Text style={styles.activityheading}>Next Up</Text>
-                      </View>
-                      <View style={styles.activitycol}>
-                        <TouchableOpacity style={styles.iconcoverlatest}>
-                          <Image
-                            style={{
-                              height: 22,
-                              width: 22,
-                              resizeMode: "contain",
-                              tintColor: Colors.PrimaryColor,
-                              marginRight: 5,
-                            }}
-                            source={require("../../../assets/emailwhite.png")}
-                          />
-                        </TouchableOpacity>
-                        <Text style={styles.activityheading}>
-                          Drip Campaign Initiated
-                        </Text>
-                        <TouchableOpacity style={styles.iconcoverlatest}>
-                          <Image
-                            style={{
-                              height: 12,
-                              width: 12,
-                              resizeMode: "contain",
-                              tintColor: Colors.black,
-                              marginLeft: 5,
-                              marginTop: 5,
-                            }}
-                            source={require("../../../assets/downarrow.png")}
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-
-                    <View style={styles.maincoverop}>
-                      <TouchableOpacity
-                        style={styles.boxcover}
-                        onPress={() => navigation.navigate("TransactionDesk")}
-                      >
-                        <Text style={styles.bigtextone}>Documents</Text>
-                      </TouchableOpacity>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Partner Contacts</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Transactions</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>Activities Log</Text>
-                      </View>
-                      <View style={styles.boxcover}>
-                        <Text style={styles.bigtextone}>
-                          Start Transactions
-                        </Text>
-                      </View>
-                    </View>
-                  </ScrollView>
-                </View>
-              )}
-            />
+                    )
+                  }}>
+                </FlatList>
+              </View>
+            </View>
           </ScrollView>
         </View>
-        </ScrollView>
-    
+
+
       ) : (
         <Activity />
       )}
@@ -872,12 +861,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
     lineHeight: 170,
     justifyContent: "center",
-    shadowColor: Colors.black,
-    shadowOpacity: 0.26,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 10,
-    elevation: 3,
+    shadowOffset: {width: -2, height: 4},  
+  shadowColor: '#171717',  
+  shadowOpacity: 0.2,  
+  shadowRadius: 3,  
   },
+  profiledetailtext: { fontWeight: 300, fontSize: 16, padding: 5 },
   bigtextone: {
     fontSize: 17,
     color: Colors.white,
@@ -925,7 +914,7 @@ const styles = StyleSheet.create({
     paddingTop: 2,
   },
   boldphone: { fontWeight: "bold", fontSize: 14 },
-
+  divider: { width: '100%', height: 1, backgroundColor: Colors.boderColor, marginTop: 5 },
   pendingdetail: {
     flexDirection: "row",
     textAlign: "left",
@@ -937,9 +926,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   togglepencil: {
-    alignContent: "center",
-    flexDirection: "row",
-    justifyContent: "space-between",
+    // alignContent: "center",
+    // flexDirection: "row",
+    // justifyContent: "space-between",
   },
   boldphoneadd: {
     fontWeight: "bold",
@@ -948,11 +937,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  maincoverop: { marginTop: 40, marginBottom: 40, alignItems: "center" },
+  maincoverop: { marginTop: 20, marginBottom: 20, alignItems: "center",  },
   maincoverid: {
-    borderBottomColor: Colors.cream,
-    borderBottomWidth: 1,
-    marginVertical: 12,
   },
   idheading: { fontWeight: "bold", fontSize: 15, marginBottom: 7 },
   mainheadingid: { paddingVertical: 6, marginBottom: 12 },
@@ -960,16 +946,16 @@ const styles = StyleSheet.create({
   maincover: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-start",
+    alignItems: "center",
   },
 
   onlinedot: {
-    height: 15,
-    width: 15,
+    height: 25,
+    width: 25,
     backgroundColor: "#08d007",
     borderRadius: 100,
-    left: -1,
-    top: 10,
+    left: 0,
+    top: 5,
     position: "absolute",
   },
   imagewithdot: { position: "relative" },
@@ -991,14 +977,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     marginHorizontal: 2,
+    padding: 8,
     backgroundColor: Colors.PrimaryColor,
-    height: 48,
-    width: 48,
     borderRadius: 100,
   },
   informationicons: { alignItems: "center", marginBottom: 25 },
   maininfoicons: { flexDirection: "row", alignItems: "center" },
-  username: { fontSize: 24, fontWeight: "bold", marginBottom: 5 },
+  username: { fontSize: 24,  marginBottom: 5 },
   phonenumber: { marginBottom: 5, fontSize: 15 },
   clientid: { fontSize: 14, marginBottom: 5 },
   switcher: {

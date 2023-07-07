@@ -27,6 +27,7 @@ import TransactionDetails from "../container/Transactions/TransactionDetails";
 import Leads from "../container/Leads/Leads";
 import DisPosition from "../container/DisPosition/DisPosition";
 import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
+import ClientDetail from "../container/clientDetail/index"
 import SurfStats from "../container/SurfStats/SurfStats";
 import Settings from "../container/Settings/Settings";
 const Stack = createStackNavigator();
@@ -35,46 +36,54 @@ function StackNavigator() {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
         cardStyle: { backgroundColor: Colors.PrimaryColor },
       }}
+      options={{headerShown:false}}
+
     >
-      <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="AccessRequest" component={AccessRequest} />
-      <Stack.Screen name="AccessRequestSent" component={AccessRequestSent} />
-      <Stack.Screen name="EnterPin" component={EnterPin} />
-      <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
-      <Stack.Screen name="Dashboard" component={DrawerNavigator} />
-      <Stack.Screen name="ContactsDetails" component={ContactsDetails} />
-      <Stack.Screen name="AddContacts" component={AddContacts} />
-      <Stack.Screen name="AddProperties" component={AddProperties} />
-      <Stack.Screen name="NewActivies" component={NewActivies} />
-      <Stack.Screen name="TransactionDetails" component={TransactionDetails} />
+        
+      <Stack.Screen name="Login" component={Login}  options={{headerShown:false}}/>
+      <Stack.Screen name="AccessRequest" component={AccessRequest} options={{headerShown:false}}/>
+      <Stack.Screen name="AccessRequestSent" component={AccessRequestSent} options={{headerShown:false}}/>
+      <Stack.Screen name="EnterPin" component={EnterPin} options={{headerShown:false}}/>
+      <Stack.Screen name="ForgotPassword" component={ForgotPassword} options={{headerShown:false}}/>
+      <Stack.Screen name="Dashboard" component={DrawerNavigator} options={{headerShown:false}}/>
+      <Stack.Screen name="ContactsDetails" component={ContactsDetails} options={{headerShown:false}}/>
+      <Stack.Screen name="AddContacts" component={AddContacts} options={{headerShown:false}}/>
+      <Stack.Screen name="AddProperties" component={AddProperties} options={{headerShown:false}}/>
+      <Stack.Screen name="NewActivies" component={NewActivies} options={{headerShown:false}}/>
+      <Stack.Screen name="TransactionDetails" component={TransactionDetails} options={{headerShown:false}}/>
 
       <Stack.Screen
         name="EditContactsDetails"
         component={EditContactsDetails}
+        options={{headerShown:false}}
       />
-      <Stack.Screen name="PropertiesDetails" component={PropertiesDetails} />
-      <Stack.Screen name="DeletePropertiy" component={DeletePropertiy} />
-      <Stack.Screen name="AddClients" component={AddClients} />
-      <Stack.Screen name="MyClientsDetails" component={MyClientsDetails} />
-      <Stack.Screen name="EditProfile" component={EditProfile} />
-      <Stack.Screen name="AddActivity" component={AddActivity} />
-      <Stack.Screen name="EditActivity" component={EditActivity} />
-      <Stack.Screen name="NewNote" component={NewNote} />
-      <Stack.Screen name="EditClientsDetails" component={EditClientsDetails} />
-      <Stack.Screen name="Documents" component={Documents} />
-      <Stack.Screen name="Leads" component={Leads} />
-      <Stack.Screen name="DisPosition" component={DisPosition} />
-      <Stack.Screen name="SingleClientDetail" component={SingleClientDetail} />
-      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="PropertiesDetails" component={PropertiesDetails} options={{headerShown:false}}/>
+      <Stack.Screen name="DeletePropertiy" component={DeletePropertiy} options={{headerShown:false}}/>
+      <Stack.Screen name="AddClients" component={AddClients} options={{headerShown:false}}/>
+      <Stack.Screen name="MyClientsDetails" component={MyClientsDetails} options={{headerShown:false}}/>
+      <Stack.Screen name="EditProfile" component={EditProfile} options={{headerShown:false}}/>
+      <Stack.Screen name="AddActivity" component={AddActivity} options={{headerShown:false}}/>
+      <Stack.Screen name="EditActivity" component={EditActivity} options={{headerShown:false}}/>
+      <Stack.Screen name="NewNote" component={NewNote} options={{headerShown:false}}/>
+      <Stack.Screen name="EditClientsDetails" component={EditClientsDetails} options={{headerShown:false}}/>
+      <Stack.Screen name="Documents" component={Documents} options={{headerShown:false}}/>
+      <Stack.Screen name="Leads" component={Leads} options={{headerShown:false}}/>
+      <Stack.Screen name="DisPosition" component={DisPosition} options={{headerShown:false}}/>
+      <Stack.Screen name="SingleClientDetail" component={SingleClientDetail} options={{headerShown:false}}/>
+      <Stack.Screen name="Settings" component={Settings} options={{headerShown:false}}/>
       <Stack.Screen
         name="PropertiesViewedByLeads"
         component={PropertiesViewedByLeads}
+        options={{headerShown:false}}
       />
-      <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} />
-      <Stack.Screen name="SurfStats" component={SurfStats} />
+      <Stack.Screen
+        name="ClientDetail"
+        component={ClientDetail}
+         />
+      <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} options={{headerShown:false}}/>
+      <Stack.Screen name="SurfStats" component={SurfStats} options={{headerShown:false}}/>
     </Stack.Navigator>
   );
 }

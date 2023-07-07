@@ -204,6 +204,8 @@ const Contact = () => {
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate("MyClientsDetails", { item: item })
+                    // navigation.navigate("ClientDetail", { item: item })
+
                   }
                   style={{
                     height: 80,
