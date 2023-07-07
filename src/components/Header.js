@@ -101,7 +101,7 @@ const Header = (props) => {
                 justifyContent: "center",
                 borderRadius: 100,
                 marginRight: 12,
-                marginTop: 5,
+                marginTop: 50,
                 marginBottom: 5,
               }}
             >
@@ -119,7 +119,7 @@ const Header = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <ScrollView>
+          <ScrollView style={{zIndex:99}}>
             <View>
               <Calendar
                 markedDates={{
@@ -194,7 +194,7 @@ const Header = (props) => {
                 justifyContent: "center",
                 borderRadius: 100,
                 marginRight: 12,
-                marginTop: 5,
+                marginTop: 50,
                 marginBottom: 5,
               }}
             >
@@ -313,7 +313,7 @@ const Header = (props) => {
                 justifyContent: "center",
                 borderRadius: 100,
                 marginRight: 12,
-                marginTop: 5,
+                marginTop: 50,
                 marginBottom: 5,
               }}
             >
@@ -441,6 +441,7 @@ const Header = (props) => {
         width: "100%",
         justifyContent: "space-between",
         paddingHorizontal: 2,
+        zIndex:99
       }}
     >
       <View style={styles.onlinepeoples}>
@@ -537,34 +538,7 @@ const Header = (props) => {
               source={require("../../assets/notification.png")}
             ></Image>
           </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.calicon}>
-            <View style={styles.containermain}>
-              <View style={styles.iconmaincol}>
-                <Image
-                  style={{
-                    height: 22,
-                    width: 22,
-                    marginLeft: 22,
-                    resizeMode: "contain",
-                    position: "relative",
-                    bottom: -26,
-                  }}
-                  source={require("../../assets/calender.png")}
-                ></Image>
-              </View>
-              <Picker
-                selectedValue={selectedOption}
-                onValueChange={handleOptionChange}
-                style={styles.picker}
-              >
-                <Picker.Item label="Select Value" value="" />
-                <Picker.Item label="Date" value="date" />
-                <Picker.Item label="Month" value="month" />
-                <Picker.Item label="Year" value="year" />
-              </Picker>
-              {renderCalendar()}
-            </View>
-          </TouchableOpacity> */}
+         <View style={styles.maincalcov}>
           <TouchableOpacity onPress={() => { setVisible(!visible) }}>
             <Image
               style={{
@@ -590,26 +564,32 @@ const Header = (props) => {
            
           </TouchableOpacity>
             
-            {
+            
+          
+        </View>
+        <View style={styles.covermonth}>
+        {
                visible && <View>
-                <TouchableOpacity  onPress={() => { handleOptionChange('date') }}>
-                <Text>Date</Text>
+                <TouchableOpacity  onPress={() => {setVisible(!visible);
+                   handleOptionChange('date') }}>
+                <Text style={styles.maindate}>Date</Text>
 
                 </TouchableOpacity>
                
-                <TouchableOpacity  onPress={() => { handleOptionChange('month') }}>
-                <Text>Month</Text>
+                <TouchableOpacity  onPress={() => {setVisible(!visible);
+                  handleOptionChange('month') }}>
+               <Text style={styles.maindate}>Month</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={() => { handleOptionChange('year') }}>
-                <Text>Year</Text>
+                <TouchableOpacity  onPress={() => {setVisible(!visible);
+                  handleOptionChange('year') }}>
+              <Text style={styles.maindate}>Year</Text>
                 </TouchableOpacity>
 
                </View>
             }
-          
-        </View>
-       
+            </View>
+      </View>
       </View>
       {renderCalendar()}
 
@@ -691,5 +671,8 @@ const styles = StyleSheet.create({
   },
   pickertext: { color: "red" },
   // bgc:{backgroundColor:"red",height:100,width:"100%",padding:12}
+  covermonth:{position:"absolute",backgroundColor:Colors.white,width:100,top:31,padding:12},
+  maincalcov:{position:"relative"},
+  maindate:{paddingBottom:10,marginBottom:10,borderBottomColor:Colors.gray,borderBottomWidth:1}
 });
 export default Header;

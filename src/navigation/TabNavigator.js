@@ -16,7 +16,7 @@ import SurfStats from "../container/SurfStats/SurfStats";
 import Leads from "../container/Leads/Leads";
 import Contact from "../container/Contact/Contact";
 import Transactions from "../container/Transactions/Transactions";
-import DisPosition from "../container/DisPosition/DisPosition";
+//import Settings from "../container/Settings/Settings";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";

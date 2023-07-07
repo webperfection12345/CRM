@@ -143,7 +143,7 @@ export default function Dashboard() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: Colors.white,zIndex:99 }}>
       <StatusBar />
       <Header label={name} />
       {activity ? (
