@@ -537,34 +537,7 @@ const Header = (props) => {
               source={require("../../assets/notification.png")}
             ></Image>
           </TouchableOpacity>
-          {/* <TouchableOpacity style={styles.calicon}>
-            <View style={styles.containermain}>
-              <View style={styles.iconmaincol}>
-                <Image
-                  style={{
-                    height: 22,
-                    width: 22,
-                    marginLeft: 22,
-                    resizeMode: "contain",
-                    // position: "relative",
-                    // bottom: -26,
-                  }}
-                  source={require("../../assets/calender.png")}
-                ></Image>
-              </View>
-              {/* <Picker
-                selectedValue={selectedOption}
-                onValueChange={handleOptionChange}
-                style={styles.picker}
-              >
-                <Picker.Item label="Select Value" value="" />
-                <Picker.Item label="Date" value="date" />
-                <Picker.Item label="Month" value="month" />
-                <Picker.Item label="Year" value="year" />
-              </Picker> */}
-              {renderCalendar()}
-            </View>
-          </TouchableOpacity> */}
+          
           <TouchableOpacity onPress={() => { setVisible(!visible) }}>
             <Image
               style={{

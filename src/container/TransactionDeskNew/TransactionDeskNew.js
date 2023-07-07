@@ -13,10 +13,13 @@ import Checkbox from "expo-checkbox";
 import Colors from "../../utils/Colors";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
+import { Dimensions } from 'react-native';
 const TransactionDeskNew = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const [isChecked, setChecked] = useState(false);
   const navigation = useNavigation();
+  // Get the device's screen dimensions
+const { height, width } = Dimensions.get('window');
   const [toggle, setToggle] = useState(false);
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
@@ -24,397 +27,160 @@ const TransactionDeskNew = () => {
   };
   return (
     <SafeAreaView style={{ flex: 1, height: "100%" }}>
-      <View
-        style={{
-          height: 60,
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center",
-          backgroundColor: Colors.PrimaryColor,
-        }}
-      >
-        <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginLeft: 10,
-          }}
-        >
+      <View style={styles.topcoverupper}>
+        <TouchableOpacity onPress={() => navigation.navigate("Home")} style={[styles.backiconcover,{paddingLeft:10}]}>
           <Image
-            style={{
-              height: 15,
-              width: 15,
-              resizeMode: "contain",
-              tintColor: Colors.white,
-            }}
+            style={[styles.backimage, {tintColor:Colors.white}]}
             source={require("../../../assets/back.png")}
           ></Image>
-          {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
+          
         </TouchableOpacity>
-        <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
-          Transaction Desk
+        <Text style={styles.transactionidtext}>
+        Transaction ID: 310987 
         </Text>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("EditContactsDetails", { item: items })
-          }
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: 10,
-          }}
+          style={styles.plusiconcover}
         >
-          <Text></Text>
+        <Image style={styles.plusimage}
+            source={require("../../../assets/plus.png")}
+          ></Image>
         </TouchableOpacity>
       </View>
-      <View
-        style={{
-          height: 80,
-          width: "100%",
-          justifyContent: "center",
-          alignContent: "center",
-          alignItems: "center",
-          backgroundColor: Colors.PrimaryColor,
-        }}
-      >
-        <View
-          style={{
-            backgroundColor: Colors.buttonColor,
-            borderRadius: 5,
-            width: "92%",
-            height: 50,
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
+      
+      <ScrollView style={{ height: "100%", flex: 1, backgroundColor:Colors.cream}}>
+      <View style={{backgroundColor:Colors.white,padding:12,flexDirection:"row",justifyContent:"flex-start",}}>
+        <View style={{width:"33%"}}>
+          <Text style={styles.username}>Jessica Kent</Text>
+          <View style={{flexDirection:"row",justifyContent:"flex-start"}}>
+          <TouchableOpacity style={styles.backiconcover}>
           <Image
-            style={{
-              marginLeft: 10,
-              height: 20,
-              width: 20,
-              resizeMode: "contain",
-              tintColor: Colors.white,
-            }}
-            source={require("../../../assets/search.png")}
-          />
-
-          <TextInput
-            allowFontScaling={false}
-            placeholder="Search"
-            placeholderTextColor={Colors.white}
-            style={{
-              color: Colors.white,
-              fontSize: 15,
-              marginLeft: 10,
-              marginHorizontal: 10,
-              height: "100%",
-              width: "100%",
-            }}
-          />
+            style={styles.backimagenew}
+            source={require("../../../assets/callblack.png")}
+          ></Image>
+          
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.backiconcover}>
+          <Image
+            style={styles.backimagenew}
+            source={require("../../../assets/blackchat.png")}
+          ></Image>
+          
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.backiconcover}>
+          <Image
+            style={styles.backimagenew}
+            source={require("../../../assets/blackmeasg.png")}
+          ></Image>
+          
+        </TouchableOpacity>
+            </View>
         </View>
-      </View>
-      <ScrollView style={{ height: "100%", flex: 1 }}>
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: Colors.white,
-            height: "100%",
-          }}
-        >
-          <View style={styles.maincover}>
-            <View style={styles.firstcolnew}>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Activities</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Checkbox
-                    style={styles.checkbox}
-                    value={isChecked}
-                    onValueChange={setChecked}
-                    color={isChecked ? "#576ebd" : undefined}
-                  />
-                  <Image
-                    source={require("../../../assets/share.png")}
-                    style={{
-                      height: 30,
-                      width: 30,
-                      marginLeft: 12,
-                      resizeMode: "contain",
-                    }}
-                  ></Image>
-                  <Text style={styles.activityname}>Escrow Due</Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheadingend}>
-                  <Text style={styles.mainheadinginner}>Due Dates</Text>
-                </View>
-                <View style={styles.activitycoverone}>
-                  <Text style={styles.activitydate}>4/04/2023 </Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.firstcol}>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Action</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Preview</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <Text style={styles.mainheadinginner}></Text>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityiconstoggle}>
-                    <Switch
-                      style={styles.mainbt}
-                      trackColor={{ false: "#767577", true: "#576ebd" }}
-                      thumbColor={"#f4f3f4"}
-                      ios_backgroundColor="#3e3e3e"
-                      onValueChange={toggleSwitch}
-                      value={isEnabled}
-                    />
-                  </Text>
-                </View>
-              </View>
+        <View style={{width:"40%"}}>
+          <Text style={styles.propertytext}>Property Info</Text>
+          <Text>233 Royal Palm Way 
+Boca Raton, FL 33496</Text>
+        </View>
+        </View>
+        <View style={{paddingHorizontal:12,paddingVertical:22,flexDirection:"row",alignItems:"center",justifyContent:"space-between",flexWrap:"wrap"}}>
+          <View style={styles.maincoverbox}>
+             <TouchableOpacity style={{alignItems:"flex-end",marginBottom:12}}>
+             <View style={styles.greencover}>    
+             <Image style={styles.greenimage}
+            source={require("../../../assets/greenok.png")}
+          ></Image></View>
+            </TouchableOpacity>
+            <Text style={styles.namegreen}>Escrow Due</Text>
+            <Text style={styles.timedate}>06.05.23</Text>
+            <View style={styles.maincobvericons}>
+            <TouchableOpacity><Image style={styles.cloudphoto2}
+            source={require("../../../assets/cloud.png")}
+          ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity><Image style={styles.cloudphoto}
+            source={require("../../../assets/plan.png")}
+          ></Image>
+          </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.maincover}>
-            <View style={styles.firstcolnew}>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Activities</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Checkbox
-                    style={styles.checkbox}
-                    value={isChecked}
-                    onValueChange={setChecked}
-                    color={isChecked ? "#576ebd" : undefined}
-                  />
-                  <Image
-                    source={require("../../../assets/share.png")}
-                    style={{
-                      height: 30,
-                      width: 30,
-                      marginLeft: 12,
-                      resizeMode: "contain",
-                    }}
-                  ></Image>
-                  <Text style={styles.activityname}>Loan Approval Due</Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheadingend}>
-                  <Text style={styles.mainheadinginner}>Due Dates</Text>
-                </View>
-                <View style={styles.activitycoverone}>
-                  <Text style={styles.activitydatered}>4/04/2023</Text>
-                  <Text style={styles.activitydatered}>OVERDUE</Text>
-                </View>
-              </View>
-            </View>
-            <View style={styles.firstcol}>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Action</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Preview</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <Text style={styles.mainheadinginner}></Text>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityiconstoggle}>
-                    <Switch
-                      style={{ marginRight: 12 }}
-                      trackColor={{ false: "#767577", true: "#576ebd" }}
-                      thumbColor={"#f4f3f4"}
-                      ios_backgroundColor="#3e3e3e"
-                      onValueChange={toggleSwitch}
-                      value={isEnabled}
-                    />
-                  </Text>
-                </View>
-              </View>
+          <View style={styles.maincoverbox}>
+             <TouchableOpacity style={{alignItems:"flex-end",marginBottom:12}}>
+             <View style={styles.greencover}>    
+             <Image style={styles.greenimage}
+            source={require("../../../assets/greenok.png")}
+          ></Image></View>
+            </TouchableOpacity>
+            <Text style={styles.namegreen}>Escrow Due</Text>
+            <Text style={styles.timedate}>06.05.23</Text>
+            <View style={styles.maincobvericons}>
+            <TouchableOpacity><Image style={styles.cloudphoto2}
+            source={require("../../../assets/cloud.png")}
+          ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity><Image style={styles.cloudphoto}
+            source={require("../../../assets/plan.png")}
+          ></Image>
+          </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.maincover}>
-            <View style={styles.firstcolnew}>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Activities</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Checkbox
-                    style={styles.checkbox}
-                    value={isChecked}
-                    onValueChange={setChecked}
-                    color={isChecked ? "#576ebd" : undefined}
-                  />
-                  <Image
-                    source={require("../../../assets/share.png")}
-                    style={{
-                      height: 30,
-                      width: 30,
-                      marginLeft: 12,
-                      resizeMode: "contain",
-                    }}
-                  ></Image>
-                  <Text style={styles.activityname}>Appraisal Due</Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheadingend}>
-                  <Text style={styles.mainheadinginnerend}>Due Dates</Text>
-                </View>
-                <View style={styles.activitycoverone}>
-                  <Text style={styles.activitydateyellow}>4/04/2023</Text>
-                  <Text style={styles.activitydateyellow}>DUE TOMORROW</Text>
-                </View>
-              </View>
+          <View style={styles.maincoverbox}>
+             <TouchableOpacity style={{alignItems:"flex-end",marginBottom:12}}>
+             <View style={styles.greencover}>    
+             <Image style={styles.greenimage}
+            source={require("../../../assets/note.png")}
+          ></Image></View>
+            </TouchableOpacity>
+            <Text style={styles.namegreen}>Loan Approval Due</Text>
+            <Text style={[styles.timedate, {color:"red"}]}>06.08.23</Text>
+            <View style={styles.maincobvericons}>
+            <TouchableOpacity><Image style={styles.cloudphoto2}
+            source={require("../../../assets/cloud.png")}
+          ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity><Image style={styles.cloudphoto}
+            source={require("../../../assets/plan.png")}
+          ></Image>
+          </TouchableOpacity>
             </View>
-            <View style={styles.firstcol}>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Action</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}>Preview</Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityicons}>
-                    <Image
-                      source={require("../../../assets/share.png")}
-                      style={{
-                        height: 30,
-                        width: 30,
-                        resizeMode: "contain",
-                      }}
-                    ></Image>
-                  </Text>
-                </View>
-              </View>
-              <View style={styles.maincolumn}>
-                <View style={styles.mainheading}>
-                  <Text style={styles.mainheadinginner}></Text>
-                </View>
-                <View style={styles.activitycover}>
-                  <Text style={styles.activityiconstoggle}>
-                    <Switch
-                      style={{ marginRight: 12 }}
-                      trackColor={{ false: "#767577", true: "#576ebd" }}
-                      thumbColor={"#f4f3f4"}
-                      ios_backgroundColor="#3e3e3e"
-                      onValueChange={toggleSwitch}
-                      value={isEnabled}
-                    />
-                  </Text>
-                </View>
-              </View>
+          </View>
+          <View style={styles.maincoverbox}>
+             <TouchableOpacity style={{alignItems:"center",marginBottom:12,flexDirection:"row",justifyContent:"flex-end"}}>
+             <Text>DUE TODAY!</Text> 
+             <View style={[styles.greencover,{marginLeft:10}]}>   
+            
+             <Image style={styles.greenimage}
+            source={require("../../../assets/yellowbell.png")}
+          ></Image></View>
+            </TouchableOpacity>
+            <Text style={styles.namegreen}>Appraisal Due</Text>
+            <Text style={[styles.timedate, {color:"#ffd200"}]}>06.15.23</Text>
+            <View style={styles.maincobvericons}>
+            <TouchableOpacity><Image style={styles.cloudphoto2}
+            source={require("../../../assets/cloud.png")}
+          ></Image>
+          </TouchableOpacity>
+          <TouchableOpacity><Image style={styles.cloudphoto}
+            source={require("../../../assets/plan.png")}
+          ></Image>
+          </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.maincoverbox}>
+             <TouchableOpacity style={{alignItems:"center",marginBottom:12,flexDirection:"row",justifyContent:"flex-end"}}>
+             
+             <View style={styles.greencover}>   
+            
+             <Image style={styles.greenimage}
+            source={require("../../../assets/Hourglass.png")}
+          ></Image></View>
+            </TouchableOpacity>
+            <Text style={styles.namegreen}>Lien Search Due</Text>
+            <Text style={[styles.timedate, {color:"#ffd200"}]}>06.20.23</Text>
+            <View style={styles.maincobvericons}>
+            <TouchableOpacity><Image style={styles.cloudphoto2}
+            source={require("../../../assets/cloud.png")}
+          ></Image>
+          </TouchableOpacity>
+          
             </View>
           </View>
         </View>
@@ -426,89 +192,57 @@ const TransactionDeskNew = () => {
 export default TransactionDeskNew;
 
 const styles = StyleSheet.create({
-  maincover: {
-    paddingHorizontal: 12,
-    paddingTop: 12,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    borderBottomColor: Colors.gray,
-    borderBottomWidth: 1,
-    paddingBottom: 12,
-    //height:"100%"
-  },
+ plusiconcover:{      flexDirection: "row",
+ justifyContent: "center",
+ alignItems: "center",
+ marginRight: 10,
+ backgroundColor:Colors.white,
+ height:40,
+ width:40,
+ borderRadius:100,
+ shadowColor: '#000',
+shadowOffset: { width: 0, height: 2 },
+shadowOpacity: 0.3,
+shadowRadius: 4,
+elevation: 4,},
+backimage:{height: 15,
+  width: 15,
+  resizeMode: "contain",
+},
+maincobvericons:{justifyContent:"center", flexDirection:"row",width:"100%",alignItems:"center",paddingVertical:20},
+maincoverbox:{backgroundColor:Colors.white,borderRadius:12,padding:12,
+width: 185,
+marginBottom:12
 
-  activitycover: {
-    flexDirection: "row",
-    height: 40,
-    alignItems: "center",
+}, //width: width - 200,},
+  plusimage:{ height: 15,
+    width: 15,
+    resizeMode: "contain",
+    tintColor: Colors.black,},
+    transactionidtext:{fontSize: 19, fontWeight: "bold", color: Colors.white},
+    backiconcover:{flexDirection: "row",
     justifyContent: "center",
-  },
-  activitycoverred: {
-    flexDirection: "column",
-    height: 40,
     alignItems: "center",
-    justifyContent: "flex-end",
-    textAlign: "right",
-  },
-
-  activityname: { marginLeft: 7, fontSize: 14, marginTop: -5 },
-  activitydate: {
-    textAlign: "right",
-    alignItems: "flex-end",
-    fontSize: 13,
-    color: "green",
-  },
-  mainheadinginnerend: {
-    fontWeight: "bold",
-    fontSize: 16,
-    //marginRight:-20,
-    textAlign: "right",
-    alignItems: "flex-end",
-    //position:"relative",
-    //left:27
-  },
-  activitydatered: {
-    textAlign: "right",
-    alignItems: "flex-end",
-    fontSize: 13,
-    color: "red",
-    //position:"relative",
-    //left:4
-  },
-  firstcol: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    alignItems: "center",
-  },
-  firstcolnew: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    width: "100%",
-    alignItems: "flex-start",
-  },
-  mainheadinginner: { fontWeight: "bold", fontSize: 16 },
-  activityicons: { marginRight: 6, height: 40, marginTop: 6 },
-  maincolumn: {
-    paddingRight: 12,
-    marginBottom: 12,
-
-    justifyContent: "flex-end",
-    textAlign: "right",
-  },
-
-  activitydateyellow: {
-    textAlign: "right",
-    alignItems: "flex-end",
-    fontSize: 13,
-    color: "orange",
-  },
-  // activityiconstoggle: { marginTop: 12, marginRight: 6 },
-  mainheading: {
-    alignItems: "flex-start",
-  },
-  activitycoverone: { marginTop: 10 },
-  activitycover: { marginTop: 10, flexDirection: "row", alignItems: "center" },
+    marginRight: 10,},
+    topcoverupper:{height: 60,
+      width: "100%",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      backgroundColor: Colors.PrimaryColor,},
+      username:{fontSize:14,marginBottom:12},
+      backimagenew:{height: 20,
+        width: 20,
+        resizeMode: "contain",},
+        propertytext:{fontSize:16,marginBottom:3,fontWeight:"bold"},
+        greenimage:{height:20,width:20,resizeMode:"contain",alignItems:"center"},
+        greencover:{alignItems:"center",height:40,width:40,borderRadius:100,backgroundColor:Colors.white,justifyContent:"center",shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 4,},
+        namegreen:{fontSize:18,marginBottom:12, textAlign:"center"},
+        timedate:{fontSize:27,fontWeight:"bold",color:"#00ff24",textAlign:"center"},
+        cloudphoto:{height:25,width:25,resizeMode:"contain",marginHorizontal:12},
+        cloudphoto2:{height:30,width:30,resizeMode:"contain",marginHorizontal:12}
 });
