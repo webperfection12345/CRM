@@ -6,15 +6,34 @@ import {
   TouchableOpacity,
   StyleSheet,
   SafeAreaView,
+  FlatList
 } from "react-native";
 import Colors from "../../utils/Colors";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 
+const tablists = [
+  {
+    label: 'Client'
+  },
+  {
+    label: 'Disposition Log'
+  },
+  {
+    label: 'Live Chat'
+  },
+  {
+    label: 'Assigned Realtor'
+  },
+  {
+    label: 'Scripts'
+  },
+]
 const CallCenter = () => {
+  const navigation = useNavigation();
     return(
 <SafeAreaView style={{ flex: 1, height: "100%" ,backgroundColor:Colors.gray}}>
-      <View style={styles.headermain}>
+      {/* <View style={styles.headermain}>
         <View style={styles.leftheader}>
       <Text style={styles.questext}>In Queue</Text>
       <View style={styles.whitephone}>
@@ -47,7 +66,24 @@ const CallCenter = () => {
         </TouchableOpacity>
         </View>
         
-      </View>
+      </View> */}
+      <ScrollView>
+      <FlatList style={styles.maincoverup}
+                          data={tablists}
+                          renderItem={(item, index) => {
+                            return (
+                              <View style={styles.maincoverop}>
+                                <TouchableOpacity
+                                  style={styles.boxcover}
+                                  onPress={() => navigation.navigate("Client")}
+                                >
+                                  <Text style={styles.bigtextone}>{item.item.label}</Text>
+                                </TouchableOpacity>
+                              </View>
+                            )
+                          }}></FlatList>
+                     
+      </ScrollView>
       </SafeAreaView>
 
     )
@@ -69,5 +105,8 @@ plusimage: {
   tintColor: Colors.white,
 },
 covericons:{flexDirection:"row",alignItems:"center"},
-textcall:{fontSize:12}
+textcall:{fontSize:12},
+maincoverop:{padding:17,backgroundColor:Colors.white,marginBottom:12,borderRadius:5},
+maincoverup:{marginTop:15,marginHorizontal:12},
+bigtextone:{fontSize:15}
 });

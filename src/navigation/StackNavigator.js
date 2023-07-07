@@ -30,6 +30,7 @@ import SingleClientDetail from "../container/SingleClientDetail/SingleClientDeta
 import SurfStats from "../container/SurfStats/SurfStats";
 import Settings from "../container/Settings/Settings";
 import CallCenter from "../container/CallCenter/index";
+import Client from "../container/CallCenter/Client/index";
 const Stack = createStackNavigator();
 
 function StackNavigator() {
@@ -77,6 +78,7 @@ function StackNavigator() {
       <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} />
       <Stack.Screen name="SurfStats" component={SurfStats} />
       <Stack.Screen name="CallCenter" component={CallCenter} />
+      <Stack.Screen name="Client" component={Client} />
     </Stack.Navigator>
   );
 }
