@@ -7,6 +7,7 @@ import {
   View,
   Image,
   KeyboardAvoidingView,
+  Button,
 } from "react-native";
 import Images from "../utils/Images";
 import Fonts from "../utils/Fonts";

@@ -138,6 +138,8 @@ const MyClientsDetails = (props) => {
       return "";
     };
   };
+
+  
   const disPosition = () => {
     dispatch(getDisposition(id)).then((response) => {
       const data = response.payload.data;
@@ -313,7 +315,8 @@ const MyClientsDetails = (props) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
       {activity ? (
-        <View style={{ flex: 1, backgroundColor: Colors.white }}>
+        <ScrollView>
+              <View style={{  backgroundColor: Colors.white }}>
           <FlatList
             data={data}
             scrollEnabled={false}
@@ -593,7 +596,7 @@ const MyClientsDetails = (props) => {
                       </Text>
                     </View>
                     <View style={styles.pendingdetailaddress}>
-                      <Text style={styles.boldphoneadd}> Main Address: </Text>
+                      <Text style={styles.boldphoneadd}> Main Address </Text>
                       <Text style={styles.phonenumberadd}>
                         {item.property_address}
                       </Text>
@@ -850,6 +853,8 @@ const MyClientsDetails = (props) => {
             />
           </ScrollView>
         </View>
+        </ScrollView>
+    
       ) : (
         <Activity />
       )}
