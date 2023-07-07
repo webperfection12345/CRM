@@ -71,7 +71,7 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ width: "40%" }}>
+          <View style={{ width: "50%" }}>
             <Text style={styles.propertytext}>Property Info</Text>
             <Text>233 Royal Palm Way
               Boca Raton, FL 33496</Text>
@@ -79,7 +79,7 @@ const TransactionDeskNew = () => {
         </View>
         <View style={{ paddingHorizontal: 12, paddingVertical: 22, flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap" }}>
           <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 12 }}>
+            <TouchableOpacity style={{ position:"absolute", top:8, right:8 }}>
               <View style={styles.greencover}>
                 <Image style={styles.greenimage}
                   source={require("../../../assets/greenok.png")}
@@ -99,7 +99,7 @@ const TransactionDeskNew = () => {
             </View>
           </View>
           <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 12 }}>
+            <TouchableOpacity style={{ position:"absolute", top:8, right:8 }}>
               <View style={styles.greencover}>
                 <Image style={styles.greenimage}
                   source={require("../../../assets/greenok.png")}
@@ -119,7 +119,7 @@ const TransactionDeskNew = () => {
             </View>
           </View>
           <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 12 }}>
+            <TouchableOpacity style={{ position:"absolute", top:8, right:8 }}>
               <View style={styles.greencover}>
                 <Image style={styles.greenimage}
                   source={require("../../../assets/note.png")}
@@ -139,9 +139,10 @@ const TransactionDeskNew = () => {
             </View>
           </View>
           <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "center", marginBottom: 12, flexDirection: "row", justifyContent: "flex-end" }}>
-              <Text>DUE TODAY!</Text>
-              <View style={[styles.greencover, { marginLeft: 10 }]}>
+              {/* <Text style={{textAlign:"center",justifyContent:"center"}}>DUE TODAY!</Text> */}
+            <TouchableOpacity style={{ position:"absolute", top:8, right:8}}>
+            
+              <View style={[styles.greencover, { }]}>
 
                 <Image style={styles.greenimage}
                   source={require("../../../assets/yellowbell.png")}
@@ -161,7 +162,7 @@ const TransactionDeskNew = () => {
             </View>
           </View>
           <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "center", marginBottom: 12, flexDirection: "row", justifyContent: "flex-end" }}>
+            <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 12,position:"absolute", top:8, right:8}}>
 
               <View style={styles.greencover}>
 
@@ -208,13 +209,14 @@ const styles = StyleSheet.create({
     width: 15,
     resizeMode: "contain",
   },
-  maincobvericons: { justifyContent: "center", flexDirection: "row", width: "100%", alignItems: "center", paddingVertical: 20 },
+  maincobvericons: { justifyContent: "center", flexDirection: "row", width: "100%", alignItems: "center", paddingVertical: 10 },
   maincoverbox: width => ({
-    backgroundColor: Colors.white, borderRadius: 12, padding: 12,
+    backgroundColor: Colors.white, borderRadius: 12, 
+    // padding: 12,
     width: width,
     height:width,
-    marginBottom: 12
-
+    marginBottom: 12,
+justifyContent:"center"
   }), //width: width - 200,},
   plusimage: {
     height: 15,
@@ -244,16 +246,16 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
   propertytext: { fontSize: 16, marginBottom: 3, fontWeight: "bold" },
-  greenimage: { height: 20, width: 20, resizeMode: "contain", alignItems: "center" },
+  greenimage: { height: 12, width: 12, resizeMode: "contain", alignItems: "center" },
   greencover: {
-    alignItems: "center", height: 40, width: 40, borderRadius: 100, backgroundColor: Colors.white, justifyContent: "center", shadowColor: '#000',
+    alignItems: "center", height: 30, width: 30, borderRadius: 100, backgroundColor: Colors.white, justifyContent: "center", shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 4,
   },
-  namegreen: { fontSize: 18, marginBottom: 12, textAlign: "center" },
-  timedate: { fontSize: 27, fontWeight: "bold", color: "#00ff24", textAlign: "center" },
-  cloudphoto: { height: 25, width: 25, resizeMode: "contain", marginHorizontal: 12 },
-  cloudphoto2: { height: 30, width: 30, resizeMode: "contain", marginHorizontal: 12 }
+  namegreen: { fontSize: 14, marginBottom: 8, textAlign: "center" },
+  timedate: { fontSize:18, fontWeight: "bold", color: "#00ff24", textAlign: "center" },
+  cloudphoto: { height: 20, width: 20, resizeMode: "contain", marginHorizontal: 12 },
+  cloudphoto2: { height: 25, width: 25, resizeMode: "contain", marginHorizontal: 12 }
 });

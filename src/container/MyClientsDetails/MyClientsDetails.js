@@ -12,6 +12,7 @@ import {
   StyleSheet,
   PanResponder,
   Share,
+  Platform,
 } from "react-native";
 import { Switch } from 'react-native-switch';
 import Colors from "../../utils/Colors";
@@ -468,11 +469,16 @@ const MyClientsDetails = (props) => {
                               navigation.navigate("SurfStats", { item })
                             }
                           >
+                            
                             <Image
-                              style={{
+
+                              style={ Platform.OS === 'web' && {
+                                
                                 resizeMode: "contain",
+                                height:80,
+                                width:80,
                               }}
-                              source={require("../../../assets/speed3/speed3.png")}
+                              source={ require("../../../assets/speed3/speed3.png") }
                             />
                           </TouchableOpacity>
                           <View style={styles.clientinformation}>
@@ -485,6 +491,7 @@ const MyClientsDetails = (props) => {
                                   borderColor: '#000000',
                                   borderWidth: 1,
                                   borderRadius: 100,
+                                  backgroundColor:Colors.gray
                                 }}
                                 source={{ uri: item.contact_image }}
                               />
@@ -820,6 +827,7 @@ const MyClientsDetails = (props) => {
                         </View>
 
                         <FlatList
+                        style={{marginBottom:16}}
                           data={rounds}
                           renderItem={(item, index) => {
                             return (

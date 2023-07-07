@@ -10,7 +10,7 @@ import {
   FlatList,
 } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
-
+import { Dimensions } from 'react-native';
 import Colors from "../../utils/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { color } from "react-native-reanimated";
@@ -23,6 +23,7 @@ import { getEngagement } from "../../modules/getEngagement";
 const SurfStats = (props) => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const { height, width } = Dimensions.get('window');
   const [isEnabled, setIsEnabled] = useState(false);
   const [toggle, setToggle] = useState(false);
   const [contactData, setContactData] = useState("");
@@ -87,20 +88,12 @@ const SurfStats = (props) => {
   const getEngageTime = () => {
     dispatch(getEngagement(id)).then((response) => {
       const contactsData = response.payload.data;
-      setTimeData(contactsData);
       console.log(contactsData, "contacts");
     });
   };
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
-      {/* <View>
-        <BarChart
-          style={{ height: 200 }}
-          data={data}
-          svg={{ fill: "rgb(134, 65, 244)" }}
-          contentInset={{ top: 30, bottom: 30 }}
-        />
-      </View> */}
+    
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
         <View
           style={{
@@ -194,10 +187,10 @@ const SurfStats = (props) => {
                 </View>
               </View>
             </View>
-
+              
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
-                <View style={styles.signlecolumn}>
+                <View style={styles.signlecolumn(width/2-16)}>
                   <View style={styles.innermains}>
                     <Text style={styles.simplename}>Favorites</Text>
                     <TouchableOpacity style={styles.iconnextarrow}>
@@ -343,7 +336,7 @@ const SurfStats = (props) => {
                 </View>
               </View>
               <View style={styles.covercolsingle}>
-                <View style={styles.signlecolumn}>
+                <View style={styles.signlecolumn(width/2-16)}>
                   <View style={styles.innermains}>
                     <Text style={styles.simplename}>Saved Searches</Text>
                     <TouchableOpacity style={styles.iconnextarrow}>
@@ -483,11 +476,11 @@ const SurfStats = (props) => {
               <View style={styles.covercolsingle}>
                 <View
                   style={[
-                    styles.signlecolumn,
+                    styles.signlecolumn(width/2-16),
                     {
-                      minHeight: 210,
+                      // minHeight: 210,
                       justifyContent: "center",
-                      position: "relative",
+                      // position: "relative",
                     },
                   ]}
                 >
@@ -505,7 +498,7 @@ const SurfStats = (props) => {
                 </View>
               </View>
               <View style={styles.covercolsingle}>
-                <View style={styles.signlecolumn}>
+                <View style={styles.signlecolumn(width/2-16)}>
                   <Text style={[styles.simplename, { marginBottom: 15 }]}>
                     Search Criteria
                   </Text>
@@ -556,7 +549,7 @@ const SurfStats = (props) => {
             </View>
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
-                <View style={styles.signlecolumn}>
+                <View style={styles.signlecolumn(width/2-16)}>
                   <Text style={[styles.simplename, , { marginBottom: 15 }]}>
                     Search Behaviour
                   </Text>
@@ -579,7 +572,7 @@ const SurfStats = (props) => {
                 </View>
               </View>
               <View style={styles.covercolsingle}>
-                <View style={styles.signlecolumn}>
+                <View style={styles.signlecolumn(width/2-16)}>
                   <Text style={[styles.simplename, , { marginBottom: 15 }]}>
                     Surf Level
                   </Text>
@@ -731,10 +724,9 @@ const styles = StyleSheet.create({
   clientid: { fontSize: 14, marginBottom: 5 },
   covercolsingle: {
     width: "50%",
-    height: "100%",
-    backgroundColor: color.white,
+  
   },
-  signlecolumn: {
+  signlecolumn:  width =>({
     backgroundColor: Colors.white,
     padding: 10,
     borderRadius: 5,
@@ -743,7 +735,9 @@ const styles = StyleSheet.create({
     paddingTop: 19,
     paddingBottom: 2,
     paddingBottom: 10,
-  },
+    height:width,
+    overflow:'hidden'
+  }) ,
   //   iconnextarrow:{alignItems:"flex-end",
   // position:"absolute",
   // right:10,
