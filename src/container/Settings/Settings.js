@@ -16,8 +16,6 @@ import { color } from "react-native-reanimated";
 const Settings = () => {
   const navigation = useNavigation();
 
-
-
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: Colors.cream }}>
       <View style={{ flex: 1, backgroundColor: Colors.white }}>
