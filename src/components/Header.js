@@ -577,7 +577,7 @@ const Header = (props) => {
               source={require("../../assets/calender.png")}
             ></Image>
 
-            <Menu
+            {/* <Menu
               visible={visible}
               onRequestClose={hideMenu}
             >
@@ -586,10 +586,27 @@ const Header = (props) => {
               <MenuItem onPress={() => { handleOptionChange('month') }}>Month</MenuItem>
               <MenuDivider />
               <MenuItem onPress={() => { handleOptionChange('year') }}>Year</MenuItem>
-            </Menu>
+            </Menu> */}
            
           </TouchableOpacity>
+            
+            {
+               visible && <View>
+                <TouchableOpacity  onPress={() => { handleOptionChange('date') }}>
+                <Text>Date</Text>
 
+                </TouchableOpacity>
+               
+                <TouchableOpacity  onPress={() => { handleOptionChange('month') }}>
+                <Text>Month</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity  onPress={() => { handleOptionChange('year') }}>
+                <Text>Year</Text>
+                </TouchableOpacity>
+
+               </View>
+            }
           
         </View>
        
