@@ -14,7 +14,8 @@ import {
   Share,
   Platform,
 } from "react-native";
-import { Switch } from 'react-native-switch';
+import { MultiSelect } from 'react-native-element-dropdown';
+
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
@@ -32,11 +33,20 @@ import Activity from "../../components/Activity";
 import axios from "axios";
 import * as WebBrowser from "expo-web-browser";
 import { MenuDivider } from "react-native-material-menu";
-
+const data = [
+  { label: 'Item 1', value: '1' },
+  { label: 'Item 2', value: '2' },
+  { label: 'Item 3', value: '3' },
+  { label: 'Item 4', value: '4' },
+  { label: 'Item 5', value: '5' },
+  { label: 'Item 6', value: '6' },
+  { label: 'Item 7', value: '7' },
+  { label: 'Item 8', value: '8' },
+];
 const MyClientsDetails = (props) => {
   const dispatch = useDispatch();
   const [activity, setActivity] = useState(false);
-
+const [selected, setSelected] = useState([]);
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -380,54 +390,9 @@ const MyClientsDetails = (props) => {
                   />
                 </TouchableOpacity>
 
-                <Text
-                  style={{
-                    fontSize: 19,
-                    fontWeight: "bold",
-                    color: Colors.white,
-                    marginLeft: 60,
-                  }}
-                >
-                  {item.contact_name}{" "}
-                </Text>
+
                 <View style={styles.threeiconmain}>
-                  <TouchableOpacity
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginRight: 10,
-                    }}
-                    onPress={handleCallButtonPress}
-                  >
-                    <Image
-                      style={{
-                        height: 22,
-                        width: 22,
-                        resizeMode: "contain",
-                        tintColor: Colors.white,
-                      }}
-                      source={require("../../../assets/whitecall.png")}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={{
-                      flexDirection: "row",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      marginRight: 10,
-                    }}
-                  >
-                    <Image
-                      style={{
-                        height: 22,
-                        width: 22,
-                        resizeMode: "contain",
-                        tintColor: Colors.white,
-                      }}
-                      source={require("../../../assets/messengerwhite.png")}
-                    />
-                  </TouchableOpacity>
+
                   <TouchableOpacity
                     onPress={() => navigation.navigate("")}
                     style={{
@@ -441,6 +406,7 @@ const MyClientsDetails = (props) => {
                       style={{
                         height: 22,
                         width: 22,
+                        marginRight: 16,
                         resizeMode: "contain",
                         tintColor: Colors.white,
                       }}
@@ -454,7 +420,6 @@ const MyClientsDetails = (props) => {
           <ScrollView>
             <View style={{ backgroundColor: Colors.white }}>
               <View>
-
                 <FlatList
                   style={{ padding: 16 }}
                   data={data}
@@ -469,17 +434,18 @@ const MyClientsDetails = (props) => {
                               navigation.navigate("SurfStats", { item })
                             }
                           >
-                            
-                            <Image
 
-                              style={ Platform.OS === 'web' && {
-                                
-                                resizeMode: "contain",
-                                height:80,
-                                width:80,
-                              }}
-                              source={ require("../../../assets/speed3/speed3.png") }
-                            />
+                            <View>
+                              <Image
+                                style={Platform.OS === 'web' && {
+                                  resizeMode: "contain",
+                                  height: 80,
+                                  width: 80,
+                                }}
+                                source={require("../../../assets/speed3/speed3.png")}
+                              />
+                              <Text style={{ fontWeight: 'bold' }}>surf Stats</Text>
+                            </View>
                           </TouchableOpacity>
                           <View style={styles.clientinformation}>
                             <View style={styles.imagewithdot}>
@@ -491,7 +457,7 @@ const MyClientsDetails = (props) => {
                                   borderColor: '#000000',
                                   borderWidth: 1,
                                   borderRadius: 100,
-                                  backgroundColor:Colors.gray
+                                  backgroundColor: Colors.gray
                                 }}
                                 source={{ uri: item.contact_image }}
                               />
@@ -499,22 +465,6 @@ const MyClientsDetails = (props) => {
                             </View>
 
                           </View>
-                          <View style={{height:30,width:70,borderRadius:20,backgroundColor:isEnabled ? Colors.PrimaryColor :Colors.boderColor}}>
-                          <Switch
-                            activeText='Loan'
-                            inActiveText="Cash"
-                            outerCircleStyle={{ width: 50 }}
-                            switchRightPx={60}
-                            backgroundActive={Colors.PrimaryColor}
-                            backgroundInactive={Colors.boderColor}
-                            thumbColor={"#f4f3f4"}
-                            ios_backgroundColor="#3e3e3e"
-                            onValueChange={toggleSwitch}
-                            value={isEnabled}
-
-                          />
-                          </View>
-                          
 
                         </View>
 
@@ -523,10 +473,7 @@ const MyClientsDetails = (props) => {
                             {" "}
                             {item.contact_name}{" "}
                           </Text>
-                          <Text style={styles.phonenumber}>
-                            {" "}
-                            {item.contact_number}
-                          </Text>
+
                           <Text style={styles.clientid}>
                             Client ID: {item.contact_lead_id}
                           </Text>
@@ -540,8 +487,9 @@ const MyClientsDetails = (props) => {
                             >
                               <Image
                                 style={{
-                                  height: 15,
-                                  width: 15,
+                                  height: 30,
+                                  width: 30,
+                                  margin: 2,
                                   resizeMode: "contain",
                                   tintColor: Colors.white,
                                 }}
@@ -555,8 +503,9 @@ const MyClientsDetails = (props) => {
                             >
                               <Image
                                 style={{
-                                  height: 15,
-                                  width: 15,
+                                  height: 30,
+                                  width: 30,
+                                  margin: 2,
                                   resizeMode: "contain",
                                   tintColor: Colors.white,
                                 }}
@@ -569,8 +518,9 @@ const MyClientsDetails = (props) => {
                             >
                               <Image
                                 style={{
-                                  height: 15,
-                                  width: 15,
+                                  height: 30,
+                                  margin: 2,
+                                  width: 30,
                                   resizeMode: "contain",
                                   tintColor: Colors.white,
                                 }}
@@ -580,8 +530,9 @@ const MyClientsDetails = (props) => {
                             <TouchableOpacity style={styles.iconcover}>
                               <Image
                                 style={{
-                                  height: 15,
-                                  width: 15,
+                                  height: 30,
+                                  margin: 2,
+                                  width: 30,
                                   resizeMode: "contain",
                                   tintColor: Colors.white,
                                 }}
@@ -596,23 +547,81 @@ const MyClientsDetails = (props) => {
                             >
                               <Image
                                 style={{
-                                  height: 15,
-                                  width: 15,
+                                  height: 30,
+                                  margin: 2,
+                                  width: 30,
                                   resizeMode: "contain",
                                   tintColor: Colors.white,
                                 }}
                                 source={require("../../../assets/pencilwhite.png")}
                               />
                             </TouchableOpacity>
+
+                            <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() => {}}
+                            >
+                              <Image
+                                style={{
+                                  height: 30,
+                                  margin: 2,
+                                  width: 30,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/plus.png")}
+                              />
+                            </TouchableOpacity>
                           </View>
                         </View>
+                        <View style={{flexDirection:'row'}}>
+                        <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() =>
+                                navigation.navigate("EditClientsDetails", { item })
+                              }
+                            >
+                              <Image
+                                style={{
+                                  height: 12,
+                                  margin: 2,
+                                  width: 12,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/whitecall.png")}
+                              />
+                            </TouchableOpacity>
                         <Text style={styles.profiledetailtext}> Phone: {item.contact_number} </Text>
+
+                        </View>
                         <View style={styles.divider}></View>
+                        <View style={{flexDirection:'row'}}>
+                        <TouchableOpacity
+                              style={styles.iconcover}
+                              onPress={() =>
+                                navigation.navigate("EditClientsDetails", { item })
+                              }
+                            >
+                              <Image
+                                style={{
+                                  height: 12,
+                                  margin: 2,
+                                  width: 12,
+                                  resizeMode: "contain",
+                                  tintColor: Colors.white,
+                                }}
+                                source={require("../../../assets/emailwhite.png")}
+                              />
+                            </TouchableOpacity>
                         <Text style={styles.profiledetailtext}> Email:{item.contact_email}  </Text>
+
+                        </View>
                         <View style={styles.divider}></View>
 
                         <Text style={styles.profiledetailtext}> Main Address:{item.property_address} </Text>
-
+                        <View style={styles.divider}></View>
+                        <Text style={styles.profiledetailtext}> Contact Type: </Text>
                         <View style={styles.mainareacover}>
                           <Text>Note</Text>
                           <View
@@ -792,7 +801,7 @@ const MyClientsDetails = (props) => {
                               }}
                               source={require("../../../assets/viewtel.png")}
                             />
-                            <Text style={styles.activityheading}>Next Up</Text>
+                            <Text style={styles.activityheading}>Next Activity</Text>
                           </View>
                           <View style={styles.activitycol}>
                             <TouchableOpacity style={styles.iconcoverlatest}>
@@ -827,7 +836,7 @@ const MyClientsDetails = (props) => {
                         </View>
 
                         <FlatList
-                        style={{marginBottom:16}}
+                          style={{ marginBottom: 16 }}
                           data={rounds}
                           renderItem={(item, index) => {
                             return (
@@ -860,19 +869,20 @@ const MyClientsDetails = (props) => {
 };
 
 const styles = StyleSheet.create({
+
   boxcover: {
     backgroundColor: Colors.darkblue,
-    height: 170,
-    width: 170,
+    height: 190,
+    width: 190,
     marginBottom: 30,
     borderRadius: 100,
     alignItems: "center",
     lineHeight: 170,
     justifyContent: "center",
-    shadowOffset: {width: -2, height: 4},  
-  shadowColor: '#171717',  
-  shadowOpacity: 0.2,  
-  shadowRadius: 3,  
+    shadowOffset: { width: -2, height: 4 },
+    shadowColor: '#171717',
+    shadowOpacity: 0.2,
+    shadowRadius: 3,
   },
   profiledetailtext: { fontWeight: 300, fontSize: 16, padding: 5 },
   bigtextone: {
@@ -945,7 +955,7 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  maincoverop: { marginTop: 20, marginBottom: 20, alignItems: "center",  },
+  maincoverop: { marginTop: 20, marginBottom: 20, alignItems: "center", },
   maincoverid: {
   },
   idheading: { fontWeight: "bold", fontSize: 15, marginBottom: 7 },
@@ -953,8 +963,9 @@ const styles = StyleSheet.create({
   pendingdetailaddress: { flexDirection: "column", marginBottom: 4 },
   maincover: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center",
+    position: "relative"
   },
 
   onlinedot: {
@@ -969,7 +980,8 @@ const styles = StyleSheet.create({
   imagewithdot: { position: "relative" },
   clientinformation: { flexDirection: "column", alignItems: "center" },
   speedcover: {
-    // width: "20%",
+    position: "absolute",
+    left: 8,
   },
 
   idinnerbold: { fontSize: 14, lineHeight: 22 },
@@ -991,7 +1003,7 @@ const styles = StyleSheet.create({
   },
   informationicons: { alignItems: "center", marginBottom: 25 },
   maininfoicons: { flexDirection: "row", alignItems: "center" },
-  username: { fontSize: 24,  marginBottom: 5 },
+  username: { fontSize: 24, marginBottom: 5 },
   phonenumber: { marginBottom: 5, fontSize: 15 },
   clientid: { fontSize: 14, marginBottom: 5 },
   switcher: {

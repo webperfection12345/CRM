@@ -7,10 +7,12 @@ import StackNavigator from "./src/navigation/StackNavigator";
 import { store } from "./src/redux/store";
 import { Provider } from "react-redux";
 import Colors from "./src/utils/Colors";
+import { LogBox } from 'react-native';
 import Apps from "./App";
 const App = () => {
   useEffect(() => {});
-
+  LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+  LogBox.ignoreAllLogs();//Ignore all log notifications
   return (
     <SafeAreaView
       style={{

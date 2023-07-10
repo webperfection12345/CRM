@@ -179,7 +179,7 @@ export default function Dashboard() {
                 marginTop: 20,
               }}
             >
-              Surf Level
+              surf Score
             </Text>
             <TouchableOpacity onPress={openPopup}>
               <View
@@ -354,7 +354,7 @@ export default function Dashboard() {
                           marginTop: 0,
                         }}
                       >
-                        Your Surf Level
+                        surf Score
                       </Text>
 
                       <View
@@ -466,10 +466,26 @@ export default function Dashboard() {
                   source={require("../../../assets/bluedocumnet.png")}
                 ></Image>
 
-                <Text style={styles.smalltexttwo}>Portal</Text>
+                <Text style={styles.smalltexttwo}>Library</Text>
               </View>
+
               <View style={styles.boxcover}>
-                <Text style={styles.smalltexttwo}>Call</Text>
+                <Text style={styles.smalltexttwo}>Add</Text>
+                <Image
+                  style={{
+                    height: 40,
+                    width: 40,
+                    resizeMode: "contain",
+                    marginVertical: 6,
+                    alignItems: "center",
+                  }}
+                  source={require("../../assets/images/favorite.png")}
+                ></Image>
+                <Text style={styles.smalltexttwo}>Favorites</Text>
+              </View>
+
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltexttwo}>Contact</Text>
                 <Image
                   style={{
                     height: 40,
@@ -480,7 +496,15 @@ export default function Dashboard() {
                   }}
                   source={require("../../../assets/telephone-iconwhite.png")}
                 ></Image>
-                <Text style={styles.smalltexttwo}>Center</Text>
+                <Text style={styles.smalltexttwo}>Call</Text>
+                <Text style={styles.smalltexttwo}> Center</Text>
+              </View>
+
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltexttwo}>Self</Text>
+               
+                <Text style={styles.smalltexttwo}>Sourced</Text>
+                <Text style={styles.smalltexttwo}>Leads</Text>
               </View>
             </View>
           </View>
@@ -492,10 +516,11 @@ export default function Dashboard() {
   );
 }
 const styles = StyleSheet.create({
+ 
   boxcover: {
     backgroundColor: Colors.darkblue,
-    height: 130,
-    width: 130,
+    height: 150,
+    width: 150,
     marginBottom: 30,
     borderRadius: 100,
     alignItems: "center",

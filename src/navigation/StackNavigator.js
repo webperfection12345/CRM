@@ -29,6 +29,7 @@ import DisPosition from "../container/DisPosition/DisPosition";
 import SingleClientDetail from "../container/SingleClientDetail/SingleClientDetail";
 import SurfStats from "../container/SurfStats/SurfStats";
 import Settings from "../container/Settings/Settings";
+import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 const Stack = createStackNavigator();
 
 function StackNavigator() {
@@ -79,6 +80,7 @@ function StackNavigator() {
       />
       
       <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} options={{headerShown:false}}/>
+      <Stack.Screen name="TransactionDesk" component={TransactionDesk} options={{headerShown:false}}/>
       <Stack.Screen name="SurfStats" component={SurfStats} options={{headerShown:false}}/>
     </Stack.Navigator>
   );

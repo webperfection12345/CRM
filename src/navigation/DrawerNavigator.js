@@ -262,6 +262,7 @@ const CustomDrawerContent = () => {
         backgroundColor: Colors.PrimaryColor,
       }}
     >
+      <ScrollView>
       <View style={{ flex: 1, backgroundColor: Colors.PrimaryColor }}>
        <View style={{flexDirection:"row",alignItems:"center",width:"90%"}}> 
         <TouchableOpacity
@@ -377,12 +378,6 @@ const CustomDrawerContent = () => {
           </TouchableHighlight>
 
 
-
-
-
-
-
-          
           <TouchableHighlight
             onPress={() => navigation.navigate("Contacts")}
             underlayColor="transparent"
@@ -475,7 +470,7 @@ const CustomDrawerContent = () => {
                   fontWeight: "bold",
                 }}
               >
-                Opportunities
+                surf Leads
               </Text>
             </View>
           </TouchableHighlight>
@@ -571,7 +566,7 @@ const CustomDrawerContent = () => {
                   fontWeight: "bold",
                 }}
               >
-                Document Folder
+                Document Library
               </Text>
             </View>
           </TouchableHighlight>
@@ -619,7 +614,7 @@ const CustomDrawerContent = () => {
                   fontWeight: "bold",
                 }}
               >
-                MLS
+                surf Listings
               </Text>
             </View>
           </TouchableHighlight>
@@ -671,6 +666,90 @@ const CustomDrawerContent = () => {
               </Text>
             </View>
           </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={handlePress}
+            underlayColor="transparent"
+            onMouseEnter={handleMouseEnter7}
+            onMouseLeave={handleMouseLeave7}
+          >
+            <View
+              style={{
+                backgroundColor: tab7BackgroundColor,
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image
+                  source={require("../assets/images/bell.png")}
+                  style={{
+                    height:32,
+                    width:32
+                  }}
+                />
+              </View>
+              <Text
+                style={{
+                  color: tab7TextColor,
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Notifications
+              </Text>
+            </View>
+          </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={handlePress}
+            underlayColor="transparent"
+            onMouseEnter={handleMouseEnter7}
+            onMouseLeave={handleMouseLeave7}
+          >
+            <View
+              style={{
+                backgroundColor: tab7BackgroundColor,
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+               
+              </View>
+              <Text
+                style={{
+                  color: tab7TextColor,
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Lead Pond
+              </Text>
+            </View>
+          </TouchableHighlight>
         </View>
       </View>
       <View
@@ -691,11 +770,14 @@ const CustomDrawerContent = () => {
           }}
         ></Image>
       </View>
+      </ScrollView>
+     
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+
   button: {
     backgroundColor: "blue",
   },

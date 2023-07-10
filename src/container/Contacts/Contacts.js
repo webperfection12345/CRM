@@ -515,22 +515,7 @@ const Contacts = () => {
                       </TouchableOpacity>
                     </View>
 
-                    <View
-                      style={{
-                        height: 80,
-                        justifyContent: "center",
-                        marginLeft: 10,
-                      }}
-                    >
-                      <Image
-                        source={require("../../../assets/leftArrow.png")}
-                        style={{
-                          height: 10,
-                          width: 10,
-                          resizeMode: "contain",
-                        }}
-                      ></Image>
-                    </View>
+                 
                   </View>
                 </TouchableOpacity>
               )}

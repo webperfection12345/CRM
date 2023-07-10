@@ -11,6 +11,8 @@ import Colors from "../../utils/Colors";
 import { ScrollView } from "react-native-gesture-handler";
 import { useNavigation } from "@react-navigation/native";
 import { Dimensions } from 'react-native';
+import { Switch } from 'react-native-switch';
+
 const TransactionDeskNew = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const navigation = useNavigation();
@@ -24,18 +26,25 @@ const TransactionDeskNew = () => {
   return (
     <SafeAreaView style={{ flex: 1, height: "100%" }}>
       <View style={styles.topcoverupper}>
-        <TouchableOpacity onPress={() => navigation.navigate("Home")} style={[styles.backiconcover, { paddingLeft: 10 }]}>
+        <TouchableOpacity onPress={() => navigation.navigate("Contact")} style={[styles.backiconcover, { paddingLeft: 10 }]}>
           <Image
             style={[styles.backimage, { tintColor: Colors.white }]}
             source={require("../../../assets/back.png")}
           ></Image>
 
         </TouchableOpacity>
+        <View>
+        <Text style={styles.username}>Jessica Kent</Text>
         <Text style={styles.transactionidtext}>
           Transaction ID: 310987
         </Text>
+        </View>
+       
         <TouchableOpacity
           style={styles.plusiconcover}
+          onPress={()=>{
+            navigation.navigate("TransactionDesk")
+          }}
         >
           <Image style={styles.plusimage}
             source={require("../../../assets/plus.png")}
@@ -45,9 +54,24 @@ const TransactionDeskNew = () => {
 
       <ScrollView style={{ height: "100%", flex: 1, backgroundColor: Colors.cream }}>
         <View style={{ backgroundColor: Colors.white, padding: 12, flexDirection: "row", justifyContent: "flex-start", }}>
+          <View style={{ height: 30, width: 70, borderRadius: 20, backgroundColor: isEnabled ? Colors.PrimaryColor : Colors.boderColor ,margin:12}}>
+            <Switch
+              activeText='Loan'
+              inActiveText="Cash"
+              outerCircleStyle={{ width: 50 }}
+              switchRightPx={60}
+              backgroundActive={Colors.PrimaryColor}
+              backgroundInactive={Colors.boderColor}
+              thumbColor={"#f4f3f4"}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
+
+            />
+          </View>
           <View style={{ width: "33%" }}>
-            <Text style={styles.username}>Jessica Kent</Text>
-            <View style={{ flexDirection: "row", justifyContent: "flex-start" }}>
+            
+            <View style={{ flexDirection: "row", justifyContent: "flex-start" ,margin:16}}>
               <TouchableOpacity style={styles.backiconcover}>
                 <Image
                   style={styles.backimagenew}
@@ -78,14 +102,15 @@ const TransactionDeskNew = () => {
           </View>
         </View>
         <View style={{ paddingHorizontal: 12, paddingVertical: 22, flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap" }}>
-          <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ position:"absolute", top:8, right:8 }}>
+          <View style={styles.maincoverbox(width / 2 - 16)}>
+            <TouchableOpacity style={{ position: "absolute", top: 8, right: 8 }}>
               <View style={styles.greencover}>
                 <Image style={styles.greenimage}
                   source={require("../../../assets/greenok.png")}
                 ></Image></View>
             </TouchableOpacity>
             <Text style={styles.namegreen}>Escrow Due</Text>
+            <Text style={styles.namegreen}>RX number</Text>
             <Text style={styles.timedate}>06.05.23</Text>
             <View style={styles.maincobvericons}>
               <TouchableOpacity><Image style={styles.cloudphoto2}
@@ -98,14 +123,15 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ position:"absolute", top:8, right:8 }}>
+          <View style={styles.maincoverbox(width / 2 - 16)}>
+            <TouchableOpacity style={{ position: "absolute", top: 8, right: 8 }}>
               <View style={styles.greencover}>
                 <Image style={styles.greenimage}
                   source={require("../../../assets/greenok.png")}
                 ></Image></View>
             </TouchableOpacity>
             <Text style={styles.namegreen}>Escrow Due</Text>
+            <Text style={styles.namegreen}>RX number</Text>
             <Text style={styles.timedate}>06.05.23</Text>
             <View style={styles.maincobvericons}>
               <TouchableOpacity><Image style={styles.cloudphoto2}
@@ -118,14 +144,15 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ position:"absolute", top:8, right:8 }}>
+          <View style={styles.maincoverbox(width / 2 - 16)}>
+            <TouchableOpacity style={{ position: "absolute", top: 8, right: 8 }}>
               <View style={styles.greencover}>
                 <Image style={styles.greenimage}
                   source={require("../../../assets/note.png")}
                 ></Image></View>
             </TouchableOpacity>
             <Text style={styles.namegreen}>Loan Approval Due</Text>
+            <Text style={styles.namegreen}>RX number</Text>
             <Text style={[styles.timedate, { color: "red" }]}>06.08.23</Text>
             <View style={styles.maincobvericons}>
               <TouchableOpacity><Image style={styles.cloudphoto2}
@@ -138,17 +165,18 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.maincoverbox(width/2 - 16)}>
-              {/* <Text style={{textAlign:"center",justifyContent:"center"}}>DUE TODAY!</Text> */}
-            <TouchableOpacity style={{ position:"absolute", top:8, right:8}}>
-            
-              <View style={[styles.greencover, { }]}>
+          <View style={styles.maincoverbox(width / 2 - 16)}>
+            {/* <Text style={{textAlign:"center",justifyContent:"center"}}>DUE TODAY!</Text> */}
+            <TouchableOpacity style={{ position: "absolute", top: 8, right: 8 }}>
+
+              <View style={[styles.greencover, {}]}>
 
                 <Image style={styles.greenimage}
                   source={require("../../../assets/yellowbell.png")}
                 ></Image></View>
             </TouchableOpacity>
             <Text style={styles.namegreen}>Appraisal Due</Text>
+            <Text style={styles.namegreen}>RX number</Text>
             <Text style={[styles.timedate, { color: "#ffd200" }]}>06.15.23</Text>
             <View style={styles.maincobvericons}>
               <TouchableOpacity><Image style={styles.cloudphoto2}
@@ -161,8 +189,8 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.maincoverbox(width/2 - 16)}>
-            <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 12,position:"absolute", top:8, right:8}}>
+          <View style={styles.maincoverbox(width / 2 - 16)}>
+            <TouchableOpacity style={{ alignItems: "flex-end", marginBottom: 12, position: "absolute", top: 8, right: 8 }}>
 
               <View style={styles.greencover}>
 
@@ -171,6 +199,7 @@ const TransactionDeskNew = () => {
                 ></Image></View>
             </TouchableOpacity>
             <Text style={styles.namegreen}>Lien Search Due</Text>
+            <Text style={styles.namegreen}>RX number</Text>
             <Text style={[styles.timedate, { color: "#ffd200" }]}>06.20.23</Text>
             <View style={styles.maincobvericons}>
               <TouchableOpacity><Image style={styles.cloudphoto2}
@@ -211,12 +240,12 @@ const styles = StyleSheet.create({
   },
   maincobvericons: { justifyContent: "center", flexDirection: "row", width: "100%", alignItems: "center", paddingVertical: 10 },
   maincoverbox: width => ({
-    backgroundColor: Colors.white, borderRadius: 12, 
+    backgroundColor: Colors.white, borderRadius: 12,
     // padding: 12,
     width: width,
-    height:width,
+    height: width,
     marginBottom: 12,
-justifyContent:"center"
+    justifyContent: "center"
   }), //width: width - 200,},
   plusimage: {
     height: 15,
@@ -239,7 +268,7 @@ justifyContent:"center"
     alignItems: "center",
     backgroundColor: Colors.PrimaryColor,
   },
-  username: { fontSize: 14, marginBottom: 12 },
+  username: { fontSize: 14,textAlign:'center',color:'white'},
   backimagenew: {
     height: 20,
     width: 20,
@@ -255,7 +284,7 @@ justifyContent:"center"
     elevation: 4,
   },
   namegreen: { fontSize: 14, marginBottom: 8, textAlign: "center" },
-  timedate: { fontSize:18, fontWeight: "bold", color: "#00ff24", textAlign: "center" },
+  timedate: { fontSize: 18, fontWeight: "bold", color: "#00ff24", textAlign: "center" },
   cloudphoto: { height: 20, width: 20, resizeMode: "contain", marginHorizontal: 12 },
   cloudphoto2: { height: 25, width: 25, resizeMode: "contain", marginHorizontal: 12 }
 });

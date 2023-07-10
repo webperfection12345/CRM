@@ -97,7 +97,7 @@ const Leads = () => {
           {/* <Text style={{ fontSize: 15, color: Colors.white }}>Back</Text> */}
         </TouchableOpacity>
         <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
-          Opportunities
+          surf Leads
         </Text>
         <Text></Text>
       </View>

@@ -39,7 +39,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
-              MLS
+              surf Listings
             </Text>
           ),
           tabBarIcon: require("./../assets/images/mlscallcenterb.png"),
@@ -53,7 +53,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
-              Contact
+              Contacts
             </Text>
           ),
           tabBarIcon: require("./../assets/images/contactwhiteb.png"),
@@ -83,7 +83,7 @@ const BottomTabNavigator = () => {
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
-              Opportunities
+              surf Leads
             </Text>
           ),
 

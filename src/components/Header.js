@@ -119,7 +119,7 @@ const Header = (props) => {
               </TouchableOpacity>
             </View>
           </View>
-          <ScrollView style={{zIndex:99}}>
+          <ScrollView style={{ zIndex: 99 }}>
             <View>
               <Calendar
                 markedDates={{
@@ -131,6 +131,7 @@ const Header = (props) => {
                 onDayPress={handleDateSelect}
                 theme={calendarTheme}
               />
+              <View style={{flexDirection:'row'}}>
               <View style={{ paddingHorizontal: 20 }}>
                 <Text style={{ paddingVertical: 12, fontWeight: "bold" }}>
                   Activities for{" "}
@@ -145,7 +146,7 @@ const Header = (props) => {
                     {activity.name} - {activity.time}
                   </Text>
                 ))}
-
+               
                 {/* <Button
             title="Close"
             onPress={() => {
@@ -154,6 +155,22 @@ const Header = (props) => {
             }}
           /> */}
               </View>
+              <TouchableOpacity
+                  style={styles.iconcover}
+                  onPress={() => navigation.navigate("TransactionDesk")}
+                >
+                  <Image
+                    style={{
+                      height: 20,
+                      width: 20,
+                      resizeMode: "contain",
+                      tintColor: Colors.white,
+                    }}
+                    source={require("../assets/images/plus.png")}
+                  />
+                </TouchableOpacity>
+              </View>
+              
             </View>
           </ScrollView>
         </Modal>
@@ -441,7 +458,7 @@ const Header = (props) => {
         width: "100%",
         justifyContent: "space-between",
         paddingHorizontal: 2,
-        zIndex:99
+        zIndex: 99
       }}
     >
       <View style={styles.onlinepeoples}>
@@ -538,20 +555,20 @@ const Header = (props) => {
               source={require("../../assets/notification.png")}
             ></Image>
           </TouchableOpacity>
-         <View style={styles.maincalcov}>
-          <TouchableOpacity onPress={() => { setVisible(!visible) }}>
-            <Image
-              style={{
-                height: 22,
-                width: 22,
-                marginLeft: 22,
-                resizeMode: "contain",
-                position: "relative",
-              }}
-              source={require("../../assets/calender.png")}
-            ></Image>
+          <View style={styles.maincalcov}>
+            <TouchableOpacity onPress={() => { setVisible(!visible) }}>
+              <Image
+                style={{
+                  height: 22,
+                  width: 22,
+                  marginLeft: 22,
+                  resizeMode: "contain",
+                  position: "relative",
+                }}
+                source={require("../../assets/calender.png")}
+              ></Image>
 
-            {/* <Menu
+              {/* <Menu
               visible={visible}
               onRequestClose={hideMenu}
             >
@@ -561,35 +578,41 @@ const Header = (props) => {
               <MenuDivider />
               <MenuItem onPress={() => { handleOptionChange('year') }}>Year</MenuItem>
             </Menu> */}
-           
-          </TouchableOpacity>
-            
-            
-          
-        </View>
-        <View style={styles.covermonth}>
-        {
-               visible && <View>
-                <TouchableOpacity  onPress={() => {setVisible(!visible);
-                   handleOptionChange('date') }}>
-                <Text style={styles.maindate}>Date</Text>
+
+            </TouchableOpacity>
+
+
+
+          </View>
+          <View style={styles.covermonth}>
+            {
+              visible && <View>
+                <TouchableOpacity onPress={() => {
+                  setVisible(!visible);
+                  handleOptionChange('date')
+                }}>
+                  <Text style={styles.maindate}>Date</Text>
 
                 </TouchableOpacity>
-               
-                <TouchableOpacity  onPress={() => {setVisible(!visible);
-                  handleOptionChange('month') }}>
-               <Text style={styles.maindate}>Month</Text>
+
+                <TouchableOpacity onPress={() => {
+                  setVisible(!visible);
+                  handleOptionChange('month')
+                }}>
+                  <Text style={styles.maindate}>Month</Text>
                 </TouchableOpacity>
 
-                <TouchableOpacity  onPress={() => {setVisible(!visible);
-                  handleOptionChange('year') }}>
-              <Text style={styles.maindate}>Year</Text>
+                <TouchableOpacity onPress={() => {
+                  setVisible(!visible);
+                  handleOptionChange('year')
+                }}>
+                  <Text style={styles.maindate}>Year</Text>
                 </TouchableOpacity>
 
-               </View>
+              </View>
             }
-            </View>
-      </View>
+          </View>
+        </View>
       </View>
       {renderCalendar()}
 
@@ -597,6 +620,17 @@ const Header = (props) => {
   );
 };
 const styles = StyleSheet.create({
+  iconcover: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 40,
+    width: 40,
+    marginHorizontal: 2,
+    padding: 8,
+    backgroundColor: Colors.PrimaryColor,
+    borderRadius: 100,
+  },
   headericons: { flexDirection: "row", alignItems: "center", paddingRight: 12 },
   onlinepeoples: {
     flexDirection: "row",
@@ -671,8 +705,8 @@ const styles = StyleSheet.create({
   },
   pickertext: { color: "red" },
   // bgc:{backgroundColor:"red",height:100,width:"100%",padding:12}
-  covermonth:{position:"absolute",backgroundColor:Colors.white,width:100,top:31,padding:12},
-  maincalcov:{position:"relative"},
-  maindate:{paddingBottom:10,marginBottom:10,borderBottomColor:Colors.gray,borderBottomWidth:1}
+  covermonth: { position: "absolute", backgroundColor: Colors.white, width: 100, top: 31, padding: 12 },
+  maincalcov: { position: "relative" },
+  maindate: { paddingBottom: 10, marginBottom: 10, borderBottomColor: Colors.gray, borderBottomWidth: 1 }
 });
 export default Header;
