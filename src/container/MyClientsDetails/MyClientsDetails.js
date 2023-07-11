@@ -46,7 +46,7 @@ const data = [
 const MyClientsDetails = (props) => {
   const dispatch = useDispatch();
   const [activity, setActivity] = useState(false);
-const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState([]);
   const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,7 +97,13 @@ const [selected, setSelected] = useState([]);
 
   const rounds = [
     {
-      label: 'Document'
+      label: 'Tags'
+    },
+    {
+      label: 'Favorites'
+    },
+    {
+      label: 'Client Documents'
     },
     {
       label: 'Partner Contacts'
@@ -559,7 +565,7 @@ const [selected, setSelected] = useState([]);
 
                             <TouchableOpacity
                               style={styles.iconcover}
-                              onPress={() => {}}
+                              onPress={() => { }}
                             >
                               <Image
                                 style={{
@@ -574,47 +580,15 @@ const [selected, setSelected] = useState([]);
                             </TouchableOpacity>
                           </View>
                         </View>
-                        <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity
-                              style={styles.iconcover}
-                              onPress={() =>
-                                navigation.navigate("EditClientsDetails", { item })
-                              }
-                            >
-                              <Image
-                                style={{
-                                  height: 12,
-                                  margin: 2,
-                                  width: 12,
-                                  resizeMode: "contain",
-                                  tintColor: Colors.white,
-                                }}
-                                source={require("../../../assets/whitecall.png")}
-                              />
-                            </TouchableOpacity>
-                        <Text style={styles.profiledetailtext}> Phone: {item.contact_number} </Text>
+                        <View style={{ flexDirection: 'row' }}>
+
+                          <Text style={styles.profiledetailtext}> Phone: {item.contact_number} </Text>
 
                         </View>
                         <View style={styles.divider}></View>
-                        <View style={{flexDirection:'row'}}>
-                        <TouchableOpacity
-                              style={styles.iconcover}
-                              onPress={() =>
-                                navigation.navigate("EditClientsDetails", { item })
-                              }
-                            >
-                              <Image
-                                style={{
-                                  height: 12,
-                                  margin: 2,
-                                  width: 12,
-                                  resizeMode: "contain",
-                                  tintColor: Colors.white,
-                                }}
-                                source={require("../../../assets/emailwhite.png")}
-                              />
-                            </TouchableOpacity>
-                        <Text style={styles.profiledetailtext}> Email:{item.contact_email}  </Text>
+                        <View style={{ flexDirection: 'row' }}>
+
+                          <Text style={styles.profiledetailtext}> Email:{item.contact_email}  </Text>
 
                         </View>
                         <View style={styles.divider}></View>
@@ -859,8 +833,6 @@ const [selected, setSelected] = useState([]);
             </View>
           </ScrollView>
         </View>
-
-
       ) : (
         <Activity />
       )}
@@ -872,8 +844,8 @@ const styles = StyleSheet.create({
 
   boxcover: {
     backgroundColor: Colors.darkblue,
-    height: 190,
-    width: 190,
+    height: 150,
+    width: 150,
     marginBottom: 30,
     borderRadius: 100,
     alignItems: "center",
@@ -888,7 +860,6 @@ const styles = StyleSheet.create({
   bigtextone: {
     fontSize: 17,
     color: Colors.white,
-    fontWeight: "bold",
     textAlign: "center",
     paddingHorizontal: 20,
   },

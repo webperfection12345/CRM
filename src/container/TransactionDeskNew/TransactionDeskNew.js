@@ -15,6 +15,8 @@ import { Switch } from 'react-native-switch';
 
 const TransactionDeskNew = () => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled1, setIsEnabled1] = useState(false);
+
   const navigation = useNavigation();
   // Get the device's screen dimensions
   const { height, width } = Dimensions.get('window');
@@ -22,6 +24,12 @@ const TransactionDeskNew = () => {
   const toggleSwitch = () => {
     setIsEnabled((previousState) => !previousState);
     setToggle(!isEnabled);
+  };
+
+  const [toggle1, setToggle1] = useState(false);
+  const toggleSwitch1 = () => {
+    setIsEnabled1((previousState) => !previousState);
+    setToggle1(!isEnabled);
   };
   return (
     <SafeAreaView style={{ flex: 1, height: "100%" }}>
@@ -53,25 +61,50 @@ const TransactionDeskNew = () => {
       </View>
 
       <ScrollView style={{ height: "100%", flex: 1, backgroundColor: Colors.cream }}>
-        <View style={{ backgroundColor: Colors.white, padding: 12, flexDirection: "row", justifyContent: "flex-start", }}>
-          <View style={{ height: 30, width: 70, borderRadius: 20, backgroundColor: isEnabled ? Colors.PrimaryColor : Colors.boderColor ,margin:12}}>
+        <View style={{ backgroundColor: Colors.white, padding: 12, flexDirection: "row", justifyContent: 'space-between', }}>
+        <View style={{ width: "40%" }}>
+            <Text style={styles.propertytext}>Property Info</Text>
+            <Text>233 Royal Palm Way
+              Boca Raton, FL 33496</Text>
+          </View>
+          <View>
+          <View style={{ height: 30, width: 70, borderRadius: 20, backgroundColor: isEnabled ? Colors.PrimaryColor : Colors.boderColor }}>
+            
             <Switch
-              activeText='Loan'
-              inActiveText="Cash"
+               activeText='Loan'
+               inActiveText="Cash"
+               outerCircleStyle={{ width: 50 }}
+               switchRightPx={60}
+               backgroundActive={Colors.PrimaryColor}
+               backgroundInactive={Colors.boderColor}
+               thumbColor={"#f4f3f4"}
+               ios_backgroundColor="#3e3e3e"
+               onValueChange={toggleSwitch}
+               value={isEnabled}
+ 
+             />
+           </View>
+           <View style={{ height: 30, width: 70, borderRadius: 20, backgroundColor: isEnabled1 ? Colors.PrimaryColor : Colors.boderColor ,marginTop:5}}>
+            
+           <Switch
+              activeText='Buyer'
+              inActiveText="Seller"
               outerCircleStyle={{ width: 50 }}
               switchRightPx={60}
               backgroundActive={Colors.PrimaryColor}
               backgroundInactive={Colors.boderColor}
               thumbColor={"#f4f3f4"}
               ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isEnabled}
+              onValueChange={toggleSwitch1}
+              value={isEnabled1}
 
             />
           </View>
+          </View>
+
           <View style={{ width: "33%" }}>
             
-            <View style={{ flexDirection: "row", justifyContent: "flex-start" ,margin:16}}>
+            <View style={{ flexDirection: "row", justifyContent: "flex-end",marginTop:16}}>
               <TouchableOpacity style={styles.backiconcover}>
                 <Image
                   style={styles.backimagenew}
@@ -95,11 +128,7 @@ const TransactionDeskNew = () => {
               </TouchableOpacity>
             </View>
           </View>
-          <View style={{ width: "50%" }}>
-            <Text style={styles.propertytext}>Property Info</Text>
-            <Text>233 Royal Palm Way
-              Boca Raton, FL 33496</Text>
-          </View>
+          
         </View>
         <View style={{ paddingHorizontal: 12, paddingVertical: 22, flexDirection: "row", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap" }}>
           <View style={styles.maincoverbox(width / 2 - 16)}>

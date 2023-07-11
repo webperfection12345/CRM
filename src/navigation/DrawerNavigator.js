@@ -28,6 +28,7 @@ import Settings from "../container/Settings/Settings";
 import PropertiesFavorites from "../container/PropertiesFavorites/PropertiesFavorites";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
+import Contact from "../container/Contact/Contact";
 
 const data = [
   // {
@@ -102,7 +103,7 @@ const DrawerNavigator = () => {
             backgroundColor: Colors.PrimaryColor,
           },
         }}
-        component={Contacts}
+        component={Contact}
       />
 
       <Drawer.Screen
@@ -474,6 +475,53 @@ const CustomDrawerContent = () => {
               </Text>
             </View>
           </TouchableHighlight>
+
+          <TouchableHighlight
+            onPress={handlePress}
+            underlayColor="transparent"
+            onMouseEnter={handleMouseEnter7}
+            onMouseLeave={handleMouseLeave7}
+          >
+            <View
+              style={{
+                backgroundColor: tab7BackgroundColor,
+                height: 60,
+                alignItems: "center",
+                alignContent: "center",
+                flexDirection: "row",
+                borderBottomColor: Colors.borderlightcolor,
+                borderBottomWidth: 1,
+              }}
+            >
+              <View
+                style={{
+                  height: 70,
+                  width: 70,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+             {/* <Image
+                  source={require("../assets/images/fishing.png")}
+                  style={{
+                    height:32,
+                    width:32
+                  }}
+                /> */}
+              </View>
+
+              <Text
+                style={{
+                  color: tab7TextColor,
+                  fontSize: 16,
+                  fontWeight: "bold",
+                }}
+              >
+                Self Sourced
+              </Text>
+            </View>
+          </TouchableHighlight>
+
           <TouchableHighlight
             onPress={() => navigation.navigate("TransactionDesk")}
             underlayColor="transparent"
@@ -737,8 +785,15 @@ const CustomDrawerContent = () => {
                   alignItems: "center",
                 }}
               >
-               
+             <Image
+                  source={require("../assets/images/fishing.png")}
+                  style={{
+                    height:32,
+                    width:32
+                  }}
+                />
               </View>
+
               <Text
                 style={{
                   color: tab7TextColor,

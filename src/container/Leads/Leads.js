@@ -232,7 +232,7 @@ const Leads = () => {
                   }}
                 >
                   <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                    Username
+                    Name
                   </Text>
                   <TouchableOpacity onPress={() => handleUsernameClick(item)}>
                     <Text
@@ -257,7 +257,7 @@ const Leads = () => {
                     marginBottom: 20,
                   }}
                 >
-                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Mobile</Text>
+                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Phone</Text>
                   <Text
                     style={{
                       color: Colors.black,
@@ -283,10 +283,10 @@ const Leads = () => {
                   }}
                 >
                   <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                    Property Key
+                    Favorites
                   </Text>
                   <Text style={{ color: Colors.black, fontSize: 14 }}>
-                    {item.property_key}
+                   
                   </Text>
                 </View>
                 {/* Render the Date Created */}

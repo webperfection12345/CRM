@@ -441,9 +441,20 @@ export default function Dashboard() {
               </View>
             </Modal>
             <View style={styles.maincoverop}>
+           
               <View style={styles.boxcover}>
-                <Text style={styles.smalltext}>Opportunites</Text>
+                <Text style={styles.smalltext}>surf Leads</Text>
                 <Text style={styles.bigtext}>{totalLeadValue}</Text>
+              </View>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltexttwo}>Self</Text>
+               
+                <Text style={styles.smalltexttwo}>Sourced</Text>
+                <Text style={styles.smalltexttwo}>Leads</Text>
+              </View>
+              <View style={styles.boxcover}>
+                <Text style={styles.smalltexttwo}>Tags</Text>
+               
               </View>
               <View style={styles.boxcover}>
                 <Text style={styles.smalltext}>Transactions</Text>
@@ -468,22 +479,6 @@ export default function Dashboard() {
 
                 <Text style={styles.smalltexttwo}>Library</Text>
               </View>
-
-              <View style={styles.boxcover}>
-                <Text style={styles.smalltexttwo}>Add</Text>
-                <Image
-                  style={{
-                    height: 40,
-                    width: 40,
-                    resizeMode: "contain",
-                    marginVertical: 6,
-                    alignItems: "center",
-                  }}
-                  source={require("../../assets/images/favorite.png")}
-                ></Image>
-                <Text style={styles.smalltexttwo}>Favorites</Text>
-              </View>
-
               <View style={styles.boxcover}>
                 <Text style={styles.smalltexttwo}>Contact</Text>
                 <Image
@@ -500,12 +495,7 @@ export default function Dashboard() {
                 <Text style={styles.smalltexttwo}> Center</Text>
               </View>
 
-              <View style={styles.boxcover}>
-                <Text style={styles.smalltexttwo}>Self</Text>
-               
-                <Text style={styles.smalltexttwo}>Sourced</Text>
-                <Text style={styles.smalltexttwo}>Leads</Text>
-              </View>
+          
             </View>
           </View>
         </ScrollView>

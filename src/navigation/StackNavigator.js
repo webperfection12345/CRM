@@ -30,6 +30,9 @@ import SingleClientDetail from "../container/SingleClientDetail/SingleClientDeta
 import SurfStats from "../container/SurfStats/SurfStats";
 import Settings from "../container/Settings/Settings";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
+import Favorites from "../container/SurfStats/Favorites";
+import SavedSearch from "../container/SurfStats/SavedSearch";
+import SearchCreteria from "../container/SurfStats/SearchCreteria";
 const Stack = createStackNavigator();
 
 function StackNavigator() {
@@ -80,6 +83,10 @@ function StackNavigator() {
       />
       
       <Stack.Screen name="PropertiesViewed" component={PropertiesViewed} options={{headerShown:false}}/>
+      <Stack.Screen name="Favorites" component={Favorites} options={{headerShown:false}}/>
+      <Stack.Screen name="SavedSearch" component={SavedSearch} options={{headerShown:false}}/>
+      <Stack.Screen name="SearchCreteria" component={SearchCreteria} options={{headerShown:false}}/>
+
       <Stack.Screen name="TransactionDesk" component={TransactionDesk} options={{headerShown:false}}/>
       <Stack.Screen name="SurfStats" component={SurfStats} options={{headerShown:false}}/>
     </Stack.Navigator>

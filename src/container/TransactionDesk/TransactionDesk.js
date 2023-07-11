@@ -27,7 +27,8 @@ const TransactionDesk = () => {
       <View
         style={{
           height: 60,
-          width: "100%",
+          marginRight:16,
+          marginLeft:16,
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
@@ -40,7 +41,6 @@ const TransactionDesk = () => {
             flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            marginLeft: 10,
           }}
         >
           <Image
@@ -57,19 +57,21 @@ const TransactionDesk = () => {
         <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
           Transaction Desk
         </Text>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("EditContactsDetails", { item: items })
-          }
-          style={{
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "center",
-            marginRight: 10,
-          }}
-        >
-          <Text></Text>
-        </TouchableOpacity>
+       
+
+          <TouchableOpacity
+            onPress={() => { }}
+          >
+            <Image
+              style={{
+                height: 15,
+                width: 15,
+                resizeMode: "contain",
+                tintColor: Colors.white,
+              }}
+              source={require("../../../assets/plus.png")}
+            />
+          </TouchableOpacity>
       </View>
       <View
         style={{

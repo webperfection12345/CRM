@@ -139,6 +139,7 @@ const SurfStats = (props) => {
               backgroundColor: Colors.PrimaryColor,
             }}
           >
+
             <TouchableOpacity
               onPress={() => navigation.goBack()}
               style={{
@@ -225,567 +226,129 @@ const SurfStats = (props) => {
 
               <FlatList
                 data={data}
-                numColumns={width < 768 ? 2 : width === 768 ? 3 : width === 1024 ? 4 : width === 1440 ? 5 : 5}
-                renderItem={({ item, index }) => {
+                numColumns={width < 768 ? 2 : width === 768 ? 3 : width === 1024 ? 4 : width === 1440 ? 5 : 5} renderItem={({ item, index }) => {
                   return (
-                    <View style={styles.maincovercolumns}>
-                      <View style={styles.covercolsingle(width < 768 ? width / 2 - 8 : width === 768 ? width / 3 - 8 : width === 1024 ? width / 4 - 8 : width === 1440 ? width / 5 - 8 : width / 5 - 8)}>
-                        <View style={styles.signlecolumn(width < 768 ? width / 2 - 8 : width === 768 ? width / 3 - 8 : width === 1024 ? width / 4 - 8 : width === 1440 ? width / 5 - 8 : width / 5 - 8)}>
-                          <View style={styles.innermains}>
-                            <Text style={styles.simplename}>{item.label}</Text>
-                            {
-                              index === 0 || index === 1 ? <TouchableOpacity style={styles.iconnextarrow}>
-                                <Image
-                                  style={{
-                                    height: 15,
-                                    width: 15,
-                                    marginLeft: 20,
-                                    resizeMode: "contain",
-                                  }}
-                                  source={require("../../../assets/arrownext.png")}
-                                ></Image>
-                              </TouchableOpacity> : null
-                            }
-                          </View>
-                          <TouchableOpacity  disabled={index === 5 && true} onPress={() => openPopup()}>
-                            {
-                              index === 0 || index === 1 || index === 2 ? <Text style={styles.boldname}>{index === 0 ? stats && stats.favorites.favcount : index === 1 ? stats && stats.save_search_data.searchdata.length : index === 2 ? stats.engagement_data.user_session_time : ''}</Text> :
-                                index === 4 || index === 5 ? <TouchableOpacity
-                                  style={{
-                                    flexDirection: "row",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-
-                                  }}
-                                >
-                                  {
-                                    index === 5 ? <Image
-                                      style={{
-                                        padding: 20,
-                                        resizeMode: "stretch",
-                                        height: '100%',
-                                        width: '40%'
-                                      }}
-                                      source={index === 5 ? require("../../../assets/grommet.png") : null}
-                                    /> : <View style={styles.maingraph}>
-                                      <View >
-                                        <Text style={styles.textleft}>80-</Text>
-                                        <Text style={styles.textleft}>70-</Text>
-                                        <Text style={styles.textleft}>60-</Text>
-                                        <Text style={styles.textleft}>50-</Text>
-                                        <Text style={styles.textleft}>40-</Text>
-                                        <Text style={styles.textleft}>30-</Text>
-                                        <Text style={styles.textleft}>20-</Text>
-                                        <Text style={styles.textleft}>10-</Text>
-                                        <Text style={styles.textleft}>0-</Text>
-                                      </View>
-
-                                      <View style={{ position: "absolute", width: "100%", height: "100%", }}>
-                                        <View style={{ flexDirection: "row", position: "relative", width: "100%", height: "100%", justifyContent: "center" }}>
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={styles.innermainbg}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={[styles.innermainbg, { height: "50%" }]}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={[styles.innermainbg, { height: "20%" }]}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={styles.innermainbg}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={[styles.innermainbg, { height: "50%" }]}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={styles.innermainbg}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-                                          <View style={styles.coverbg}>
-                                            <View style={styles.mainbg}>
-                                              <View style={[styles.innermainbg, { height: "10%" }]}>
-
-                                              </View>
-                                            </View>
-                                          </View>
-                                        </View>
-
-
-                                      </View>
-                                      <View style={{ top: 22, position: "relative", justifyContent: "space-between", flexDirection: "row", width: "100%", paddingHorizontal: 16 }}>
-                                        <Text style={styles.wknam}>M</Text>
-                                        <Text style={styles.wknam}>T</Text>
-                                        <Text style={styles.wknam}>W</Text>
-                                        <Text style={styles.wknam}>TH</Text>
-                                        <Text style={styles.wknam}>F</Text>
-                                        <Text style={styles.wknam}>S</Text>
-                                        <Text style={styles.wknam}>S</Text>
-                                      </View>
-                                    </View>
-
-                                  }
-
-                                </TouchableOpacity> :
-                                
-                                  <FlatList
-                                    nestedScrollEnabled={true}
-                                    data={stats.search_criteria.criteria_data}
-                                    style={{ width: "100%" }}
-                                    renderItem={({ item }) => {
-                                      return (
-                                        <View style={styles.mainsimpleprog}>
-                                          <Text style={styles.progheading}>{item.search_name}</Text>
-                                          <View style={styles.progresscover}>
-                                            <View
-                                              style={[styles.inerprogcover, { width: (100 * item.search_count) / stats.search_criteria.Criteria_Max + "%" }]}
-                                            ></View>
-                                          </View>
-                                          <Text style={styles.progresstext}>{item.search_count}</Text>
-                                        </View>
-                                      )
-                                    }}>
-
-                                  </FlatList>
-                                  
-                            } 
-                          </TouchableOpacity>
-                        </View></View></View>
-                  )
-                }}>
-              </FlatList>
-
-              {/* <View style={styles.maincovercolumns}>
-            <View style={styles.covercolsingle(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-              <View style={styles.signlecolumn(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-                <View style={styles.innermains}>
-                  <Text style={styles.simplename}>Favorites</Text>
-                  <TouchableOpacity style={styles.iconnextarrow}>
-                    <Image
-                      style={{
-                        height: 15,
-                        width: 15,
-                        marginLeft: 20,
-                        resizeMode: "contain",
-                      }}
-                      source={require("../../../assets/arrownext.png")}
-                    ></Image>
-                  </TouchableOpacity>
-                </View>
-                <TouchableOpacity onPress={() => openPopup()}>
-                  <Text style={styles.boldname}>{contactData}</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  backgroundColor: Colors.cream,
-                  width: "100%",
-                }}
-              >
-                <Modal
-                  animationType="fade"
-                  transparent={true}
-                  visible={showPopup}
-                  onRequestClose={closePopup}
-                >
-                  <View
-                    style={{
-                      justifyContent: "flex-end",
-                      alignItems: "flex-end",
-                      backgroundColor: Colors.cream,
-                    }}
-                  >
-                    <View
-                      style={{
-                        backgroundColor: Colors.PrimaryColor,
-                        height: 30,
-                        width: 30,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: 100,
-                        marginRight: 12,
-                        marginTop: 5,
-                        marginBottom: 5,
-                      }}
-                    >
-                      <TouchableOpacity
-                        onPress={() => {
-                          closePopup();
-                        }}
+                 <TouchableOpacity onPress={()=>{index === 0 ? navigation.navigate('Favorites',{item:stats.favorites})
+                  : index === 1 ? navigation.navigate('SavedSearch',{item:stats.save_search_data})
+                  : index === 3 ? navigation.navigate('SearchCreteria',{item:stats.search_criteria}) : null}}>
+                     <View style={styles.maincoverupper}>
+                      <View
+                        style={styles.covercolsinglemain(
+                          width < 768 ? width / 2.1 - 8 : width === 768 ? width / 3.1 - 8 : width === 1024 ? width / 4.1 - 8 : width === 1440 ? width / 5.1 - 8 : width / 5.1 - 8
+                        )}
                       >
-                        <Image
-                          style={{
-                            height: 12,
-                            width: 12,
-                            resizeMode: "contain",
-                          }}
-                          source={require("../../../assets/closewhite.png")}
-                        ></Image>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      justifyContent: "space-between",
-                      backgroundColor: Colors.cream,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <FlatList
-                      data={modalData}
-                      numColumns={2}
-                      ListFooterComponent={() => (
-                        <View style={{ height: 200 }}></View>
-                      )}
-                      renderItem={({ item }) => (
-                        <TouchableOpacity
-                          activeOpacity={1}
-                          onPress={() => {
-                            navigation.navigate("PropertiesDetails", {
-                              id: item.property_id,
-                            });
-                            closePopup(); // Call the closepopup function after navigation
-                          }}
-                          style={{
-                            height: 300,
-                            margin: "2.5%",
-                            width: "45%",
-                          }}
+                        <View
+                          style={styles.textcover}
                         >
-                          <View
-                            style={{
-                              height: "75%",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Image
-                              source={{ uri: item.property_image[0] }}
+                          <Text style={{ fontWeight: 'bold' }}>{item.label}</Text>
+
+                          {/* <Image
+                            style={styles.rightarrowtext}
+                            source={require("../../../assets/arrownext.png")}
+                          ></Image> */}
+                        </View>
+                        {
+                          index === 0 || index === 1 || index === 2 ?
+                            <Text style={styles.centertext}
+                            >
+                              {index === 0 ? stats && stats.favorites.favcount : index === 1 ? stats && stats.save_search_data.searchdata.length : index === 2 ? stats.engagement_data.user_session_time : ''}
+                            </Text> : index === 5 ? <Image
                               style={{
                                 height: "100%",
                                 width: "100%",
-                                borderRadius: 20,
-                                backgroundColor: Colors.white,
+                                resizeMode: "contain",
+                                marginTop: 20
                               }}
-                            ></Image>
-                          </View>
-                          <View
-                            style={{
-                              height: 80,
-                              justifyContent: "center",
-                            }}
-                          >
-                            <Text
-                              style={{
-                                color: Colors.black,
-                                fontSize: 14,
-                              }}
-                            >
-                              {item.prop_title}
-                            </Text>
-                            <Text
-                              style={{
-                                color: Colors.PrimaryColor,
-                                fontSize: 12,
-                                fontWeight: "bold",
-                                marginTop: 5,
-                              }}
-                            >
-                              {item.property_id}
-                            </Text>
-                          </View>
-                        </TouchableOpacity>
-                      )}
-                      keyExtractor={(item) => item.id}
-                    />
-                  </View>
-                </Modal>
-              </View>
-            </View>
-            <View style={styles.covercolsingle(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-              <View style={styles.signlecolumn(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-                <View style={styles.innermains}>
-                  <Text style={styles.simplename}>Saved Searches</Text>
-                  <TouchableOpacity style={styles.iconnextarrow}>
-                    <Image
-                      style={{
-                        height: 15,
-                        width: 15,
-                        resizeMode: "contain",
-                      }}
-                      source={require("../../../assets/arrownext.png")}
-                    ></Image>
-                  </TouchableOpacity>
-                </View>
-                <TouchableOpacity onPress={() => openPopup2()}>
-                  <Text style={styles.boldname}>{searchData}</Text>
-                </TouchableOpacity>
-              </View>
-              <View
-                style={{
-                  backgroundColor: Colors.cream,
-                  width: "100%",
-                }}
-              >
-                <Modal
-                  animationType="fade"
-                  transparent={true}
-                  visible={showPopup2}
-                  onRequestClose={closePopup2}
-                >
-                  <View
-                    style={{
-                      justifyContent: "flex-end",
-                      alignItems: "flex-end",
-                      backgroundColor: Colors.cream,
-                    }}
-                  >
-                    <View
-                      style={{
-                        backgroundColor: Colors.PrimaryColor,
-                        height: 30,
-                        width: 30,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        borderRadius: 100,
-                        marginRight: 12,
-                        marginTop: 5,
-                        marginBottom: 5,
-                      }}
-                    >
-                      <TouchableOpacity
-                        onPress={() => {
-                          closePopup2();
-                        }}
-                      >
-                        <Image
-                          style={{
-                            height: 12,
-                            width: 12,
-                            resizeMode: "contain",
-                          }}
-                          source={require("../../../assets/closewhite.png")}
-                        ></Image>
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                  <View
-                    style={{
-                      justifyContent: "space-between",
-                      backgroundColor: Colors.cream,
-                      width: "100%",
-                      height: "100%",
-                    }}
-                  >
-                    <FlatList
-                      data={modal2Data}
-                      ListFooterComponent={
-                        <View style={{ height: 100 }}></View>
-                      }
-                      renderItem={({ item }) => (
-                        <TouchableOpacity
-                          style={{
-                            alignItems: "center",
-                            justifyContent: "flex-start",
-                            flexDirection: "row",
-                            paddingHorizontal: 12,
-                            marginBottom: 12,
-                            paddingBottom: 7,
-                            backgroundColor: Colors.white,
-                            paddingTop: 7,
-                            marginHorizontal: 12,
-                            borderRadius: 5,
-                            borderColor: "#ddd",
-                            borderWidth: 1,
-                          }}
-                        >
-                          <View
-                            style={{
-                              alignItems: "center",
-                              justifyContent: "flex-start",
-                              flexDirection: "row",
-                              flexWrap: "wrap",
-                              width: "100%",
-                              position: "relative",
-                            }}
-                          >
-                            <Text
-                              style={{
-                                color: Colors.black,
-                                fontSize: 16,
-                                fontWeight: "bold",
+                              source={require("../../../assets/grommet.png")}
+                            /> : index === 3 ?
+                              <View style={{ marginTop: 16, marginBottom: 16, width: '95%', overflow: 'hidden', height: width < 768 ? width / 2 - 50 : width === 768 ? width / 3 - 50 : width === 1024 ? width / 4 - 50 : width === 1440 ? width / 5 - 50 : width / 5 - 50 }}>
+                                <FlatList
+                                  data={stats.search_criteria.criteria_data}
+                                  style={{ width: "100%", paddingTop: 16, height: "auto" }}
+                                  renderItem={({ item }) => {
+                                    return (
+                                      <View style={styles.mainsimpleprog}>
+                                        <Text style={styles.progheading}>{item.search_name}</Text>
+                                        <View style={styles.progresscover}>
+                                          <View
+                                            style={[styles.inerprogcover(item.search_count >= 60 ? '#2bbcee' : item.search_count < 60 && item.search_count > 25 ? '#EBA029' : item.search_count <= 25 ? '#DA6576' : '#2bbcee'), { width: (100 * item.search_count) / stats.search_criteria.Criteria_Max + "%" }]}
+                                          ></View>
+                                        </View>
+                                        <Text style={styles.progresstext}>{item.search_count}</Text>
+                                      </View>
+                                    )
+                                  }}>
+                                </FlatList>
+                              </View> :
+                             <View style={{position:"relative",height:"100%",width:"100%",flexDirection:"row",alignItems:"flex-end"}}>
 
-                                flexWrap: "wrap",
-                              }}
-                            >
-                              Search-Parameters: {item.search_parameters}
-                            </Text>
-                            <Image
-                              style={styles.trashicon}
-                              source={require("../../../assets/trash.png")}
-                            ></Image>
-                          </View>
-                        </TouchableOpacity>
-                      )}
-                      ListEmptyComponent={
-                        <View style={{ alignItems: "center", marginTop: 20 }}>
-                          <Text>No data found</Text>
-                        </View>
-                      }
-                      keyExtractor={(item) => item.id}
-                    />
-                  </View>
-                </Modal>
-              </View>
-            </View>
-          </View> */}
-              {/* <View style={styles.maincovercolumns}>
-            <View style={styles.covercolsingle(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-              <View
-                style={[
-                  styles.signlecolumn(width >= 768 ? width / 3 - 16 : width / 2 - 16),
-                  {
-                    // minHeight: 210,
-                    justifyContent: "center",
-                    // position: "relative",
-                  },
-                ]}
-              >
-                <Text
-                  style={[
-                    styles.simplename,
-                    { marginBottom: 15, position: "absolute", top: 19 },
-                  ]}
-                >
-                  Engagement
-                </Text>
-                <Text style={styles.boldname}>
-                  {timeData.user_session_time}
-                </Text>
-              </View>
-            </View>
-            <View style={styles.covercolsingle(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-              <View style={styles.signlecolumn(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-                <Text style={[styles.simplename, { marginBottom: 15 }]}>
-                  Search Criteria
-                </Text>
-                <View style={styles.mainsimpleprog}>
-                  <Text style={styles.progheading}>Boynton Beach</Text>
-                  <View style={styles.progresscover}>
-                    <View
-                      style={[styles.inerprogcover, { width: "70%" }]}
-                    ></View>
-                  </View>
-                  <Text style={styles.progresstext}>7,366</Text>
-                </View>
-                <View style={styles.mainsimpleprog}>
-                  <Text style={styles.progheading}>4 Bedrooms</Text>
-                  <View style={styles.progresscover}>
-                    <View
-                      style={[styles.inerprogcover, { width: "40%" }]}
-                    ></View>
-                  </View>
-                  <Text style={styles.progresstext}>5,298</Text>
-                </View>
-                <View style={styles.mainsimpleprog}>
-                  <Text style={styles.progheading}>Master of main Level</Text>
-                  <View style={[styles.progresscover, {}]}>
-                    <View
-                      style={[
-                        styles.inerprogcover,
-                        { width: "60%", backgroundColor: "#eb9d22" },
-                      ]}
-                    ></View>
-                  </View>
-                  <Text style={styles.progresstext}>12,85</Text>
-                </View>
-                <View style={styles.mainsimpleprog}>
-                  <Text style={styles.progheading}>Pickleball</Text>
-                  <View style={[styles.progresscover, {}]}>
-                    <View
-                      style={[
-                        styles.inerprogcover,
-                        { width: "20%", backgroundColor: "#d4445c" },
-                      ]}
-                    ></View>
-                  </View>
-                  <Text style={styles.progresstext}>12,85</Text>
-                </View>
-              </View>
-            </View>
-          </View>
-          <View style={styles.maincovercolumns}>
-            <View style={styles.covercolsingle(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-              <View style={styles.signlecolumn(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-                <Text style={[styles.simplename, , { marginBottom: 15 }]}>
-                  Search Behaviour
-                </Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Image
-                    style={{
-                      height: 130,
-                      width: 130,
-                      resizeMode: "contain",
-                    }}
-                    source={require("../../../assets/graphone.png")}
-                  />
-                </TouchableOpacity>
-              </View>
-            </View>
-            <View style={styles.covercolsingle(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-              <View style={styles.signlecolumn(width >= 768 ? width / 3 - 16 : width / 2 - 16)}>
-                <Text style={[styles.simplename, , { marginBottom: 15 }]}>
-                  Surf Level
-                </Text>
-                <TouchableOpacity
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Image
-                    style={{
-                      height: 108,
-                      width: 108,
-                      resizeMode: "contain",
-                    }}
-                    source={require("../../../assets/grommet.png")}
-                  />
-                </TouchableOpacity>
-                <Text style={styles.grommt}>Grommet</Text>
-              </View>
-            </View>
-          </View>  */}
+                             <View style={{position:"relative",height:"90%",width:"90%",marginTop:12,paddingHorizontal:12,alignItems:"flex-end",justifyContent:"flex-start",paddingVertical:12,flexDirection:"row",paddingLeft:1}}>
+                             
+                             <View style={styles.leftnum}>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 1) } -</Text>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 2) } -</Text>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 3) } -</Text>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 4) } -</Text>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 5) } -</Text>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 6) } -</Text>
+                             <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 7)} -</Text>
+                                 <Text style={styles.nummain}>{Math.round(stats.search_behavior.Max / 8) } -</Text>
+                                 <Text style={styles.nummain}>0 -</Text>
+                               </View>
+                               <View style={{justifyContent:"space-between",flexDirection:"row",height:"80%",width:"100%"}}>
+                             
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[5].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[5].total_count /stats.search_behavior.Max > 25 && 100 * stats.search_behavior.behavior_data[5].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[5].total_count /stats.search_behavior.Max)+ "%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[5].Day}</Text>
+                               </View>
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[6].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[6].total_count /stats.search_behavior.Max > 25 && 100 * stats.search_behavior.behavior_data[6].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[6].total_count /stats.search_behavior.Max)+"%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[6].Day}</Text>
+                               </View>
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[0].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[0].total_count /stats.search_behavior.Max > 25 && 100 * stats.search_behavior.behavior_data[0].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[0].total_count /stats.search_behavior.Max)+"%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[0].Day}</Text>
+                               </View>
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[1].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[1].total_count /stats.search_behavior.Max > 25 && 100 * stats.search_behavior.behavior_data[1].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[1].total_count /stats.search_behavior.Max)+"%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[1].Day}</Text>
+                               </View>
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[2].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[2].total_count /stats.search_behavior.Max > 25 && 100 * stats.search_behavior.behavior_data[2].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[2].total_count /stats.search_behavior.Max)+"%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[2].Day}</Text>
+                               </View>
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[3].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[3].total_count /stats.search_behavior.Max > 25 && 100 * stats.search_behavior.behavior_data[3].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[3].total_count /stats.search_behavior.Max)+"%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[3].Day}</Text>
+                               </View>
+                               <View style={styles.mainlymain}>
+                                 <View style={styles.covertop}>
+                                   <View style={{backgroundColor:100 * stats.search_behavior.behavior_data[4].total_count /stats.search_behavior.Max >= 50 ? Colors.PrimaryColor : 100 * stats.search_behavior.behavior_data[4].total_count /stats.search_behavior.Max >= 25 && 100 * stats.search_behavior.behavior_data[4].total_count /stats.search_behavior.Max < 50 ? '#545455' : Colors.gray,height:(100 * stats.search_behavior.behavior_data[4].total_count /stats.search_behavior.Max)+"%"}}></View>
+                                 </View>
+                                 <Text style={styles.maincoverbar} >{stats.search_behavior.behavior_data[4].Day}</Text>
+                               </View>
+                               </View> 
+                               </View>  
+                             </View>   
+                        }
+                      </View>
+                    </View>
+                 </TouchableOpacity>
+                  )
+                }}>
+              </FlatList>
               <View style={{ height: 50 }}></View>
             </ScrollView>
           </View>
@@ -796,6 +359,54 @@ const SurfStats = (props) => {
 };
 
 const styles = StyleSheet.create({
+  maincoverbar:{fontSize:8,textAlign:"center"},
+  nummain:{fontSize:8,textAlign:"center",},
+  leftnum:{
+   // position:"absolute",
+   // backgroundColor:"red",
+    height:"80%",
+    justifyContent:"space-between",
+   // bottom:6
+  },
+  mainlymain:{position:"relative",width:12,marginHorizontal:2},
+  covertop:{height:"100%",justifyContent:"flex-end",position:"relative"},
+  
+  textcover: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    width: "100%",
+    top: 0,
+    paddingTop: 12,
+    //height: 22
+  },
+  rightarrowtext: {
+    height: 15,
+    width: 15,
+    resizeMode: "contain",
+    position: "absolute",
+    right: 3,
+    top: 16
+  },
+  centertext: {
+    color: Colors.PrimaryColor,
+    fontSize: 30,
+    fontWeight: "bold",
+    top: '45%',
+    position: 'absolute'
+  },
+  covercolsinglemain: (width) => ({
+    width: width,
+    height: width,
+    backgroundColor: Colors.white,
+    alignItems: "center",
+    // justifyContent: "center",
+    position: "relative",
+    borderRadius: 8,
+    overflow: 'hidden',
+  }),
+  maincoverupper: { flexDirection: "row", padding: 4 },
   maingraph: {
     width: 150,
     height: 150,
@@ -803,23 +414,65 @@ const styles = StyleSheet.create({
     borderBottomColor: "green",
     borderBottomWidth: 1,
   },
-  innermainbg: { backgroundColor: Colors.PrimaryColor, height: 80, width: 15, position: "absolute", bottom: 0 },
-  mainbg: { height: "100%", width: 15, position: "absolute", bottom: 0 },
-  maincoverbars: { height: "100%", backgroundColor: "green", position: "relative" },
-  weektext: { fontSize: 13, color: Colors.black, opacity: .5, position: "absolute", bottom: -17, left: 0, right: 0, paddingHorizontal: 4 },
+  innermainbg: {
+    backgroundColor: Colors.PrimaryColor,
+    height: 80,
+    width: 15,
+    position: "absolute",
+    bottom: 0,
+  },
+  mainbg: { height: "100%", width: 15, position: "absolute", bottom: 0, backgroundColor: Colors.gray },
+  maincoverbars: {
+    height: "100%",
+    backgroundColor: "green",
+    position: "relative",
+  },
+  weektext: {
+    fontSize: 13,
+    color: Colors.black,
+    opacity: 0.5,
+    position: "absolute",
+    bottom: -17,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 4,
+  },
 
   mainweeks: {
-    flexDirection: "row", height: "100%",
+    flexDirection: "row",
+    height: "100%",
   },
 
-  coverbg: { height: "100%", position: "relative", width: 16 },
-  wknam: { fontSize: 10, color: Colors.black, opacity: .5, paddingTop: 4, position: "relative", paddingHorizontal: 2 },
-  textleft: { fontSize: 10, color: Colors.black, opacity: .5, paddingTop: 4, position: "relative", marginLeft: -8, marginTop: -1, zIndex: 99 },
+  coverbg: { height: "100%", position: "relative", width: 20, alignItems: "center", justifyContent: "center" },
+  wknam: {
+    fontSize: 6,
+    color: Colors.black,
+    opacity: 0.5,
+    paddingTop: 4,
+    position: "relative",
+    paddingHorizontal: 2,
+    textAlign: "center", width: 20
+  },
+  textleft: {
+    fontSize: 6,
+    color: Colors.black,
+    opacity: 0.5,
+    // paddingTop: 4,
+    position: "relative",
+    //marginLeft: -8,
+    // marginTop: -1,
+    // zIndex: 99,
+    // paddingBottom:4
+  },
   fullcoversize: {
-    height: "100%", width: 16, backgroundColor: "pink",
+    height: "100%",
+    width: 16,
+    backgroundColor: "pink",
   },
   fullactualcoversize: {
-    height: "50%", width: 16, backgroundColor: "black",
+    height: "50%",
+    width: 16,
+    backgroundColor: "black",
   },
 
   boxcover: {
@@ -858,15 +511,17 @@ const styles = StyleSheet.create({
     right: 10,
     tintColor: Colors.PrimaryColor,
   },
-  inerprogcover: {
-    height: 3,
-    borderRadius: 22,
-    backgroundColor: "#2bbcee",
-    position: "absolute",
-    left: 0,
-    top: 0,
-    bottom: 0,
-  },
+  inerprogcover: (backgroundColor) => (
+    {
+      height: 3,
+      borderRadius: 22,
+      backgroundColor: backgroundColor,
+      position: "absolute",
+      left: 0,
+      top: 0,
+      bottom: 0,
+    }
+  ),
   progresstext: {
     textAlign: "right",
     fontSize: 7,
@@ -939,17 +594,18 @@ const styles = StyleSheet.create({
   username: { fontSize: 24, fontWeight: "bold", marginBottom: 5 },
 
   clientid: { fontSize: 14, marginBottom: 5 },
-  covercolsingle: width => ({
+  covercolsingle: (width) => ({
     width: width,
   }),
-  signlecolumn: width => ({
+
+  signlecolumn: (width) => ({
     backgroundColor: Colors.white,
     padding: 10,
     borderRadius: 5,
     marginHorizontal: 5,
     height: width,
-    alignContent:"center",
-    overflow: 'hidden',
+    alignContent: "center",
+    overflow: "hidden",
   }),
   //   iconnextarrow:{alignItems:"flex-end",
   // position:"absolute",
@@ -957,8 +613,20 @@ const styles = StyleSheet.create({
   // top:10
   // },
   iconnextarrow: { position: "absolute", right: 0 },
-  simplename: { fontSize: 12, fontWeight: "bold", textAlign: "center", justifyContent: 'center' },
-  boldname: { color: "#0d8dba", fontWeight: "bold", fontSize: 30, height: '100%', textAlign: 'center', alignContent: 'center' },
+  simplename: {
+    fontSize: 12,
+    fontWeight: "bold",
+    textAlign: "center",
+    justifyContent: "center",
+  },
+  boldname: {
+    color: "#0d8dba",
+    fontWeight: "bold",
+    fontSize: 30,
+    height: "100%",
+    textAlign: "center",
+    alignContent: "center",
+  },
   maincovercolumns: {
     flexDirection: "row",
     alignItems: "center",
@@ -966,7 +634,7 @@ const styles = StyleSheet.create({
     marginTop: 12,
   },
   mainsimpleprog: { width: "100%", marginBottom: 2 },
-  progheading: { fontSize: 11, marginBottom: 4, width: '100%' },
+  progheading: { fontSize: 11, marginBottom: 4, width: "100%" },
 });
 
 export default SurfStats;

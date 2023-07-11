@@ -5,6 +5,7 @@ import {
   View,
   TouchableOpacity,
   ScrollView,
+  StyleSheet,
   SafeAreaView,
 } from "react-native";
 
@@ -126,6 +127,7 @@ const EditClientsDetails = (props) => {
           >
             Edit Client
           </Text>
+
           <TouchableOpacity
             onPress={onHandleClick}
             style={{
@@ -178,15 +180,32 @@ const EditClientsDetails = (props) => {
                 returnKeyType="done"
                 onChangeText={(text) => setName(text)}
 
-                //onChangeText={text => setID(text)}
+              //onChangeText={text => setID(text)}
               />
             </View>
           </View>
 
           <View style={{ width: "95%", alignSelf: "center" }}>
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Email
-            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+                Email
+              </Text>
+              <TouchableOpacity
+                style={styles.iconcover}
+                onPress={() => { }}
+              >
+                <Image
+                  style={{
+                    height: 15,
+                    margin: 2,
+                    width: 15,
+                    resizeMode: "contain",
+                    tintColor: Colors.white,
+                  }}
+                  source={require("../../../assets/plus.png")}
+                />
+              </TouchableOpacity>
+            </View>
             <View
               style={{
                 width: "100%",
@@ -218,9 +237,27 @@ const EditClientsDetails = (props) => {
           </View>
 
           <View style={{ width: "95%", alignSelf: "center" }}>
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Phone
-            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+                Phone
+              </Text>
+              <TouchableOpacity
+                style={styles.iconcover}
+                onPress={() => { }}
+              >
+                <Image
+                  style={{
+                    height: 15,
+                    margin: 2,
+                    width: 15,
+                    resizeMode: "contain",
+                    tintColor: Colors.white,
+                  }}
+                  source={require("../../../assets/plus.png")}
+                />
+              </TouchableOpacity>
+            </View>
+
             <View
               style={{
                 width: "100%",
@@ -255,6 +292,8 @@ const EditClientsDetails = (props) => {
             <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
               Client Type
             </Text>
+
+
             <View
               style={{
                 width: "100%",
@@ -282,15 +321,32 @@ const EditClientsDetails = (props) => {
                 autoCorrect={false}
                 returnKeyType="done"
                 placeholderTextColor={Colors.black}
-                //onChangeText={text => setMobile(text)}
+              //onChangeText={text => setMobile(text)}
               />
             </View>
           </View>
 
           <View style={{ width: "95%", alignSelf: "center" }}>
-            <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
-              Address
-            </Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+              <Text style={{ fontSize: 15, color: Colors.black, marginTop: 15 }}>
+                Address
+              </Text>
+              <TouchableOpacity
+                style={styles.iconcover}
+                onPress={() => { }}
+              >
+                <Image
+                  style={{
+                    height: 15,
+                    margin: 2,
+                    width: 15,
+                    resizeMode: "contain",
+                    tintColor: Colors.white,
+                  }}
+                  source={require("../../../assets/plus.png")}
+                />
+              </TouchableOpacity>
+            </View>
             <View
               style={{
                 width: "100%",
@@ -381,4 +437,16 @@ const EditClientsDetails = (props) => {
   );
 };
 
+const styles = StyleSheet.create({
+  iconcover: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    marginHorizontal: 2,
+
+    padding: 8,
+    backgroundColor: Colors.PrimaryColor,
+    borderRadius: 100,
+  },
+})
 export default EditClientsDetails;

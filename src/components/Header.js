@@ -34,8 +34,9 @@ const Header = (props) => {
   const isFocused = useIsFocused();
   const [selectedOption, setSelectedOption] = useState("");
   const [selectedDate, setSelectedDate] = useState(
-    moment().format("YYYY-MM-DD")
+    moment().format("DD/MM/YYYY")
   );
+  var d = new Date();
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [showPicker, setShowPicker] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -138,7 +139,7 @@ const Header = (props) => {
                   <Text
                     style={{ color: Colors.PrimaryColor, fontWeight: "bold" }}
                   >
-                    {selectedDate}
+                   {d.toLocaleString('en-US', { hour: 'numeric',minute:'2-digit', hour12: true }).toLocaleLowerCase()} {moment(selectedDate).format('M/D/YY')} 
                   </Text>
                 </Text>
                 {activitiesForDate.map((activity, index) => (
