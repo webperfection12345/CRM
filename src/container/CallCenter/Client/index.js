@@ -23,7 +23,7 @@ const Client = () => {
     return(
 <SafeAreaView style={{ backgroundColor:Colors.gray, height:"100%",alignItems:"center",justifyContent:"center"}}>
 
-<ScrollView style={{paddingHorizontal: 16,height:"100%",}}>
+<View style={{paddingHorizontal: 16,height:"100%",alignItems:"center",justifyContent:"center"}}>
                     <View style={styles.topmain}>
                     <View style={styles.maincover}>
                         <View style={styles.mainco}>
@@ -57,7 +57,7 @@ const Client = () => {
                           <Text style={styles.onlinedot}></Text></View>
                         </View>
                         <View style={{height:30,width:70,borderRadius:20,position:"absolute",right:0}}>
-                          <Switch
+                          {/* <Switch
                             activeText='Loan'
                             inActiveText="Cash"
                             outerCircleStyle={{ width: 40 }}
@@ -67,9 +67,9 @@ const Client = () => {
                             thumbColor={"#f4f3f4"}
                             ios_backgroundColor="#3e3e3e"
                             onValueChange={toggleSwitch}
-                            // value={isEnabled}
+                          
 
-                          />
+                          /> */}
                           </View>
                           </View>
                           
@@ -151,7 +151,7 @@ const Client = () => {
                     </View>
                    
                   
-                  </ScrollView>
+                  </View>
       </SafeAreaView>
 
     )

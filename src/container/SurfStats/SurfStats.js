@@ -13,7 +13,7 @@ import { ScrollView, TextInput } from "react-native-gesture-handler";
 
 import Colors from "../../utils/Colors";
 import { useNavigation } from "@react-navigation/native";
-import { color } from "react-native-reanimated";
+import { RotateInDownLeft, RotateInDownRight, RotateInUpLeft, color } from "react-native-reanimated";
 import { getSearchFav } from "../../modules/getSearchFav";
 import { getContactFav } from "../../modules/getContactFav";
 import { useDispatch } from "react-redux";
@@ -194,7 +194,7 @@ const SurfStats = (props) => {
                 </View>
               </View>
             </View>
-
+   
             <View style={styles.maincovercolumns}>
               <View style={styles.covercolsingle}>
                 <View style={styles.signlecolumn}>
@@ -560,7 +560,7 @@ const SurfStats = (props) => {
                   <Text style={[styles.simplename, , { marginBottom: 15 }]}>
                     Search Behaviour
                   </Text>
-                  <TouchableOpacity
+                  {/* <TouchableOpacity
                     style={{
                       flexDirection: "row",
                       justifyContent: "center",
@@ -575,7 +575,92 @@ const SurfStats = (props) => {
                       }}
                       source={require("../../../assets/graphone.png")}
                     />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
+
+
+<View style={styles.maingraph}>
+<View style={styles.sidenumber}>
+  <Text style={styles.textleft}>80 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>70 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>60 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>50 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>40 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>30 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>20 <Text style={styles.dash}>-</Text> </Text>
+  <Text style={styles.textleft}>10 <Text style={styles.dash}>-</Text></Text>
+  <Text style={styles.textleft}>0 <Text style={styles.dash}>-</Text></Text>
+</View>
+
+ <View style={{position:"absolute",width:"100%",height:"100%"}}>
+ <View style={{flexDirection:"row",position:"relative",width:"100%",height:"100%",justifyContent:"center"}}>
+<View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+    <View style={styles.innermainbg}>
+
+    </View>
+  </View>
+  </View>
+
+<View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+<View style={[styles.innermainbg, {height:"50%"}]}>
+
+    </View>
+  </View>
+  </View>
+  <View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+    <View style={[styles.innermainbg, {height:"20%"}]}>
+
+    </View>
+  </View>
+  </View>
+  <View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+    <View style={styles.innermainbg}>
+
+    </View>
+  </View>
+  </View>
+  <View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+<View style={[styles.innermainbg, {height:"100%"}]}>
+
+    </View>
+  </View>
+  </View>
+  <View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+    <View style={styles.innermainbg}>
+
+    </View>
+  </View>
+  </View>
+  <View style={styles.coverbg}>  
+<View style={styles.mainbg}>
+<View style={[styles.innermainbg, {height:"10%"}]}>
+
+    </View>
+  </View>
+  </View>
+</View>
+   <View style={{position:"relative",justifyContent:"space-between",flexDirection:"row",width:"100%"}}>
+  <Text style={styles.wknam}>M</Text>
+  <Text style={styles.wknam}>T</Text>
+  <Text style={styles.wknam}>W</Text>
+  <Text style={styles.wknam}>TH</Text>
+  <Text style={styles.wknam}>F</Text>
+  <Text style={styles.wknam}>S</Text>
+  <Text style={styles.wknam}>S</Text>
+</View>
+
+
+</View>
+</View>
+
+
+
+
                 </View>
               </View>
               <View style={styles.covercolsingle}>
@@ -604,14 +689,55 @@ const SurfStats = (props) => {
               </View>
             </View>
             <View style={{ height: 50 }}></View>
+           
           </ScrollView>
         </View>
       </View>
+      <View style={{height:150,width:150,backgroundColor:"red",alignItems:"center",justifyContent:"center"}}>
+            <View style={[styles.innermains,{position:"absolute",top:12}]}>
+                    <Text style={styles.simplename}>Favorites</Text>
+                    <TouchableOpacity style={styles.iconnextarrow}>
+                      <Image
+                        style={{
+                          height: 15,
+                          width: 15,
+                          marginLeft: 20,
+                          resizeMode: "contain",
+                        }}
+                        source={require("../../../assets/arrownext.png")}
+                      ></Image>
+                    </TouchableOpacity>
+                  </View>
+                  <Text style={styles.boldname}>defdfdfd</Text>
+            </View>
     </SafeAreaView>
+    
   );
 };
 
 const styles = StyleSheet.create({
+  maingraph:{
+//height:150,
+  width:150,
+  backgroundColor:Colors.cream,
+  borderBottomColor:"green",
+  borderBottomWidth:1
+},
+innermainbg:{backgroundColor:Colors.PrimaryColor,height:80,width:15,position:"absolute",bottom:0},
+mainbg:{backgroundColor:Colors.cream,height:"100%",width:15,position:"absolute",bottom:0},
+maincoverbars:{height:"100%",backgroundColor:"green",position:"relative"},
+weektext:{fontSize:13,color:Colors.black,opacity:.5,position:"absolute",bottom:-17,left:0,right:0,paddingHorizontal:4},
+
+ mainweeks:{flexDirection:"row",height:"100%",
+},
+
+coverbg:{height:"100%",position:"relative",width:22},
+wknam:{fontSize:10,color:Colors.black,opacity:.5,paddingTop:4,position:"relative",paddingHorizontal:2},
+textleft:{fontSize:10,color:Colors.black,opacity:.5,paddingTop:4,position:"relative",left:-24},
+fullcoversize:{height:"100%",width:20,backgroundColor:"pink",
+},
+fullactualcoversize:{height:"50%",width:20,backgroundColor:"black",
+},
   boxcover: {
     backgroundColor: Colors.darkblue,
     height: 170,
