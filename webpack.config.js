@@ -24,7 +24,7 @@ module.exports = {
   plugins: [
     new Dotenv(),
     new HtmlWebpackPlugin({
-      title: "Weather App",
+      title: "CRM App",
       template: path.resolve(__dirname, "src/index.tmp.html"),
       filename: "index.bundle.html",
     }),
