@@ -10,7 +10,6 @@
     "deploy": "gh-pages -d web-build",
     "predeploy": "expo build:web",
     "build": "webpack --mode production"
-
   },
   "dependencies": {
     "@expo/webpack-config": "^18.0.1",
@@ -73,12 +72,18 @@
     "redux-thunk": "^2.4.2",
     "rn-responsive-styles": "^2.1.0",
     "styled-components": "^6.0.2",
+    "webpack": "^5.88.1",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@babel/plugin-proposal-export-namespace-from": "^7.18.9",
-    "gh-pages": "^5.0.0"
+    "gh-pages": "^5.0.0",
+    "webpack": "^4.28.3",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-middleware": "^3.5.0",
+    "webpack-dev-server": "^3.1.14",
+    "webpack-hot-middleware": "^2.24.3"
   },
   "resolutions": {
     "@expo/config-plugins": "~6.0.0",
