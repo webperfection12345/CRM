@@ -112,7 +112,7 @@ const MyClientsDetails = (props) => {
       label: 'Transactions'
     },
     {
-      label: 'Activities'
+      label: 'Activity Log'
     },
     {
       label: 'Start Transaction'
@@ -383,7 +383,7 @@ const MyClientsDetails = (props) => {
                     alignItems: "center",
                     marginLeft: 10,
                   }}
-                  onPress={() => navigation.goBack()}
+                  onPress={() => navigation.navigate('Contact')}
                 >
                   <Image
                     style={{
@@ -412,7 +412,7 @@ const MyClientsDetails = (props) => {
                       style={{
                         height: 22,
                         width: 22,
-                        marginRight: 16,
+                        marginRight: 8,
                         resizeMode: "contain",
                         tintColor: Colors.white,
                       }}
@@ -450,7 +450,7 @@ const MyClientsDetails = (props) => {
                                 }}
                                 source={require("../../../assets/speed3/speed3.png")}
                               />
-                              <Text style={{ fontWeight: 'bold' }}>surf Stats</Text>
+                              <Text style={{ fontWeight: 'bold' ,textAlign:'center'}}>surf Stats</Text>
                             </View>
                           </TouchableOpacity>
                           <View style={styles.clientinformation}>
@@ -469,7 +469,6 @@ const MyClientsDetails = (props) => {
                               />
                               <View style={styles.onlinedot}></View>
                             </View>
-
                           </View>
 
                         </View>

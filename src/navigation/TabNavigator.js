@@ -17,14 +17,23 @@ import SurfStats from "../container/SurfStats/SurfStats";
 import Leads from "../container/Leads/Leads";
 import Contact from "../container/Contact/Contact";
 import Transactions from "../container/Transactions/Transactions";
-//import Settings from "../container/Settings/Settings";
 import Marketing from "../container/Marketing/Marketing";
 import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import TransactionDeskNew from "../container/TransactionDeskNew/TransactionDeskNew";
 import TransactionDesk from "../container/TransactionDesk/TransactionDesk";
 import Properties from "../container/Properties/Properties";
+import MyClientsDetails from "../container/MyClientsDetails/MyClientsDetails";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Favorites from "../container/SurfStats/Favorites";
+import SavedSearch from "../container/SurfStats/SavedSearch";
+import SearchCreteria from "../container/SurfStats/SearchCreteria";
+import PropertiesDetails from "../container/PropertiesDetails/PropertiesDetails";
+import EditClientsDetails from "../container/EditClientsDetails/EditClientsDetails";
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const BottomTabNavigator = () => {
   return (
@@ -35,7 +44,7 @@ const BottomTabNavigator = () => {
     >
       <Tab.Screen
         name="MLS"
-        component={Properties}
+        component={SurfListingStackScreen}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
@@ -49,7 +58,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="Contact"
-        component={Contact}
+        component={ContactStackScreen}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
@@ -61,6 +70,7 @@ const BottomTabNavigator = () => {
           tabBarHideOnKeyboard: true,
         }}
       />
+    
       <Tab.Screen
         name="Home"
         component={Dashboard}
@@ -72,7 +82,6 @@ const BottomTabNavigator = () => {
           ),
 
           tabBarIcon: require("./../assets/images/Dashboab.png"),
-
           //keyboardHidesTabBar: true,
           tabBarHideOnKeyboard: true,
         }}
@@ -94,7 +103,7 @@ const BottomTabNavigator = () => {
       />
       <Tab.Screen
         name="TransactionDeskNew"
-        component={TransactionDeskNew}
+        component={TransactionStackScreen}
         options={{
           tabBarLabel: (
             <Text style={{ fontSize: 11 }} allowFontScaling={false}>
@@ -107,21 +116,9 @@ const BottomTabNavigator = () => {
           tabBarBackground: "grey",
         }}
       />
-      {/* <Tab.Screen
-        name="Marketing"
-        component={Marketing}
-        options={{
-          tabBarLabel: (
-            <Text style={{ fontSize: 10 }} allowFontScaling={false}>
-              Marketing
-            </Text>
-          ),
-          tabBarIcon: require("../../assets/account.png"),
-          //keyboardHidesTabBar: true,
-          tabBarHideOnKeyboard: true,
-        }}
-      /> */}
+  
     </Tab.Navigator>
+    
   );
 };
 function CustomTabBar({ state, descriptors, navigation }) {
@@ -229,6 +226,47 @@ function CustomTabBar({ state, descriptors, navigation }) {
         </KeyboardAvoidingView>
       </SafeAreaView>
     </>
+  );
+}
+
+const ContactStack = createNativeStackNavigator();
+const TransactionStack = createNativeStackNavigator();
+const SurfListingStack = createNativeStackNavigator();
+
+
+function SurfListingStackScreen() {
+  return (
+    <SurfListingStack.Navigator>
+      <SurfListingStack.Screen name="MLS" component={Properties} options={{headerShown:false}} />
+      <SurfListingStack.Screen name="PropertiesDetails" component={PropertiesDetails} options={{headerShown:false}}/>
+
+      
+    </SurfListingStack.Navigator>
+  );
+}
+
+function TransactionStackScreen() {
+  return (
+    <TransactionStack.Navigator>
+      <TransactionStack.Screen name="TransactionDeskNew" component={TransactionDeskNew} options={{headerShown:false}} />
+      <TransactionStack.Screen name="TransactionDesk" component={TransactionDesk} options={{headerShown:false}}/>
+    </TransactionStack.Navigator>
+  );
+}
+
+function ContactStackScreen() {
+  return (
+    <ContactStack.Navigator>
+      <ContactStack.Screen name="Contact" component={Contact} options={{headerShown:false}} />
+      <ContactStack.Screen name="MyClientsDetails" component={MyClientsDetails} options={{headerShown:false}}/>
+      <ContactStack.Screen name="SurfStats" component={SurfStats} options={{headerShown:false}}/>
+      <ContactStack.Screen name="Favorites" component={Favorites} options={{headerShown:false}}/>
+      <ContactStack.Screen name="SavedSearch" component={SavedSearch} options={{headerShown:false}}/>
+      <ContactStack.Screen name="SearchCreteria" component={SearchCreteria} options={{headerShown:false}}/>
+      <ContactStack.Screen name="TransactionDesk" component={TransactionDesk} options={{headerShown:false}}/>
+      <ContactStack.Screen name="EditClientsDetails" component={EditClientsDetails} options={{headerShown:false}}/>
+
+    </ContactStack.Navigator>
   );
 }
 export default BottomTabNavigator;

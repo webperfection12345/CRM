@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const getLeads = createAsyncThunk("getLeads", async () => {
   const id = await AsyncStorage.getItem("userId");
   const urlDynamic =
-    " https://surf.topsearchrealty.com/wp-json/leads/leadsall?agentid=" + id;
+    "https://surf.topsearchrealty.com/wp-json/leads/leadsall?agentid=" + id;
   return await getAPI(urlDynamic)
     .then(async (response) => {
       const { data } = response;
@@ -27,7 +27,7 @@ export const getLeads = createAsyncThunk("getLeads", async () => {
 const getLeadsSlice = createSlice({
   name: "getLeads",
   initialState: {
-    getLeadsData: [],
+    getLeadsData: {},
     status: null,
   },
   extraReducers: {

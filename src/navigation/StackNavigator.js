@@ -44,7 +44,6 @@ function StackNavigator() {
       options={{headerShown:false}}
 
     >
-        
       <Stack.Screen name="Login" component={Login}  options={{headerShown:false}}/>
       <Stack.Screen name="AccessRequest" component={AccessRequest} options={{headerShown:false}}/>
       <Stack.Screen name="AccessRequestSent" component={AccessRequestSent} options={{headerShown:false}}/>
@@ -86,7 +85,6 @@ function StackNavigator() {
       <Stack.Screen name="Favorites" component={Favorites} options={{headerShown:false}}/>
       <Stack.Screen name="SavedSearch" component={SavedSearch} options={{headerShown:false}}/>
       <Stack.Screen name="SearchCreteria" component={SearchCreteria} options={{headerShown:false}}/>
-
       <Stack.Screen name="TransactionDesk" component={TransactionDesk} options={{headerShown:false}}/>
       <Stack.Screen name="SurfStats" component={SurfStats} options={{headerShown:false}}/>
     </Stack.Navigator>

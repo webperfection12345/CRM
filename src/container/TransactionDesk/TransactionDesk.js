@@ -27,8 +27,8 @@ const TransactionDesk = () => {
       <View
         style={{
           height: 60,
-          marginRight:16,
-          marginLeft:16,
+          paddingLeft:16,
+          paddingRight:16,
           flexDirection: "row",
           justifyContent: "space-between",
           alignItems: "center",
@@ -36,7 +36,7 @@ const TransactionDesk = () => {
         }}
       >
         <TouchableOpacity
-          onPress={() => navigation.navigate("Home")}
+          onPress={() => navigation.goBack()}
           style={{
             flexDirection: "row",
             justifyContent: "center",

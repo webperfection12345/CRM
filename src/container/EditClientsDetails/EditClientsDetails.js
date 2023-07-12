@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet,
   SafeAreaView,
+  Modal
 } from "react-native";
 
 import Header from "../../components/Header";
@@ -18,24 +19,41 @@ import { useNavigation } from "@react-navigation/native";
 import * as ImagePicker from "expo-image-picker";
 import { updateContact } from "../../modules/deleteContact";
 import { useDispatch } from "react-redux";
+import { Dropdown } from "react-native-element-dropdown";
+import { Button } from "react-native-web";
 
+const data = [
+  { label: 'mobile', value: '1' },
+  { label: 'home', value: '2' },
+  { label: 'work', value: '3' },
+  { label: 'school', value: '4' },
+  { label: 'main', value: '5' },
+];
 const EditClientsDetails = (props) => {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [id, setID] = useState("");
-  const [login, setLogin] = useState("");
-  const [nickname, setNickname] = useState("");
   const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [mobile, setMobile] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [comments, setComments] = useState("");
-  const [avatarSource, setAvatarSource] = useState(null);
   const [uriResponse, setUriResponse] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
+  const [value, setValue] = useState(null);
+  const [isFocus, setIsFocus] = useState(false);
+
   const fogotPassword = () => {
     navigation.navigate("ForgotPassword");
   };
+
+  const openPopup = () => {
+    setShowPopup(true);
+  };
+
+  const closePopup = () => {
+    setShowPopup(false);
+  };
+
   const item = props.route.params.item;
   useEffect(() => {
     setName(item.contact_full_name);
@@ -179,8 +197,6 @@ const EditClientsDetails = (props) => {
                 autoCorrect={false}
                 returnKeyType="done"
                 onChangeText={(text) => setName(text)}
-
-              //onChangeText={text => setID(text)}
               />
             </View>
           </View>
@@ -192,7 +208,7 @@ const EditClientsDetails = (props) => {
               </Text>
               <TouchableOpacity
                 style={styles.iconcover}
-                onPress={() => { }}
+                onPress={() => { setShowPopup(!showPopup) }}
               >
                 <Image
                   style={{
@@ -212,12 +228,27 @@ const EditClientsDetails = (props) => {
                 height: 50,
                 marginTop: 10,
                 justifyContent: "center",
+                flexDirection: 'row',
+                alignItems: 'center'
               }}
             >
+              <TouchableOpacity
+                style={{ width: 25, height: 25, backgroundColor: Colors.PrimaryColor, borderRadius: 15, alignItems: 'center', justifyContent: 'center' }}
+                onPress={() => { }}>
+                <Image
+                  style={{
+                    height: 20,
+                    width: 20,
+                    resizeMode: "contain",
+
+                  }}
+                  source={require("../../../assets/mail.png")}
+                ></Image>
+              </TouchableOpacity>
               <TextInput
                 allowFontScaling={false}
                 style={{
-                  width: "100%",
+                  width: "90%",
                   borderRadius: 8,
                   height: "100%",
                   paddingHorizontal: 15,
@@ -234,6 +265,89 @@ const EditClientsDetails = (props) => {
                 onChangeText={(text) => setEmail(text)}
               />
             </View>
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={showPopup}
+              onRequestClose={closePopup}
+            >
+              <View style={styles.popupContainer}>
+                <View style={styles.popupContent}>
+                  <View
+                    style={{
+                      alignSelf: "flex-end",
+                      position: "absolute",
+                      zIndex: 9999,
+                      right: 6,
+                      top: 6,
+                    }}
+                  >
+                    <TouchableOpacity
+                      style={styles.popupButton}
+                      onPress={closePopup}
+                    >
+                      <Image
+                        style={{
+                          height: 15,
+                          width: 15,
+                          resizeMode: "contain",
+                        }}
+                        source={require("../../../assets/closeblack.png")}
+                      ></Image>
+                    </TouchableOpacity>
+                  </View>
+
+                  <View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 16 }}>
+                      <Dropdown
+                        style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+                        placeholderStyle={styles.placeholderStyle}
+                        selectedTextStyle={styles.selectedTextStyle}
+                        inputSearchStyle={styles.inputSearchStyle}
+                        iconStyle={styles.iconStyle}
+                        data={data}
+                        maxHeight={300}
+                        labelField="label"
+                        valueField="value"
+                        value={value}
+                        onFocus={() => setIsFocus(true)}
+                        onBlur={() => setIsFocus(false)}
+                        onChange={item => {
+                          setValue(item.value);
+                          setIsFocus(false);
+                        }}
+
+                      />
+                      <TextInput
+                        allowFontScaling={false}
+                        style={{
+                          width: "70%",
+                          borderRadius: 8,
+                          height: 50,
+                          marginTop: 30,
+                          marginLeft: 8,
+                          color: Colors.black,
+                          borderColor: Colors.gray,
+                          borderWidth: 1,
+                          borderColor: Colors.boderColor,
+                          fontSize: 14,
+                          padding: 2,
+                        }}
+                        autoCorrect={false}
+                        returnKeyType="done"
+                        onChangeText={(text) => setName(text)}
+                      />
+                    </View>
+                    <View style={{width:"100%",justifyContent:"center",alignItems:"center",marginTop:16}}>
+                      <View style={{width:'25%',height:50,borderRadius:10,backgroundColor:Colors.PrimaryColor,justifyContent:'center'}}>
+                        <Text style={{color:Colors.white,textAlign:'center',justifyContent:'center',}}>Add</Text>
+                      </View>
+                      </View>
+                  </View>
+                </View>
+              </View>
+            </Modal>
           </View>
 
           <View style={{ width: "95%", alignSelf: "center" }}>
@@ -243,7 +357,7 @@ const EditClientsDetails = (props) => {
               </Text>
               <TouchableOpacity
                 style={styles.iconcover}
-                onPress={() => { }}
+                onPress={() => { setShowPopup(!showPopup) }}
               >
                 <Image
                   style={{
@@ -333,7 +447,7 @@ const EditClientsDetails = (props) => {
               </Text>
               <TouchableOpacity
                 style={styles.iconcover}
-                onPress={() => { }}
+                onPress={() => { setShowPopup(!showPopup) }}
               >
                 <Image
                   style={{
@@ -431,13 +545,86 @@ const EditClientsDetails = (props) => {
             </TouchableOpacity>
           </View>
           <View style={{ height: 50 }}></View>
+
         </ScrollView>
+
       </View>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: 'white',
+    padding: 16,
+  },
+  dropdown: {
+    width: "25%",
+
+    marginTop: 30,
+    height: 50,
+    borderColor: 'gray',
+    borderWidth: 0.5,
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  icon: {
+    marginRight: 5,
+  },
+  label: {
+    position: 'absolute',
+    backgroundColor: 'white',
+    left: 22,
+    top: 8,
+    zIndex: 999,
+    paddingHorizontal: 8,
+    fontSize: 14,
+  },
+  placeholderStyle: {
+    fontSize: 16,
+  },
+  selectedTextStyle: {
+    fontSize: 16,
+  },
+  iconStyle: {
+    width: 20,
+    height: 20,
+  },
+  inputSearchStyle: {
+    height: 40,
+    fontSize: 16,
+  },
+  popupButton: {
+    backgroundColor: Colors.white,
+    alignSelf: "center",
+    borderRadius: 100,
+    height: 35,
+    width: 35,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  popupContent: {
+    backgroundColor: Colors.cream,
+    padding: 16,
+    borderRadius: 10,
+    height:'40%',
+    width: "100%",
+  },
+  popupContainer: {
+    flex: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    justifyContent: "flex-end",
+    alignItems: "flex-end",
+  },
+  popupButton: {
+    backgroundColor: Colors.white,
+    alignSelf: "center",
+    borderRadius: 100,
+    height: 35,
+    width: 35,
+    justifyContent: "center",
+    alignItems: "center",
+  },
   iconcover: {
     flexDirection: "row",
     justifyContent: "center",

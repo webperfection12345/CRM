@@ -14,42 +14,49 @@ import { getLeads } from "../../modules/getLeads";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import Activity from "../../components/Activity";
+import {store} from "../../redux/store"
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const Leads = () => {
+const Leads =  () => {
   const [data, setData] = useState([]);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const isFocused = useIsFocused();
+  const [id,setID]=useState();
   const navigation = useNavigation();
   const [searchText, setSearchText] = useState("");
   const [filteredData, setFilteredData] = useState();
   const [isSearching, setIsSearching] = useState(false);
   const [activity, setActivity] = useState(false);
 
-  useEffect(() => {
-    getAllContacts();
+  
+  useEffect( () => {
+    setActivity(true)
+
     if (isFocused) {
+    // const userID = await AsyncStorage.getItem("userId");
       // Perform the refresh logic here
+    getAllContacts();
+
     }
+
   }, [isFocused]);
 
-  const getAllContacts = async () => {
+  const getAllContacts =  (id) => {
     try {
-      const response = await dispatch(getLeads());
-      console.log(response, "response");
-      if (response && response.payload && response.payload.data) {
-        const contactsData = response.payload.data;
-        setData(contactsData);
-        setLoading(false);
-        setActivity(true);
-      } else {
-        console.error("Invalid response data:", response);
-        // Handle the error case here, such as displaying an error message or taking appropriate action
-      }
+       dispatch(getLeads()).then((res)=> {
+        setData(res.payload.data)
+       setActivity(false);
+
+      }).catch((e)=>{
+        console.log('Catch Error====> ',e)
+      })
+
     } catch (error) {
       console.error("Error retrieving leads:", error);
       // Handle the error case here, such as displaying an error message or taking appropriate action
     }
+
   };
 
   const searchFilter = (text) => {
@@ -99,7 +106,8 @@ const Leads = () => {
         <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
           surf Leads
         </Text>
-        <Text></Text>
+        <Text style={{ fontSize: 19, fontWeight: "bold", color: Colors.white }}>
+        </Text>
       </View>
       <View
         style={{
@@ -143,184 +151,180 @@ const Leads = () => {
           ></TextInput>
         </View>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        {activity ? (
+          {activity ? <Activity></Activity> :
           <FlatList
-            data={isSearching ? filteredData : data}
-            ListFooterComponent={<View style={{ height: 50 }}></View>}
-            renderItem={({ item }) => (
+          data={isSearching ? filteredData : data}
+          ListFooterComponent={<View style={{ height: 50 }}></View>}
+          renderItem={({ item }) => (
+            <View
+              style={{
+                backgroundColor: Colors.cream,
+                width: "100%",
+
+                paddingVertical: 20,
+                borderBottomWidth: 1,
+                borderBottomColor: "#ddd",
+              }}
+            >
+              {/* Render the content for each item */}
               <View
                 style={{
-                  backgroundColor: Colors.cream,
-                  width: "100%",
-
-                  paddingVertical: 20,
-                  borderBottomWidth: 1,
-                  borderBottomColor: "#ddd",
+                  width: "90%",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                  height: 50,
                 }}
               >
-                {/* Render the content for each item */}
-                <View
+                {/* Render the Type */}
+                <Text
                   style={{
-                    width: "90%",
+                    color: "#8d8a8a",
+                    fontSize: 14,
+                    height: 50,
                     alignSelf: "center",
                     alignItems: "center",
                     alignContent: "center",
                     flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginBottom: 20,
-                    height: 50,
+                    marginTop: 25,
                   }}
                 >
-                  {/* Render the Type */}
-                  <Text
+                  Type
+                </Text>
+                {/* Render the icon based on the item type */}
+
+                {item.type === "Email" ? (
+                  <Image
+                    source={require("../../../assets/mail.png")}
                     style={{
-                      color: "#8d8a8a",
-                      fontSize: 14,
-                      height: 50,
+                      height: 35,
+                      width: 35,
                       alignSelf: "center",
                       alignItems: "center",
                       alignContent: "center",
                       flexDirection: "row",
-                      marginTop: 25,
+                      resizeMode: "contain",
                     }}
-                  >
-                    Type
-                  </Text>
-                  {/* Render the icon based on the item type */}
-
-                  {item.type === "Email" ? (
-                    <Image
-                      source={require("../../../assets/mail.png")}
-                      style={{
-                        height: 35,
-                        width: 35,
-                        alignSelf: "center",
-                        alignItems: "center",
-                        alignContent: "center",
-                        flexDirection: "row",
-                        resizeMode: "contain",
-                      }}
-                    />
-                  ) : item.type === "Message" ? (
-                    <Image
-                      source={require("../../../assets/chat.png")}
-                      style={{
-                        height: 35,
-                        width: 35,
-                        alignSelf: "center",
-                        alignItems: "center",
-                        alignContent: "center",
-                        flexDirection: "row",
-                        resizeMode: "contain",
-                        marginTop: 12,
-                      }}
-                    />
-                  ) : null}
-                </View>
-                {/* Render the Message */}
-                <View
-                  style={{
-                    width: "90%",
-                    alignSelf: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginBottom: 20,
-                    flexWrap: "wrap",
-                  }}
-                >
-                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                    Name
-                  </Text>
-                  <TouchableOpacity onPress={() => handleUsernameClick(item)}>
-                    <Text
-                      style={{
-                        color: Colors.black,
-                        fontSize: 14,
-                        textAlign: "right",
-                      }}
-                    >
-                      {item.username}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-                <View
-                  style={{
-                    width: "90%",
-                    alignSelf: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginBottom: 20,
-                  }}
-                >
-                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Phone</Text>
+                  />
+                ) : item.type === "Message" ? (
+                  <Image
+                    source={require("../../../assets/chat.png")}
+                    style={{
+                      height: 35,
+                      width: 35,
+                      alignSelf: "center",
+                      alignItems: "center",
+                      alignContent: "center",
+                      flexDirection: "row",
+                      resizeMode: "contain",
+                      marginTop: 12,
+                    }}
+                  />
+                ) : null}
+              </View>
+              {/* Render the Message */}
+              <View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                  flexWrap: "wrap",
+                }}
+              >
+                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
+                  Name
+                </Text>
+                <TouchableOpacity onPress={() => handleUsernameClick(item)}>
                   <Text
                     style={{
                       color: Colors.black,
                       fontSize: 14,
                       textAlign: "right",
-                      width: "60%",
                     }}
                   >
-                    {item.Phone}
+                    {item.username}
                   </Text>
-                </View>
-
-                {/* Render the Property Key */}
-                <View
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                }}
+              >
+                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>Phone</Text>
+                <Text
                   style={{
-                    width: "90%",
-                    alignSelf: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginBottom: 20,
+                    color: Colors.black,
+                    fontSize: 14,
+                    textAlign: "right",
+                    width: "60%",
                   }}
                 >
-                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                    Favorites
-                  </Text>
-                  <Text style={{ color: Colors.black, fontSize: 14 }}>
-                   
-                  </Text>
-                </View>
-                {/* Render the Date Created */}
-                <View
-                  style={{
-                    width: "90%",
-                    alignSelf: "center",
-                    alignItems: "center",
-                    alignContent: "center",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    marginBottom: 20,
-                  }}
-                >
-                  <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
-                    Date Created
-                  </Text>
+                  {item.Phone}
+                </Text>
+              </View>
 
-                  <Text style={{ color: Colors.black, fontSize: 14 }}>
-                    {new Date(item.created_date).toLocaleDateString("en-US")}
-                  </Text>
-                </View>
+              {/* Render the Property Key */}
+              <View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                }}
+              >
+                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
+                  Favorites
+                </Text>
+                <Text style={{ color: Colors.black, fontSize: 14 }}>
+                 
+                </Text>
               </View>
-            )}
-            ListEmptyComponent={
-              <View style={{ alignItems: "center", marginTop: 20 }}>
-                <Text>No data found</Text>
+              {/* Render the Date Created */}
+              <View
+                style={{
+                  width: "90%",
+                  alignSelf: "center",
+                  alignItems: "center",
+                  alignContent: "center",
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  marginBottom: 20,
+                }}
+              >
+                <Text style={{ color: "#8d8a8a", fontSize: 14 }}>
+                  Date Created
+                </Text>
+
+                <Text style={{ color: Colors.black, fontSize: 14 }}>
+                  {new Date(item.created_date).toLocaleDateString("en-US")}
+                </Text>
               </View>
-            }
-          />
-        ) : (
-          <Activity />
-        )}
-      </ScrollView>
+            </View>
+          )}
+          ListEmptyComponent={
+            <View style={{ alignItems: "center", marginTop: 20 }}>
+              <Text>No data found</Text>
+            </View>
+          }
+        />}
+        
     </SafeAreaView>
   );
 };

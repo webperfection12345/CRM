@@ -9,6 +9,8 @@ import { Provider } from "react-redux";
 import Colors from "./src/utils/Colors";
 import { LogBox } from 'react-native';
 import Apps from "./App";
+import { registerRootComponent } from 'expo';
+
 const App = () => {
   useEffect(() => {});
   LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message

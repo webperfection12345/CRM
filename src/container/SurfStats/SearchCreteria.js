@@ -59,7 +59,8 @@ const SearchCreteria = (props) => {
                 <View style={{padding:16}}>
                     <FlatList
                         data={props.route.params.item.criteria_data}
-                        style={{ width: "100%", paddingTop: 16, height: "auto" }}
+                        style={{ width: "100%", paddingTop: 16, height: "auto" ,marginBottom:50}}
+                        showsVerticalScrollIndicator={false}
                         renderItem={({ item }) => {
                             return (
                                 <View style={styles.mainsimpleprog}>

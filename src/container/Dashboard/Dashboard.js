@@ -461,8 +461,8 @@ export default function Dashboard() {
                 <Text style={styles.bigtext}>$2.7MM</Text>
               </View>
               <View style={styles.boxcover}>
-                <Text style={styles.smalltext}>Earnings</Text>
-                <Text style={styles.bigtext}>$29.500</Text>
+                <Text style={styles.smalltext}>Commissions</Text>
+                <Text style={styles.bigtext}>$29,500</Text>
               </View>
               <View style={styles.boxcover}>
                 <Text style={styles.smalltexttwo}>Document</Text>
@@ -494,8 +494,6 @@ export default function Dashboard() {
                 <Text style={styles.smalltexttwo}>Call</Text>
                 <Text style={styles.smalltexttwo}> Center</Text>
               </View>
-
-          
             </View>
           </View>
         </ScrollView>

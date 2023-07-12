@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   Linking,
 } from "react-native";
-
+import { StackActions } from '@react-navigation/native';
 import Header from "../../components/Header";
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
@@ -203,9 +203,8 @@ const Contact = () => {
               renderItem={({ item }) => (
                 <TouchableOpacity
                   onPress={() =>
-                    navigation.navigate("MyClientsDetails", { item: item })
-                    // navigation.navigate("ClientDetail", { item: item })
-
+                    // navigation.navigate("MyClientsDetails", { item: item })
+                    navigation.dispatch(StackActions.replace('MyClientsDetails', { item: item }))
                   }
                   style={{
                     height: 80,
