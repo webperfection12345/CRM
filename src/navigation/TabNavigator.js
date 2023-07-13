@@ -31,6 +31,7 @@ import SavedSearch from "../container/SurfStats/SavedSearch";
 import SearchCreteria from "../container/SurfStats/SearchCreteria";
 import PropertiesDetails from "../container/PropertiesDetails/PropertiesDetails";
 import EditClientsDetails from "../container/EditClientsDetails/EditClientsDetails";
+import chat from "../container/chat";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
@@ -200,8 +201,8 @@ function CustomTabBar({ state, descriptors, navigation }) {
                       source={image}
                       resizeMode="contain"
                       style={{
-                        height: "70%",
-                        width: "70%",
+                        height: label ==='Dashboard' ? '90%':"100%",
+                        width: label ==='Dashboard' ? '90%':"70%",
                         tintColor: isFocused ? Colors.PrimaryColor : null,
 
                         marginBottom: 10,
@@ -265,6 +266,8 @@ function ContactStackScreen() {
       <ContactStack.Screen name="SearchCreteria" component={SearchCreteria} options={{headerShown:false}}/>
       <ContactStack.Screen name="TransactionDesk" component={TransactionDesk} options={{headerShown:false}}/>
       <ContactStack.Screen name="EditClientsDetails" component={EditClientsDetails} options={{headerShown:false}}/>
+      <ContactStack.Screen name="Chat" component={chat} options={{headerShown:false}}/>
+
 
     </ContactStack.Navigator>
   );

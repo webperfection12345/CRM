@@ -14,7 +14,6 @@ import {
   Share,
   Platform,
 } from "react-native";
-import { MultiSelect } from 'react-native-element-dropdown';
 
 import Colors from "../../utils/Colors";
 import { TextInput } from "react-native-gesture-handler";
@@ -504,7 +503,7 @@ const MyClientsDetails = (props) => {
 
                             <TouchableOpacity
                               style={styles.iconcover}
-                              onPress={() => sendSMS()}
+                              onPress={() => {navigation.navigate('Chat')}}
                             >
                               <Image
                                 style={{

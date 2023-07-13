@@ -28,6 +28,7 @@ import getSearchFavReducer from "../modules/getSearchFav";
 import getContactFavReducer from "../modules/getContactFav";
 import getEngagementReducer from "../modules/getEngagement";
 import getLeadsReducer from "../modules/getLeads";
+import chat from "../modules/chat"
 export const store = configureStore({
   reducer: {
     loginUser: loginUserReducer,
@@ -59,6 +60,7 @@ export const store = configureStore({
     getContactFav: getContactFavReducer,
     getEngagement: getEngagementReducer,
     getLeads: getLeadsReducer,
+    chat:chat,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
