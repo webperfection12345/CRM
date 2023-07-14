@@ -30,43 +30,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScrollView } from "react-native-gesture-handler";
 import Contact from "../container/Contact/Contact";
 
-const data = [
-  // {
-  //   name: "Dashboard",
-  //   index: 0,
-  //   img: require("../../assets/Dashboardwhite.png"),
-  // },
-  // {
-  //   name: "Contacts",
-  //   index: 1,
-  //   img: require("../../assets/contactwhite.png"),
-  // },
-  // {
-  //   name: "Opportunities",
-  //   index: 2,
-  //   img: require("../../assets/transactionwqhite.png"),
-  // },
-  // {
-  //   name: "Transactions",
-  //   index: 3,
-  //   img: require("../../assets/opporrtubitywhite.png"),
-  // },
-  // {
-  //   name: "Document Folder",
-  //   index: 4,
-  //   img: require("../../assets/folderwhite.png"),
-  // },
-  // {
-  //   name: "MLS",
-  //   index: 5,
-  //   img: require("../../assets/mlscallcenter.png"),
-  // },
-  // {
-  //   name: "Call Center",
-  //   index: 6,
-  //   img: require("../../assets/callwhite.png"),
-  // },
-];
 
 const Drawer = createDrawerNavigator();
 
